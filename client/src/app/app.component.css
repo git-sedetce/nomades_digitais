@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+.imagem-carousel{
+    object-fit: cover;
+    object-position: 0 80%;
+    height: 500px;
+}
+
+.fonte-titulo{
+    font-weight: bold !important;
+}
+
+.info-contato{
+    background-color: #165cdf;
+    color: #fff;
+  }
+  .info-contato p{
+    padding-top: 50px;
+  }
+
+.copyright{
+    background-color: #000;
+    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .copyright i{
+    padding-right: 15px;
+  }
+  .texto-section-grande{
+    font-size:150px;
+    font-weight:bolder;
+    color: white;
+    margin: 0;
+    padding: 30px 0 0 0;
+    line-height: 150px;
+  }
+  .cabos_sub{
+    height: 650px;
+    background:url("../assets/imgs/extras/conexoes.png");
+    margin-left: 20px;
+  }
+  .hubs{
+    position: absolute;
+    background-color: #f8f9faa8;
+    color:rgb(22, 19, 19);
+    font-weight: bold;
+    text-align: justify;
+    font-size: 1.8rem;
+    width: 285px;
+    line-height: 40px;
+    height: 360px;
+    padding: 12px 12px 50px 12px;
+    margin: 50px 12px;
+    right: 20px;
+  }
+  .data-centers{
+    height: 850px;
+    background:url("../assets/imgs/datacenter-6255978c7f9bc.jpg");
+  }
+  .data{
+    position: absolute;
+    background-color: #f8f9faa8;
+    color:rgb(22, 19, 19);
+    font-weight: bold  !important;
+    font-size: 2rem;
+    line-height: 40px;
+    height: 150px;
+    padding: 12px 12px 12px 12px;
+    vertical-align: middle;
+    margin-top: 25%;
+  }
+  .cabos_opticos{
+    height: 650px;
+    background:url("../assets/imgs/extras/fibra-optica-destaque.jpg");
+  }
+  .fibras{
+    position: absolute;
+    background-color: #f8f9faa8;
+    color:rgb(22, 19, 19);
+    font-weight: bold;
+    text-align: justify;
+    font-size: 1.8rem;
+    width: 285px;
+    line-height: 40px;
+    height: 360px;
+    padding: 12px 12px 50px 12px;
+    margin: 50px 12px;
+    left: 20px;
+  }
+  .fibers{
+    height: 650px;
+    background:url("../assets/imgs/extras/Fibra-optica.jpg");
+  }
+  .fibers_02{
+    position: absolute;
+    background-color: #f8f9faa8;
+    color:rgb(22, 19, 19);
+    font-weight: bold  !important;
+    font-size: 2rem;
+    line-height: 40px;
+    height: 300px;
+    padding: 12px 12px 12px 12px;
+    vertical-align: middle;
+    margin-top: 10%;
+  }
