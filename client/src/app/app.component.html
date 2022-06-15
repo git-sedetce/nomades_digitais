@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><strong>Nômades Digitais CE</strong></a>
+      <a class="navbar-brand" href="#"><strong>Digital Nomads CE</strong></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,7 @@
               Cadastre-se
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Município</a></li>
+              <li><a class="dropdown-item" href="cadastro-municipio/cadastro-municipio.component.html">Município</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -125,11 +125,17 @@
   </section>
   <section id="ceara_esta_pronto">
     <div class="cabos_sub">
-      <div class="hubs col-md-4">
-        <p>Um dos principais Hubs de Cabos Submarinos de Fibra Óptica do mundo!</p>
-        <p>A Capital Fortaleza possui 16 cabos.</p>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4"></div>
+          <div class="hubs col-md-4">
+            <p>Um dos principais Hubs de Cabos Submarinos de Fibra Óptica do mundo!</p>
+            <p>A Capital Fortaleza possui 16 cabos.</p>
+          </div>
+        </div>
+        </div>
       </div>
-    </div>
     <div class="data-centers">
       <div class="data text-center col-md-12 display-4">
         <p>O Ceará Possui 12 dos 150 data centers de colocation do Brasil</p>
@@ -174,15 +180,34 @@
     </div>
     <div class="saiba_mais">
       <h4 class="safe text-center">Selos de segurança sanitária do Estado</h4>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col-md-4">
+          <div class="h-100">
+            <img src="../assets/imgs/extras/selo_safe_travel.png" class="img-fluid mx-auto d-block" alt="Selo viajem segura">
+              <a href="#" class="btn btn-primary">Saiba mais</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="h-100">
+            <img src="../assets/imgs/extras/selos.png" class="img-fluid mx-auto d-block" alt="selos">
+              <a href="#" class="btn btn-primary">Saiba mais</a>
+          </div>
+
+        </div>
+      </div>
+
+
+<!--
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6">
           <div class="card">
             <div class="card-body">
               <a href=""><img src="../assets/imgs/extras/Selo safe travel.png" alt="Selo viajem segura"></a>
             </div>
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-md-6">
           <div class="card">
             <div class="card-body">
               <a href=""><img src="../assets/imgs/extras/Selo safe travel.png" alt="Selo viajem segura"></a>
@@ -190,6 +215,7 @@
           </div>
         </div>
       </div>
+      -->
     </div>
   </section>
 </main>

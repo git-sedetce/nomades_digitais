@@ -2,7 +2,7 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
-.imagem-carousel{
+.imagem-carousel_teste{
     object-fit: cover;
     object-position: 0 80%;
     height: 500px;
@@ -37,31 +37,33 @@
     padding: 30px 0 0 0;
     line-height: 150px;
   }
+
   .cabos_sub{
-    height: 850px;
+    height: 650px;
+    background-image: url("../assets/imgs/extras/conexoes.png");
     background-repeat: no-repeat;
-    background-size: 100% !important;
-    background:url("../assets/imgs/extras/conexoes.png");
+    background-size: cover;
     margin-left: 20px;
   }
+
   .hubs{
     position: absolute;
     background-color: #f8f9faa8;
     color:rgb(22, 19, 19);
     font-weight: bold;
     text-align: justify;
-    font-size: 2.8rem;
-    width: 330px;
-    line-height: 50px;
-    height: 630px;
+    font-size: 1.8rem;
+    width: 285px;
+    line-height: 40px;
+    height: 360px;
     padding: 12px 12px 50px 12px;
-    margin: 50px 30px;
+    margin: 50px 12px;
     right: 20px;
   }
+
   .data-centers{
     height: 850px;
-    background-repeat: no-repeat;
-    background-size: 100% !important;
+
     background:url("../assets/imgs/datacenter-6255978c7f9bc.jpg");
   }
   .data{
@@ -69,18 +71,17 @@
     background-color: #f8f9faa8;
     color:rgb(22, 19, 19);
     font-weight: bold  !important;
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 40px;
-    height: 150px;
     padding: 12px 12px 12px 12px;
     vertical-align: middle;
     margin-top: 25%;
   }
   .cabos_opticos{
-    background-repeat: no-repeat;
-    background-size: 100% !important;
     height: 650px;
     background:url("../assets/imgs/extras/fibra-optica-destaque.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .fibras{
     position: absolute;
@@ -98,9 +99,9 @@
   }
   .fibers{
     height: 850px;
-    background-repeat: no-repeat;
-    background-size: 100% !important;
     background:url("../assets/imgs/extras/Fibra-optica.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .fibers_02{
     position: absolute;
@@ -116,28 +117,28 @@
   }
   .conectado{
     height: 850px;
-    background-repeat: no-repeat;
-    background-size: 100% !important;
     background:url("../assets/imgs/extras/Cidade conectada.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .conection{
     height: 850px;
-    background-repeat: no-repeat;
-    background-size: 100% !important;
     background:url("../assets/imgs/extras/Localização estratégica.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     margin-left: 20px;
   }
   .crescimento{
     height: 850px;
+    background: url("../assets/imgs/_MVS6417.jpg");
     background-repeat: no-repeat;
-    background-size: 100% !important;
-    background:url("../assets/imgs/_MVS6417.jpg");
+    background-size: cover;
   }
   .airport{
     height: 850px;
-    background-repeat: no-repeat;
-    background-size: 100% !important;
     background:url("../assets/imgs/extras/Hub aéreo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .safe{
     color:rgb(22, 19, 19);
