@@ -62,20 +62,21 @@
   }
 
   .data-centers{
-    height: 850px;
-
+    height: 650px;
     background:url("../assets/imgs/datacenter-6255978c7f9bc.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .data{
-    position: absolute;
+
     background-color: #f8f9faa8;
     color:rgb(22, 19, 19);
     font-weight: bold  !important;
     font-size: 1.8rem;
     line-height: 40px;
     padding: 12px 12px 12px 12px;
-    vertical-align: middle;
-    margin-top: 25%;
+
+    margin-top: 20%;
   }
   .cabos_opticos{
     height: 650px;
