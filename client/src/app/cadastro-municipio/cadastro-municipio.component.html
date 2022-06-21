@@ -1,16 +1,204 @@
-<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><strong>Nômades Digitais CE</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!--<li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>-->
+          <li class="nav-item">
+            <a class="nav-link active" href="#ceara_esta_pronto">O Ceará está pronto</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              O Projeto
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">O que é?</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Manual</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Selo</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Cadastre-se
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Município</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Parceiros</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Nômades</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Escolha sua próxima parada</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Parceiros
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Hotéis</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Hosteis</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Restaurantes</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Coworkings</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Shoppings</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Contatos</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          Os municípios que estiverem interessados em se cadastrar para receber os Nômades Digitais,
+          poderão realizar o cadastro, na aba cadastre-se, para ter suas informações divulgadas no site.
+          Um manual com algumas recomendações encontra-se disponível abaixo para download.
+
+        </p>
+      </div>
+      <div class="col-6">
+        <form>
+          <div class="mb-3">
+            <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
+            <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade">
+          </div>
+          <div class="mb-3">
+            <figure class="figure">
+              <img src="../../assets/imgs/extras/regiao_ceara.png" class="figure-img img-fluid rounded" alt="...">
+              <figcaption class="figure-caption text-end">Ceará e suas regiões</figcaption>
+            </figure>
+            <label for="regiao_ceara" class="form-label">Datalist example</label>
+            <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+              <option value="Cariri">
+              <option value="Centro Sul">
+              <option value="Grande Fortaleza">
+              <option value="Litoral Leste">
+              <option value="Litoral Norte">
+              <option value="Litoral oeste / Vale do Curu">
+              <option value="Maciço de Baturité">
+              <option value="Serra Ibiapaba">
+              <option value="Sertão Central">
+              <option value="Sertão de Canidé">
+              <option value="Sertão dos Crateús">
+              <option value="Sertão dos Inhamuns">
+              <option value="Sertão de Sobral">
+              <option value="Vale do Jaguaribe">
+            </datalist>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Telefone de contato</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+
+
+</section>
+
+
+<footer class="footer">
+  <div class="row info-contato">
+    <div class="col-md-4">
+      <p class="text-center">
+        <i class="fa-solid fa-place-of-worship"></i>
+        Secretária de Desenvolvimento Econômico e Trabalho do Ceará
+      </p>
+      <p class="text-center">
+        <i class="fa-solid fa-place-of-worship"></i>
+        Secretária de Turismo do Estado do Ceará
+      </p>
+    </div>
+    <div class="col-md-4">
+      <p class="text-center">
+        <i class="fas fa-phone"></i>
+        Contato:
+        (85) 3108-1039
+      </p>
+      <p class="text-center">
+        <i class="fas fa-phone"></i>
+        Contato:
+        (85) xxxx-xxxx
+      </p>
+    </div>
+    <div class="col-md-4">
+      <p class="text-center">
+        <i class="far fa-clock"></i>
+        Working time:
+        Monday–Sunday: 10:00–20:00;
+      </p>
+    </div>
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  <!-- Copyright -->
+  <div class="container-fluid copyright">
+    <div class="row">
+      <div class="col-md-4 text-center logo">
+        <h5>Nomades Digitais CE</h5>
+      </div>
+      <div class="col-md-4 text-center">
+        <h5>© 2022 Copyright:</h5>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-instagram"></i>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  <!-- Copyright -->
+
+</footer>
