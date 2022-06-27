@@ -1,0 +1,17 @@
+.info-contato{
+  background-color: #165cdf;
+  color: #fff;
+}
+.info-contato p{
+  padding-top: 50px;
+}
+
+.copyright{
+  background-color: #000;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.copyright i{
+  padding-right: 15px;
+}
