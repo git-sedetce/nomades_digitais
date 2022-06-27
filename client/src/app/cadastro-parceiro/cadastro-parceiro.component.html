@@ -1,0 +1,175 @@
+<app-header></app-header>
+<section id="forms">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 col-12">
+        <p class="mb-3 mt-3">
+          Os estabelecimentos que possuem interesse em participar do projeto Nômades Digitais do Ceará, podem fazer a sua inscrição para ter seus dados divulgados no site do projeto, basta se inscrever clicando abaixo. </p>
+        <a href="#" target="_blank">Manual estabelecimentos</a><br>
+        <figure class="figure">
+          <img src="../../assets/imgs/extras/estabelecimento.jpg" class="figure-img img-fluid rounded" alt="...">
+          <figcaption class="figure-caption text-end">Ceará e suas regiões</figcaption>
+        </figure>
+      </div>
+      <div class="col-sm-6 col-12">
+        <h3 class="mb-3 mt-3 tex-center">Cadastro do Municípios</h3>
+        <form>
+          <fieldset>
+            <legend>
+              Dados do Município
+            </legend>
+            <div class="mb-3">
+              <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
+              <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade">
+            </div>
+            <div class="mb-3">
+              <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
+              <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região">
+              <datalist id="datalistOptions">
+                <option value="Cariri">
+                <option value="Centro Sul">
+                <option value="Grande Fortaleza">
+                <option value="Litoral Leste">
+                <option value="Litoral Norte">
+                <option value="Litoral oeste / Vale do Curu">
+                <option value="Maciço de Baturité">
+                <option value="Serra Ibiapaba">
+                <option value="Sertão Central">
+                <option value="Sertão de Canidé">
+                <option value="Sertão dos Crateús">
+                <option value="Sertão dos Inhamuns">
+                <option value="Sertão de Sobral">
+                <option value="Vale do Jaguaribe">
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <label for="email_prefeitura" class="form-label">Email de contato</label>
+              <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp" placeholder="Insira um email válido!">
+              <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
+            </div>
+            <div class="mb-3">
+              <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
+              <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
+            </div>
+            <div class="mb-3">
+              <label for="link_prefeitura" class="form-label">Link para mais informações (site da prefeitura ou de ponto turístico).</label>
+              <input type="text" class="form-control" id="link_prefeitura" aria-describedby="linkHelp" placeholder="Digite o nome da Cidade">
+              <div id="linkHelp" class="form-text">Se não houver, favor escrever "não possui".</div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Histórico da Cidade</legend>
+            <div class="form-group mb-3">
+              <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre outros).</label>
+              <textarea class="form-control" id="historia_cidade" rows="5"></textarea>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Serviços Ofertados</legend>
+            <label for="wifi_service">Possui wifi gratuito em pontos públicos do município?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_sim" value="sim">
+              <label class="form-check-label" for="wifi_sim">
+                Sim
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_nao" value="nao">
+              <label class="form-check-label" for="wifi_nao">
+                Não
+              </label>
+            </div>
+            <div class="form-group mb-3">
+              <label for="wifi_cidade">Se sim, quais locais? (nomes de praças, bairros, etc).</label>
+              <textarea class="form-control" id="wifi_cidade" rows="3"></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="service_cidade">Se houver serviços, onde são ofertados (endereços)?</label>
+              <textarea class="form-control" id="service_cidade" rows="3"></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="service_empresario">Quais são os serviços oferecidos para empresários? (apoio ao empresário, emissão de notas, entre outros). Se não houver favor escrever "Não ofertamos esse serviço".</label>
+              <textarea class="form-control" id="service_empresario" rows="3"></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="service_seguranca">Quais são as medidas de segurança pública do município? (vigilância, endereço de postos policiais, entre outros).</label>
+              <textarea class="form-control" id="service_seguranca" rows="3"></textarea>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Pontos Turísticos</legend>
+            <div class="form-group mb-3">
+              <label for="pontos_turisticos">Principais pontos turísticos da cidade (Cite e descreva os pontos turísticos).</label>
+              <textarea class="form-control" id="pontos_turisticos" rows="5"></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
+              <textarea class="form-control" id="espacos_culturais" rows="5"></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças, bibliotecas, entre outros).</label>
+              <textarea class="form-control" id="espacos_lazer" rows="5"></textarea>
+            </div>
+            <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="praia" id="praia">
+              <label class="form-check-label" for="praia">
+                Praia
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="serra" id="serra">
+              <label class="form-check-label" for="serra">
+                Serra
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="religioso" id="religioso">
+              <label class="form-check-label" for="religioso">
+                Religioso
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="sertão" id="sertão">
+              <label class="form-check-label" for="sertão">
+                Sertão
+              </label>
+            </div>
+            <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim">
+              <label class="form-check-label" for="rota_sim">
+                Sim
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao">
+              <label class="form-check-label" for="rota_nao">
+                Não
+              </label>
+            </div>
+            <div class="form-group mb-3">
+              <label for="qual_rota">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
+              <textarea class="form-control" id="qual_rota" rows="3"></textarea>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Anexos</legend>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Anexo</span>
+              </div>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="inputGroupFile01">Escolher arquivo</label>
+              </div>
+            </div>
+          </fieldset>
+
+
+          <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
