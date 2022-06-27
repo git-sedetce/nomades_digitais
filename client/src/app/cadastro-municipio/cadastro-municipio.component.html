@@ -19,38 +19,42 @@
             <legend>
               Dados do Município
             </legend>
-            <div class="mb-3">
-              <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
-              <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade">
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
+                <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
+                <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região">
+                <datalist id="datalistOptions">
+                  <option value="Cariri">
+                  <option value="Centro Sul">
+                  <option value="Grande Fortaleza">
+                  <option value="Litoral Leste">
+                  <option value="Litoral Norte">
+                  <option value="Litoral oeste / Vale do Curu">
+                  <option value="Maciço de Baturité">
+                  <option value="Serra Ibiapaba">
+                  <option value="Sertão Central">
+                  <option value="Sertão de Canidé">
+                  <option value="Sertão dos Crateús">
+                  <option value="Sertão dos Inhamuns">
+                  <option value="Sertão de Sobral">
+                  <option value="Vale do Jaguaribe">
+                </datalist>
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
-              <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região">
-              <datalist id="datalistOptions">
-                <option value="Cariri">
-                <option value="Centro Sul">
-                <option value="Grande Fortaleza">
-                <option value="Litoral Leste">
-                <option value="Litoral Norte">
-                <option value="Litoral oeste / Vale do Curu">
-                <option value="Maciço de Baturité">
-                <option value="Serra Ibiapaba">
-                <option value="Sertão Central">
-                <option value="Sertão de Canidé">
-                <option value="Sertão dos Crateús">
-                <option value="Sertão dos Inhamuns">
-                <option value="Sertão de Sobral">
-                <option value="Vale do Jaguaribe">
-              </datalist>
-            </div>
-            <div class="mb-3">
-              <label for="email_prefeitura" class="form-label">Email de contato</label>
-              <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp" placeholder="Insira um email válido!">
-              <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
-            </div>
-            <div class="mb-3">
-              <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
-              <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="email_prefeitura" class="form-label">Email de contato</label>
+                <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp" placeholder="Insira um email válido!">
+                <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
+                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
+              </div>
             </div>
             <div class="mb-3">
               <label for="link_prefeitura" class="form-label">Link para mais informações (site da prefeitura ou de ponto turístico).</label>
@@ -111,7 +115,9 @@
               <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças, bibliotecas, entre outros).</label>
               <textarea class="form-control" id="espacos_lazer" rows="5"></textarea>
             </div>
-            <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="praia" id="praia">
               <label class="form-check-label" for="praia">
@@ -136,7 +142,9 @@
                 Sertão
               </label>
             </div>
-            <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
+              </div>
+            <div class="col-sm-6 col-12 mb-3">
+              <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim">
               <label class="form-check-label" for="rota_sim">
@@ -148,6 +156,8 @@
               <label class="form-check-label" for="rota_nao">
                 Não
               </label>
+            </div>
+            </div>
             </div>
             <div class="form-group mb-3">
               <label for="qual_rota">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
