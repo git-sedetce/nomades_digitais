@@ -1,3 +1,5 @@
+import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
+import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
@@ -7,9 +9,11 @@ import { CadastroMunicipioComponent } from './cadastro-municipio/cadastro-munici
 import { Ceara_prontoComponent } from './ceara_pronto/ceara_pronto.component';
 
 const APP_ROUTES: Routes = [
-  { path: 'ceara_pronto', component: Ceara_prontoComponent},
-  { path: 'cadastro_municipio', component: CadastroMunicipioComponent},
-  { path: '', component: HomeComponent},
+  { path: 'ceara_pronto', component: Ceara_prontoComponent },
+  { path: 'cadastro_municipio', component: CadastroMunicipioComponent },
+  { path: 'cadastro_parceiro', component: CadastroParceiroComponent },
+  { path: 'cadastro_nomad', component: CadastroNomadComponent },
+  { path: '', component: HomeComponent },
 
 ];
 

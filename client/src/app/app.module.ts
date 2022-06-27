@@ -8,15 +8,19 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { Ceara_prontoComponent } from './ceara_pronto/ceara_pronto.component';
 import { HomeComponent } from './home/home.component';
+import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
+import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [			
     AppComponent,
     CadastroMunicipioComponent,
       HeaderComponent,
       FooterComponent,
       Ceara_prontoComponent,
-      HomeComponent
+      HomeComponent,
+      CadastroParceiroComponent,
+      CadastroNomadComponent
    ],
   imports: [
     BrowserModule,
