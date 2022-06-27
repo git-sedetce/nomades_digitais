@@ -12,23 +12,7 @@
     font-weight: bold !important;
 }
 
-.info-contato{
-    background-color: #165cdf;
-    color: #fff;
-  }
-  .info-contato p{
-    padding-top: 50px;
-  }
 
-.copyright{
-    background-color: #000;
-    color: #fff;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  .copyright i{
-    padding-right: 15px;
-  }
   .texto-section-grande{
     font-size:150px;
     font-weight:bolder;
@@ -131,7 +115,7 @@
   }
   .crescimento{
     height: 850px;
-    background: url("../assets/imgs/_MVS6417.jpg");
+    background: url("../assets/imgs/_MVS6417.JPG");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -150,4 +134,9 @@
   .selo img{
     width: 50%;
     margin: 20px;
+  }
+
+  .conteudo{
+    min-height: 65vh;
+    margin-top: 1em;
   }
