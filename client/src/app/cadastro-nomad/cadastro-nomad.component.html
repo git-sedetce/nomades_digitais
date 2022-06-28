@@ -21,44 +21,52 @@
             <legend>
               Dados pessoais / Personal Data
             </legend>
-            <div class="mb-3">
-              <label for="nomad_name" class="form-label">Nome / Name</label>
-              <input type="text" class="form-control" id="nomad_name" placeholder="Digite seu nome / Type your name">
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nomad_name" class="form-label">Nome / Name</label>
+                <input type="text" class="form-control" id="nomad_name" placeholder="Digite seu nome / Type your name">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nomad_lastName" class="form-label">Sobrenome / Last name</label>
+                <input type="text" class="form-control" id="nomad_lastName"
+                  placeholder="Digite seu Sobrenome / Type your Last name">
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="nomad_lastName" class="form-label">Sobrenome / Last name</label>
-              <input type="text" class="form-control" id="nomad_lastName"
-                placeholder="Digite seu Sobrenome / Type your Last name">
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="email_nomad" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email_nomad" aria-describedby="emailNomad"
+                  placeholder="Insira um email válido! / Please enter a valid email!">
+                <div id="emailHelp" class="form-text">Não compartilhe email com terceiros. / Do not share email with third
+                  parties.</div>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="contato_nomad" class="form-label">Telefone / Phone Number</label>
+                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="email_nomad" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email_nomad" aria-describedby="emailNomad"
-                placeholder="Insira um email válido! / Please enter a valid email!">
-              <div id="emailHelp" class="form-text">Não compartilhe email com terceiros. / Do not share email with third
-                parties.</div>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nomad_city" class="form-label">Cidade / City</label>
+                <input type="text" class="form-control" id="nomad_city" placeholder="Digite sua cidade / Type your city">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nomad_state" class="form-label">Região ou Estado / State or Region</label>
+                <input type="text" class="form-control" id="nomad_state"
+                  placeholder="Digite seu Estado / Type your State or Region">
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="contato_nomad" class="form-label">Telefone / Phone Number</label>
-              <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
-            </div>
-            <div class="mb-3">
-              <label for="nomad_city" class="form-label">Cidade / City</label>
-              <input type="text" class="form-control" id="nomad_city" placeholder="Digite sua cidade / Type your city">
-            </div>
-            <div class="mb-3">
-              <label for="nomad_state" class="form-label">Região ou Estado / State or Region</label>
-              <input type="text" class="form-control" id="nomad_state"
-                placeholder="Digite seu Estado / Type your State or Region">
-            </div>
-            <div class="mb-3">
-              <label for="nomad_country" class="form-label">País / Country</label>
-              <input type="text" class="form-control" id="nomad_country"
-                placeholder="Digite seu País / Type your Country">
-            </div>
-            <div class="mb-3">
-              <label for="nomad_date" class="form-label">Data de partida / Departure Date</label>
-              <input type="date" class="form-control" id="nomad_date"
-                placeholder="Data">
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nomad_country" class="form-label">País / Country</label>
+                <input type="text" class="form-control" id="nomad_country"
+                  placeholder="Digite seu País / Type your Country">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nomad_date" class="form-label">Data de partida / Departure Date</label>
+                <input type="date" class="form-control" id="nomad_date"
+                  placeholder="Data">
+              </div>
             </div>
             <div class="mb-3">
               <label for="wifi_service">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos
@@ -102,123 +110,8 @@
               <textarea class="form-control" id="suggestion" rows="3"></textarea>
             </div>
           </fieldset>
-          <fieldset>
-            <legend>Histórico da Cidade</legend>
-            <div class="form-group mb-3">
-              <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre
-                outros).</label>
-              <textarea class="form-control" id="historia_cidade" rows="5"></textarea>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Serviços Ofertados</legend>
-            <label for="wifi_service">Possui wifi gratuito em pontos públicos do município?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_sim" value="sim">
-              <label class="form-check-label" for="wifi_sim">
-                Sim
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_nao" value="nao">
-              <label class="form-check-label" for="wifi_nao">
-                Não
-              </label>
-            </div>
-            <div class="form-group mb-3">
-              <label for="wifi_cidade">Se sim, quais locais? (nomes de praças, bairros, etc).</label>
-              <textarea class="form-control" id="wifi_cidade" rows="3"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="service_cidade">Se houver serviços, onde são ofertados (endereços)?</label>
-              <textarea class="form-control" id="service_cidade" rows="3"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="service_empresario">Quais são os serviços oferecidos para empresários? (apoio ao empresário,
-                emissão de notas, entre outros). Se não houver favor escrever "Não ofertamos esse serviço".</label>
-              <textarea class="form-control" id="service_empresario" rows="3"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="service_seguranca">Quais são as medidas de segurança pública do município? (vigilância,
-                endereço de postos policiais, entre outros).</label>
-              <textarea class="form-control" id="service_seguranca" rows="3"></textarea>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Pontos Turísticos</legend>
-            <div class="form-group mb-3">
-              <label for="pontos_turisticos">Principais pontos turísticos da cidade (Cite e descreva os pontos
-                turísticos).</label>
-              <textarea class="form-control" id="pontos_turisticos" rows="5"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
-              <textarea class="form-control" id="espacos_culturais" rows="5"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
-                bibliotecas, entre outros).</label>
-              <textarea class="form-control" id="espacos_lazer" rows="5"></textarea>
-            </div>
-            <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="praia" id="praia">
-              <label class="form-check-label" for="praia">
-                Praia
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="serra" id="serra">
-              <label class="form-check-label" for="serra">
-                Serra
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="religioso" id="religioso">
-              <label class="form-check-label" for="religioso">
-                Religioso
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="sertão" id="sertão">
-              <label class="form-check-label" for="sertão">
-                Sertão
-              </label>
-            </div>
-            <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim">
-              <label class="form-check-label" for="rota_sim">
-                Sim
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao">
-              <label class="form-check-label" for="rota_nao">
-                Não
-              </label>
-            </div>
-            <div class="form-group mb-3">
-              <label for="qual_rota">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
-              <textarea class="form-control" id="qual_rota" rows="3"></textarea>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Anexos</legend>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Anexo</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                  aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label" for="inputGroupFile01">Escolher arquivo</label>
-              </div>
-            </div>
-          </fieldset>
 
-
-          <button type="submit" class="btn btn-primary mb-3">Submit</button>
+          <button type="submit" class="btn btn-success mb-3">Cadastrar Nomad</button>
         </form>
       </div>
     </div>
