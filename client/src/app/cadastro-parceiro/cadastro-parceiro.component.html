@@ -4,7 +4,8 @@
     <div class="row">
       <div class="col-sm-6 col-12">
         <p class="mb-3 mt-3">
-          Os estabelecimentos que possuem interesse em participar do projeto Nômades Digitais do Ceará, podem fazer a sua inscrição para ter seus dados divulgados no site do projeto, basta se inscrever clicando abaixo. </p>
+          Os estabelecimentos que possuem interesse em participar do projeto Nômades Digitais do Ceará, podem fazer a
+          sua inscrição para ter seus dados divulgados no site do projeto, basta se inscrever clicando abaixo. </p>
         <a href="#" target="_blank">Manual estabelecimentos</a><br>
         <figure class="figure">
           <img src="../../assets/imgs/extras/estabelecimento.jpg" class="figure-img img-fluid rounded" alt="...">
@@ -12,162 +13,247 @@
         </figure>
       </div>
       <div class="col-sm-6 col-12">
-        <h3 class="mb-3 mt-3 tex-center">Cadastro do Municípios</h3>
+        <h3 class="mb-3 mt-3 tex-center">Cadastro dos Parceiros</h3>
         <form>
           <fieldset>
-            <legend>
-              Dados do Município
+            <legend class="text-center">
+              Dados Cadastrais
             </legend>
-            <div class="mb-3">
-              <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
-              <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade">
-            </div>
-            <div class="mb-3">
-              <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
-              <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região">
-              <datalist id="datalistOptions">
-                <option value="Cariri">
-                <option value="Centro Sul">
-                <option value="Grande Fortaleza">
-                <option value="Litoral Leste">
-                <option value="Litoral Norte">
-                <option value="Litoral oeste / Vale do Curu">
-                <option value="Maciço de Baturité">
-                <option value="Serra Ibiapaba">
-                <option value="Sertão Central">
-                <option value="Sertão de Canidé">
-                <option value="Sertão dos Crateús">
-                <option value="Sertão dos Inhamuns">
-                <option value="Sertão de Sobral">
-                <option value="Vale do Jaguaribe">
-              </datalist>
-            </div>
-            <div class="mb-3">
-              <label for="email_prefeitura" class="form-label">Email de contato</label>
-              <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp" placeholder="Insira um email válido!">
-              <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
-            </div>
-            <div class="mb-3">
-              <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
-              <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
-            </div>
-            <div class="mb-3">
-              <label for="link_prefeitura" class="form-label">Link para mais informações (site da prefeitura ou de ponto turístico).</label>
-              <input type="text" class="form-control" id="link_prefeitura" aria-describedby="linkHelp" placeholder="Digite o nome da Cidade">
-              <div id="linkHelp" class="form-text">Se não houver, favor escrever "não possui".</div>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Histórico da Cidade</legend>
-            <div class="form-group mb-3">
-              <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre outros).</label>
-              <textarea class="form-control" id="historia_cidade" rows="5"></textarea>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Serviços Ofertados</legend>
-            <label for="wifi_service">Possui wifi gratuito em pontos públicos do município?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_sim" value="sim">
-              <label class="form-check-label" for="wifi_sim">
-                Sim
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_nao" value="nao">
-              <label class="form-check-label" for="wifi_nao">
-                Não
-              </label>
-            </div>
-            <div class="form-group mb-3">
-              <label for="wifi_cidade">Se sim, quais locais? (nomes de praças, bairros, etc).</label>
-              <textarea class="form-control" id="wifi_cidade" rows="3"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="service_cidade">Se houver serviços, onde são ofertados (endereços)?</label>
-              <textarea class="form-control" id="service_cidade" rows="3"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="service_empresario">Quais são os serviços oferecidos para empresários? (apoio ao empresário, emissão de notas, entre outros). Se não houver favor escrever "Não ofertamos esse serviço".</label>
-              <textarea class="form-control" id="service_empresario" rows="3"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="service_seguranca">Quais são as medidas de segurança pública do município? (vigilância, endereço de postos policiais, entre outros).</label>
-              <textarea class="form-control" id="service_seguranca" rows="3"></textarea>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Pontos Turísticos</legend>
-            <div class="form-group mb-3">
-              <label for="pontos_turisticos">Principais pontos turísticos da cidade (Cite e descreva os pontos turísticos).</label>
-              <textarea class="form-control" id="pontos_turisticos" rows="5"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
-              <textarea class="form-control" id="espacos_culturais" rows="5"></textarea>
-            </div>
-            <div class="form-group mb-3">
-              <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças, bibliotecas, entre outros).</label>
-              <textarea class="form-control" id="espacos_lazer" rows="5"></textarea>
-            </div>
-            <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="praia" id="praia">
-              <label class="form-check-label" for="praia">
-                Praia
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="serra" id="serra">
-              <label class="form-check-label" for="serra">
-                Serra
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="religioso" id="religioso">
-              <label class="form-check-label" for="religioso">
-                Religioso
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="sertão" id="sertão">
-              <label class="form-check-label" for="sertão">
-                Sertão
-              </label>
-            </div>
-            <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim">
-              <label class="form-check-label" for="rota_sim">
-                Sim
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao">
-              <label class="form-check-label" for="rota_nao">
-                Não
-              </label>
-            </div>
-            <div class="form-group mb-3">
-              <label for="qual_rota">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
-              <textarea class="form-control" id="qual_rota" rows="3"></textarea>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Anexos</legend>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon01">Anexo</span>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="cnpj" class="form-label">CNPJ</label>
+                <input type="text" class="form-control" id="cnpj" placeholder="Digite o CNPJ">
+                <div id="cnpjHelp" class="form-text">Informe apenas os números.</div>
               </div>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                <label class="custom-file-label" for="inputGroupFile01">Escolher arquivo</label>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="nome_fantasia" class="form-label">Nome Fantasia</label>
+                <input type="text" class="form-control" id="nome_fantasia" placeholder="Digite o nome fantasia">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="razao_social" class="form-label">Razão Social</label>
+                <input type="text" class="form-control" id="razao_social" placeholder="Digite a Razão Social">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="endereco" class="form-label">Endereço</label>
+                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" id="complemento" placeholder="Complemento">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" placeholder="Informe a Cidade">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx">
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="email_parceiro" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email_parceiro" aria-describedby="emailNomad"
+                  placeholder="Insira um email válido!">
+                <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="midia_social" class="form-label">Redes Sociais e Site.</label>
+                <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social">
+                <div id="midiaHelp" class="form-text">Caso não tiver, assinalar abaixo que não possui.</div>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="tipo_service">Enquadra-se em qual tipo de local abaixo?</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="hospedagem" value="hospedagem">
+                  <label class="form-check-label" for="hospedagem">
+                    Hospedagem
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="alimentacao" value="alimentacao">
+                  <label class="form-check-label" for="alimentacao">
+                    Alimentação
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="local_trabalho"
+                    value="local_de_trabalho">
+                  <label class="form-check-label" for="local_trabalho">
+                    Local de trabalho
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="outro" value="outro">
+                  <label class="form-check-label" for="outro">
+                    Outro
+                  </label>
+                </div>
               </div>
             </div>
           </fieldset>
-
-
-          <button type="submit" class="btn btn-primary mb-3">Submit</button>
+          <fieldset>
+            <legend class="text-center">Qualidade da Internet</legend>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="internet_service">O acesso a internet é liberado aos clientes?</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="internet_sim" value="sim">
+                  <label class="form-check-label" for="internet_sim">
+                    Sim
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="internet_nao" value="nao">
+                  <label class="form-check-label" for="internet_nao">
+                    Não
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="internet_speed">Qual a velocidade da internet do estabelecimento, em Mbps?</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="low_30mbps" value="abaixo_30">
+                  <label class="form-check-label" for="low_30mbps">
+                    Abaixo de 30 Mbps
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="30mbps" value="30">
+                  <label class="form-check-label" for="30mbps">
+                    30 Mbps
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="high_30mbps" value="acima_30">
+                  <label class="form-check-label" for="high_30mbps">
+                    Acima de 30 Mbps
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend class="text-center">Serviços prestados - Hospedagem</legend>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="wifi_service">Quais serviços essenciais você fornece aos hóspedes? São exemplos: lavanderia,
+                  espaço de trabalho coletivo ou individual, cozinha, entre outros.</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Lavanderia" id="lavanderia">
+                  <label class="form-check-label" for="lavanderia">
+                    Lavanderia
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Cozinha coletiva" id="cozinha">
+                  <label class="form-check-label" for="cozinha">
+                    Cozinha coletiva
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Limpeza" id="limpeza">
+                  <label class="form-check-label" for="limpeza">
+                    Limpeza
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Restaurante e/ou Bar" id="bar">
+                  <label class="form-check-label" for="bar">
+                    Restaurante e/ou Bar
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Cafeteria" id="cafeteria">
+                  <label class="form-check-label" for="cafeteria">
+                    Cafeteria
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Café da manhã" id="breakfast">
+                  <label class="form-check-label" for="breakfast">
+                    Café da manhã
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Espaços de lazer individual"
+                    id="lazer_individual">
+                  <label class="form-check-label" for="lazer_individual">
+                    Espaços de lazer individual (ex. tv no quarto)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Espaços de lazer coletivo" id="lazer_coletivo">
+                  <label class="form-check-label" for="lazer_coletivo">
+                    Espaços de lazer coletivo (sala de TV, de jogos, e/ou de leitura, etc)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Outro" id="outro">
+                  <label class="form-check-label" for="outro">
+                    Outro
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="outro_servico">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
+                  ofertados.</label>
+                <textarea class="form-control" id="outro_servico" rows="3"></textarea>
+                <label class="mt-3" for="wifi_service">Possui espaços de trabalho e/ou para reuniões?
+                </label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho"
+                    id="individual_trabalho">
+                  <label class="form-check-label" for="individual_trabalho">
+                    Sim, Espaço individual para trabalho
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Sim, Espaço coletivo para trabalho"
+                    id="coletivo_trabalho">
+                  <label class="form-check-label" for="coletivo_trabalho">
+                    Sim, Espaço coletivo para trabalho
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Sim, espaço para reuniões coletivas"
+                    id="reuniao_coletivas">
+                  <label class="form-check-label" for="reuniao_coletivas">
+                    Sim, espaço para reuniões coletivas
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="não" id="nao">
+                  <label class="form-check-label" for="nao">
+                    Não
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <div class="form-group mb-3">
+                  <label for="pontos_turisticos">Detalhe sua proposta de tarifa especial para permanência a partir de 15
+                    dias. Exemplos: percentual de desconto, novo valor de tarifa, etc.</label>
+                  <textarea class="form-control" id="tarifa_especial" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <div class="form-group mb-3">
+                  <label for="espacos_culturais">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
+                    falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
+                  <textarea class="form-control" id="resumo_estabelecimento" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <button type="submit" class="btn btn-info mb-3">Cadastrar Parceiro</button>
         </form>
       </div>
     </div>
