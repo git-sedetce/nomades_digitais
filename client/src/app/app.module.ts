@@ -10,9 +10,10 @@ import { Ceara_prontoComponent } from './ceara_pronto/ceara_pronto.component';
 import { HomeComponent } from './home/home.component';
 import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
 import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
+import { O_que_eComponent } from './o_que_e/o_que_e.component';
 
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
     CadastroMunicipioComponent,
       HeaderComponent,
@@ -20,7 +21,8 @@ import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.componen
       Ceara_prontoComponent,
       HomeComponent,
       CadastroParceiroComponent,
-      CadastroNomadComponent
+      CadastroNomadComponent,
+      O_que_eComponent
    ],
   imports: [
     BrowserModule,
