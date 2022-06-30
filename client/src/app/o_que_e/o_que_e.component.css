@@ -1,6 +1,17 @@
 section {
   margin-top: 100px;
 }
-img {
-  width: 80%;
+
+.q1 {
+  text-align: justify;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+
+.q2 {
+  text-align: justify;
+  letter-spacing: 5px;
+  line-height: 1.5;
+  margin-bottom: 2px;
 }
