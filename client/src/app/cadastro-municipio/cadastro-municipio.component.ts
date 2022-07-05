@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroMunicipioComponent implements OnInit {
 
+  submitCity(municipio:any){
+    console.log(municipio)
+  }
+
   constructor() { }
 
   ngOnInit(): void {

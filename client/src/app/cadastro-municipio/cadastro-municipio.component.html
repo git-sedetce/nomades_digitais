@@ -15,7 +15,7 @@
       </div>
       <div class="col-sm-6 col-12">
         <h3 class="mb-3 mt-3 tex-center">Cadastro do Municípios</h3>
-        <form>
+        <form #municipio="ngForm" (ngSubmit)="submitCity(municipio)">
           <fieldset>
             <legend>
               Dados do Município
@@ -23,11 +23,11 @@
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
-                <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade">
+                <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade" name="cidade" ngModel>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
-                <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região">
+                <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região" name="regiao" ngModel>
                 <datalist id="datalistOptions">
                   <option value="Cariri">
                   <option value="Centro Sul">
@@ -50,19 +50,19 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="email_prefeitura" class="form-label">Email de contato</label>
                 <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp"
-                  placeholder="Insira um email válido!">
+                  placeholder="Insira um email válido!" name="email_prefeitura" ngModel>
                 <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
-                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
+                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx" name="contato_prefeitura" ngModel>
               </div>
             </div>
             <div class="mb-3">
               <label for="link_prefeitura" class="form-label">Link para mais informações (site da prefeitura ou de ponto
                 turístico).</label>
               <input type="text" class="form-control" id="link_prefeitura" aria-describedby="linkHelp"
-                placeholder="Digite o nome da Cidade">
+                placeholder="Digite o nome da Cidade" name="link_prefeitura" ngModel>
               <div id="linkHelp" class="form-text">Se não houver, favor escrever "não possui".</div>
             </div>
           </fieldset>
@@ -71,7 +71,7 @@
             <div class="form-group mb-3">
               <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre
                 outros).</label>
-              <textarea class="form-control" id="historia_cidade" rows="5"></textarea>
+              <textarea class="form-control" id="historia_cidade" rows="5" name="historia" ngModel></textarea>
             </div>
           </fieldset>
           <fieldset>
@@ -91,21 +91,21 @@
             </div>
             <div class="form-group mb-3">
               <label for="wifi_cidade">Se sim, quais locais? (nomes de praças, bairros, etc).</label>
-              <textarea class="form-control" id="wifi_cidade" rows="3"></textarea>
+              <textarea class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade" ngModel></textarea>
             </div>
             <div class="form-group mb-3">
               <label for="service_cidade">Se houver serviços, onde são ofertados (endereços)?</label>
-              <textarea class="form-control" id="service_cidade" rows="3"></textarea>
+              <textarea class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel></textarea>
             </div>
             <div class="form-group mb-3">
               <label for="service_empresario">Quais são os serviços oferecidos para empresários? (apoio ao empresário,
                 emissão de notas, entre outros). Se não houver favor escrever "Não ofertamos esse serviço".</label>
-              <textarea class="form-control" id="service_empresario" rows="3"></textarea>
+              <textarea class="form-control" id="service_empresario" rows="3" name="service_empresario" ngModel></textarea>
             </div>
             <div class="form-group mb-3">
               <label for="service_seguranca">Quais são as medidas de segurança pública do município? (vigilância,
                 endereço de postos policiais, entre outros).</label>
-              <textarea class="form-control" id="service_seguranca" rows="3"></textarea>
+              <textarea class="form-control" id="service_seguranca" rows="3" name="service_seguranca" ngModel></textarea>
             </div>
           </fieldset>
           <fieldset>
@@ -113,40 +113,40 @@
             <div class="form-group mb-3">
               <label for="pontos_turisticos">Principais pontos turísticos da cidade (Cite e descreva os pontos
                 turísticos).</label>
-              <textarea class="form-control" id="pontos_turisticos" rows="5"></textarea>
+              <textarea class="form-control" id="pontos_turisticos" rows="5" name="pontos_turisticos" ngModel></textarea>
             </div>
             <div class="form-group mb-3">
               <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
-              <textarea class="form-control" id="espacos_culturais" rows="5"></textarea>
+              <textarea class="form-control" id="espacos_culturais" rows="5" name="cultura" ngModel></textarea>
             </div>
             <div class="form-group mb-3">
               <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
                 bibliotecas, entre outros).</label>
-              <textarea class="form-control" id="espacos_lazer" rows="5"></textarea>
+              <textarea class="form-control" id="espacos_lazer" rows="5" name="lazer" ngModel></textarea>
             </div>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="praia" id="praia">
+                  <input class="form-check-input" type="checkbox" value="praia" id="praia" name="turismo" ngModel>
                   <label class="form-check-label" for="praia">
                     Praia
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="serra" id="serra">
+                  <input class="form-check-input" type="checkbox" value="serra" id="serra" name="turismo" ngModel>
                   <label class="form-check-label" for="serra">
                     Serra
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="religioso" id="religioso">
+                  <input class="form-check-input" type="checkbox" value="religioso" id="religioso" name="turismo" ngModel>
                   <label class="form-check-label" for="religioso">
                     Religioso
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="sertão" id="sertão">
+                  <input class="form-check-input" type="checkbox" value="sertão" id="sertão" name="turismo" ngModel>
                   <label class="form-check-label" for="sertão">
                     Sertão
                   </label>
@@ -155,13 +155,13 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim" name="rota" ngModel>
                   <label class="form-check-label" for="rota_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao">
+                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao" name="rota" ngModel>
                   <label class="form-check-label" for="rota_nao">
                     Não
                   </label>
@@ -170,7 +170,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="qual_rota">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
-              <textarea class="form-control" id="qual_rota" rows="3"></textarea>
+              <textarea class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel></textarea>
             </div>
           </fieldset>
           <fieldset>

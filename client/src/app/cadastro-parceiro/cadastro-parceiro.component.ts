@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroParceiroComponent implements OnInit {
 
+
+  submitParceiro(parceiro:any){
+    console.log(parceiro)
+  }
+
   constructor() { }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRounting } from './app.routing'
+import { FormsModule } from '@angular/forms';
+import { AppRounting } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { CadastroMunicipioComponent } from './cadastro-municipio/cadastro-municipio.component';
@@ -15,7 +16,7 @@ import { ManualComponent } from './manual/manual.component';
 import { SeloComponent } from './selo/selo.component';
 
 @NgModule({
-  declarations: [						
+  declarations: [
     AppComponent,
     CadastroMunicipioComponent,
       HeaderComponent,
@@ -30,7 +31,8 @@ import { SeloComponent } from './selo/selo.component';
    ],
   imports: [
     BrowserModule,
-    AppRounting
+    AppRounting,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

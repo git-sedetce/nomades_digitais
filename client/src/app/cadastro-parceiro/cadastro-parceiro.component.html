@@ -13,7 +13,7 @@
       </div>
       <div class="col-sm-6 col-12">
         <h3 class="mb-3 mt-3 tex-center">Cadastro dos Parceiros</h3>
-        <form>
+        <form #parceiro="ngForm" (ngSubmit)="submitParceiro(parceiro)">
           <fieldset>
             <legend class="text-center">
               Dados Cadastrais
