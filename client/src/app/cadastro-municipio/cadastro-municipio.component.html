@@ -23,11 +23,14 @@
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
-                <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade" name="cidade" ngModel>
+                <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade"
+                  name="cidade" ngModel required #cidade="ngModel">
+                <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">Cidade é obrigatório</div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
-                <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região" name="regiao" ngModel>
+                <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região"
+                  name="regiao" ngModel required #regiao="ngModel">
                 <datalist id="datalistOptions">
                   <option value="Cariri">
                   <option value="Centro Sul">
@@ -44,26 +47,34 @@
                   <option value="Sertão de Sobral">
                   <option value="Vale do Jaguaribe">
                 </datalist>
+                <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">Região é
+                  obrigatório</div>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="email_prefeitura" class="form-label">Email de contato</label>
                 <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp"
-                  placeholder="Insira um email válido!" name="email_prefeitura" ngModel>
-                <div id="emailHelp" class="form-text">Não compartilhe email com terceiros.</div>
+                  placeholder="Insira um email válido!" name="email_prefeitura" ngModel required email #email="ngModel">
+                <div id="emailHelp" *ngIf="email.untouched" class="form-text">Não compartilhe email com terceiros.</div>
+                <div *ngIf="!email.valid && email.touched" class="alert alert-danger" role="alert">Email inválido</div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
-                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx" name="contato_prefeitura" ngModel>
+                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx"
+                  name="contato_prefeitura" ngModel required #contato_prefeitura="ngModel">
+                <div *ngIf="!contato_prefeitura.valid && contato_prefeitura.touched" class="alert alert-danger"
+                  role="alert">Contato é obrigatório</div>
               </div>
             </div>
             <div class="mb-3">
               <label for="link_prefeitura" class="form-label">Link para mais informações (site da prefeitura ou de ponto
                 turístico).</label>
               <input type="text" class="form-control" id="link_prefeitura" aria-describedby="linkHelp"
-                placeholder="Digite o nome da Cidade" name="link_prefeitura" ngModel>
-              <div id="linkHelp" class="form-text">Se não houver, favor escrever "não possui".</div>
+                placeholder="Digite o link de informações da Cidade" name="link_prefeitura" ngModel required
+                #link_prefeitura="ngModel">
+              <div *ngIf="!link_prefeitura.valid && link_prefeitura.touched" class="alert alert-danger" role="alert">Se
+                não houver, favor escrever "não possui".</div>
             </div>
           </fieldset>
           <fieldset>
@@ -71,7 +82,10 @@
             <div class="form-group mb-3">
               <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre
                 outros).</label>
-              <textarea class="form-control" id="historia_cidade" rows="5" name="historia" ngModel></textarea>
+              <textarea class="form-control" id="historia_cidade" rows="5" name="historia" ngModel required
+                #historia="ngModel"></textarea>
+              <div *ngIf="!historia.valid && historia.touched" class="alert alert-danger" role="alert">Por favor, fale
+                mais de sua Cidade!!!</div>
             </div>
           </fieldset>
           <fieldset>
@@ -91,21 +105,33 @@
             </div>
             <div class="form-group mb-3">
               <label for="wifi_cidade">Se sim, quais locais? (nomes de praças, bairros, etc).</label>
-              <textarea class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade" ngModel></textarea>
+              <textarea class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade" ngModel required
+                #wifi_cidade="ngModel"></textarea>
+              <div *ngIf="!wifi_cidade.valid && wifi_cidade.touched" class="alert alert-danger" role="alert">Informe os
+                locais de wifi</div>
             </div>
             <div class="form-group mb-3">
               <label for="service_cidade">Se houver serviços, onde são ofertados (endereços)?</label>
-              <textarea class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel></textarea>
+              <textarea class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel required
+                #service_cidade="ngModel"></textarea>
+              <div *ngIf="!service_cidade.valid && service_cidade.touched" class="alert alert-danger" role="alert">
+                Informe os serviços</div>
             </div>
             <div class="form-group mb-3">
               <label for="service_empresario">Quais são os serviços oferecidos para empresários? (apoio ao empresário,
-                emissão de notas, entre outros). Se não houver favor escrever "Não ofertamos esse serviço".</label>
-              <textarea class="form-control" id="service_empresario" rows="3" name="service_empresario" ngModel></textarea>
+                emissão de notas, entre outros).</label>
+              <textarea class="form-control" id="service_empresario" rows="3" name="service_empresario" ngModel required
+                #service_empresario="ngModel"></textarea>
+              <div *ngIf="!service_empresario.valid && service_empresario.touched" class="alert alert-danger"
+                role="alert">Se não houver favor escrever "Não ofertamos esse serviço".</div>
             </div>
             <div class="form-group mb-3">
               <label for="service_seguranca">Quais são as medidas de segurança pública do município? (vigilância,
                 endereço de postos policiais, entre outros).</label>
-              <textarea class="form-control" id="service_seguranca" rows="3" name="service_seguranca" ngModel></textarea>
+              <textarea class="form-control" id="service_seguranca" rows="3" name="service_seguranca" ngModel required
+                #service_seguranca="ngModel"></textarea>
+              <div *ngIf="!service_seguranca.valid && service_seguranca.touched" class="alert alert-danger"
+                role="alert">Informe os serviços de segurança</div>
             </div>
           </fieldset>
           <fieldset>
@@ -113,16 +139,25 @@
             <div class="form-group mb-3">
               <label for="pontos_turisticos">Principais pontos turísticos da cidade (Cite e descreva os pontos
                 turísticos).</label>
-              <textarea class="form-control" id="pontos_turisticos" rows="5" name="pontos_turisticos" ngModel></textarea>
+              <textarea class="form-control" id="pontos_turisticos" rows="5" name="pontos_turisticos" ngModel required
+                #pontos_turisticos="ngModel"></textarea>
+              <div *ngIf="!pontos_turisticos.valid && pontos_turisticos.touched" class="alert alert-danger"
+                role="alert">Informe os pontos turísticos</div>
             </div>
             <div class="form-group mb-3">
               <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
-              <textarea class="form-control" id="espacos_culturais" rows="5" name="cultura" ngModel></textarea>
+              <textarea class="form-control" id="espacos_culturais" rows="5" name="cultura" ngModel required
+                #cultura="ngModel"></textarea>
+              <div *ngIf="!cultura.valid && cultura.touched" class="alert alert-danger" role="alert">Se não houver favor
+                escrever "Não possuimos espaço cultural".</div>
             </div>
             <div class="form-group mb-3">
               <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
                 bibliotecas, entre outros).</label>
-              <textarea class="form-control" id="espacos_lazer" rows="5" name="lazer" ngModel></textarea>
+              <textarea class="form-control" id="espacos_lazer" rows="5" name="lazer" ngModel required
+                #lazer="ngModel"></textarea>
+              <div *ngIf="!lazer.valid && lazer.touched" class="alert alert-danger" role="alert">Informe os espaços de
+                lazer.</div>
             </div>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
@@ -140,7 +175,8 @@
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="religioso" id="religioso" name="turismo" ngModel>
+                  <input class="form-check-input" type="checkbox" value="religioso" id="religioso" name="turismo"
+                    ngModel>
                   <label class="form-check-label" for="religioso">
                     Religioso
                   </label>
@@ -155,13 +191,15 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim" name="rota" ngModel>
+                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim" name="rota"
+                    ngModel>
                   <label class="form-check-label" for="rota_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao" name="rota" ngModel>
+                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao" name="rota"
+                    ngModel>
                   <label class="form-check-label" for="rota_nao">
                     Não
                   </label>
@@ -181,7 +219,7 @@
               <input class="form-control" type="file" id="formFileMultiple" multiple>
             </div>
           </fieldset>
-          <button type="submit" class="btn btn-primary mb-3">Cadastrar Município</button>
+          <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid">Cadastrar Município</button>
         </form>
       </div>
     </div>
