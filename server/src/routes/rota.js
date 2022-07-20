@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser')
+const municipio = require('./municipioRoutes')
 
 module.exports = app => {
     app.use(bodyParser.json())
-    app.get('/', (req,res) => res.send('olá'))
+    app.use(municipio)    
 }
