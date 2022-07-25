@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRounting } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { SeloComponent } from './selo/selo.component';
   imports: [
     BrowserModule,
     AppRounting,
+    HttpClientModule,
     FormsModule
   ],
   providers: [],
