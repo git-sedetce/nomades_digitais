@@ -126,24 +126,41 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="internet_speed">Qual a velocidade da internet do estabelecimento, em Mbps?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel">
+                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel">
                   <label class="form-check-label" for="low_30mbps">
                     Abaixo de 30 Mbps
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel">
+                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel">
                   <label class="form-check-label" for="30mbps">
                     30 Mbps
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel">
+                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel">
                   <label class="form-check-label" for="high_30mbps">
                     Acima de 30 Mbps
                   </label>
                 </div>
               </div>
+            </div>
+            <div *ngIf="speed_quality == 'abaixo_30'" class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <div class="alert alert-warning" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                  <h4 class="alert-heading">ATENÇÃO</h4>
+                  <p>Na seção anterior, suas respostas não atendem aos requisitos para atendimento aos Nômades Digitais, que são:</p>
+                  <ol>
+                    <li style="font-weight: bold;">Fornecer internet de qualidade para os clientes;</li>
+                    <li style="font-weight: bold;">Possuir internet de qualidade superior à 30 Mbps.</li>
+                  </ol>
+                  <p>Caso opte por continuar, você pode concluir o preenchimento do formulário e se comprometer a enviar posteriormente e-mail comprovando atendimento aos critérios que faltaram.</p>
+                  <hr>
+                  <p class="mb-0">Dúvidas ou comprovantes, envie e-mail para: digital.nomads@sedet.ce.gov.br</p>
+                </div>
+              </div>
+
             </div>
           </fieldset>
           <fieldset>

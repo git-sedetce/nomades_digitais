@@ -9,7 +9,8 @@ import { ConsultaCepService }from '../service/consulta-cep.service';
 })
 export class CadastroParceiroComponent implements OnInit {
 
-  radio_service:any;
+  radio_service: any;
+  speed_quality: any;
 
 
   submitParceiro(parceiro:any){
