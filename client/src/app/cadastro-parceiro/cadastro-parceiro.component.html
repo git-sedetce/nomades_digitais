@@ -41,7 +41,7 @@
 
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx">
+                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel">
               </div>
             </div>
 
@@ -68,7 +68,7 @@
                 </div>
                 <div class="form-group col-sm-8 col-12 mb-3">
                   <label for="complemento" class="form-label">Complemento</label>
-                  <input type="text" class="form-control" id="complemento" placeholder="Complemento">
+                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" name="complemento" ngModel #complemento="ngModel">
                 </div>
               </div>
 
@@ -90,46 +90,20 @@
             </div>
 
             <div class="row">
-              <div class="form-group col-sm-4 col-12 mb-3">
+              <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="email_parceiro" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email_parceiro" aria-describedby="emailNomad"
                   placeholder="Insira um email válido!" name="email_parceiro" ngModel required email #email_parceiro="ngModel">
                   <div id="emailHelp" *ngIf="email_parceiro.untouched" class="form-text">Não compartilhe email com terceiros.</div>
                   <div *ngIf="!email_parceiro.valid && email_parceiro.touched" class="alert alert-danger" role="alert">Email inválido</div>
               </div>
-              <div class="form-group col-sm-4 col-12 mb-3">
+              <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="midia_social" class="form-label">Redes Sociais e Site.</label>
                 <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social" name="midia_social" ngModel required #midia_social="ngModel">
                 <div id="midiaHelp" *ngIf="!midia_social.valid && midia_social.touched" class="alert alert-danger" role="alert">Caso não tiver, assinalar abaixo que não possui.</div>
               </div>
-              <div class="col-sm-4 col-12 mb-3">
-                <label for="tipo_service">Enquadra-se em qual tipo de local abaixo?</label>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="gridRadios" id="hospedagem" value="hospedagem">
-                  <label class="form-check-label" for="hospedagem">
-                    Hospedagem
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="gridRadios" id="alimentacao" value="alimentacao">
-                  <label class="form-check-label" for="alimentacao">
-                    Alimentação
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="gridRadios" id="local_trabalho" value="local_trabalho">
-                  <label class="form-check-label" for="local_trabalho">
-                    Local de trabalho
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="gridRadios" id="outro" value="outro">
-                  <label class="form-check-label" for="outro">
-                    Outro
-                  </label>
-                </div>
-              </div>
             </div>
+
           </fieldset>
           <fieldset>
             <legend class="text-center">Qualidade da Internet</legend>
@@ -137,13 +111,13 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="internet_service">O acesso a internet é liberado aos clientes?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="internet_sim" value="sim">
+                  <input class="form-check-input" type="radio" name="internet_service" id="internet_sim" value="sim" ngModel #internet_service="ngModel">
                   <label class="form-check-label" for="internet_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="internet_nao" value="nao">
+                  <input class="form-check-input" type="radio" name="internet_service" id="internet_nao" value="nao" ngModel #internet_service="ngModel">
                   <label class="form-check-label" for="internet_nao">
                     Não
                   </label>
@@ -152,19 +126,19 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="internet_speed">Qual a velocidade da internet do estabelecimento, em Mbps?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="low_30mbps" value="abaixo_30">
+                  <input class="form-check-input" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel">
                   <label class="form-check-label" for="low_30mbps">
                     Abaixo de 30 Mbps
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="30mbps" value="30">
+                  <input class="form-check-input" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel">
                   <label class="form-check-label" for="30mbps">
                     30 Mbps
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="high_30mbps" value="acima_30">
+                  <input class="form-check-input" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel">
                   <label class="form-check-label" for="high_30mbps">
                     Acima de 30 Mbps
                   </label>
@@ -172,63 +146,95 @@
               </div>
             </div>
           </fieldset>
+          <fieldset>
+            <legend class="text-center"> Tipo de serviços</legend>
+            <div class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="tipo_service" class="text-center">Enquadra-se em qual tipo de local abaixo?</label><br><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="hospedagem" value="hospedagem" ngModel #tipo_service="ngModel">
+                  <label class="form-check-label" for="hospedagem">
+                    Hospedagem
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="alimentacao" value="alimentacao" ngModel #tipo_service="ngModel">
+                  <label class="form-check-label" for="alimentacao">
+                    Alimentação
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="local_trabalho" value="local_trabalho" ngModel #tipo_service="ngModel">
+                  <label class="form-check-label" for="local_trabalho">
+                    Local de trabalho
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="outro" value="outro" ngModel #tipo_service="ngModel">
+                  <label class="form-check-label" for="outro">
+                    Outro
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
           <fieldset *ngIf="radio_service == 'hospedagem'">
             <legend class="text-center">Serviços prestados - Hospedagem</legend>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
-                <label for="wifi_service">Quais serviços essenciais você fornece aos hóspedes? São exemplos: lavanderia,
+                <label for="essential_service">Quais serviços essenciais você fornece aos hóspedes? São exemplos: lavanderia,
                   espaço de trabalho coletivo ou individual, cozinha, entre outros.</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Lavanderia" id="lavanderia">
+                  <input class="form-check-input" type="checkbox" value="Lavanderia" id="lavanderia" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="lavanderia">
                     Lavanderia
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Cozinha coletiva" id="cozinha">
+                  <input class="form-check-input" type="checkbox" value="Cozinha coletiva" id="cozinha" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="cozinha">
                     Cozinha coletiva
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Limpeza" id="limpeza">
+                  <input class="form-check-input" type="checkbox" value="Limpeza" id="limpeza" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="limpeza">
                     Limpeza
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Restaurante e/ou Bar" id="bar">
+                  <input class="form-check-input" type="checkbox" value="Restaurante e/ou Bar" id="bar" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="bar">
                     Restaurante e/ou Bar
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Cafeteria" id="cafeteria">
+                  <input class="form-check-input" type="checkbox" value="Cafeteria" id="cafeteria" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="cafeteria">
                     Cafeteria
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Café da manhã" id="breakfast">
+                  <input class="form-check-input" type="checkbox" value="Café da manhã" id="breakfast" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="breakfast">
                     Café da manhã
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Espaços de lazer individual"
-                    id="lazer_individual">
+                  <input class="form-check-input" type="checkbox" value="Espaços de lazer individual" id="lazer_individual" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="lazer_individual">
                     Espaços de lazer individual (ex. tv no quarto)
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Espaços de lazer coletivo" id="lazer_coletivo">
+                  <input class="form-check-input" type="checkbox" value="Espaços de lazer coletivo" id="lazer_coletivo" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="lazer_coletivo">
                     Espaços de lazer coletivo (sala de TV, de jogos, e/ou de leitura, etc)
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Outro" id="outro">
+                  <input class="form-check-input" type="checkbox" value="Outro" id="outro" name="essential_service" ngModel #essential_service="ngModel">
                   <label class="form-check-label" for="outro">
                     Outro
                   </label>
@@ -237,52 +243,7 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="outro_servico">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
                   ofertados.</label>
-                <textarea class="form-control" id="outro_servico" rows="3"></textarea>
-                <label class="mt-3" for="wifi_service">Possui espaços de trabalho e/ou para reuniões?
-                </label>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho"
-                    id="individual_trabalho">
-                  <label class="form-check-label" for="individual_trabalho">
-                    Sim, Espaço individual para trabalho
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Sim, Espaço coletivo para trabalho"
-                    id="coletivo_trabalho">
-                  <label class="form-check-label" for="coletivo_trabalho">
-                    Sim, Espaço coletivo para trabalho
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Sim, espaço para reuniões coletivas"
-                    id="reuniao_coletivas">
-                  <label class="form-check-label" for="reuniao_coletivas">
-                    Sim, espaço para reuniões coletivas
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="não" id="nao">
-                  <label class="form-check-label" for="nao">
-                    Não
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <div class="form-group mb-3">
-                  <label for="pontos_turisticos">Detalhe sua proposta de tarifa especial para permanência a partir de 15
-                    dias. Exemplos: percentual de desconto, novo valor de tarifa, etc.</label>
-                  <textarea class="form-control" id="tarifa_especial" rows="3"></textarea>
-                </div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <div class="form-group mb-3">
-                  <label for="espacos_culturais">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
-                    falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
-                  <textarea class="form-control" id="resumo_estabelecimento" rows="3"></textarea>
-                </div>
+                <textarea class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel"></textarea>
               </div>
             </div>
           </fieldset>
@@ -290,106 +251,55 @@
             <legend class="text-center">Serviços prestados - Alimentação</legend>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
-                <label for="internet_service">Possui espaços que sejam possíveis de trabalhar?</label>
+                <label for="internet_service_alimentacao">Possui espaços que sejam possíveis de trabalhar?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="trabalho_sim" value="sim">
+                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_sim" value="sim" ngModel #internet_service_alimentacao="ngModel">
                   <label class="form-check-label" for="trabalho_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="trabalho_nao" value="nao">
+                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_nao" value="nao" ngModel #internet_service_alimentacao="ngModel">
                   <label class="form-check-label" for="trabalho_nao">
                     Não
                   </label>
                 </div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
-                <label for="internet_service">Sua equipe é orientada para atender clientes que trabalham no local? Por
+                <label for="orienta_equipe">Sua equipe é orientada para atender clientes que trabalham no local? Por
                   exemplo: não questiona muito sobre o nível de consumo do cliente.</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="orienta_sim" value="sim">
+                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_sim" value="sim" name="orienta_equipe" ngModel #orienta_equipe="ngModel">
                   <label class="form-check-label" for="orienta_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="orienta_nao" value="nao">
+                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_nao" value="nao" name="orienta_equipe" ngModel #orienta_equipe="ngModel">
                   <label class="form-check-label" for="orienta_nao">
                     Não
                   </label>
                 </div>
               </div>
             </div>
-            <div class="form-group col-12 mb-3">
-              <label for="promotion">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de falar sobre os
-                serviços prestados que são um diferencial para nômades digitais!</label>
-              <textarea class="form-control" id="promotion" rows="3"></textarea>
-            </div>
           </fieldset>
           <fieldset *ngIf="radio_service == 'local_trabalho'">
             <legend class="text-center">Serviços prestados - Locais de trabalho</legend>
             <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="wifi_service">Possui espaço que possibilite o trabalho em grupo e individual.</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho"
-                    id="individual_trabalho">
-                  <label class="form-check-label" for="individual_trabalho">
-                    Sim, Espaço individual para trabalho
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Sim, Espaço coletivo para trabalho"
-                    id="coletivo_trabalho">
-                  <label class="form-check-label" for="coletivo_trabalho">
-                    Sim, Espaço coletivo para trabalho
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Sim, espaço para reuniões coletivas"
-                    id="reuniao_coletivas">
-                  <label class="form-check-label" for="reuniao_coletivas">
-                    Sim, espaço para reuniões coletivas
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="não" id="nao">
-                  <label class="form-check-label" for="nao">
-                    Não
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="internet_service">Possui boa localização? (Fácil acesso ao estabelecimento, próximo aos
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="localizacao">Possui boa localização? (Fácil acesso ao estabelecimento, próximo aos
                   hotéis, restaurantes e centros comerciais).</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="localizacao_sim" value="sim">
+                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_sim" value="sim" name="localizacao" ngModel #localizacao="ngModel">
                   <label class="form-check-label" for="localizacao_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="localizacao_nao" value="nao">
+                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_nao" value="nao" name="localizacao" ngModel #localizacao="ngModel">
                   <label class="form-check-label" for="localizacao_nao">
                     Não
                   </label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <div class="form-group mb-3">
-                  <label for="proposta">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos:
-                    preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
-                  <textarea class="form-control" id="proposta" rows="3"></textarea>
-                </div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <div class="form-group mb-3">
-                  <label for="resumo_estabelecimento">Faça um breve resumo promovendo o seu estabelecimento, sem deixar
-                    de falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
-                  <textarea class="form-control" id="resumo_estabelecimento" rows="3"></textarea>
                 </div>
               </div>
             </div>
@@ -399,22 +309,60 @@
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="ramo">Qual o ramo de atividade do estabelecimento?</label>
-                <textarea class="form-control" id="outro_servico" rows="3"></textarea>
+                <textarea class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel"></textarea>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label class="mt-3" for="beneficios">Quais os beneficios que o estabelecimento tem a oferecer aos
                   <span>Nômades Digitais</span>?</label>
-                <textarea class="form-control" id="beneficios" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-12 mb-3">
-                <label for="espacos_culturais">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
-                  falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
-                <textarea class="form-control" id="resumo_estabelecimento" rows="3"></textarea>
+                <textarea class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel"></textarea>
               </div>
             </div>
           </fieldset>
+          <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'" class="row">
+            <div class="col-sm-6 col-12 mb-3">
+              <label for="trabalho_reunioes">Possui espaço que possibilite o trabalho em grupo e individual.</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho" id="individual_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                <label class="form-check-label" for="individual_trabalho">
+                  Sim, Espaço individual para trabalho
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Sim, Espaço coletivo para trabalho"
+                  id="coletivo_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                <label class="form-check-label" for="coletivo_trabalho">
+                  Sim, Espaço coletivo para trabalho
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Sim, espaço para reuniões coletivas"
+                  id="reuniao_coletivas" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                <label class="form-check-label" for="reuniao_coletivas">
+                  Sim, espaço para reuniões coletivas
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="não" id="nao" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                <label class="form-check-label" for="nao">
+                  Não
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-6 col-12 mb-3">
+              <div class="form-group mb-3">
+                <label for="tarifa_especial">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos:
+                  preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
+                <textarea class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel"></textarea>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'outro' || radio_service == 'alimentacao'" class="row">
+            <div class="form-group col-12 mb-3">
+              <label for="espacos_culturais">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
+                falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
+              <textarea class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel"></textarea>
+            </div>
+          </div>
           <fieldset>
             <legend class="text-center">Anexos</legend>
             <div class="row">
