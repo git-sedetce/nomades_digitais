@@ -1,0 +1,48 @@
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class cadastra_parceiro extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  cadastra_parceiro.init({
+    cnpj: DataTypes.STRING,
+    nome_fantasia: DataTypes.STRING,
+    razao_social: DataTypes.STRING,
+    telefone: DataTypes.STRING,
+    cep: DataTypes.STRING,
+    logradouro: DataTypes.STRING,
+    numero: DataTypes.STRING,
+    complemento: DataTypes.STRING,
+    bairro: DataTypes.STRING,
+    cidade: DataTypes.STRING,
+    estado: DataTypes.STRING,
+    email_parceiro: DataTypes.STRING,
+    midia_social: DataTypes.STRING,
+    tipo_service: DataTypes.STRING,
+    essential_service: DataTypes.STRING,
+    internet_speed: DataTypes.STRING,
+    internet_service: DataTypes.STRING,
+    outro_servico: DataTypes.STRING,
+    trabalho_reunioes: DataTypes.STRING,
+    tarifa_especial: DataTypes.STRING,
+    internet_service_alimentacao: DataTypes.STRING,
+    orienta_equipe: DataTypes.STRING,
+    localizacao: DataTypes.STRING,
+    ramo: DataTypes.STRING,
+    beneficios: DataTypes.STRING,
+    espacos_culturais: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'cadastra_parceiro',
+  });
+  return cadastra_parceiro;
+};
