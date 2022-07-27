@@ -148,7 +148,6 @@
             <div *ngIf="speed_quality == 'abaixo_30'" class="row">
               <div class="col-sm-12 col-12 mb-3">
                 <div class="alert alert-warning" role="alert">
-                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                   <h4 class="alert-heading">ATENÇÃO</h4>
                   <p>Na seção anterior, suas respostas não atendem aos requisitos para atendimento aos Nômades Digitais, que são:</p>
                   <ol>
@@ -202,60 +201,64 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="essential_service">Quais serviços essenciais você fornece aos hóspedes? São exemplos: lavanderia,
                   espaço de trabalho coletivo ou individual, cozinha, entre outros.</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Lavanderia" id="lavanderia" name="essential_service" ngModel #essential_service="ngModel">
+                  <div *ngFor="let item of _serviceList">
+                    <input class="form-check-input" value = "{{ item.nome }}" id = "{{ item.nome }}" type="checkbox" name = "{{ item.nome }}" (change)="onChange()" [(ngModel)]="item.isselected">
+                    <label class="form-check-label" for = "{{ item.nome }}">{{ item.nome }}</label>
+                  </div>
+                <!--<div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Lavanderia" id="lavanderia" name="essential_service" ngModel #lavanderia="ngModel">
                   <label class="form-check-label" for="lavanderia">
                     Lavanderia
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Cozinha coletiva" id="cozinha" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Cozinha coletiva" id="cozinha" name="essential_service" ngModel #cozinha="ngModel">
                   <label class="form-check-label" for="cozinha">
                     Cozinha coletiva
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Limpeza" id="limpeza" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Limpeza" id="limpeza" name="essential_service" ngModel #limpeza="ngModel">
                   <label class="form-check-label" for="limpeza">
                     Limpeza
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Restaurante e/ou Bar" id="bar" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Restaurante e/ou Bar" id="bar" name="essential_service" ngModel #bar="ngModel">
                   <label class="form-check-label" for="bar">
                     Restaurante e/ou Bar
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Cafeteria" id="cafeteria" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Cafeteria" id="cafeteria" name="essential_service" ngModel #cafeteria="ngModel">
                   <label class="form-check-label" for="cafeteria">
                     Cafeteria
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Café da manhã" id="breakfast" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Café da manhã" id="breakfast" name="essential_service" ngModel #breakfast="ngModel">
                   <label class="form-check-label" for="breakfast">
                     Café da manhã
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Espaços de lazer individual" id="lazer_individual" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Espaços de lazer individual" id="lazer_individual" name="essential_service" ngModel #lazer_individual="ngModel">
                   <label class="form-check-label" for="lazer_individual">
                     Espaços de lazer individual (ex. tv no quarto)
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Espaços de lazer coletivo" id="lazer_coletivo" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Espaços de lazer coletivo" id="lazer_coletivo" name="essential_service" ngModel #lazer_coletivo="ngModel">
                   <label class="form-check-label" for="lazer_coletivo">
                     Espaços de lazer coletivo (sala de TV, de jogos, e/ou de leitura, etc)
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Outro" id="outro" name="essential_service" ngModel #essential_service="ngModel">
+                  <input class="form-check-input" type="checkbox" value="Outro" id="outro" name="essential_service" ngModel #outro="ngModel">
                   <label class="form-check-label" for="outro">
                     Outro
                   </label>
-                </div>
+                </div>-->
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label for="outro_servico">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços

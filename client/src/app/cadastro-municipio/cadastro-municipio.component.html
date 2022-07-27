@@ -92,30 +92,40 @@
             <legend>Serviços Ofertados</legend>
             <label for="wifi_service">Possui wifi gratuito em pontos públicos do município?</label>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_sim" value="sim">
-              <label class="form-check-label" for="wifi_sim">
+              <input class="form-check-input" [(ngModel)]="service_wifi" type="radio" name="wifi_service" id="wifi_sim" value="sim">
+              <label class="form-check-label" for="wifi_sim" ngModel #wifi_service="ngModel">
                 Sim
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="wifi_nao" value="nao">
-              <label class="form-check-label" for="wifi_nao">
+              <input class="form-check-input" [(ngModel)]="service_wifi" type="radio" name="wifi_service" id="wifi_nao" value="nao">
+              <label class="form-check-label" for="wifi_nao" ngModel #wifi_service="ngModel">
                 Não
               </label>
             </div>
-            <div class="form-group mb-3">
-              <label for="wifi_cidade">Se sim, quais locais? (nomes de praças, bairros, etc).</label>
+            <div *ngIf="service_wifi == 'sim'" class="form-group mb-3">
+              <label  for="wifi_cidade" >Quais locais? (nomes de praças, bairros, etc).</label>
               <textarea class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade" ngModel required
                 #wifi_cidade="ngModel"></textarea>
               <div *ngIf="!wifi_cidade.valid && wifi_cidade.touched" class="alert alert-danger" role="alert">Informe os
                 locais de wifi</div>
             </div>
+
+            <div class="form-group mb-3">
+              <label for="service_estrangeiro">Quais são os serviços ofertados para turistas e/ou estrangeiros?</label>
+              <textarea class="form-control" id="service_estrangeiro" rows="3" name="service_estrangeiro" ngModel required
+                #service_estrangeiro="ngModel"></textarea>
+              <div *ngIf="!service_estrangeiro.valid && service_estrangeiro.touched" class="alert alert-danger"
+                role="alert">Se não houver favor escrever "Não ofertamos esse serviço".</div>
+            </div>
+
             <div class="form-group mb-3">
               <label for="service_cidade">Se houver serviços, onde são ofertados (endereços)?</label>
               <textarea class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel required
                 #service_cidade="ngModel"></textarea>
               <div *ngIf="!service_cidade.valid && service_cidade.touched" class="alert alert-danger" role="alert">
                 Informe os serviços</div>
+
             </div>
             <div class="form-group mb-3">
               <label for="service_empresario">Quais são os serviços oferecidos para empresários? (apoio ao empresário,
@@ -146,7 +156,7 @@
             </div>
             <div class="form-group mb-3">
               <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
-              <textarea class="form-control" id="espacos_culturais" rows="5" name="cultura" ngModel required
+              <textarea class="form-control" id="espacos_culturais" rows="5" name="espacos_culturais" ngModel required
                 #cultura="ngModel"></textarea>
               <div *ngIf="!cultura.valid && cultura.touched" class="alert alert-danger" role="alert">Se não houver favor
                 escrever "Não possuimos espaço cultural".</div>
@@ -154,61 +164,61 @@
             <div class="form-group mb-3">
               <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
                 bibliotecas, entre outros).</label>
-              <textarea class="form-control" id="espacos_lazer" rows="5" name="lazer" ngModel required
+              <textarea class="form-control" id="espacos_lazer" rows="5" name="espacos_lazer" ngModel required
                 #lazer="ngModel"></textarea>
               <div *ngIf="!lazer.valid && lazer.touched" class="alert alert-danger" role="alert">Informe os espaços de
                 lazer.</div>
             </div>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
-                <label for="wifi_service">Qual o tipo de turismo predominante da cidade?</label>
+                <label for="turismo">Qual o tipo de turismo predominante da cidade?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="praia" id="praia" name="turismo" ngModel>
+                  <input class="form-check-input" type="checkbox" value="praia" id="praia" name="turismo" ngModel  #turismo="ngModel">
                   <label class="form-check-label" for="praia">
                     Praia
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="serra" id="serra" name="turismo" ngModel>
+                  <input class="form-check-input" type="checkbox" value="serra" id="serra" name="turismo" ngModel #turismo="ngModel">
                   <label class="form-check-label" for="serra">
                     Serra
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="religioso" id="religioso" name="turismo"
-                    ngModel>
+                    ngModel #turismo="ngModel">
                   <label class="form-check-label" for="religioso">
                     Religioso
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="sertão" id="sertão" name="turismo" ngModel>
+                  <input class="form-check-input" type="checkbox" value="sertão" id="sertão" name="turismo" ngModel #turismo="ngModel">
                   <label class="form-check-label" for="sertão">
                     Sertão
                   </label>
                 </div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
-                <label for="rota mb-3">A cidade faz parte de alguma rota turística ?</label>
+                <label for="rota">A cidade faz parte de alguma rota turística ?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_sim" value="sim" name="rota"
-                    ngModel>
+                  <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota" id="rota_sim" value="sim" name="rota"
+                    ngModel #rota="ngModel">
                   <label class="form-check-label" for="rota_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="rota_nao" value="nao" name="rota"
-                    ngModel>
+                  <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota" id="rota_nao" value="nao" name="rota"
+                    ngModel #rota="ngModel">
                   <label class="form-check-label" for="rota_nao">
                     Não
                   </label>
                 </div>
               </div>
             </div>
-            <div class="form-group mb-3">
+            <div *ngIf="rota_turistica == 'sim'" class="form-group mb-3">
               <label for="qual_rota">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
-              <textarea class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel></textarea>
+              <textarea class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel #qual_rota="ngModel"></textarea>
             </div>
           </fieldset>
           <fieldset>
