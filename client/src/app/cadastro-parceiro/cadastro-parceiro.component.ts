@@ -36,7 +36,6 @@ export class CadastroParceiroComponent implements OnInit {
       .subscribe((dados: any) => this.populaForm(dados, form));
     }
     }
-
     populaForm(dados:any, formulario:any){
       formulario.form.patchValue({
         endereco: {

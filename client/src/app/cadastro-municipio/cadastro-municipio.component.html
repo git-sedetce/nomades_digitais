@@ -22,31 +22,20 @@
             </legend>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
-                <label for="cidade_ceara" class="form-label">Nome da Cidade</label>
-                <input type="text" class="form-control" id="cidade_ceara" placeholder="Digite o nome da Cidade"
-                  name="cidade" ngModel required #cidade="ngModel">
+                <label for="cidade" class="form-label">Nome da Cidade</label>
+                <input list="datalistCidade" class="form-control" id="cidade" placeholder="Digite o nome da Cidade"
+                  name="cidade" ngModel required #cidade="ngModel" (blur)="(localizaregiao(cidade.value, municipio))">
+                  <datalist id="datalistCidade">
+                    <!--<option value="default">----</option>-->
+                  <option *ngFor="let city of lista_municipio" value="{{city.nome_municipio}}">{{city.nome_municipio}}</option>
+                </datalist>
                 <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">Cidade é obrigatório</div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
-                <label for="regiao_ceara" class="form-label">Região de Planejamento</label>
-                <input class="form-control" list="datalistOptions" id="regiao_ceara" placeholder="Informe a sua região"
-                  name="regiao" ngModel required #regiao="ngModel">
-                <datalist id="datalistOptions">
-                  <option value="Cariri">
-                  <option value="Centro Sul">
-                  <option value="Grande Fortaleza">
-                  <option value="Litoral Leste">
-                  <option value="Litoral Norte">
-                  <option value="Litoral oeste / Vale do Curu">
-                  <option value="Maciço de Baturité">
-                  <option value="Serra Ibiapaba">
-                  <option value="Sertão Central">
-                  <option value="Sertão de Canidé">
-                  <option value="Sertão dos Crateús">
-                  <option value="Sertão dos Inhamuns">
-                  <option value="Sertão de Sobral">
-                  <option value="Vale do Jaguaribe">
-                </datalist>
+                <label for="regiao" class="form-label">Região de Planejamento</label>
+                <input class="form-control" type="text" id="regiao" placeholder="Informe a sua região"
+                  name="regiao" ngModel required #regiao="ngModel" readonly>
+
                 <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">Região é
                   obrigatório</div>
               </div>
@@ -55,9 +44,9 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="email_prefeitura" class="form-label">Email de contato</label>
                 <input type="email" class="form-control" id="email_prefeitura" aria-describedby="emailHelp"
-                  placeholder="Insira um email válido!" name="email_prefeitura" ngModel required email #email="ngModel">
-                <div id="emailHelp" *ngIf="email.untouched" class="form-text">Não compartilhe email com terceiros.</div>
-                <div *ngIf="!email.valid && email.touched" class="alert alert-danger" role="alert">Email inválido</div>
+                  placeholder="Insira um email válido!" name="email_prefeitura" ngModel required email #email_prefeitura="ngModel">
+                <div id="emailHelp" *ngIf="email_prefeitura.untouched" class="form-text">Não compartilhe email com terceiros.</div>
+                <div *ngIf="!email_prefeitura.valid && email_prefeitura.touched" class="alert alert-danger" role="alert">Email inválido</div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label for="contato_prefeitura" class="form-label">Telefone de contato</label>
@@ -82,9 +71,9 @@
             <div class="form-group mb-3">
               <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre
                 outros).</label>
-              <textarea class="form-control" id="historia_cidade" rows="5" name="historia" ngModel required
-                #historia="ngModel"></textarea>
-              <div *ngIf="!historia.valid && historia.touched" class="alert alert-danger" role="alert">Por favor, fale
+              <textarea class="form-control" id="historia_cidade" rows="5" name="historia_cidade" ngModel required
+                #historia_cidade="ngModel"></textarea>
+              <div *ngIf="!historia_cidade.valid && historia_cidade.touched" class="alert alert-danger" role="alert">Por favor, fale
                 mais de sua Cidade!!!</div>
             </div>
           </fieldset>
@@ -157,42 +146,41 @@
             <div class="form-group mb-3">
               <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
               <textarea class="form-control" id="espacos_culturais" rows="5" name="espacos_culturais" ngModel required
-                #cultura="ngModel"></textarea>
-              <div *ngIf="!cultura.valid && cultura.touched" class="alert alert-danger" role="alert">Se não houver favor
-                escrever "Não possuimos espaço cultural".</div>
+                #espacos_culturais="ngModel"></textarea>
+              <div *ngIf="!espacos_culturais.valid && espacos_culturais.touched" class="alert alert-danger" role="alert">Se não houver favor escrever "Não possuimos espaço cultural".</div>
             </div>
             <div class="form-group mb-3">
               <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
                 bibliotecas, entre outros).</label>
               <textarea class="form-control" id="espacos_lazer" rows="5" name="espacos_lazer" ngModel required
-                #lazer="ngModel"></textarea>
-              <div *ngIf="!lazer.valid && lazer.touched" class="alert alert-danger" role="alert">Informe os espaços de
+                #espacos_lazer="ngModel"></textarea>
+              <div *ngIf="!espacos_lazer.valid && espacos_lazer.touched" class="alert alert-danger" role="alert">Informe os espaços de
                 lazer.</div>
             </div>
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
-                <label for="turismo">Qual o tipo de turismo predominante da cidade?</label>
+                <label for="tipo_turismo">Qual o tipo de turismo predominante da cidade?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="praia" id="praia" name="turismo" ngModel  #turismo="ngModel">
+                  <input class="form-check-input" type="checkbox" value="praia" id="praia" name="tipo_turismo" ngModel  #tipo_turismo="ngModel">
                   <label class="form-check-label" for="praia">
                     Praia
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="serra" id="serra" name="turismo" ngModel #turismo="ngModel">
+                  <input class="form-check-input" type="checkbox" value="serra" id="serra" name="tipo_turismo" ngModel #tipo_turismo="ngModel">
                   <label class="form-check-label" for="serra">
                     Serra
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="religioso" id="religioso" name="turismo"
+                  <input class="form-check-input" type="checkbox" value="religioso" id="religioso" name="tipo_turismo"
                     ngModel #turismo="ngModel">
                   <label class="form-check-label" for="religioso">
                     Religioso
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="sertão" id="sertão" name="turismo" ngModel #turismo="ngModel">
+                  <input class="form-check-input" type="checkbox" value="sertão" id="sertão" name="tipo_turismo" ngModel #turismo="ngModel">
                   <label class="form-check-label" for="sertão">
                     Sertão
                   </label>
@@ -201,15 +189,13 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="rota">A cidade faz parte de alguma rota turística ?</label>
                 <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota" id="rota_sim" value="sim" name="rota"
-                    ngModel #rota="ngModel">
+                  <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota" id="rota_sim" value="sim" name="rota" ngModel #rota="ngModel">
                   <label class="form-check-label" for="rota_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota" id="rota_nao" value="nao" name="rota"
-                    ngModel #rota="ngModel">
+                  <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota" id="rota_nao" value="nao" name="rota" ngModel #rota="ngModel">
                   <label class="form-check-label" for="rota_nao">
                     Não
                   </label>
