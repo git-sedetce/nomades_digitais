@@ -12,9 +12,40 @@ export class CadastroParceiroComponent implements OnInit {
   radio_service: any;
   speed_quality: any;
 
+  empresa = {
+    cnpj: '',
+    nome_fantasia: '',
+    razao_social: '',
+    telefone: '',
+    cep: '',
+    logradouro: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    estado: '',
+    email_parceiro: '',
+    midia_social: '',
+    tipo_service: '',
+    essential_service: '',
+    internet_speed: '',
+    internet_service: '',
+    outro_servico: '',
+    trabalho_reunioes: '',
+    tarifa_especial: '',
+    internet_service_alimentacao: '',
+    orienta_equipe: '',
+    localizacao: '',
+    ramo: '',
+    beneficios: '',
+    espacos_culturais: '',
+  }
+
+
 
   submitParceiro(parceiro:any){
     console.log(parceiro)
+    console.log(this.empresa)
   }
 
   constructor(private cepsService: ConsultaCepService) { }

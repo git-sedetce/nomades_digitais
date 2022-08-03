@@ -21,27 +21,27 @@
             <div class="row">
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="cnpj" class="form-label">CNPJ</label>
-                <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel required #cnpj="ngModel">
+                <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel required #cnpj="ngModel" [(ngModel)]="empresa.cnpj">
                 <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe apenas os números.</div>
                 <div *ngIf="!cnpj.valid && cnpj.touched" class="alert alert-danger" role="alert">CNPJ é obrigatório</div>
 
               </div>
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="nome_fantasia" class="form-label">Nome Fantasia</label>
-                <input type="text" class="form-control" id="nome_fantasia" placeholder="Digite o nome fantasia" name="nome_fantasia" ngModel required #nome_fantasia="ngModel">
+                <input type="text" class="form-control" id="nome_fantasia" placeholder="Digite o nome fantasia" name="nome_fantasia" ngModel required #nome_fantasia="ngModel" [(ngModel)]="empresa.nome_fantasia">
                 <div *ngIf="!nome_fantasia.valid && nome_fantasia.touched" class="alert alert-danger" role="alert">Informe o nome fantasia</div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="razao_social" class="form-label">Razão Social</label>
-                <input type="text" class="form-control" id="razao_social" placeholder="Digite a Razão Social" name="razao_social" ngModel required #razao_social="ngModel">
+                <input type="text" class="form-control" id="razao_social" placeholder="Digite a Razão Social" name="razao_social" ngModel required #razao_social="ngModel" [(ngModel)]="empresa.razao_social">
                 <div *ngIf="!razao_social.valid && razao_social.touched" class="alert alert-danger" role="alert">Informe a razao_social</div>
               </div>
 
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel">
+                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone">
               </div>
             </div>
 
@@ -50,12 +50,12 @@
               <div class="row">
                 <div class="form-group col-sm-6 col-12 mb-3">
                   <label for="cep" class="form-label">CEP</label>
-                  <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel required #cep="ngModel" (blur)="(consultaCEP(cep.value, parceiro))">
+                  <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel required #cep="ngModel" [(ngModel)]="empresa.cep" (blur)="(consultaCEP(cep.value, parceiro))">
                   <div *ngIf="!cep.valid && cep.touched" class="alert alert-danger" role="alert">Informe o CEP</div>
                 </div>
                 <div class="form-group col-sm-6 col-12 mb-3">
                   <label for="logradouro" class="form-label">Endereço</label>
-                  <input type="text" class="form-control" id="logradouro" placeholder="Digite o endereço" name="logradouro" ngModel required #logradouro="ngModel" readonly>
+                  <input type="text" class="form-control" id="logradouro" placeholder="Digite o endereço" name="logradouro" ngModel required #logradouro="ngModel" [(ngModel)]="empresa.logradouro" readonly>
                 </div>
               </div>
 
@@ -63,27 +63,27 @@
               <div class="row">
                 <div class="form-group col-sm-4 col-12 mb-3">
                   <label for="numero" class="form-label">Número</label>
-                  <input type="text" class="form-control" id="numero" placeholder="Insira o número" name="numero" ngModel required #numero="ngModel">
+                  <input type="text" class="form-control" id="numero" placeholder="Insira o número" name="numero" ngModel required #numero="ngModel" [(ngModel)]="empresa.numero">
                   <div *ngIf="!numero.valid && numero.touched" class="alert alert-danger" role="alert">Caso não tenha número informe S/N</div>
                 </div>
                 <div class="form-group col-sm-8 col-12 mb-3">
                   <label for="complemento" class="form-label">Complemento</label>
-                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" name="complemento" ngModel #complemento="ngModel">
+                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" name="complemento" ngModel #complemento="ngModel" [(ngModel)]="empresa.complemento">
                 </div>
               </div>
 
               <div class="row">
                 <div class="form-group col-sm-3 col-12 mb-3">
                   <label for="bairro" class="form-label">Bairro</label>
-                  <input type="text" class="form-control" id="bairro" placeholder="Digite o bairro" name="bairro" ngModel required #bairro="ngModel" readonly>
+                  <input type="text" class="form-control" id="bairro" placeholder="Digite o bairro" name="bairro" ngModel required #bairro="ngModel" [(ngModel)]="empresa.bairro" readonly>
                 </div>
                 <div class="form-group col-sm-4 col-12 mb-3">
                   <label for="cidade" class="form-label">Cidade</label>
-                  <input type="text" class="form-control" id="cidade" placeholder="Informe a Cidade" name="cidade" ngModel required #cidade="ngModel" readonly>
+                  <input type="text" class="form-control" id="cidade" placeholder="Informe a Cidade" name="cidade" ngModel required #cidade="ngModel" [(ngModel)]="empresa.cidade" readonly>
                 </div>
                 <div class="form-group col-sm-4 col-12 mb-3">
                   <label for="estado" class="form-label">Estado</label>
-                  <input type="text" class="form-control" id="estado" placeholder="Informe o Estado" name="estado" ngModel required #estado="ngModel" readonly>
+                  <input type="text" class="form-control" id="estado" placeholder="Informe o Estado" name="estado" ngModel required #estado="ngModel" [(ngModel)]="empresa.estado" readonly>
                 </div>
               </div>
 
@@ -93,13 +93,13 @@
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="email_parceiro" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email_parceiro" aria-describedby="emailNomad"
-                  placeholder="Insira um email válido!" name="email_parceiro" ngModel required email #email_parceiro="ngModel">
+                  placeholder="Insira um email válido!" name="email_parceiro" ngModel required email #email_parceiro="ngModel" [(ngModel)]="empresa.email_parceiro">
                   <div id="emailHelp" *ngIf="email_parceiro.untouched" class="form-text">Não compartilhe email com terceiros.</div>
                   <div *ngIf="!email_parceiro.valid && email_parceiro.touched" class="alert alert-danger" role="alert">Email inválido</div>
               </div>
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="midia_social" class="form-label">Redes Sociais e Site.</label>
-                <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social" name="midia_social" ngModel required #midia_social="ngModel">
+                <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social" name="midia_social" ngModel required #midia_social="ngModel" [(ngModel)]="empresa.midia_social">
                 <div id="midiaHelp" *ngIf="!midia_social.valid && midia_social.touched" class="alert alert-danger" role="alert">Caso não tiver, assinalar abaixo que não possui.</div>
               </div>
             </div>
@@ -111,13 +111,13 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="internet_service">O acesso a internet é liberado aos clientes?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service" id="internet_sim" value="sim" ngModel #internet_service="ngModel">
+                  <input class="form-check-input" type="radio" name="internet_service" id="internet_sim" value="sim" ngModel #internet_service="ngModel" [(ngModel)]="empresa.internet_service">
                   <label class="form-check-label" for="internet_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service" id="internet_nao" value="nao" ngModel #internet_service="ngModel">
+                  <input class="form-check-input" type="radio" name="internet_service" id="internet_nao" value="nao" ngModel #internet_service="ngModel" [(ngModel)]="empresa.internet_service">
                   <label class="form-check-label" for="internet_nao">
                     Não
                   </label>
@@ -126,19 +126,19 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="internet_speed">Qual a velocidade da internet do estabelecimento, em Mbps?</label>
                 <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel">
+                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
                   <label class="form-check-label" for="low_30mbps">
                     Abaixo de 30 Mbps
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel">
+                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
                   <label class="form-check-label" for="30mbps">
                     30 Mbps
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel">
+                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
                   <label class="form-check-label" for="high_30mbps">
                     Acima de 30 Mbps
                   </label>
@@ -168,25 +168,25 @@
               <div class="col-sm-12 col-12 mb-3">
                 <label for="tipo_service" class="text-center">Enquadra-se em qual tipo de local abaixo?</label><br><br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="hospedagem" value="hospedagem" ngModel #tipo_service="ngModel">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="hospedagem" value="hospedagem" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
                   <label class="form-check-label" for="hospedagem">
                     Hospedagem
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="alimentacao" value="alimentacao" ngModel #tipo_service="ngModel">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="alimentacao" value="alimentacao" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
                   <label class="form-check-label" for="alimentacao">
                     Alimentação
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="local_trabalho" value="local_trabalho" ngModel #tipo_service="ngModel">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="local_trabalho" value="local_trabalho" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
                   <label class="form-check-label" for="local_trabalho">
                     Local de trabalho
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="outro" value="outro" ngModel #tipo_service="ngModel">
+                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="outro" value="outro" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
                   <label class="form-check-label" for="outro">
                     Outro
                   </label>
@@ -263,7 +263,7 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="outro_servico">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
                   ofertados.</label>
-                <textarea class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel"></textarea>
+                <textarea class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
               </div>
             </div>
           </fieldset>
@@ -273,13 +273,13 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="internet_service_alimentacao">Possui espaços que sejam possíveis de trabalhar?</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_sim" value="sim" ngModel #internet_service_alimentacao="ngModel">
+                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_sim" value="sim" ngModel #internet_service_alimentacao="ngModel" [(ngModel)]="empresa.internet_service_alimentacao">
                   <label class="form-check-label" for="trabalho_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_nao" value="nao" ngModel #internet_service_alimentacao="ngModel">
+                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_nao" value="nao" ngModel #internet_service_alimentacao="ngModel" [(ngModel)]="empresa.internet_service_alimentacao">
                   <label class="form-check-label" for="trabalho_nao">
                     Não
                   </label>
@@ -289,13 +289,13 @@
                 <label for="orienta_equipe">Sua equipe é orientada para atender clientes que trabalham no local? Por
                   exemplo: não questiona muito sobre o nível de consumo do cliente.</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_sim" value="sim" name="orienta_equipe" ngModel #orienta_equipe="ngModel">
+                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_sim" value="sim" name="orienta_equipe" ngModel #orienta_equipe="ngModel" [(ngModel)]="empresa.orienta_equipe">
                   <label class="form-check-label" for="orienta_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_nao" value="nao" name="orienta_equipe" ngModel #orienta_equipe="ngModel">
+                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_nao" value="nao" name="orienta_equipe" ngModel #orienta_equipe="ngModel" [(ngModel)]="empresa.orienta_equipe">
                   <label class="form-check-label" for="orienta_nao">
                     Não
                   </label>
@@ -310,13 +310,13 @@
                 <label for="localizacao">Possui boa localização? (Fácil acesso ao estabelecimento, próximo aos
                   hotéis, restaurantes e centros comerciais).</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_sim" value="sim" name="localizacao" ngModel #localizacao="ngModel">
+                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_sim" value="sim" name="localizacao" ngModel #localizacao="ngModel" [(ngModel)]="empresa.localizacao">
                   <label class="form-check-label" for="localizacao_sim">
                     Sim
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_nao" value="nao" name="localizacao" ngModel #localizacao="ngModel">
+                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_nao" value="nao" name="localizacao" ngModel #localizacao="ngModel" [(ngModel)]="empresa.localizacao">
                   <label class="form-check-label" for="localizacao_nao">
                     Não
                   </label>
@@ -329,12 +329,12 @@
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="ramo">Qual o ramo de atividade do estabelecimento?</label>
-                <textarea class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel"></textarea>
+                <textarea class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label class="mt-3" for="beneficios">Quais os beneficios que o estabelecimento tem a oferecer aos
                   <span>Nômades Digitais</span>?</label>
-                <textarea class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel"></textarea>
+                <textarea class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel" [(ngModel)]="empresa.beneficios"></textarea>
               </div>
             </div>
           </fieldset>
@@ -342,27 +342,27 @@
             <div class="col-sm-6 col-12 mb-3">
               <label for="trabalho_reunioes">Possui espaço que possibilite o trabalho em grupo e individual.</label>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho" id="individual_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho" id="individual_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel" [(ngModel)]="empresa.trabalho_reunioes">
                 <label class="form-check-label" for="individual_trabalho">
                   Sim, Espaço individual para trabalho
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="Sim, Espaço coletivo para trabalho"
-                  id="coletivo_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                  id="coletivo_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel" [(ngModel)]="empresa.trabalho_reunioes">
                 <label class="form-check-label" for="coletivo_trabalho">
                   Sim, Espaço coletivo para trabalho
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="Sim, espaço para reuniões coletivas"
-                  id="reuniao_coletivas" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                  id="reuniao_coletivas" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel" [(ngModel)]="empresa.trabalho_reunioes">
                 <label class="form-check-label" for="reuniao_coletivas">
                   Sim, espaço para reuniões coletivas
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="não" id="nao" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel">
+                <input class="form-check-input" type="checkbox" value="não" id="nao" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel" [(ngModel)]="empresa.trabalho_reunioes">
                 <label class="form-check-label" for="nao">
                   Não
                 </label>
@@ -372,7 +372,7 @@
               <div class="form-group mb-3">
                 <label for="tarifa_especial">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos:
                   preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
-                <textarea class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel"></textarea>
+                <textarea class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel" [(ngModel)]="empresa.tarifa_especial"></textarea>
               </div>
             </div>
           </div>
@@ -380,7 +380,7 @@
             <div class="form-group col-12 mb-3">
               <label for="espacos_culturais">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
                 falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
-              <textarea class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel"></textarea>
+              <textarea class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel" [(ngModel)]="empresa.espacos_culturais"></textarea>
             </div>
           </div>
           <fieldset>

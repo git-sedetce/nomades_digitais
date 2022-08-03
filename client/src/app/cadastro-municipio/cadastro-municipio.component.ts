@@ -13,9 +13,30 @@ export class CadastroMunicipioComponent implements OnInit {
   municipio!: any[];
   city:any;
   lista_municipio!: any[];
+  cadastro_cidade = {
+    cidade: '',
+    regiao: '',
+    email_prefeitura: '',
+    contato_prefeitura: '',
+    link_prefeitura: '',
+    historia_cidade: '',
+    wifi_service: '',
+    wifi_cidade: '',
+    service_estrangeiro: '',
+    service_cidade: '',
+    service_empresario: '',
+    service_seguranca: '',
+    pontos_turisticos: '',
+    espacos_culturais: '',
+    espacos_lazer: '',
+    tipo_turismo: '',
+    rota: '',
+    qual_rota: '',
+  }
 
   submitCity(municipio:any){
     console.log(municipio)
+    console.log(this.cadastro_cidade)
   }
 
 
