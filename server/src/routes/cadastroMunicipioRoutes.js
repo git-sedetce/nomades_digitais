@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const CadastroMunicipioController = require('../controllers/CadastroMunicipioController')
+const CadastroMunicipioController = require('../controllers/cadastroMunicipioController')
 
 const router = Router()
 router.get('/parceiroMunicipio', CadastroMunicipioController.pegarMunicipioParceiro)
