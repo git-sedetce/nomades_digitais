@@ -33,6 +33,7 @@ export class CadastroMunicipioComponent implements OnInit {
     rota: '',
     qual_rota: '',
   }
+  submitted = false;
 
   submitCity(municipio:any){
     console.log(municipio)
@@ -75,6 +76,65 @@ export class CadastroMunicipioComponent implements OnInit {
       console.log('lista_municipio');
 
     }
+
+    //cadastrar a cidade
+
+    saveCity(): void{
+      const data = {
+        cidade: this.cadastro_cidade.cidade,
+        regiao: this.cadastro_cidade.regiao,
+        email_prefeitura: this.cadastro_cidade.email_prefeitura,
+        contato_prefeitura: this.cadastro_cidade.contato_prefeitura,
+        link_prefeitura: this.cadastro_cidade.link_prefeitura,
+        historia_cidade: this.cadastro_cidade.historia_cidade,
+        wifi_service: this.cadastro_cidade.wifi_service,
+        wifi_cidade: this.cadastro_cidade.wifi_cidade,
+        service_estrangeiro: this.cadastro_cidade.service_estrangeiro,
+        service_cidade: this.cadastro_cidade.service_cidade,
+        service_empresario: this.cadastro_cidade.service_empresario,
+        service_seguranca: this.cadastro_cidade.service_seguranca,
+        pontos_turisticos: this.cadastro_cidade.pontos_turisticos,
+        espacos_culturais: this.cadastro_cidade.espacos_culturais,
+        espacos_lazer: this.cadastro_cidade.espacos_lazer,
+        tipo_turismo: this.cadastro_cidade.tipo_turismo,
+        rota: this.cadastro_cidade.rota,
+        qual_rota: this.cadastro_cidade.qual_rota
+      };
+      this.services.cadastar_municipio(data)
+      .subscribe({
+          next: (res: any) => {
+            console.log(res);
+            this.submitted = true;
+          },
+          error: (e: any) => console.error(e)
+        })
+    }
+
+    novoCadastro(): void {
+      this.submitted = false;
+      this.cadastro_cidade = {
+        cidade: '',
+        regiao: '',
+        email_prefeitura: '',
+        contato_prefeitura: '',
+        link_prefeitura: '',
+        historia_cidade: '',
+        wifi_service: '',
+        wifi_cidade: '',
+        service_estrangeiro: '',
+        service_cidade: '',
+        service_empresario: '',
+        service_seguranca: '',
+        pontos_turisticos: '',
+        espacos_culturais: '',
+        espacos_lazer: '',
+        tipo_turismo: '',
+        rota: '',
+        qual_rota: '',
+      };
+    }
+
+
 
 
   }

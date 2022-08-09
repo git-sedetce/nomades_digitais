@@ -13,7 +13,7 @@
           <figcaption class="figure-caption text-end">Ceará e suas regiões</figcaption>
         </figure>
       </div>
-      <div class="col-sm-6 col-12">
+      <div class="col-sm-6 col-12" *ngIf="!submitted">
         <h3 class="mb-3 mt-3 tex-center">Cadastro do Municípios</h3>
         <form #municipio="ngForm" (ngSubmit)="submitCity(municipio)">
           <fieldset>
@@ -214,8 +214,95 @@
               <input class="form-control" type="file" id="formFileMultiple" multiple>
             </div>
           </fieldset>
-          <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid">Cadastrar Município</button>
+          <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid" (click)="saveCity()">Cadastrar Município</button>
         </form>
+      </div>
+      <div class="col-sm-6 col-12" *ngIf="submitted">
+        <h3>O Munícipio foi cadastrado com sucesso!</h3>
+        <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Nome da Cidade: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Região de Planejamento:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.regiao }}</div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Email de Contato: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.email_prefeitura }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Telefone de Contato:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.contato_prefeitura }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Site da prefeitura: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.link_prefeitura }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Histórico da Cidade: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.historia_cidade }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Possui Wifi em pontos públicos? </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_service }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Quais locais?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_cidade }}</div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Quais são os serviços ofertados para turistas e/ou estrangeiros?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_estrangeiro }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Se houver serviços, onde são ofertados (endereços)?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_cidade }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Quais são os serviços oferecidos para empresários?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_empresario }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Quais são as medidas de segurança pública do município?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_seguranca }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.pontos_turisticos }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Espaços culturais:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_culturais }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Espaços de Lazer: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_lazer }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Tipo de turismo predominante:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.tipo_turismo }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Faz parte de alguma rota turística ?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.rota }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Qual rota? </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.qual_rota }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success mb-3" (click)="novoCadastro()">Novo Cadastro</button>
       </div>
     </div>
   </div>
