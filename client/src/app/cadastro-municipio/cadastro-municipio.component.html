@@ -72,7 +72,7 @@
               <label for="historia_cidade">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre
                 outros).</label>
               <textarea class="form-control" id="historia_cidade" rows="5" name="historia_cidade" ngModel required
-                #historia_cidade="ngModel" [(ngModel)]="cadastro_cidade.historia_cidade"></textarea>
+                #historia_cidade="ngModel" [(ngModel)]="cadastro_cidade.historia_cidade" placeholder="Insira no máximo 255 caractere!"></textarea>
               <div *ngIf="!historia_cidade.valid && historia_cidade.touched" class="alert alert-danger" role="alert">Por favor, fale
                 mais de sua Cidade!!!</div>
             </div>
@@ -142,13 +142,13 @@
                 #pontos_turisticos="ngModel" [(ngModel)]="cadastro_cidade.pontos_turisticos"></textarea>
               <div *ngIf="!pontos_turisticos.valid && pontos_turisticos.touched" class="alert alert-danger"
                 role="alert">Informe os pontos turísticos</div>
-            </div>
+            </div><!--
             <div class="form-group mb-3">
               <label for="espacos_culturais">Se possuir espaços culturais, cite-os abaixo.</label>
               <textarea class="form-control" id="espacos_culturais" rows="5" name="espacos_culturais" ngModel required
                 #espacos_culturais="ngModel" [(ngModel)]="cadastro_cidade.espacos_culturais"></textarea>
               <div *ngIf="!espacos_culturais.valid && espacos_culturais.touched" class="alert alert-danger" role="alert">Se não houver favor escrever "Não possuimos espaço cultural".</div>
-            </div>
+            </div>-->
             <div class="form-group mb-3">
               <label for="espacos_lazer">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
                 bibliotecas, entre outros).</label>
@@ -277,9 +277,9 @@
             <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade:</div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.pontos_turisticos }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
+            <!--<div class="w-100 d-none d-md-block"></div>
             <div class="col-6 col-sm-4 mb-3">Espaços culturais:</div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_culturais }}</div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_culturais }}</div>-->
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
             <div class="col-6 col-sm-4 mb-3">Espaços de Lazer: </div>

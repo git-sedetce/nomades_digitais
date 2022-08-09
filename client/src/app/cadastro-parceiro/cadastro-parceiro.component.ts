@@ -12,6 +12,7 @@ export class CadastroParceiroComponent implements OnInit {
 
   radio_service: any;
   speed_quality: any;
+  have_internet: any;
 
   empresa = {
     cnpj: '',
