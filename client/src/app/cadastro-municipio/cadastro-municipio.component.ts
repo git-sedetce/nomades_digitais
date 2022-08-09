@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
+import { ServiceService } from '../services/service.service';
 
 @Component({
   selector: 'app-cadastro-municipio',
@@ -41,7 +42,7 @@ export class CadastroMunicipioComponent implements OnInit {
   }
 
 
-  constructor( public services: ListaMinucipioService) { }
+  constructor( public services: ListaMinucipioService, public service: ServiceService) { }
 
   ngOnInit(): void {
 
@@ -100,7 +101,7 @@ export class CadastroMunicipioComponent implements OnInit {
         rota: this.cadastro_cidade.rota,
         qual_rota: this.cadastro_cidade.qual_rota
       };
-      this.services.cadastar_municipio(data)
+      this.service.cadastar_municipio(data)
       .subscribe({
           next: (res: any) => {
             console.log(res);

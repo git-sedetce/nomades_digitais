@@ -21,10 +21,7 @@ export class ListaMinucipioService {
     console.log('pegar_regiao', environment.url + metodo + id)
     return this.httpClient.get(environment.url + metodo + id);
   }
-  cadastar_municipio(data: any): Observable<any> {
-    console.log('cadastar_municipio', environment.url + data)
-    return this.httpClient.post(environment.url + 'parceiroMunicipio', data)
-  }
+
 
 
 }
