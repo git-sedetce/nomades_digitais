@@ -11,7 +11,7 @@
           <img src="../../assets/imgs/extras/estabelecimento.jpg" class="figure-img img-fluid rounded" alt="...">
         </figure>
       </div>
-      <div class="col-sm-6 col-12">
+      <div class="col-sm-6 col-12" *ngIf="!submitted">
         <h3 class="mb-3 mt-3 tex-center">Cadastro dos Parceiros</h3>
         <form #parceiro="ngForm" (ngSubmit)="submitParceiro(parceiro)">
           <fieldset>
@@ -414,8 +414,127 @@
             </div>-->
           </fieldset>
 
-          <button type="submit" class="btn btn-info mb-3" [disabled]="!parceiro.valid">Cadastrar Parceiro</button>
+          <button type="submit" class="btn btn-info mb-3" [disabled]="!parceiro.valid" (click)="savePartner()">Cadastrar Parceiro</button>
         </form>
+      </div>
+      <div class="col-sm-6 col-12" *ngIf="submitted">
+        <h3>O Munícipio foi cadastrado com sucesso!</h3>
+        <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">CNPJ: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.cnpj }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Nome Fantasia:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.nome_fantasia }}</div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Razão Social: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.razao_social }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Telefone de Contato:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.telefone }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">CEP: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.cep }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Endereço: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.logradouro }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Número: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.numero }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Comlemento:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.complemento }}</div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Bairro:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.bairro }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Cidade:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.cidade }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Estado:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.estado }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Email:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.email_parceiro }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Redes Sociais e Site:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.midia_social }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">O acesso a internet é liberado aos clientes?</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.internet_service }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Velocidade da internet: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.internet_speed }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">Tipo de Serviço:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.tipo_service }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Serviços essenciais: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.essential_service }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Detalhamento de serviço: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.outro_servico }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Espaço de Trabalho:</div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.trabalho_reunioes }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Proposta de tarifa: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.tarifa_especial }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Possui espaço para trabalho? </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.internet_service_alimentacao }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Possui equipe orientada? </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.orienta_equipe }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Possui boa localização? </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.localizacao }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Qual o ramo de atividade do estabelecimento? </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.ramo }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Benefícios para os Nômades: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.beneficios }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Resumo: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.espacos_culturais }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success mb-3" (click)="novoCadastroParceiro()">Novo Cadastro</button>
       </div>
     </div>
   </div>
