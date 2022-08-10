@@ -338,8 +338,24 @@
               </div>
             </div>
           </fieldset>
+          <!--<div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'" class="row">
+            <div class="col-sm-6 col-12 mb-3">
+              <label for="trabalho_reunioes">Possui espaço que possibilite o trabalho em grupo e individual.</label>
+              <div *ngFor="let space of _meetList">
+                <input class="form-check-input" value = "{{ space.nome }}" id = "{{ space.nome }}" type="checkbox" name = "{{ space.nome }}"[(ngModel)]="space.isselected">
+                <label class="form-check-label" for = "{{ space.nome }}">{{ space.nome }}</label>
+               </div>
+            </div>
+          </div>-->
           <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'" class="row">
             <div class="col-sm-6 col-12 mb-3">
+              <label for="trabalho_reunioes">Possui espaço que possibilite o trabalho em grupo e individual.</label>
+              <div *ngFor="let space of _meetList">
+                <input class="form-check-input" value = "{{ space.nome }}" id = "{{ space.nome }}" type="checkbox" name = "{{ space.nome }}" (change)="onChange()" [(ngModel)]="space.isselected">
+                <label class="form-check-label" for = "{{ space.nome }}">{{ space.nome }}</label>
+               </div>
+            </div>
+            <!--<div class="col-sm-6 col-12 mb-3">
               <label for="trabalho_reunioes">Possui espaço que possibilite o trabalho em grupo e individual.</label>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="Sim, Espaço individual para trabalho" id="individual_trabalho" name="trabalho_reunioes" ngModel #trabalho_reunioes="ngModel" [(ngModel)]="empresa.trabalho_reunioes">
@@ -367,7 +383,7 @@
                   Não
                 </label>
               </div>
-            </div>
+            </div>-->
             <div class="col-sm-6 col-12 mb-3">
               <div class="form-group mb-3">
                 <label for="tarifa_especial">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos:

@@ -54,6 +54,7 @@ export class CadastroParceiroComponent implements OnInit {
   ngOnInit() {
 
     this.getService()
+    this.getMeet()
 
   }
 
@@ -81,6 +82,8 @@ export class CadastroParceiroComponent implements OnInit {
     }
 
     savePartner(): void {
+      this.empresa.essential_service = this._serviceList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
+      this.empresa.trabalho_reunioes = this._meetList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
       const data ={
         cnpj: this.empresa.cnpj,
         nome_fantasia: this.empresa.nome_fantasia,
@@ -150,9 +153,8 @@ export class CadastroParceiroComponent implements OnInit {
       }
     }
 
-
-
-    _serviceList: typeService[] | undefined;
+    _serviceList!: typeService[];
+    _meetList!: typeMeet[];
 
     getService(){
       this._serviceList=[
@@ -164,15 +166,27 @@ export class CadastroParceiroComponent implements OnInit {
         {nome: "Espaços de lazer individual (ex. tv no quarto)", isselected: false},
         {nome: "Espaços de lazer coletivo (sala de TV, de jogos, e/ou de leitura, etc)", isselected: false},
         {nome: "Outro", isselected: false}
+      ]
+    }
 
+    getMeet(){
+      this._meetList=[
+        { nome:"Sim. Espaço individual para trabalho", isselected: false },
+        { nome:"Sim. Espaço coletivo para trabalho", isselected: false },
+        { nome:"Sim. Espaço para reuniões coletivas", isselected: false },
+        { nome:"Não", isselected: false }
       ]
     }
     onChange(){
       console.log(this._serviceList);
+      console.log(this._meetList);
     }
 }
 class typeService {
   nome: string | undefined;
   isselected: boolean | undefined;
-
+}
+class typeMeet{
+  nome: string | undefined;
+  isselected: boolean | undefined;
 }
