@@ -8,4 +8,13 @@
 #forms {
   margin-top: 100px;
 }
-
+.pergunta{
+  font-weight: bold;
+}
+legend{
+  font-weight: bold;
+  text-decoration: underline;
+}
+h3{
+  font-weight: bolder;
+}

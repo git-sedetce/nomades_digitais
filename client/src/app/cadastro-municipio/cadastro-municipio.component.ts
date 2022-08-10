@@ -46,6 +46,8 @@ export class CadastroMunicipioComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getTourism()
+
        /* this.services.listar_municipio('municipio')
         .subscribe((m: any) => {
           this.municipio = m );
@@ -81,6 +83,7 @@ export class CadastroMunicipioComponent implements OnInit {
     //cadastrar a cidade
 
     saveCity(): void{
+      this.cadastro_cidade.tipo_turismo = this._tourismList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
       const data = {
         cidade: this.cadastro_cidade.cidade,
         regiao: this.cadastro_cidade.regiao,
@@ -135,9 +138,25 @@ export class CadastroMunicipioComponent implements OnInit {
       };
     }
 
+    _tourismList!: typeTourism[];
+
+    getTourism(){
+      this._tourismList=[
+        { nome:"Praia", isselected: false },
+        { nome:"Religião", isselected: false },
+        { nome:"Serra", isselected: false },
+        { nome:"Sertão", isselected: false }
+      ]
+    }
 
 
 
+
+  }
+
+  class typeTourism{
+    nome: string | undefined;
+    isselected: boolean | undefined;
   }
 
 
