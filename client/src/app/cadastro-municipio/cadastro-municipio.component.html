@@ -188,14 +188,6 @@
               <textarea class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel #qual_rota="ngModel" [(ngModel)]="cadastro_cidade.qual_rota"></textarea>
             </div>
           </fieldset>
-          <fieldset>
-            <legend>Anexos</legend>
-            <div class="mb-3">
-              <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
-                culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
-              <input class="form-control" type="file" id="formFileMultiple" multiple>
-            </div>
-          </fieldset>
           <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid" (click)="saveCity()">Cadastrar Município</button>
         </form>
       </div>
@@ -283,6 +275,15 @@
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
           </div>
+          <fieldset>
+            <legend>Anexos</legend>
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
+                culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
+              <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple>
+              <button (click)="onFilesUpload()">upLoad</button>
+            </div>
+          </fieldset>
         </div>
         <button type="submit" class="btn btn-success mb-3" (click)="novoCadastro()">Novo Cadastro</button>
       </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
+import { HttpClient } from '@angular/common/http'
 import { ServiceService } from '../services/service.service';
 
 @Component({
@@ -9,12 +11,15 @@ import { ServiceService } from '../services/service.service';
 })
 export class CadastroMunicipioComponent implements OnInit {
 
+  @ViewChild('filesInput') filesInput!: ElementRef;
+
   service_wifi: any;
   rota_turistica: any;
   municipio!: any[];
   city:any;
   lista_municipio!: any[];
   cadastro_cidade = {
+    id: '',
     cidade: '',
     regiao: '',
     email_prefeitura: '',
@@ -42,7 +47,7 @@ export class CadastroMunicipioComponent implements OnInit {
   }
 
 
-  constructor( public services: ListaMinucipioService, public service: ServiceService) { }
+  constructor( public services: ListaMinucipioService, public service: ServiceService, private http: HttpClient) { }
 
   ngOnInit(): void {
 
@@ -108,6 +113,7 @@ export class CadastroMunicipioComponent implements OnInit {
       .subscribe({
           next: (res: any) => {
             console.log(res);
+            this.cadastro_cidade = res.id
             this.submitted = true;
           },
           error: (e: any) => console.error(e)
@@ -118,6 +124,7 @@ export class CadastroMunicipioComponent implements OnInit {
       this.submitted = false;
       this.cadastro_cidade = {
         cidade: '',
+        id:'',
         regiao: '',
         email_prefeitura: '',
         contato_prefeitura: '',
@@ -147,6 +154,20 @@ export class CadastroMunicipioComponent implements OnInit {
         { nome:"Serra", isselected: false },
         { nome:"Sertão", isselected: false }
       ]
+    }
+
+    //anexos
+    onFilesUpload(){
+      const imageBlob = this.filesInput.nativeElement.files[3]
+      const file = new FormData()
+      file.append('file', imageBlob)
+      file.append("id", this.cadastro_cidade.id + '');
+      console.log('formData', file)
+      console.log('id', this.cadastro_cidade.id)
+
+      this.http.post(environment.url + 'anexo' , file).subscribe((response: any) => {
+        console.log(response)
+      })
     }
 
 

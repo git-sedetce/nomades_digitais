@@ -46,6 +46,10 @@ export class CadastroParceiroComponent implements OnInit {
     beneficios: '',
     espacos_culturais: '',
   }
+  documentos = {
+    user_id: '',
+    caminho: ''
+  }
   submitted = false
 
   submitParceiro(parceiro:any){
@@ -193,7 +197,10 @@ export class CadastroParceiroComponent implements OnInit {
     onFileUpload(){
       const imageBlob = this.fileInput.nativeElement.files[0]
       const file = new FormData()
-      file.set('file', imageBlob)
+      file.append('file', imageBlob)
+      file.append("id", this.empresa.id + '');
+      console.log('formData', file)
+      console.log('id', this.empresa.id)
 
       this.http.post(environment.url + 'anexo' , file).subscribe((response: any) => {
         console.log(response)
