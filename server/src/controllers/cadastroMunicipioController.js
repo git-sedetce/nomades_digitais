@@ -33,6 +33,16 @@ class CadastroMunicipioController {
           return res.status(500).json(error.message);
         }
       }
+
+      static async anexosMunicipioParceiro(req, res) {
+        const file = req.files
+        if(file){
+          res.json(file)
+        }else{
+          throw new Error("File upload unseccessful")
+        }
+          //res.send("Arquivo recebido!")
+      }
 }
 
 module.exports = CadastroMunicipioController;
