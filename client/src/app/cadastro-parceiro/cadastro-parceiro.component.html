@@ -211,7 +211,7 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="outro_servico" class="pergunta">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
                   ofertados.</label>
-                <textarea class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
+                <textarea data-ls-module="charCounter" maxlength="100" class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
               </div>
             </div>
           </fieldset>
@@ -312,27 +312,6 @@
             </div>
           </div>
           <fieldset>
-            <legend class="text-center">Anexos</legend>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Adicione o comprovante de velocidade de internet (contrato
-                    com a operadora ou documento similar vigente).</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-
-              <div class="col-sm-6 col-12 mb-3">
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Adicione o Alvará de Funcionamento.</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
-                <div class="mb-3">
-                  <label for="formFile" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
-                  <input class="form-control" type="file" id="formFile">
-                </div>
-              </div>
-            </div>
             <!--
             <div class="row">
               <div class="col-12 mb-3">
@@ -349,6 +328,10 @@
         <h3>O Munícipio foi cadastrado com sucesso!</h3>
         <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
         <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">ID: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.id }}</div>
+          </div>
           <div class="row">
             <div class="col-6 col-sm-4 mb-3">CNPJ: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.cnpj }}</div>
@@ -461,6 +444,30 @@
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
           </div>
+          <legend class="text-center">Anexos</legend>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Adicione o comprovante de velocidade de internet (contrato
+                    com a operadora ou documento similar vigente).</label>
+                  <input #fileInput class="form-control" type="file" id="formFile">
+                  <button (click)="onFileUpload()">upLoad</button>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Adicione o Alvará de Funcionamento.</label>
+                  <input class="form-control" type="file" id="formFile">
+                  <button (click)="onFileUpload()">upLoad</button>
+                </div>
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
+                  <input class="form-control" type="file" id="formFile">
+                  <button (click)="onFileUpload()">upLoad</button>
+                </div>
+              </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-success mb-3" (click)="novoCadastroParceiro()">Novo Cadastro</button>
       </div>

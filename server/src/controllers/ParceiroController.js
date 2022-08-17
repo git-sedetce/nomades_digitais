@@ -31,6 +31,25 @@ class ParceiroController {
       return res.status(500).json(error.message);
     }
   }
+
+  static async anexoParceiro(req, res) {
+    const file = req.file
+    if(file){
+      res.json(file)
+    }else{
+      throw new Error("File upload unseccessful")
+    }
+      //res.send("Arquivo recebido!")
+  }
+  static async anexosParceiro(req, res) {
+    const file = req.files
+    if(file){
+      res.json(file)
+    }else{
+      throw new Error("File upload unseccessful")
+    }
+      //res.send("Arquivo recebido!")
+  }
 }
 
 module.exports = ParceiroController;

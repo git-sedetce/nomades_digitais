@@ -19,4 +19,9 @@ export class ServiceService {
     console.log('cadastar_parceiro', environment.url + data)
     return this.http.post(environment.url + 'parceiro', data)
   }
+
+  anexar_arquivo(file: File): Observable<any> {
+    console.log('anexar_arquivo', environment.url + file)
+    return this.http.post(environment.url + 'parceiro', file)
+  }
 }

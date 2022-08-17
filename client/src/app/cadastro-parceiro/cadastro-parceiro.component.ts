@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ConsultaCepService }from '../service/consulta-cep.service';
 import { ServiceService } from '../services/service.service';
-
+import { HttpClient } from '@angular/common/http'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cadastro-parceiro',
@@ -10,11 +11,14 @@ import { ServiceService } from '../services/service.service';
 })
 export class CadastroParceiroComponent implements OnInit {
 
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   radio_service: any;
   speed_quality: any;
   have_internet: any;
 
   empresa = {
+    id: '',
     cnpj: '',
     nome_fantasia: '',
     razao_social: '',
@@ -49,7 +53,7 @@ export class CadastroParceiroComponent implements OnInit {
     console.log(this.empresa)
   }
 
-  constructor(private cepsService: ConsultaCepService, public service: ServiceService) { }
+  constructor(private cepsService: ConsultaCepService, public service: ServiceService, private http: HttpClient) { }
 
   ngOnInit() {
 
@@ -115,6 +119,8 @@ export class CadastroParceiroComponent implements OnInit {
       this.service.cadastar_parceiro(data).subscribe({
         next: (res: any) => {
           console.log(res);
+          this.empresa.id = res.id
+          console.log("Id", this.empresa.id)
           this.submitted = true;
         },
         error: (e) => console.error(e)
@@ -124,6 +130,7 @@ export class CadastroParceiroComponent implements OnInit {
     novoCadastroParceiro(): void {
       this.submitted = false;
       this.empresa = {
+        id: '',
         cnpj: '',
         nome_fantasia: '',
         razao_social: '',
@@ -180,6 +187,17 @@ export class CadastroParceiroComponent implements OnInit {
     onChange(){
       console.log(this._serviceList);
       console.log(this._meetList);
+    }
+
+    //anexar arquivos
+    onFileUpload(){
+      const imageBlob = this.fileInput.nativeElement.files[0]
+      const file = new FormData()
+      file.set('file', imageBlob)
+
+      this.http.post(environment.url + 'anexo' , file).subscribe((response: any) => {
+        console.log(response)
+      })
     }
 }
 class typeService {
