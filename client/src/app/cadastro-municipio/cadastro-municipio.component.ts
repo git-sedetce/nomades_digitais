@@ -18,6 +18,7 @@ export class CadastroMunicipioComponent implements OnInit {
   municipio!: any[];
   city:any;
   lista_municipio!: any[];
+  multipleImages = [];
   cadastro_cidade = {
     id: '',
     cidade: '',
@@ -157,15 +158,31 @@ export class CadastroMunicipioComponent implements OnInit {
     }
 
     //anexos
+
+    selectMultipleImage(event: any) {
+      if (event.target.files.length > 0) {
+        this.multipleImages = event.target.files;
+      }
+    }
+
     onFilesUpload(){
-      const imageBlob = this.filesInput.nativeElement.files[3]
-      const file = new FormData()
-      file.append('file', imageBlob)
+      const files = new FormData()
+
+      for(let img of this.multipleImages){
+        files.append('files', img)
+      }
+
+      /*
+      for (let index = 0; index < this.multipleImages.length; index++){
+        const element = this.multipleImages[index]
+        files.append('file', element)
+      }
+
       file.append("id", this.cadastro_cidade.id + '');
       console.log('formData', file)
-      console.log('id', this.cadastro_cidade.id)
+      console.log('id', this.cadastro_cidade.id)*/
 
-      this.http.post(environment.url + 'anexo' , file).subscribe((response: any) => {
+      this.http.post(environment.url + 'anexosMunicipio', files).subscribe((response: any) => {
         console.log(response)
       })
     }

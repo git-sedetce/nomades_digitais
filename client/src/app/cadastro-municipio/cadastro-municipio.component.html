@@ -280,8 +280,8 @@
             <div class="mb-3">
               <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
                 culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
-              <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple>
-              <button (click)="onFilesUpload()">upLoad</button>
+              <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple (change)="selectMultipleImage($event)">
+              <button type="submit" (click)="onFilesUpload()">upLoad</button>
             </div>
           </fieldset>
         </div>
