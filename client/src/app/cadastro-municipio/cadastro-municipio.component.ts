@@ -123,6 +123,7 @@ export class CadastroMunicipioComponent implements OnInit {
 
     novoCadastro(): void {
       this.submitted = false;
+      this.getTourism();
       this.cadastro_cidade = {
         cidade: '',
         id:'',

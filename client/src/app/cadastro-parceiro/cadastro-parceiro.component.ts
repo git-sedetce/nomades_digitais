@@ -133,6 +133,8 @@ export class CadastroParceiroComponent implements OnInit {
 
     novoCadastroParceiro(): void {
       this.submitted = false;
+      this.getService();
+      this.getMeet();
       this.empresa = {
         id: '',
         cnpj: '',
