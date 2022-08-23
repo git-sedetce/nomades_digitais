@@ -1,2 +1,3 @@
 client/src/assets/imgs/*
 server/node_modules/*
+server/uploads/*
