@@ -71,8 +71,9 @@
             <div class="form-group mb-3">
               <label for="historia_cidade" class="pergunta">História da Cidade (ano de criação, origem do nome, pessoas históricas, entre
                 outros).</label>
-              <textarea class="form-control" id="historia_cidade" rows="5" name="historia_cidade" ngModel required
-                #historia_cidade="ngModel" [(ngModel)]="cadastro_cidade.historia_cidade" placeholder="Insira no máximo 255 caracteres!"></textarea>
+              <textarea [maxlength]="maxChars" class="form-control" id="historia_cidade" rows="7" name="historia_cidade" ngModel required
+                #historia_cidade="ngModel" [(ngModel)]="cadastro_cidade.historia_cidade" placeholder="Insira no máximo 500 caracteres!"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.historia_cidade.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!historia_cidade.valid && historia_cidade.touched" class="alert alert-danger" role="alert">Por favor, fale
                 mais de sua Cidade!!!</div>
             </div>
@@ -94,24 +95,27 @@
             </div>
             <div *ngIf="service_wifi == 'sim'" class="form-group mb-3">
               <label  for="wifi_cidade" class="pergunta">Quais locais? (nomes de praças, bairros, etc).</label>
-              <textarea class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade" ngModel required
                 #wifi_cidade="ngModel" [(ngModel)]="cadastro_cidade.wifi_cidade"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.wifi_cidade.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!wifi_cidade.valid && wifi_cidade.touched" class="alert alert-danger" role="alert">Informe os
                 locais de wifi</div>
             </div>
 
             <div class="form-group mb-3">
               <label for="service_estrangeiro" class="pergunta">Quais são os serviços ofertados para turistas e/ou estrangeiros?</label>
-              <textarea class="form-control" id="service_estrangeiro" rows="3" name="service_estrangeiro" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="service_estrangeiro" rows="3" name="service_estrangeiro" ngModel required
                 #service_estrangeiro="ngModel" [(ngModel)]="cadastro_cidade.service_estrangeiro"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.service_estrangeiro.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!service_estrangeiro.valid && service_estrangeiro.touched" class="alert alert-danger"
                 role="alert">Se não houver favor escrever "Não ofertamos esse serviço".</div>
             </div>
 
             <div class="form-group mb-3">
               <label for="service_cidade" class="pergunta">Se houver serviços, onde são ofertados (endereços)?</label>
-              <textarea class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel required
                 #service_cidade="ngModel" [(ngModel)]="cadastro_cidade.service_cidade"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.service_cidade.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!service_cidade.valid && service_cidade.touched" class="alert alert-danger" role="alert">
                 Informe os serviços</div>
 
@@ -119,16 +123,18 @@
             <div class="form-group mb-3">
               <label for="service_empresario" class="pergunta">Quais são os serviços oferecidos para empresários? (apoio ao empresário,
                 emissão de notas, entre outros).</label>
-              <textarea class="form-control" id="service_empresario" rows="3" name="service_empresario" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="service_empresario" rows="3" name="service_empresario" ngModel required
                 #service_empresario="ngModel" [(ngModel)]="cadastro_cidade.service_empresario"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.service_empresario.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!service_empresario.valid && service_empresario.touched" class="alert alert-danger"
                 role="alert">Se não houver favor escrever "Não ofertamos esse serviço".</div>
             </div>
             <div class="form-group mb-3">
               <label for="service_seguranca" class="pergunta">Quais são as medidas de segurança pública do município? (vigilância,
                 endereço de postos policiais, entre outros).</label>
-              <textarea class="form-control" id="service_seguranca" rows="3" name="service_seguranca" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="service_seguranca" rows="3" name="service_seguranca" ngModel required
                 #service_seguranca="ngModel" [(ngModel)]="cadastro_cidade.service_seguranca"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.service_seguranca.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!service_seguranca.valid && service_seguranca.touched" class="alert alert-danger"
                 role="alert">Informe os serviços de segurança</div>
             </div>
@@ -138,8 +144,9 @@
             <div class="form-group mb-3">
               <label for="pontos_turisticos" class="pergunta">Principais pontos turísticos da cidade (Cite e descreva os pontos
                 turísticos).</label>
-              <textarea class="form-control" id="pontos_turisticos" rows="5" name="pontos_turisticos" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="pontos_turisticos" rows="5" name="pontos_turisticos" ngModel required
                 #pontos_turisticos="ngModel" [(ngModel)]="cadastro_cidade.pontos_turisticos"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.pontos_turisticos.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!pontos_turisticos.valid && pontos_turisticos.touched" class="alert alert-danger"
                 role="alert">Informe os pontos turísticos</div>
             </div><!--
@@ -152,8 +159,9 @@
             <div class="form-group mb-3">
               <label for="espacos_lazer" class="pergunta">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças,
                 bibliotecas, entre outros).</label>
-              <textarea class="form-control" id="espacos_lazer" rows="5" name="espacos_lazer" ngModel required
+              <textarea [maxlength]="maxChars" class="form-control" id="espacos_lazer" rows="5" name="espacos_lazer" ngModel required
                 #espacos_lazer="ngModel" [(ngModel)]="cadastro_cidade.espacos_lazer"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.espacos_lazer.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!espacos_lazer.valid && espacos_lazer.touched" class="alert alert-danger" role="alert">Informe os espaços de
                 lazer.</div>
             </div>
@@ -185,7 +193,8 @@
             </div>
             <div *ngIf="rota_turistica == 'sim'" class="form-group mb-3">
               <label for="qual_rota" class="pergunta">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
-              <textarea class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel #qual_rota="ngModel" [(ngModel)]="cadastro_cidade.qual_rota"></textarea>
+              <textarea [maxlength]="maxChars" class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel #qual_rota="ngModel" [(ngModel)]="cadastro_cidade.qual_rota"></textarea>
+              <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.qual_rota.length }} / {{ maxChars }}</strong></div>
             </div>
           </fieldset>
           <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid" (click)="saveCity()">Cadastrar Município</button>

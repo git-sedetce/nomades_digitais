@@ -42,6 +42,8 @@ export class CadastroMunicipioComponent implements OnInit {
   }
   submitted = false;
 
+  maxChars = 500
+
   submitCity(municipio:any){
     console.log(municipio)
     console.log(this.cadastro_cidade)

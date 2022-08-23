@@ -18,3 +18,9 @@ legend{
 h3{
   font-weight: bolder;
 }
+textarea {
+  resize: none;
+}
+.limite_caractere{
+  padding: 0.3rem 0.3rem !important;
+}

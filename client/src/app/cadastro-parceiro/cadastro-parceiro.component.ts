@@ -51,6 +51,7 @@ export class CadastroParceiroComponent implements OnInit {
     caminho: ''
   }
   submitted = false
+  maxChars = 500
 
   submitParceiro(parceiro:any){
     console.log(parceiro)

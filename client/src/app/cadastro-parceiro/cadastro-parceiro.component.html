@@ -211,7 +211,8 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="outro_servico" class="pergunta">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
                   ofertados.</label>
-                <textarea data-ls-module="charCounter" maxlength="100" class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
+                <textarea [maxlength]="maxChars" data-ls-module="charCounter" maxlength="100" class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.outro_servico.length }} / {{ maxChars }}</strong></div>
               </div>
             </div>
           </fieldset>
@@ -277,12 +278,14 @@
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="ramo" class="pergunta">Qual o ramo de atividade do estabelecimento?</label>
-                <textarea class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
+                <textarea [maxlength]="maxChars" class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.ramo.length }} / {{ maxChars }}</strong></div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
                 <label class="mt-3 pergunta" for="beneficios" >Quais os beneficios que o estabelecimento tem a oferecer aos
                   <span>Nômades Digitais</span>?</label>
-                <textarea class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel" [(ngModel)]="empresa.beneficios"></textarea>
+                <textarea [maxlength]="maxChars" class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel" [(ngModel)]="empresa.beneficios"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.beneficios.length }} / {{ maxChars }}</strong></div>
               </div>
             </div>
           </fieldset>
@@ -300,7 +303,8 @@
               <div class="form-group mb-3">
                 <label for="tarifa_especial" class="pergunta">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos:
                   preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
-                <textarea class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel" [(ngModel)]="empresa.tarifa_especial"></textarea>
+                <textarea [maxlength]="maxChars" class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel" [(ngModel)]="empresa.tarifa_especial"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.tarifa_especial.length }} / {{ maxChars }}</strong></div>
               </div>
             </div>
           </div>
@@ -308,7 +312,8 @@
             <div class="form-group col-12 mb-3">
               <label for="espacos_culturais" class="pergunta">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
                 falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
-              <textarea class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel" [(ngModel)]="empresa.espacos_culturais"></textarea>
+              <textarea [maxlength]="maxChars" class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel" [(ngModel)]="empresa.espacos_culturais"></textarea>
+              <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.espacos_culturais.length }} / {{ maxChars }}</strong></div>
             </div>
           </div>
           <fieldset>
