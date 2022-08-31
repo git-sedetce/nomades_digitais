@@ -3,9 +3,27 @@ const bodyParser = require("body-parser")
 const routes = require('./routes')
 const cors = require("cors");
 
+
+var whitelist = [
+  'http://localhost:4290',
+  'http://digitalnomads.ce.gov.br',
+];
 var corsOptions = {
-  origin: "http://localhost:4290"
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Acesso negado à API " + origin));
+    }
+  },
+  optionsSuccessStatus: 200, // For legacy browser support
+  methods: "GET, PUT, POST, DELETE",
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
 };
+/*var corsOptions = {
+  origin: 'http://localhost:4290',
+  optionsSuccessStatus:200,
+};*/
 
 const app = express()
 const port = 2225
@@ -38,6 +56,6 @@ var corsOptions = {
   
   app.use(cors());
 
-app.listen(port, () => console.log(`O Servidor está rodando na porta ${port}`))
+app.listen(port, () => console.log(`O Servidor está rodando`))
 
 module.exports = app
