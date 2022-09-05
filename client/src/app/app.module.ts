@@ -16,6 +16,7 @@ import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { ManualComponent } from './manual/manual.component';
 import { SeloComponent } from './selo/selo.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +33,9 @@ import { SeloComponent } from './selo/selo.component';
    ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRounting,
-    HttpClientModule,
-    FormsModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
