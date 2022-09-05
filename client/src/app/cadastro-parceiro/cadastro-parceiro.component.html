@@ -21,7 +21,7 @@
             <div class="row">
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="cnpj" class="form-label pergunta">CNPJ</label>
-                <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel required #cnpj="ngModel" [(ngModel)]="empresa.cnpj">
+                <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" mask="00.000.000/0000-00">
                 <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe apenas os números.</div>
                 <div *ngIf="!cnpj.valid && cnpj.touched" class="alert alert-danger" role="alert">CNPJ é obrigatório</div>
 
@@ -41,7 +41,7 @@
 
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="telefone" class="form-label pergunta">Telefone</label>
-                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone">
+                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone" prefix="+55 " mask="(00) 0 0000-0000">
               </div>
             </div>
 
@@ -50,7 +50,7 @@
               <div class="row">
                 <div class="form-group col-sm-6 col-12 mb-3">
                   <label for="cep" class="form-label pergunta">CEP</label>
-                  <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel required #cep="ngModel" [(ngModel)]="empresa.cep" (blur)="(consultaCEP(cep.value, parceiro))">
+                  <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel required #cep="ngModel" [(ngModel)]="empresa.cep" (blur)="(consultaCEP(cep.value, parceiro))" mask="00000-000">
                   <div *ngIf="!cep.valid && cep.touched" class="alert alert-danger" role="alert">Informe o CEP</div>
                 </div>
                 <div class="form-group col-sm-6 col-12 mb-3">
