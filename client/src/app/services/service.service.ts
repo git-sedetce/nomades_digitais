@@ -10,13 +10,13 @@ export class ServiceService {
 
   constructor(private http: HttpClient) { }
 
-  cadastar_municipio(data: any): Observable<any> {
-    console.log('cadastar_municipio', environment.url + data)
+  cadastrar_municipio(data: any): Observable<any> {
+    console.log('cadastrar_municipio', environment.url + data)
     return this.http.post(environment.url + 'parceiroMunicipio', data)
   }
 
-  cadastar_parceiro(data: any): Observable<any> {
-    console.log('cadastar_parceiro', environment.url + data)
+  cadastrar_parceiro(data: any): Observable<any> {
+    console.log('cadastrar_parceiro', environment.url + data)
     return this.http.post(environment.url + 'parceiro', data)
   }
 

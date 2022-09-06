@@ -78,18 +78,22 @@
                 mais de sua Cidade!!!</div>
             </div>
           </fieldset>
+
+
           <fieldset>
             <legend>Serviços Ofertados</legend>
+
+            <!--Analisar pra corrigir-->
             <label for="wifi_service" class="pergunta">Possui wifi gratuito em pontos públicos do município?</label>
             <div class="form-check">
-              <input class="form-check-input" [(ngModel)]="service_wifi" type="radio" name="wifi_service" id="wifi_sim" value="sim" [(ngModel)]="cadastro_cidade.wifi_service">
-              <label class="form-check-label" for="wifi_sim" ngModel #wifi_service="ngModel">
+              <input class="form-check-input" [(ngModel)]="service_wifi" type="radio" name="wifi_service" id="wifi_sim" value="sim" ngModel [(ngModel)]="cadastro_cidade.wifi_service">
+              <label class="form-check-label" for="wifi_sim">
                 Sim
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" [(ngModel)]="service_wifi" type="radio" name="wifi_service" id="wifi_nao" value="nao" [(ngModel)]="cadastro_cidade.wifi_service">
-              <label class="form-check-label" for="wifi_nao" ngModel #wifi_service="ngModel">
+              <input class="form-check-input" [(ngModel)]="service_wifi" type="radio" name="wifi_service" id="wifi_nao" value="nao" ngModel [(ngModel)]="cadastro_cidade.wifi_service">
+              <label class="form-check-label" for="wifi_nao">
                 Não
               </label>
             </div>
@@ -101,6 +105,7 @@
               <div *ngIf="!wifi_cidade.valid && wifi_cidade.touched" class="alert alert-danger" role="alert">Informe os
                 locais de wifi</div>
             </div>
+            <!--Fim da analise-->
 
             <div class="form-group mb-3">
               <label for="service_estrangeiro" class="pergunta">Quais são os serviços ofertados para turistas e/ou estrangeiros?</label>
@@ -139,6 +144,7 @@
                 role="alert">Informe os serviços de segurança</div>
             </div>
           </fieldset>
+
           <fieldset>
             <legend>Pontos Turísticos</legend>
             <div class="form-group mb-3">
@@ -209,7 +215,7 @@
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Região de Planejamento:</div>
+            <div class="col-6 col-sm-4 mb-3">Região de Planejamento: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.regiao }}</div>
           </div>
           <div class="row">
@@ -217,7 +223,7 @@
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.email_prefeitura }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Telefone de Contato:</div>
+            <div class="col-6 col-sm-4 mb-3">Telefone de Contato: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.contato_prefeitura }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
@@ -235,29 +241,29 @@
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_service }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Quais locais?</div>
+            <div class="col-6 col-sm-4 mb-3">Quais locais? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_cidade }}</div>
           </div>
           <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Quais são os serviços ofertados para turistas e/ou estrangeiros?</div>
+            <div class="col-6 col-sm-4 mb-3">Quais são os serviços ofertados para turistas e/ou estrangeiros? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_estrangeiro }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Se houver serviços, onde são ofertados (endereços)?</div>
+            <div class="col-6 col-sm-4 mb-3">Se houver serviços, onde são ofertados (endereços)? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_cidade }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Quais são os serviços oferecidos para empresários?</div>
+            <div class="col-6 col-sm-4 mb-3">Quais são os serviços oferecidos para empresários? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_empresario }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Quais são as medidas de segurança pública do município?</div>
+            <div class="col-6 col-sm-4 mb-3">Quais são as medidas de segurança pública do município? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_seguranca }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
           </div>
           <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade:</div>
+            <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.pontos_turisticos }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <!--<div class="w-100 d-none d-md-block"></div>
@@ -271,11 +277,11 @@
             <div class="w-100 d-none d-md-block"></div>
           </div>
           <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Tipo de turismo predominante:</div>
+            <div class="col-6 col-sm-4 mb-3">Tipo de turismo predominante: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.tipo_turismo }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Faz parte de alguma rota turística ?</div>
+            <div class="col-6 col-sm-4 mb-3">Faz parte de alguma rota turística? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.rota }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
