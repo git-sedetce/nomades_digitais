@@ -67,6 +67,8 @@ export class CadastroParceiroComponent implements OnInit {
 
   }
 
+  //preencher o endereço usando o cep
+
   consultaCEP(cep: any, form: any) {
     console.log(form)
 
@@ -89,6 +91,8 @@ export class CadastroParceiroComponent implements OnInit {
       });
 
     }
+
+    //fim do metodo cep
 
     savePartner(): void {
       this.empresa.essential_service = this._serviceList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
@@ -121,7 +125,7 @@ export class CadastroParceiroComponent implements OnInit {
         beneficios: this.empresa.beneficios,
         espacos_culturais: this.empresa.espacos_culturais
       }
-      this.service.cadastar_parceiro(data).subscribe({
+      this.service.cadastrar_parceiro(data).subscribe({
         next: (res: any) => {
           console.log(res);
           this.empresa.id = res.id

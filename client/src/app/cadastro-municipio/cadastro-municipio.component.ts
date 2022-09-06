@@ -112,11 +112,11 @@ export class CadastroMunicipioComponent implements OnInit {
         rota: this.cadastro_cidade.rota,
         qual_rota: this.cadastro_cidade.qual_rota
       };
-      this.service.cadastar_municipio(data)
+      this.service.cadastrar_municipio(data)
       .subscribe({
           next: (res: any) => {
             console.log(res);
-            this.cadastro_cidade = res.id
+            this.cadastro_cidade.id = res.id
             this.submitted = true;
           },
           error: (e: any) => console.error(e)
