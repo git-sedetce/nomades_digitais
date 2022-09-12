@@ -34,7 +34,7 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="regiao" class="form-label pergunta">Região de Planejamento</label>
                 <input class="form-control" type="text" id="regiao" placeholder="Informe a sua região"
-                  name="regiao" ngModel required #regiao="ngModel" [(ngModel)]="cadastro_cidade.regiao">
+                  name="regiao" ngModel required #regiao="ngModel" [(ngModel)]="cadastro_cidade.regiao" readonly>
 
                 <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">Região é
                   obrigatório</div>

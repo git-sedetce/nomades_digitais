@@ -35,11 +35,11 @@ class MunicipioController {
     }
 
     static async pegaUmMunicipio(req, res){
-        const { id } = req.params
+        const { cidade } = req.params
         try{
             const umMunicipio = await database.Cidades.findOne( {
                 where: {
-                    id: Number(id)
+                    nome_municipio: String(cidade)
                 }
             })            
             return res.status(200).json(umMunicipio)

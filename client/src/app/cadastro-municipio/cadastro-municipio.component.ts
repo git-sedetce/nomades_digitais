@@ -17,6 +17,7 @@ export class CadastroMunicipioComponent implements OnInit {
   rota_turistica: any;
   municipio!: any[];
   city:any;
+  id_regiao: any;
   lista_municipio!: any[];
   multipleImages = [];
   cadastro_cidade = {
@@ -62,30 +63,16 @@ export class CadastroMunicipioComponent implements OnInit {
         console.log('municipio', m);*/
 
 
-    this.services.listar_municipio('municipio')
+    this.services.listar_municipio('todos_municipio')
       .subscribe((m: any[]) => {
-        console.log('lista_municipio', m);
+        //console.log('lista_municipio', m);
         this.lista_municipio = m;
       }, (erro: any) => console.log(erro)
       );
   }
-  localizaregiao(cidade: any, form: any){
-    this.services.listar_municipio('municipio')
-      .subscribe((m: any[]) => {
-        console.log('m', m[0].id)
-        if (cidade != null && cidade !== '') {
-          this.services.pegar_regiao("regiao",id)
-          .subscribe((dados: any) => this.achaRegiao());
-        }
-       // console.log('lista_municipio', m);
-       // this.lista_municipio = m;
-      },
-      );
 
-    }
     achaRegiao(){
       console.log('lista_municipio');
-
     }
 
     //cadastrar a cidade
@@ -122,6 +109,24 @@ export class CadastroMunicipioComponent implements OnInit {
           error: (e: any) => console.error(e)
         })
     }
+
+    //retorna região
+
+    localizaregiao(cidade: any, form: any){
+      //console.log('cidade', cidade)
+      this.services.pegar_municipio('municipio/', cidade)
+      .subscribe((regiao: any) => this.pegarnomeRegiao(regiao.regiao_id)
+      );
+      }
+
+      pegarnomeRegiao(id:any){
+        //id = this.id_regiao
+        this.services.pegar_regiao('regiao/', id).subscribe((id_r: any) => {
+          //console.log(id_r)
+          this.cadastro_cidade.regiao = id_r.nome
+        }, (erro: any) => console.log(erro)
+        );
+      }
 
     novoCadastro(): void {
       this.submitted = false;

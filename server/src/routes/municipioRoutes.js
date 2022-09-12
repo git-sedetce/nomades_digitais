@@ -4,7 +4,7 @@ const MunicipioController = require('../controllers/MunicipioController')
 const router = Router()
 router.get('/regiao', MunicipioController.pegaRegiao)
 router.get('/regiao/:id', MunicipioController.pegaUmaRegiao)
-router.get('/municipio', MunicipioController.pegaMunicipio)
-router.get('/municipio/:id', MunicipioController.pegaUmMunicipio)
+router.get('/todos_municipio', MunicipioController.pegaMunicipio)
+router.get('/municipio/:cidade', MunicipioController.pegaUmMunicipio)
 
 module.exports = router
