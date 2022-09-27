@@ -12,7 +12,7 @@
         </figure>
       </div>
       <div class="col-sm-6 col-12" *ngIf="!submitted">
-        <h3 class="mb-3 mt-3 text-center bg-primary text-white">Cadastro dos Parceiros</h3>
+        <h3 class="mb-3 mt-3 text-center bg-primary text-white">Cadastro de Empresas</h3>
         <form #parceiro="ngForm" (ngSubmit)="submitParceiro(parceiro)">
           <fieldset>
             <legend>
@@ -100,6 +100,7 @@
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="midia_social" class="form-label pergunta">Redes Sociais e Site.</label>
                 <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social" name="midia_social" ngModel required #midia_social="ngModel" [(ngModel)]="empresa.midia_social">
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.midia_social.length }} / {{ maxChars }}</strong></div>
                 <div id="midiaHelp" *ngIf="!midia_social.valid && midia_social.touched" class="alert alert-danger" role="alert">Caso não tiver, assinalar abaixo que não possui.</div>
               </div>
             </div>
@@ -301,19 +302,43 @@
               </div>
             <div class="col-sm-6 col-12 mb-3">
               <div class="form-group mb-3">
-                <label for="tarifa_especial" class="pergunta">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos:
-                  preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
+                <label for="tarifa_especial" class="pergunta">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos: preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
                 <textarea [maxlength]="maxChars" class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel" [(ngModel)]="empresa.tarifa_especial"></textarea>
                 <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.tarifa_especial.length }} / {{ maxChars }}</strong></div>
               </div>
             </div>
           </div>
           <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'outro' || radio_service == 'alimentacao'" class="row">
-            <div class="form-group col-12 mb-3">
-              <label for="espacos_culturais" class="pergunta">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de
-                falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
+            <div class="form-group col-sm-8 col-12 mb-3">
+              <label for="espacos_culturais" class="pergunta">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
               <textarea [maxlength]="maxChars" class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel" [(ngModel)]="empresa.espacos_culturais"></textarea>
               <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.espacos_culturais.length }} / {{ maxChars }}</strong></div>
+            </div>
+            <div class="form-group col-sm-4 col-12 mb-3">
+              <label for="idioma_service" class="pergunta">Trabalha com outro idioma?</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="idioma" id="idioma_sim" value="sim" ngModel #idioma="ngModel" [(ngModel)]="have_idioma" [(ngModel)]="empresa.idioma">
+                  <label class="form-check-label" for="idioma_sim">
+                    Sim
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="idioma_service" id="idioma_nao" value="nao" ngModel #idioma="ngModel" [(ngModel)]="have_idioma" [(ngModel)]="empresa.idioma">
+                  <label class="form-check-label" for="idioma_nao">
+                    Não
+                  </label>
+                </div>
+                <div *ngIf="have_idioma == 'sim'">
+                  <label for="qual_idioma" class="form-label pergunta">Informe o idioma.</label>
+                  <input class="form-control" list="datalistIdioma" id="qual_idioma" placeholder="Selecione o idioma." name="qual_idioma" #qual_idioma="ngModel" [(ngModel)]="empresa.qual_idioma">
+                  <datalist id="datalistIdioma">
+                    <option value="Alemão">Alemão</option>
+                    <option value="Chinês">Chinês</option>
+                    <option value="Espanhol">Espanhol</option>
+                    <option value="Francês">Francês</option>
+                    <option value="Inglês">Inglês</option>
+                  </datalist>
+                </div>
             </div>
           </div>
           <fieldset>
@@ -446,6 +471,14 @@
             <div class="w-100 d-none d-md-block"></div>
             <div class="col-6 col-sm-4 mb-3">Resumo: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.espacos_culturais }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Trabalha com outro idioma: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.idioma }}</div>
+            <!-- Force next columns to break to new line at md breakpoint and up -->
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-6 col-sm-4 mb-3">Idioma: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ empresa.qual_idioma }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
           </div>

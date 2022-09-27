@@ -16,6 +16,7 @@ export class CadastroParceiroComponent implements OnInit {
   radio_service: any;
   speed_quality: any;
   have_internet: any;
+  have_idioma: any;
 
   empresa = {
     id: '',
@@ -45,6 +46,8 @@ export class CadastroParceiroComponent implements OnInit {
     ramo: '',
     beneficios: '',
     espacos_culturais: '',
+    idioma: '',
+    qual_idioma:'',
   }
   documentos = {
     user_id: '',
@@ -123,7 +126,9 @@ export class CadastroParceiroComponent implements OnInit {
         localizacao: this.empresa.localizacao,
         ramo: this.empresa.ramo,
         beneficios: this.empresa.beneficios,
-        espacos_culturais: this.empresa.espacos_culturais
+        espacos_culturais: this.empresa.espacos_culturais,
+        idioma: this.empresa.idioma,
+        qual_idioma: this.empresa.qual_idioma
       }
       this.service.cadastrar_parceiro(data).subscribe({
         next: (res: any) => {
@@ -168,6 +173,8 @@ export class CadastroParceiroComponent implements OnInit {
         ramo: '',
         beneficios: '',
         espacos_culturais: '',
+        idioma: '',
+        qual_idioma: '',
       }
     }
 

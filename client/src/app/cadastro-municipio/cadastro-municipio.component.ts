@@ -44,6 +44,7 @@ export class CadastroMunicipioComponent implements OnInit {
   submitted = false;
 
   maxChars = 500
+  maxChars_link = 150
 
   submitCity(municipio:any){
     console.log(municipio)
@@ -158,10 +159,13 @@ export class CadastroMunicipioComponent implements OnInit {
 
     getTourism(){
       this._tourismList=[
-        { nome:"Praia", isselected: false },
-        { nome:"Religião", isselected: false },
-        { nome:"Serra", isselected: false },
-        { nome:"Sertão", isselected: false }
+        { nome:"Ecológico", isselected: false },
+        { nome:"Praiano", isselected: false },
+        { nome:"Radical", isselected: false },
+        { nome:"Religioso", isselected: false },
+        { nome:"Serrano", isselected: false },
+        { nome:"Sertanejo", isselected: false },
+
       ]
     }
 

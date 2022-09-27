@@ -62,6 +62,7 @@
               <input type="text" class="form-control" id="link_prefeitura" aria-describedby="linkHelp"
                 placeholder="Digite o link de informações da Cidade" name="link_prefeitura" ngModel required
                 #link_prefeitura="ngModel" [(ngModel)]="cadastro_cidade.link_prefeitura">
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.link_prefeitura.length }} / {{ maxChars_link }}</strong></div>
               <div *ngIf="!link_prefeitura.valid && link_prefeitura.touched" class="alert alert-danger" role="alert">Se
                 não houver, favor escrever "não possui".</div>
             </div>
@@ -195,13 +196,14 @@
                     Não
                   </label>
                 </div>
+                <div *ngIf="rota_turistica == 'sim'" class="form-group mb-3">
+                  <label for="qual_rota" class="pergunta">A qual rota faz parte?</label>
+                  <textarea [maxlength]="maxChars" class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel #qual_rota="ngModel" [(ngModel)]="cadastro_cidade.qual_rota"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.qual_rota.length }} / {{ maxChars }}</strong></div>
+                </div>
               </div>
             </div>
-            <div *ngIf="rota_turistica == 'sim'" class="form-group mb-3">
-              <label for="qual_rota" class="pergunta">Caso a resposta anterior seja sim, a qual rota faz parte?</label>
-              <textarea [maxlength]="maxChars" class="form-control" id="qual_rota" rows="3" name="qual_rota" ngModel #qual_rota="ngModel" [(ngModel)]="cadastro_cidade.qual_rota"></textarea>
-              <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.qual_rota.length }} / {{ maxChars }}</strong></div>
-            </div>
+
           </fieldset>
           <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid" (click)="saveCity()">Cadastrar Município</button>
         </form>
