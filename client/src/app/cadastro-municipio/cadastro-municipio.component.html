@@ -203,6 +203,56 @@
                 </div>
               </div>
             </div>
+            <div *ngFor="let tourism of _tourismList" class="row">
+
+              <div *ngIf="tourism.nome == 'Ecológico' && tourism.isselected == true" class="form-group mb-3"><!--*ngIf="rota_turistica == 'sim' || rota_turistica == 'nao'"-->
+                <label for="tourism_ecologico" class="pergunta">Cite os pontos turísticos {{ tourism.nome }} de sua cidade</label>
+                <textarea [maxlength]="maxChars_link" class="form-control" id="tourism_ecologico" rows="3" name="tourism_ecologico" ngModel required
+                  #tourism_ecologico="ngModel" [(ngModel)]="cadastro_cidade.tourism_ecologico"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.tourism_ecologico.length }} / {{ maxChars_link }}</strong></div>
+                <div *ngIf="!tourism_ecologico.valid && tourism_ecologico.touched" class="alert alert-danger" role="alert">Informe os pontos turísticos {{ tourism.nome }}.</div>
+              </div>
+
+              <div *ngIf="tourism.nome == 'Praiano' && tourism.isselected == true" class="form-group mb-3"><!--*ngIf="rota_turistica == 'sim' || rota_turistica == 'nao'"-->
+                <label for="tourism_praiano" class="pergunta">Cite os pontos turísticos {{ tourism.nome }} de sua cidade</label>
+                <textarea [maxlength]="maxChars_link" class="form-control" id="tourism_praiano" rows="3" name="tourism_praiano" ngModel required
+                  #tourism_praiano="ngModel" [(ngModel)]="cadastro_cidade.tourism_praiano"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.tourism_praiano.length }} / {{ maxChars_link }}</strong></div>
+                <div *ngIf="!tourism_praiano.valid && tourism_praiano.touched" class="alert alert-danger" role="alert">Informe os pontos turísticos {{ tourism.nome }}.</div>
+              </div>
+
+              <div *ngIf="tourism.nome == 'Radical' && tourism.isselected == true" class="form-group mb-3"><!--*ngIf="rota_turistica == 'sim' || rota_turistica == 'nao'"-->
+                <label for="tourism_radical" class="pergunta">Cite os pontos turísticos {{ tourism.nome }} de sua cidade</label>
+                <textarea [maxlength]="maxChars_link" class="form-control" id="tourism_radical" rows="3" name="tourism_radical" ngModel required
+                  #tourism_radical="ngModel" [(ngModel)]="cadastro_cidade.tourism_radical"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.tourism_radical.length }} / {{ maxChars_link }}</strong></div>
+                <div *ngIf="!tourism_radical.valid && tourism_radical.touched" class="alert alert-danger" role="alert">Informe os pontos turísticos {{ tourism.nome }}.</div>
+              </div>
+
+              <div *ngIf="tourism.nome == 'Religioso' && tourism.isselected == true" class="form-group mb-3"><!--*ngIf="rota_turistica == 'sim' || rota_turistica == 'nao'"-->
+                <label for="tourism_religioso" class="pergunta">Cite os pontos turísticos {{ tourism.nome }} de sua cidade</label>
+                <textarea [maxlength]="maxChars_link" class="form-control" id="tourism_religioso" rows="3" name="tourism_religioso" ngModel required
+                  #tourism_religioso="ngModel" [(ngModel)]="cadastro_cidade.tourism_religioso"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.tourism_religioso.length }} / {{ maxChars_link }}</strong></div>
+                <div *ngIf="!tourism_religioso.valid && tourism_religioso.touched" class="alert alert-danger" role="alert">Informe os pontos turísticos {{ tourism.nome }}.</div>
+              </div>
+
+              <div *ngIf="tourism.nome == 'Serrano' && tourism.isselected == true" class="form-group mb-3"><!--*ngIf="rota_turistica == 'sim' || rota_turistica == 'nao'"-->
+                <label for="tourism_serrano" class="pergunta">Cite os pontos turísticos {{ tourism.nome }} de sua cidade</label>
+                <textarea [maxlength]="maxChars_link" class="form-control" id="tourism_serrano" rows="3" name="tourism_serrano" ngModel required
+                  #tourism_serrano="ngModel" [(ngModel)]="cadastro_cidade.tourism_serrano"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.tourism_serrano.length }} / {{ maxChars_link }}</strong></div>
+                <div *ngIf="!tourism_serrano.valid && tourism_serrano.touched" class="alert alert-danger" role="alert">Informe os pontos turísticos {{ tourism.nome }}.</div>
+              </div>
+
+              <div *ngIf="tourism.nome == 'Sertanejo' && tourism.isselected == true" class="form-group mb-3"><!--*ngIf="rota_turistica == 'sim' || rota_turistica == 'nao'"-->
+                <label for="tourism_sertanejo" class="pergunta">Cite os pontos turísticos {{ tourism.nome }} de sua cidade</label>
+                <textarea [maxlength]="maxChars_link" class="form-control" id="tourism_sertanejo" rows="3" name="tourism_sertanejo" ngModel required
+                  #tourism_sertanejo="ngModel" [(ngModel)]="cadastro_cidade.tourism_sertanejo"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.tourism_sertanejo.length }} / {{ maxChars_link }}</strong></div>
+                <div *ngIf="!tourism_sertanejo.valid && tourism_sertanejo.touched" class="alert alert-danger" role="alert">Informe os pontos turísticos {{ tourism.nome }}.</div>
+              </div>
+            </div>
 
           </fieldset>
           <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid" (click)="saveCity()">Cadastrar Município</button>

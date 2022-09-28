@@ -38,6 +38,12 @@ export class CadastroMunicipioComponent implements OnInit {
     espacos_culturais: '',
     espacos_lazer: '',
     tipo_turismo: '',
+    tourism_ecologico:'',
+    tourism_praiano: '',
+    tourism_radical: '',
+    tourism_religioso: '',
+    tourism_serrano: '',
+    tourism_sertanejo: '',
     rota: '',
     qual_rota: '',
   }
@@ -97,6 +103,12 @@ export class CadastroMunicipioComponent implements OnInit {
         espacos_culturais: this.cadastro_cidade.espacos_culturais,
         espacos_lazer: this.cadastro_cidade.espacos_lazer,
         tipo_turismo: this.cadastro_cidade.tipo_turismo,
+        tourism_ecologico: this.cadastro_cidade.tourism_ecologico,
+        tourism_praiano: this.cadastro_cidade.tourism_praiano,
+        tourism_radical: this.cadastro_cidade.tourism_radical,
+        tourism_religioso: this.cadastro_cidade.tourism_religioso,
+        tourism_serrano: this.cadastro_cidade.tourism_serrano,
+        tourism_sertanejo: this.cadastro_cidade.tourism_sertanejo,
         rota: this.cadastro_cidade.rota,
         qual_rota: this.cadastro_cidade.qual_rota
       };
@@ -150,6 +162,12 @@ export class CadastroMunicipioComponent implements OnInit {
         espacos_culturais: '',
         espacos_lazer: '',
         tipo_turismo: '',
+        tourism_ecologico: '',
+        tourism_praiano: '',
+        tourism_radical: '',
+        tourism_religioso: '',
+        tourism_serrano: '',
+        tourism_sertanejo: '',
         rota: '',
         qual_rota: '',
       };
