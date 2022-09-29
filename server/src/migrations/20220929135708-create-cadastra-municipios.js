@@ -1,89 +1,83 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('cadastra_parceiros', {
+    await queryInterface.createTable('cadastra_municipios', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cnpj: {
-        type: Sequelize.STRING
-      },
-      nome_fantasia: {
-        type: Sequelize.STRING
-      },
-      razao_social: {
-        type: Sequelize.STRING
-      },
-      telefone: {
-        type: Sequelize.STRING
-      },
-      cep: {
-        type: Sequelize.STRING
-      },
-      logradouro: {
-        type: Sequelize.STRING
-      },
-      numero: {
-        type: Sequelize.STRING
-      },
-      complemento: {
-        type: Sequelize.STRING
-      },
-      bairro: {
-        type: Sequelize.STRING
-      },
       cidade: {
         type: Sequelize.STRING
       },
-      estado: {
+      regiao: {
         type: Sequelize.STRING
       },
-      email_parceiro: {
+      email_prefeitura: {
         type: Sequelize.STRING
       },
-      midia_social: {
+      contato_prefeitura: {
         type: Sequelize.STRING
       },
-      tipo_service: {
+      link_prefeitura: {
         type: Sequelize.STRING
       },
-      essential_service: {
+      historia_cidade: {
         type: Sequelize.STRING
       },
-      internet_speed: {
+      wifi_service: {
         type: Sequelize.STRING
       },
-      internet_service: {
+      wifi_cidade: {
         type: Sequelize.STRING
       },
-      outro_servico: {
+      service_estrangeiro: {
         type: Sequelize.STRING
       },
-      trabalho_reunioes: {
+      service_cidade: {
         type: Sequelize.STRING
       },
-      tarifa_especial: {
+      service_empresario: {
         type: Sequelize.STRING
       },
-      internet_service_alimentacao: {
+      service_seguranca: {
         type: Sequelize.STRING
       },
-      orienta_equipe: {
-        type: Sequelize.STRING
-      },
-      localizacao: {
-        type: Sequelize.STRING
-      },
-      ramo: {
-        type: Sequelize.STRING
-      },
-      beneficios: {
+      pontos_turisticos: {
         type: Sequelize.STRING
       },
       espacos_culturais: {
+        type: Sequelize.STRING
+      },
+      espacos_lazer: {
+        type: Sequelize.STRING
+      },
+      tipo_turismo: {
+        type: Sequelize.STRING
+      },
+      rota: {
+        type: Sequelize.STRING
+      },
+      qual_rota: {
+        type: Sequelize.STRING
+      },
+      tourism_ecologico: {
+        type: Sequelize.STRING
+      },
+      tourism_praiano: {
+        type: Sequelize.STRING
+      },
+      tourism_radical: {
+        type: Sequelize.STRING
+      },
+      tourism_religioso: {
+        type: Sequelize.STRING
+      },
+      tourism_serrano: {
+        type: Sequelize.STRING
+      },
+      tourism_sertanejo: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -97,6 +91,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('cadastra_parceiros');
+    await queryInterface.dropTable('cadastra_municipios');
   }
 };

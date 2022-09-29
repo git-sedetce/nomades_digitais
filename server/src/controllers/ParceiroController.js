@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer")
 class ParceiroController {
   static async pegarParceiro(req, res) {
     try {
-      const mostraParceiro = await database.cadastra_parceiro.findAll();
+      const mostraParceiro = await database.cadastra_parceiros.findAll();
       return res.status(200).json(mostraParceiro);
     } catch (error) {
       return res.status(500).json(error.message);
@@ -13,7 +13,7 @@ class ParceiroController {
   static async parceiroById(req, res) {
     const { id } = req.params;
     try {
-      const umParceiro = await database.cadastra_parceiro.findOne({
+      const umParceiro = await database.cadastra_parceiros.findOne({
         where: { id: Number(id) },
       });
       return res.status(200).json(umParceiro);
@@ -25,7 +25,7 @@ class ParceiroController {
     const novoParceiro = req.body;
     console.log('novoParceiro', novoParceiro)
     try {
-      const criarParceiro = await database.cadastra_parceiro.create(
+      const criarParceiro = await database.cadastra_parceiros.create(
         novoParceiro
       )
       

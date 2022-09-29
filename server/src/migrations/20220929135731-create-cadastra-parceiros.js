@@ -1,65 +1,95 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('cadastra_municipios', {
+    await queryInterface.createTable('cadastra_parceiros', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      cnpj: {
+        type: Sequelize.STRING
+      },
+      nome_fantasia: {
+        type: Sequelize.STRING
+      },
+      razao_social: {
+        type: Sequelize.STRING
+      },
+      telefone: {
+        type: Sequelize.STRING
+      },
+      cep: {
+        type: Sequelize.STRING
+      },
+      logradouro: {
+        type: Sequelize.STRING
+      },
+      numero: {
+        type: Sequelize.STRING
+      },
+      complemento: {
+        type: Sequelize.STRING
+      },
+      bairro: {
+        type: Sequelize.STRING
+      },
       cidade: {
         type: Sequelize.STRING
       },
-      regiao: {
+      estado: {
         type: Sequelize.STRING
       },
-      email_prefeitura: {
+      email_parceiro: {
         type: Sequelize.STRING
       },
-      contato_prefeitura: {
+      midia_social: {
         type: Sequelize.STRING
       },
-      link_prefeitura: {
+      tipo_service: {
         type: Sequelize.STRING
       },
-      historia_cidade: {
+      essential_service: {
         type: Sequelize.STRING
       },
-      wifi_service: {
+      internet_speed: {
         type: Sequelize.STRING
       },
-      wifi_cidade: {
+      internet_service: {
         type: Sequelize.STRING
       },
-      service_estrangeiro: {
+      outro_servico: {
         type: Sequelize.STRING
       },
-      service_cidade: {
+      trabalho_reunioes: {
         type: Sequelize.STRING
       },
-      service_empresario: {
+      tarifa_especial: {
         type: Sequelize.STRING
       },
-      service_seguranca: {
+      internet_service_alimentacao: {
         type: Sequelize.STRING
       },
-      pontos_turisticos: {
+      orienta_equipe: {
+        type: Sequelize.STRING
+      },
+      localizacao: {
+        type: Sequelize.STRING
+      },
+      ramo: {
+        type: Sequelize.STRING
+      },
+      beneficios: {
         type: Sequelize.STRING
       },
       espacos_culturais: {
         type: Sequelize.STRING
       },
-      espacos_lazer: {
+      idioma: {
         type: Sequelize.STRING
       },
-      tipo_turismo: {
-        type: Sequelize.STRING
-      },
-      rota: {
-        type: Sequelize.STRING
-      },
-      qual_rota: {
+      qual_idioma: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -73,6 +103,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('cadastra_municipios');
+    await queryInterface.dropTable('cadastra_parceiros');
   }
 };

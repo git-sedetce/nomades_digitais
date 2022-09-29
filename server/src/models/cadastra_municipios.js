@@ -31,7 +31,13 @@ module.exports = (sequelize, DataTypes) => {
     espacos_lazer: DataTypes.STRING,
     tipo_turismo: DataTypes.STRING,
     rota: DataTypes.STRING,
-    qual_rota: DataTypes.STRING
+    qual_rota: DataTypes.STRING,
+    tourism_ecologico: DataTypes.STRING,
+    tourism_praiano: DataTypes.STRING,
+    tourism_radical: DataTypes.STRING,
+    tourism_religioso: DataTypes.STRING,
+    tourism_serrano: DataTypes.STRING,
+    tourism_sertanejo: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'cadastra_municipios',

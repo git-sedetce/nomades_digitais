@@ -103,14 +103,14 @@ export class CadastroMunicipioComponent implements OnInit {
         espacos_culturais: this.cadastro_cidade.espacos_culturais,
         espacos_lazer: this.cadastro_cidade.espacos_lazer,
         tipo_turismo: this.cadastro_cidade.tipo_turismo,
+        rota: this.cadastro_cidade.rota,
+        qual_rota: this.cadastro_cidade.qual_rota,
         tourism_ecologico: this.cadastro_cidade.tourism_ecologico,
         tourism_praiano: this.cadastro_cidade.tourism_praiano,
         tourism_radical: this.cadastro_cidade.tourism_radical,
         tourism_religioso: this.cadastro_cidade.tourism_religioso,
         tourism_serrano: this.cadastro_cidade.tourism_serrano,
-        tourism_sertanejo: this.cadastro_cidade.tourism_sertanejo,
-        rota: this.cadastro_cidade.rota,
-        qual_rota: this.cadastro_cidade.qual_rota
+        tourism_sertanejo: this.cadastro_cidade.tourism_sertanejo
       };
       this.service.cadastrar_municipio(data)
       .subscribe({
