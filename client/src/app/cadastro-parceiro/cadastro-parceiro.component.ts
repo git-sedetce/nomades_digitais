@@ -55,10 +55,12 @@ export class CadastroParceiroComponent implements OnInit {
   }
   submitted = false
   maxChars = 500
+  qtdeChars = 255
+  maxChars_link = 150
 
   submitParceiro(parceiro:any){
     console.log(parceiro)
-    console.log(this.empresa)
+    //console.log(this.empresa)
   }
 
   constructor(private cepsService: ConsultaCepService, public service: ServiceService, private http: HttpClient) { }
@@ -201,10 +203,6 @@ export class CadastroParceiroComponent implements OnInit {
         { nome:"Sim. Espaço para reuniões coletivas", isselected: false },
         { nome:"Não", isselected: false }
       ]
-    }
-    onChange(){
-      console.log(this._serviceList);
-      console.log(this._meetList);
     }
 
     //anexar arquivos

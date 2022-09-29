@@ -50,6 +50,7 @@ export class CadastroMunicipioComponent implements OnInit {
   submitted = false;
 
   maxChars = 500
+  qtdeChars = 255
   maxChars_link = 150
 
   submitCity(municipio:any){
