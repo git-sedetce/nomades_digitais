@@ -337,18 +337,28 @@
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.rota }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Qual rota? </div>
+            <div *ngIf="cadastro_cidade.qual_rota !==''" class="col-6 col-sm-4 mb-3">Qual rota? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.qual_rota }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
           </div>
           <fieldset>
             <legend>Anexos</legend>
-            <div class="mb-3">
-              <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
-                culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
-              <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple (change)="selectMultipleImage($event)">
-              <button type="submit" (click)="onFilesUpload()">upLoad</button>
+            <div class="row">
+              <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
+                  culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
+                <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple (change)="selectMultipleImage($event)">
+                <button type="submit" (click)="onFilesUpload()">upLoad</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <div class="alert alert-warning" role="alert">
+                  <h4 class="alert-heading">ATENÇÃO</h4>
+                  <p>Caso tenha dificuldades com o envio das fotos, as mesmas podem ser enviadas pelo e-mail <a href = "mailto: digital.nomads@sedet.ce.gov.br">digital.nomads@sedet.ce.gov.br</a>. As fotos podem ser adicionadas em anexo ou compartilhadas por meio de armazenamento em nuvem. Ex.: Google Drive, Onedrive, etc.</p>
+                </div>
+              </div>
             </div>
           </fieldset>
         </div>
