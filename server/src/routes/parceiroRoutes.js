@@ -18,7 +18,9 @@ const router = Router()
 router.get('/parceiro', ParceiroController.pegarParceiro)
 router.get('/parceiro/:id', ParceiroController.parceiroById)
 router.post('/parceiro', ParceiroController.cadastraParceiro)
-router.post('/anexo', upload.single('file'), ParceiroController.anexoParceiro)
+router.post('/anexo/:id', upload.single('file'), ParceiroController.anexoParceiro)
+router.post('/anexo_alvara/:id', upload.single('file'), ParceiroController.alvaraParceiro)
+router.post('/anexo_logo/:id', upload.single('file'), ParceiroController.logoParceiro)
 router.post('/anexos', upload.array('files'), ParceiroController.anexosParceiro)
 
 

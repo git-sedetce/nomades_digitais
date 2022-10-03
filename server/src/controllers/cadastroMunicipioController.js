@@ -72,6 +72,7 @@ class CadastroMunicipioController {
 
       static async anexosMunicipioParceiro(req, res) {
         const file = req.files
+        console.log(file)
         if(file){
           res.json(file)
         }else{

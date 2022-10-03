@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
 export class CadastroParceiroComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput!: ElementRef;
+  @ViewChild('alvaraInput') alvaraInput!: ElementRef;
+  @ViewChild('logoInput') logoInput!: ElementRef;
 
   radio_service: any;
   speed_quality: any;
@@ -209,15 +211,45 @@ export class CadastroParceiroComponent implements OnInit {
     onFileUpload(){
       const imageBlob = this.fileInput.nativeElement.files[0]
       const file = new FormData()
+      const user_id = this.empresa.id
       file.append('file', imageBlob)
-      file.append("id", this.empresa.id + '');
+      file.append("id", user_id);
       console.log('formData', file)
-      console.log('id', this.empresa.id)
+      //console.log('id', user_id)
 
-      this.http.post(environment.url + 'anexo' , file).subscribe((response: any) => {
+      this.http.post(environment.url + 'anexo' + '/'+ user_id, file).subscribe((response: any) => {
         console.log(response)
       })
     }
+
+    alvaraUpload(){
+      const imageAlvara = this.alvaraInput.nativeElement.files[0]
+      const alvara = new FormData()
+      const user_id = this.empresa.id
+      alvara.append('file', imageAlvara)
+      alvara.append("id", user_id);
+      console.log('formData', alvara)
+      //console.log('id', user_id)
+
+      this.http.post(environment.url + 'anexo_alvara' + '/'+ user_id , alvara).subscribe((response: any) => {
+        console.log(response)
+      })
+    }
+
+    logoUpload(){
+      const imageLogo = this.logoInput.nativeElement.files[0]
+      const logo = new FormData()
+      const user_id = this.empresa.id
+      logo.append('file', imageLogo)
+      logo.append("id", user_id);
+      console.log('formData', logo)
+      //console.log('id', user_id)
+
+      this.http.post(environment.url + 'anexo_logo' + '/'+ user_id , logo).subscribe((response: any) => {
+        console.log(response)
+      })
+    }
+
 }
 class typeService {
   nome: string | undefined;

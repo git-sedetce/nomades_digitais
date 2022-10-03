@@ -70,15 +70,103 @@ class ParceiroController {
     }
   }
 
-  static async anexoParceiro(req, res) {
+  /*static async anexoParceiro(req, res) {
     const file = req.file
+    console.log(file)
     if(file){
       res.json(file)
     }else{
       throw new Error("File upload unseccessful")
     }
       //res.send("Arquivo recebido!")
+  }*/
+  
+  static async anexoParceiro(req, res) {
+    const file = req.file;
+    const { id } = req.params;
+    const caminho = file.path;
+    const nome_arquivo = file.filename;
+    const type = file.mimetype;    
+    console.log(file);
+    console.log(id);
+    try {
+      /*if (file) {
+        res.json(file);
+      } else {
+        throw new Error("File upload unseccessful");
+      }*/
+      const anexarParceiro = await database.anexos.create({
+        mimetype: type,
+        filename: nome_arquivo,
+        path: caminho,
+        user_id: id
+      });
+      return res.status(200).json(anexarParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+
+    //res.send("Arquivo recebido!")
   }
+
+  static async alvaraParceiro(req, res) {
+    const file = req.file;
+    const { id } = req.params;
+    const caminho = file.path;
+    const nome_arquivo = file.filename;
+    const type = file.mimetype;    
+    console.log(file);
+    console.log(id);
+    try {
+      /*if (file) {
+        res.json(file);
+      } else {
+        throw new Error("File upload unseccessful");
+      }*/
+      const anexarParceiro = await database.anexos.create({
+        mimetype: type,
+        filename: nome_arquivo,
+        path: caminho,
+        user_id: id
+      });
+      return res.status(200).json(anexarParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+
+    //res.send("Arquivo recebido!")
+  }
+
+
+  static async logoParceiro(req, res) {
+    const file = req.file;
+    const { id } = req.params;
+    const caminho = file.path;
+    const nome_arquivo = file.filename;
+    const type = file.mimetype;    
+    console.log(file);
+    console.log(id);
+    try {
+      /*if (file) {
+        res.json(file);
+      } else {
+        throw new Error("File upload unseccessful");
+      }*/
+      const anexarParceiro = await database.anexos.create({
+        mimetype: type,
+        filename: nome_arquivo,
+        path: caminho,
+        user_id: id
+      });
+      return res.status(200).json(anexarParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+
+    //res.send("Arquivo recebido!")
+  }
+  
+
   static async anexosParceiro(req, res) {
     const file = req.files
     if(file){
