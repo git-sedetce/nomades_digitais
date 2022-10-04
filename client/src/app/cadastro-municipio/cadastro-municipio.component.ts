@@ -198,9 +198,12 @@ export class CadastroMunicipioComponent implements OnInit {
 
     onFilesUpload(){
       const files = new FormData()
+      const user_id = this.cadastro_cidade.id
 
       for(let img of this.multipleImages){
         files.append('files', img)
+        /*files.append("id", user_id);
+        console.log('formData', files)*/
       }
 
       /*
@@ -213,7 +216,7 @@ export class CadastroMunicipioComponent implements OnInit {
       console.log('formData', file)
       console.log('id', this.cadastro_cidade.id)*/
 
-      this.http.post(environment.url + 'anexosMunicipio', files).subscribe((response: any) => {
+      this.http.post(environment.url + 'anexosMunicipio' + '/'+ user_id, files).subscribe((response: any) => {
         console.log(response)
       })
     }

@@ -72,12 +72,32 @@ class CadastroMunicipioController {
 
       static async anexosMunicipioParceiro(req, res) {
         const file = req.files
-        console.log(file)
+        const { id } = req.params;      
+        //console.log(file)        
+        if(file.length>0){
+          for(let img = 0; img < file.length; img++){
+            const caminho = file[img].path;
+            const nome_arquivo = file[img].filename;
+            const type = file[img].mimetype; 
+            //console.log(file[img].originalname)         
+              const anexarMunicipio = await database.anexo_municipio.create({
+                mimetype: type,
+                filename: nome_arquivo,
+                path: caminho,
+                municipio_id: id
+              });    
+             //console.log(res.status(200).json(anexarMunicipio));
+            }
+            return res.status(200).json({message: 'Anexo enviado com Sucesso!'})
+        }else{
+          return res.status(500).json(error.message);
+        }
+        /*
         if(file){
           res.json(file)
         }else{
           throw new Error("File upload unseccessful")
-        }
+        }*/
           //res.send("Arquivo recebido!")
       }
 }

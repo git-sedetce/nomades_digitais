@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      cadastra_municipios.hasMany(models.anexo_municipio, { foreignKey: 'municipio_id'})
     }
   }
   cadastra_municipios.init({
