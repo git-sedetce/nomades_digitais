@@ -101,7 +101,7 @@ class ParceiroController {
         path: caminho,
         user_id: id
       });
-      return res.status(200).json(anexarParceiro);
+      return res.status(200).json({message: 'Comprovante anexado com sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
     }
@@ -129,7 +129,7 @@ class ParceiroController {
         path: caminho,
         user_id: id
       });
-      return res.status(200).json(anexarParceiro);
+      return res.status(200).json({message: 'Alvará anexado com Sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
     }
@@ -158,7 +158,7 @@ class ParceiroController {
         path: caminho,
         user_id: id
       });
-      return res.status(200).json(anexarParceiro);
+      return res.status(200).json({message: 'Logo enviado com Sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
     }

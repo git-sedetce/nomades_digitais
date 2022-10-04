@@ -19,6 +19,12 @@ export class CadastroParceiroComponent implements OnInit {
   speed_quality: any;
   have_internet: any;
   have_idioma: any;
+  resposta_anexo: any;
+  habilita_anexo!: boolean;
+  alvara_anexo: any;
+  habilita_anexo_alvara!: boolean;
+  logo_anexo: any;
+  habilita_anexo_logo!: boolean;
 
   empresa = {
     id: '',
@@ -219,6 +225,13 @@ export class CadastroParceiroComponent implements OnInit {
 
       this.http.post(environment.url + 'anexo' + '/'+ user_id, file).subscribe((response: any) => {
         console.log(response)
+        this.resposta_anexo = response;
+
+        if(response=='Comprovante anexado com sucesso!'){
+          this.habilita_anexo = false
+        }else{
+          this.habilita_anexo = true
+        }
       })
     }
 
@@ -233,6 +246,13 @@ export class CadastroParceiroComponent implements OnInit {
 
       this.http.post(environment.url + 'anexo_alvara' + '/'+ user_id , alvara).subscribe((response: any) => {
         console.log(response)
+        this.alvara_anexo = response;
+
+        if(response=='Alvará anexado com Sucesso!'){
+          this.habilita_anexo_alvara = false
+        }else{
+          this.habilita_anexo_alvara = true
+        }
       })
     }
 
@@ -247,6 +267,13 @@ export class CadastroParceiroComponent implements OnInit {
 
       this.http.post(environment.url + 'anexo_logo' + '/'+ user_id , logo).subscribe((response: any) => {
         console.log(response)
+        this.logo_anexo = response;
+
+        if(response=='Logo enviado com Sucesso!'){
+          this.habilita_anexo_logo = false
+        }else{
+          this.habilita_anexo_logo = true
+        }
       })
     }
 

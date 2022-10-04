@@ -488,7 +488,10 @@
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione o comprovante de velocidade de internet (contrato com a operadora ou documento similar vigente).</label>
                   <input #fileInput class="form-control" type="file" id="formFile">
-                  <button class="btn btn-primary mb-3" (click)="onFileUpload()">upLoad</button>
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo" (click)="onFileUpload()">upLoad</button>
+                  <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
+                    Comprovante anexado com sucesso!
+                  </div>
                 </div>
               </div>
 
@@ -496,12 +499,18 @@
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione o Alvará de Funcionamento.</label>
                   <input #alvaraInput class="form-control" type="file" id="formFile">
-                  <button class="btn btn-primary mb-3" (click)="alvaraUpload()">upLoad</button>
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_alvara" (click)="alvaraUpload()">upLoad</button>
+                  <div *ngIf="habilita_anexo_alvara == true" class="alert alert-success" role="alert">
+                    Alvará anexado com Sucesso!
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
                   <input #logoInput class="form-control" type="file" id="formFile">
-                  <button class="btn btn-primary mb-3" (click)="logoUpload()">upLoad</button>
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_logo" (click)="logoUpload()">upLoad</button>
+                  <div *ngIf="habilita_anexo_logo == true" class="alert alert-success" role="alert">
+                    Logo enviado com Sucesso!
+                  </div>
                 </div>
               </div>
             </div>

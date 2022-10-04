@@ -17,6 +17,8 @@ export class CadastroMunicipioComponent implements OnInit {
   rota_turistica: any;
   municipio!: any[];
   city:any;
+  resposta_anexo: any;
+  habilita_anexo!: boolean;
   id_regiao: any;
   lista_municipio!: any[];
   multipleImages = [];
@@ -218,6 +220,13 @@ export class CadastroMunicipioComponent implements OnInit {
 
       this.http.post(environment.url + 'anexosMunicipio' + '/'+ user_id, files).subscribe((response: any) => {
         console.log(response)
+        this.resposta_anexo = response;
+
+        if(response=='Anexo enviado com Sucesso!'){
+          this.habilita_anexo = false
+        }else{
+          this.habilita_anexo = true
+        }
       })
     }
 

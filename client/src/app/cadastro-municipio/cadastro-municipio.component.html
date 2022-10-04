@@ -119,8 +119,7 @@
 
             <div class="form-group mb-3">
               <label for="service_cidade" class="pergunta">Se houver serviços, onde são ofertados (endereços)?</label>
-              <textarea [maxlength]="maxChars" class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel required
-                #service_cidade="ngModel" [(ngModel)]="cadastro_cidade.service_cidade"></textarea>
+              <textarea [maxlength]="maxChars" class="form-control" id="service_cidade" rows="3" name="service_cidade" ngModel                 #service_cidade="ngModel" [(ngModel)]="cadastro_cidade.service_cidade"></textarea>
                 <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.service_cidade.length }} / {{ maxChars }}</strong></div>
               <div *ngIf="!service_cidade.valid && service_cidade.touched" class="alert alert-danger" role="alert">
                 Informe os serviços</div>
@@ -259,9 +258,13 @@
         </form>
       </div>
       <div class="col-sm-6 col-12" *ngIf="submitted">
-        <h3>O Munícipio foi cadastrado com sucesso!</h3>
+        <h3 class="text-center">O Munícipio foi cadastrado com sucesso!</h3>
         <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
         <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-4 mb-3">ID: </div>
+            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.id }}</div>
+          </div>
           <div class="row">
             <div class="col-6 col-sm-4 mb-3">Nome da Cidade: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>
@@ -288,12 +291,12 @@
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
           </div>
-          <div class="row">
+          <div *ngIf="cadastro_cidade.wifi_service !==''"  class="row">
             <div class="col-6 col-sm-4 mb-3">Possui Wifi em pontos públicos? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_service }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Quais locais? </div>
+            <div *ngIf="cadastro_cidade.wifi_cidade !==''" class="col-6 col-sm-4 mb-3">Quais locais? </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_cidade }}</div>
           </div>
           <div class="row">
@@ -349,7 +352,10 @@
                 <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
                   culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
                 <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple (change)="selectMultipleImage($event)">
-                <button class="btn btn-primary mb-3" type="submit" (click)="onFilesUpload()">upLoad</button>
+                <button class="btn btn-primary mb-3" type="submit" [disabled]="habilita_anexo" (click)="onFilesUpload()">upLoad</button>
+                <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
+                  Anexo enviado com Sucesso!
+                </div>
               </div>
             </div>
             <div class="row">
