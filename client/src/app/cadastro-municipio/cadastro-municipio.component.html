@@ -51,7 +51,7 @@
               <div class="col-sm-6 col-12 mb-3">
                 <label for="contato_prefeitura" class="form-label pergunta">Telefone de contato</label>
                 <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx"
-                  name="contato_prefeitura" ngModel required #contato_prefeitura="ngModel" [(ngModel)]="cadastro_cidade.contato_prefeitura" prefix="+55 " mask="(00) 0 0000-0000">
+                  name="contato_prefeitura" ngModel required #contato_prefeitura="ngModel" [(ngModel)]="cadastro_cidade.contato_prefeitura" prefix="+55 " mask="(00) 0 0000-0000||(00) 0000-0000">
                 <div *ngIf="!contato_prefeitura.valid && contato_prefeitura.touched" class="alert alert-danger"
                   role="alert">Contato é obrigatório</div>
               </div>
@@ -261,10 +261,10 @@
         <h3 class="text-center">O Munícipio foi cadastrado com sucesso!</h3>
         <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
         <div class="container">
-          <div class="row">
+          <!--<div class="row">
             <div class="col-6 col-sm-4 mb-3">ID: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.id }}</div>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-6 col-sm-4 mb-3">Nome da Cidade: </div>
             <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>

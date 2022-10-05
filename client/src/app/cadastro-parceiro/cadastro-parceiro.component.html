@@ -41,7 +41,7 @@
 
               <div class="form-group col-sm-6 col-12 mb-3">
                 <label for="telefone" class="form-label pergunta">Telefone</label>
-                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone" prefix="+55 " mask="(00) 0 0000-0000">
+                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone" prefix="+55 " mask="(00) 0 0000-0000||(00) 0000-0000">
               </div>
             </div>
 
@@ -358,10 +358,10 @@
         <h3>O Munícipio foi cadastrado com sucesso!</h3>
         <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
         <div class="container">
-          <div class="row">
+          <!--<div class="row">
             <div class="col-6 col-sm-4 mb-3">ID: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.id }}</div>
-          </div>
+          </div>-->
           <div class="row">
             <div class="col-6 col-sm-4 mb-3">CNPJ: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.cnpj }}</div>
@@ -433,43 +433,43 @@
             <div class="col-6 col-sm-4 mb-3">{{ empresa.tipo_service }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Serviços essenciais: </div>
+            <div *ngIf="empresa.essential_service !==''" class="col-6 col-sm-4 mb-3">Serviços essenciais: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.essential_service }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Detalhamento de serviço: </div>
+            <div *ngIf="empresa.outro_servico !==''" class="col-6 col-sm-4 mb-3">Detalhamento de serviço: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.outro_servico }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Espaço de Trabalho:</div>
+            <div *ngIf="empresa.trabalho_reunioes !==''" class="col-6 col-sm-4 mb-3">Espaço de Trabalho:</div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.trabalho_reunioes }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Proposta de tarifa: </div>
+            <div *ngIf="empresa.tarifa_especial !==''" class="col-6 col-sm-4 mb-3">Proposta de tarifa: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.tarifa_especial }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Possui espaço para trabalho? </div>
+            <div *ngIf="empresa.internet_service_alimentacao !==''" class="col-6 col-sm-4 mb-3">Possui espaço para trabalho? </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.internet_service_alimentacao }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Possui equipe orientada? </div>
+            <div *ngIf="empresa.orienta_equipe !==''" class="col-6 col-sm-4 mb-3">Possui equipe orientada? </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.orienta_equipe }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Possui boa localização? </div>
+            <div *ngIf="empresa.localizacao !==''" class="col-6 col-sm-4 mb-3">Possui boa localização? </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.localizacao }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Qual o ramo de atividade do estabelecimento? </div>
+            <div *ngIf="empresa.ramo !==''" class="col-6 col-sm-4 mb-3">Qual o ramo de atividade do estabelecimento? </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.ramo }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Benefícios para os Nômades: </div>
+            <div *ngIf="empresa.beneficios !==''" class="col-6 col-sm-4 mb-3">Benefícios para os Nômades: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.beneficios }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Resumo: </div>
+            <div *ngIf="empresa.espacos_culturais !==''" class="col-6 col-sm-4 mb-3">Resumo: </div>
             <div class="col-6 col-sm-4 mb-3">{{ empresa.espacos_culturais }}</div>
             <!-- Force next columns to break to new line at md breakpoint and up -->
             <div class="w-100 d-none d-md-block"></div>
