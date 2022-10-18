@@ -19,7 +19,8 @@ const APP_ROUTES: Routes = [
   { path: 'cadastro_municipio', component: CadastroMunicipioComponent },
   { path: 'cadastro_parceiro', component: CadastroParceiroComponent },
   { path: 'cadastro_nomad', component: CadastroNomadComponent },
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 ];
 
