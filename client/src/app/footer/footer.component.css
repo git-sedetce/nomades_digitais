@@ -1,9 +1,10 @@
 .info-contato{
-  background-color: #165cdf;
-  color: #fff;
+  background-color: #d4dae7;
+  color: rgb(29, 22, 22);
 }
 .info-contato p{
-  padding-top: 50px;
+  padding-top: 15px;
+  font-weight: bold;
 }
 
 .copyright{
@@ -14,4 +15,8 @@
 }
 .copyright i{
   padding-right: 15px;
+}
+
+.logo{
+  width: 33%;
 }
