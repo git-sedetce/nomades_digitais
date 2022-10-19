@@ -112,7 +112,7 @@
 
             <div class="form-group mb-3">
               <label for="service_estrangeiro" class="pergunta">Quais são os serviços ofertados para turistas e/ou estrangeiros?</label>
-              <textarea [maxlength]="maxChars" class="form-control" id="service_estrangeiro" rows="3" name="service_estrangeiro" ngModel required
+              <textarea [maxlength]="qtdeChars" class="form-control" id="service_estrangeiro" rows="3" name="service_estrangeiro" ngModel required
                 #service_estrangeiro="ngModel" [(ngModel)]="cadastro_cidade.service_estrangeiro"></textarea>
                 <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ cadastro_cidade.service_estrangeiro.length }} / {{ qtdeChars }}</strong></div>
               <div *ngIf="!service_estrangeiro.valid && service_estrangeiro.touched" class="alert alert-danger"

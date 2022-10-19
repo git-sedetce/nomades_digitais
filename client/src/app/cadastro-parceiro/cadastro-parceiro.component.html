@@ -280,7 +280,7 @@
             <div class="row">
               <div class="col-sm-6 col-12 mb-3">
                 <label for="ramo" class="pergunta">Qual o ramo de atividade do estabelecimento?</label>
-                <textarea [maxlength]="maxChars" class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
+                <textarea [maxlength]="qtdeChars" class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
                 <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.ramo.length }} / {{ qtdeChars }}</strong></div>
               </div>
               <div class="col-sm-6 col-12 mb-3">
