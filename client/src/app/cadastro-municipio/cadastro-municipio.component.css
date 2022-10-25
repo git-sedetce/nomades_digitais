@@ -5,8 +5,12 @@
   margin-top: 56px;
 }*/
 
+section {
+  background: url("../../assets/imgs/Imagens/190712_TURISMO RADICAL_DP09901.JPG") no-repeat fixed center;
+}
+
 #forms {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .pergunta{
   font-weight: bold;
@@ -23,4 +27,27 @@ textarea {
 }
 .limite_caractere{
   padding: 0.3rem 0.3rem !important;
+}
+.manual p, a{
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.card_manual{
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.card_form{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cadastro_municipio{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.card {
+  box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
 }
