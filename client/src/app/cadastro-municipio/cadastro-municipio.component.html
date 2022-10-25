@@ -343,123 +343,125 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-12" *ngIf="submitted">
-        <h3 class="text-center">O Munícipio foi cadastrado com sucesso!</h3>
-        <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
-        <div class="container">
-          <!--<div class="row">
-            <div class="col-6 col-sm-4 mb-3">ID: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.id }}</div>
-          </div>-->
-          <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Nome da Cidade: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Região de Planejamento: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.regiao }}</div>
-          </div>
-          <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Email de Contato: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.email_prefeitura }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Telefone de Contato: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.contato_prefeitura }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Site da prefeitura: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.link_prefeitura }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Histórico da Cidade: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.historia_cidade }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-          </div>
-          <div *ngIf="cadastro_cidade.wifi_service !==''" class="row">
-            <div class="col-6 col-sm-4 mb-3">Possui Wifi em pontos públicos? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_service }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div *ngIf="cadastro_cidade.wifi_cidade !==''" class="col-6 col-sm-4 mb-3">Quais locais? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_cidade }}</div>
-          </div>
-          <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Quais são os serviços ofertados para turistas e/ou estrangeiros? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_estrangeiro }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Se houver serviços, onde são ofertados (endereços)? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_cidade }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Quais são os serviços oferecidos para empresários? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_empresario }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Quais são as medidas de segurança pública do município? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_seguranca }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-          </div>
-          <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.pontos_turisticos }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <!--<div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Espaços culturais:</div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_culturais }}</div>-->
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Espaços de Lazer: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_lazer }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-          </div>
-          <div class="row">
-            <div class="col-6 col-sm-4 mb-3">Tipo de turismo predominante: </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.tipo_turismo }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div class="col-6 col-sm-4 mb-3">Faz parte de alguma rota turística? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.rota }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-            <div *ngIf="cadastro_cidade.qual_rota !==''" class="col-6 col-sm-4 mb-3">Qual rota? </div>
-            <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.qual_rota }}</div>
-            <!-- Force next columns to break to new line at md breakpoint and up -->
-            <div class="w-100 d-none d-md-block"></div>
-          </div>
-          <fieldset>
-            <legend>Anexos</legend>
+      <div class="card card_form mb-5">
+        <div class="col-12" *ngIf="submitted">
+          <h3 class="text-center">O Munícipio foi cadastrado com sucesso!</h3>
+          <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
+          <div class="container">
+            <!--<div class="row">
+              <div class="col-6 col-sm-4 mb-3">ID: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.id }}</div>
+            </div>-->
             <div class="row">
-              <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
-                  culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
-                <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple
-                  (change)="selectMultipleImage($event)">
-                <button class="btn btn-primary mb-3" type="submit" [disabled]="habilita_anexo"
-                  (click)="onFilesUpload()">upLoad</button>
-                <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
-                  Anexo enviado com Sucesso!
-                </div>
-              </div>
+              <div class="col-6 col-sm-4 mb-3">Nome da Cidade: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Região de Planejamento: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.regiao }}</div>
             </div>
             <div class="row">
-              <div class="col-sm-12 col-12 mb-3">
-                <div class="alert alert-warning" role="alert">
-                  <h4 class="alert-heading">ATENÇÃO</h4>
-                  <p>Caso tenha dificuldades com o envio das fotos, as mesmas podem ser enviadas pelo e-mail <a
-                      href="mailto: digital.nomads@sedet.ce.gov.br">digital.nomads@sedet.ce.gov.br</a>. As fotos podem
-                    ser adicionadas em anexo ou compartilhadas por meio de armazenamento em nuvem. Ex.: Google Drive,
-                    Onedrive, etc.</p>
+              <div class="col-6 col-sm-4 mb-3">Email de Contato: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.email_prefeitura }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Telefone de Contato: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.contato_prefeitura }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Site da prefeitura: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.link_prefeitura }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Histórico da Cidade: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.historia_cidade }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+            </div>
+            <div *ngIf="cadastro_cidade.wifi_service !==''" class="row">
+              <div class="col-6 col-sm-4 mb-3">Possui Wifi em pontos públicos? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_service }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div *ngIf="cadastro_cidade.wifi_cidade !==''" class="col-6 col-sm-4 mb-3">Quais locais? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_cidade }}</div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-sm-4 mb-3">Quais são os serviços ofertados para turistas e/ou estrangeiros? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_estrangeiro }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Se houver serviços, onde são ofertados (endereços)? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_cidade }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Quais são os serviços oferecidos para empresários? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_empresario }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Quais são as medidas de segurança pública do município? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_seguranca }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.pontos_turisticos }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <!--<div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Espaços culturais:</div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_culturais }}</div>-->
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Espaços de Lazer: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_lazer }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-sm-4 mb-3">Tipo de turismo predominante: </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.tipo_turismo }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div class="col-6 col-sm-4 mb-3">Faz parte de alguma rota turística? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.rota }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+              <div *ngIf="cadastro_cidade.qual_rota !==''" class="col-6 col-sm-4 mb-3">Qual rota? </div>
+              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.qual_rota }}</div>
+              <!-- Force next columns to break to new line at md breakpoint and up -->
+              <div class="w-100 d-none d-md-block"></div>
+            </div>
+            <fieldset>
+              <legend>Anexos</legend>
+              <div class="row">
+                <div class="mb-3">
+                  <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
+                    culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
+                  <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple
+                    (change)="selectMultipleImage($event)">
+                  <button class="btn btn-primary mb-3" type="submit" [disabled]="habilita_anexo"
+                    (click)="onFilesUpload()">upLoad</button>
+                  <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
+                    Anexo enviado com Sucesso!
+                  </div>
                 </div>
               </div>
-            </div>
-          </fieldset>
+              <div class="row">
+                <div class="col-sm-12 col-12 mb-3">
+                  <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">ATENÇÃO</h4>
+                    <p>Caso tenha dificuldades com o envio das fotos, as mesmas podem ser enviadas pelo e-mail <a
+                        href="mailto: digital.nomads@sedet.ce.gov.br">digital.nomads@sedet.ce.gov.br</a>. As fotos podem
+                      ser adicionadas em anexo ou compartilhadas por meio de armazenamento em nuvem. Ex.: Google Drive,
+                      Onedrive, etc.</p>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <button type="submit" class="btn btn-success mb-3" (click)="novoCadastro()">Novo Cadastro</button>
         </div>
-        <button type="submit" class="btn btn-success mb-3" (click)="novoCadastro()">Novo Cadastro</button>
       </div>
     </div>
   </div>
