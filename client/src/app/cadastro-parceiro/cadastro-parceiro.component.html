@@ -1,359 +1,364 @@
 <app-header></app-header>
 <section id="forms">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-12">
-        <p class="mb-3 mt-3">
-          O estabelecimento que possui interesse em participar do projeto Nômades Digitais Ceará e ter as suas informações divulgadas no site como forma de atrair esse público, pode realizar a sua inscrição preenchendo as informações a seguir. </p>
-          <p class="mb-3 mt-3">
-            Para ajudar nesse momento, preparamos um Manual de cadastramento que se encontra disponível para download logo abaixo. </p>
-        <a href="https://drive.google.com/drive/folders/1ivhsW3lqFtX8O2owuZtoqc2XV0G2Wyck?usp=sharing" target="_blank">Manual estabelecimentos</a><br>
-        <figure class="figure">
-          <img src="../../assets/imgs/extras/estabelecimento.jpg" class="figure-img img-fluid rounded" alt="...">
-        </figure>
-      </div>
-      <div class="col-sm-6 col-12" *ngIf="!submitted">
-        <h3 class="mb-3 mt-3 text-center bg-primary text-white">Cadastro de Empresas</h3>
-        <form #parceiro="ngForm" (ngSubmit)="submitParceiro(parceiro)">
-          <fieldset>
-            <legend>
-              Dados Cadastrais
-            </legend>
-            <div class="row">
-              <div class="form-group col-sm-6 col-12 mb-3">
-                <label for="cnpj" class="form-label pergunta">CNPJ</label>
-                <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" mask="00.000.000/0000-00">
-                <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe apenas os números.</div>
-                <div *ngIf="!cnpj.valid && cnpj.touched" class="alert alert-danger" role="alert">CNPJ é obrigatório</div>
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual">
+          <div class="card-body">
+            <p class="mb-3 mt-3">
+              O estabelecimento que possui interesse em participar do projeto Nômades Digitais Ceará e ter as suas informações divulgadas no site como forma de atrair esse público, pode realizar a sua inscrição preenchendo as informações a seguir. </p>
+              <p class="mb-3 mt-3">
+                Para ajudar nesse momento, preparamos um Manual de cadastramento que se encontra disponível para download logo abaixo. </p>
+            <a href="https://drive.google.com/drive/folders/1ivhsW3lqFtX8O2owuZtoqc2XV0G2Wyck?usp=sharing" target="_blank">Manual estabelecimentos</a><br>
+          </div>
+        </div>
+      <div class="card card_form mb-5">
+        <div *ngIf="!submitted">
+          <div class="bg-primary">
+            <h3 class="pb-3 pt-3 text-center text-white">Cadastro de Empresas</h3>
+          </div>
+          <form class="cadastro_parceiro" #parceiro="ngForm" (ngSubmit)="submitParceiro(parceiro)">
+            <fieldset>
+              <legend>
+                Dados Cadastrais
+              </legend>
+              <div class="row">
+                <div class="form-group col-sm-6 col-12 mb-3">
+                  <label for="cnpj" class="form-label pergunta">CNPJ</label>
+                  <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" mask="00.000.000/0000-00">
+                  <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe apenas os números.</div>
+                  <div *ngIf="!cnpj.valid && cnpj.touched" class="alert alert-danger" role="alert">CNPJ é obrigatório</div>
+
+                </div>
+                <div class="form-group col-sm-6 col-12 mb-3">
+                  <label for="nome_fantasia" class="form-label pergunta">Nome Fantasia</label>
+                  <input type="text" class="form-control" id="nome_fantasia" placeholder="Digite o nome fantasia" name="nome_fantasia" ngModel required #nome_fantasia="ngModel" [(ngModel)]="empresa.nome_fantasia">
+                  <div *ngIf="!nome_fantasia.valid && nome_fantasia.touched" class="alert alert-danger" role="alert">Informe o nome fantasia</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-sm-6 col-12 mb-3">
+                  <label for="razao_social" class="form-label pergunta">Razão Social</label>
+                  <input type="text" class="form-control" id="razao_social" placeholder="Digite a Razão Social" name="razao_social" ngModel required #razao_social="ngModel" [(ngModel)]="empresa.razao_social">
+                  <div *ngIf="!razao_social.valid && razao_social.touched" class="alert alert-danger" role="alert">Informe a razao_social</div>
+                </div>
+
+                <div class="form-group col-sm-6 col-12 mb-3">
+                  <label for="telefone" class="form-label pergunta">Telefone</label>
+                  <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone" prefix="+55 " mask="(00) 0 0000-0000||(00) 0000-0000">
+                </div>
+              </div>
+
+              <div ngModelGroup="endereco">
+
+                <div class="row">
+                  <div class="form-group col-sm-6 col-12 mb-3">
+                    <label for="cep" class="form-label pergunta">CEP</label>
+                    <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel required #cep="ngModel" [(ngModel)]="empresa.cep" (blur)="(consultaCEP(cep.value, parceiro))" mask="00000-000">
+                    <div *ngIf="!cep.valid && cep.touched" class="alert alert-danger" role="alert">Informe o CEP</div>
+                  </div>
+                  <div class="form-group col-sm-6 col-12 mb-3">
+                    <label for="logradouro" class="form-label pergunta">Endereço</label>
+                    <input type="text" class="form-control" id="logradouro" placeholder="Digite o endereço" name="logradouro" ngModel required #logradouro="ngModel" [(ngModel)]="empresa.logradouro">
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="form-group col-sm-4 col-12 mb-3">
+                    <label for="numero" class="form-label pergunta">Número</label>
+                    <input type="text" class="form-control" id="numero" placeholder="Insira o número" name="numero" ngModel required #numero="ngModel" [(ngModel)]="empresa.numero">
+                    <div *ngIf="!numero.valid && numero.touched" class="alert alert-danger" role="alert">Caso não tenha número informe S/N</div>
+                  </div>
+                  <div class="form-group col-sm-8 col-12 mb-3">
+                    <label for="complemento" class="form-label pergunta">Complemento</label>
+                    <input type="text" class="form-control" id="complemento" placeholder="Complemento" name="complemento" ngModel #complemento="ngModel" [(ngModel)]="empresa.complemento">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-sm-3 col-12 mb-3">
+                    <label for="bairro" class="form-label pergunta">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" placeholder="Digite o bairro" name="bairro" ngModel required #bairro="ngModel" [(ngModel)]="empresa.bairro">
+                  </div>
+                  <div class="form-group col-sm-4 col-12 mb-3">
+                    <label for="cidade" class="form-label pergunta">Cidade</label>
+                    <input type="text" class="form-control" id="cidade" placeholder="Informe a Cidade" name="cidade" ngModel required #cidade="ngModel" [(ngModel)]="empresa.cidade" readonly>
+                  </div>
+                  <div class="form-group col-sm-4 col-12 mb-3">
+                    <label for="estado" class="form-label pergunta">Estado</label>
+                    <input type="text" class="form-control" id="estado" placeholder="Informe o Estado" name="estado" ngModel required #estado="ngModel" [(ngModel)]="empresa.estado" readonly>
+                  </div>
+                </div>
 
               </div>
-              <div class="form-group col-sm-6 col-12 mb-3">
-                <label for="nome_fantasia" class="form-label pergunta">Nome Fantasia</label>
-                <input type="text" class="form-control" id="nome_fantasia" placeholder="Digite o nome fantasia" name="nome_fantasia" ngModel required #nome_fantasia="ngModel" [(ngModel)]="empresa.nome_fantasia">
-                <div *ngIf="!nome_fantasia.valid && nome_fantasia.touched" class="alert alert-danger" role="alert">Informe o nome fantasia</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-sm-6 col-12 mb-3">
-                <label for="razao_social" class="form-label pergunta">Razão Social</label>
-                <input type="text" class="form-control" id="razao_social" placeholder="Digite a Razão Social" name="razao_social" ngModel required #razao_social="ngModel" [(ngModel)]="empresa.razao_social">
-                <div *ngIf="!razao_social.valid && razao_social.touched" class="alert alert-danger" role="alert">Informe a razao_social</div>
-              </div>
-
-              <div class="form-group col-sm-6 col-12 mb-3">
-                <label for="telefone" class="form-label pergunta">Telefone</label>
-                <input type="text" class="form-control" id="telefone" placeholder="(XX) x xxxx xxxx" name="telefone" ngModel required #telefone="ngModel" [(ngModel)]="empresa.telefone" prefix="+55 " mask="(00) 0 0000-0000||(00) 0000-0000">
-              </div>
-            </div>
-
-            <div ngModelGroup="endereco">
 
               <div class="row">
                 <div class="form-group col-sm-6 col-12 mb-3">
-                  <label for="cep" class="form-label pergunta">CEP</label>
-                  <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel required #cep="ngModel" [(ngModel)]="empresa.cep" (blur)="(consultaCEP(cep.value, parceiro))" mask="00000-000">
-                  <div *ngIf="!cep.valid && cep.touched" class="alert alert-danger" role="alert">Informe o CEP</div>
+                  <label for="email_parceiro" class="form-label pergunta">Email</label>
+                  <input type="email" class="form-control" id="email_parceiro" aria-describedby="emailNomad"
+                    placeholder="Insira um email válido!" name="email_parceiro" ngModel required email #email_parceiro="ngModel" [(ngModel)]="empresa.email_parceiro">
+
+                    <div *ngIf="!email_parceiro.valid && email_parceiro.touched" class="alert alert-danger" role="alert">Email inválido</div>
                 </div>
                 <div class="form-group col-sm-6 col-12 mb-3">
-                  <label for="logradouro" class="form-label pergunta">Endereço</label>
-                  <input type="text" class="form-control" id="logradouro" placeholder="Digite o endereço" name="logradouro" ngModel required #logradouro="ngModel" [(ngModel)]="empresa.logradouro">
+                  <label for="midia_social" class="form-label pergunta">Redes Sociais e Site.</label>
+                  <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social" name="midia_social" ngModel required #midia_social="ngModel" [(ngModel)]="empresa.midia_social">
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.midia_social.length }} / 300</strong></div>
+                  <div id="midiaHelp" *ngIf="!midia_social.valid && midia_social.touched" class="alert alert-danger" role="alert">Caso não tiver, assinalar abaixo que não possui.</div>
                 </div>
               </div>
 
-
+            </fieldset>
+            <fieldset>
+              <legend class="text-center">Qualidade da Internet</legend>
               <div class="row">
-                <div class="form-group col-sm-4 col-12 mb-3">
-                  <label for="numero" class="form-label pergunta">Número</label>
-                  <input type="text" class="form-control" id="numero" placeholder="Insira o número" name="numero" ngModel required #numero="ngModel" [(ngModel)]="empresa.numero">
-                  <div *ngIf="!numero.valid && numero.touched" class="alert alert-danger" role="alert">Caso não tenha número informe S/N</div>
-                </div>
-                <div class="form-group col-sm-8 col-12 mb-3">
-                  <label for="complemento" class="form-label pergunta">Complemento</label>
-                  <input type="text" class="form-control" id="complemento" placeholder="Complemento" name="complemento" ngModel #complemento="ngModel" [(ngModel)]="empresa.complemento">
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="form-group col-sm-3 col-12 mb-3">
-                  <label for="bairro" class="form-label pergunta">Bairro</label>
-                  <input type="text" class="form-control" id="bairro" placeholder="Digite o bairro" name="bairro" ngModel required #bairro="ngModel" [(ngModel)]="empresa.bairro">
-                </div>
-                <div class="form-group col-sm-4 col-12 mb-3">
-                  <label for="cidade" class="form-label pergunta">Cidade</label>
-                  <input type="text" class="form-control" id="cidade" placeholder="Informe a Cidade" name="cidade" ngModel required #cidade="ngModel" [(ngModel)]="empresa.cidade" readonly>
-                </div>
-                <div class="form-group col-sm-4 col-12 mb-3">
-                  <label for="estado" class="form-label pergunta">Estado</label>
-                  <input type="text" class="form-control" id="estado" placeholder="Informe o Estado" name="estado" ngModel required #estado="ngModel" [(ngModel)]="empresa.estado" readonly>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="row">
-              <div class="form-group col-sm-6 col-12 mb-3">
-                <label for="email_parceiro" class="form-label pergunta">Email</label>
-                <input type="email" class="form-control" id="email_parceiro" aria-describedby="emailNomad"
-                  placeholder="Insira um email válido!" name="email_parceiro" ngModel required email #email_parceiro="ngModel" [(ngModel)]="empresa.email_parceiro">
-
-                  <div *ngIf="!email_parceiro.valid && email_parceiro.touched" class="alert alert-danger" role="alert">Email inválido</div>
-              </div>
-              <div class="form-group col-sm-6 col-12 mb-3">
-                <label for="midia_social" class="form-label pergunta">Redes Sociais e Site.</label>
-                <input type="text" class="form-control" id="midia_social" placeholder="Informe sua rede social" name="midia_social" ngModel required #midia_social="ngModel" [(ngModel)]="empresa.midia_social">
-                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.midia_social.length }} / 300</strong></div>
-                <div id="midiaHelp" *ngIf="!midia_social.valid && midia_social.touched" class="alert alert-danger" role="alert">Caso não tiver, assinalar abaixo que não possui.</div>
-              </div>
-            </div>
-
-          </fieldset>
-          <fieldset>
-            <legend class="text-center">Qualidade da Internet</legend>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="internet_service" class="pergunta">O acesso a internet é liberado aos clientes?</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service" id="internet_sim" value="sim" ngModel #internet_service="ngModel" [(ngModel)]="have_internet" [(ngModel)]="empresa.internet_service">
-                  <label class="form-check-label" for="internet_sim">
-                    Sim
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service" id="internet_nao" value="nao" ngModel #internet_service="ngModel" [(ngModel)]="have_internet" [(ngModel)]="empresa.internet_service">
-                  <label class="form-check-label" for="internet_nao">
-                    Não
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="internet_speed" class="pergunta">Qual a velocidade da internet do estabelecimento, em Mbps?</label>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
-                  <label class="form-check-label" for="low_30mbps">
-                    Abaixo de 30 Mbps
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
-                  <label class="form-check-label" for="30mbps">
-                    30 Mbps
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
-                  <label class="form-check-label" for="high_30mbps">
-                    Acima de 30 Mbps
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div *ngIf="speed_quality == 'abaixo_30' || have_internet == 'nao'" class="row">
-              <div class="col-sm-12 col-12 mb-3">
-                <div class="alert alert-warning" role="alert">
-                  <h4 class="alert-heading">ATENÇÃO</h4>
-                  <p>Na seção anterior, suas respostas não atendem a um dos requisitos para atendimento aos Nômades Digitais, que são:</p>
-                  <ol>
-                    <li style="font-weight: bold;">Fornecer internet de qualidade para os clientes;</li>
-                    <li style="font-weight: bold;">Possuir internet de qualidade superior à 30 Mbps.</li>
-                  </ol>
-                  <p>Caso opte por continuar, você pode concluir o preenchimento do formulário e se comprometer a enviar posteriormente e-mail comprovando atendimento aos critérios que faltaram.</p>
-                  <hr>
-                  <p class="mb-0">Dúvidas ou comprovantes, envie e-mail para: <a href = "mailto: digital.nomads@sedet.ce.gov.br">digital.nomads@sedet.ce.gov.br</a></p>
-                </div>
-              </div>
-
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend class="text-center pergunta"> Tipo de serviços</legend>
-            <div class="row">
-              <div class="col-sm-12 col-12 mb-3">
-                <label for="tipo_service" class="text-center pergunta">Enquadra-se em qual tipo de local abaixo?</label><br><br>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="hospedagem" value="hospedagem" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
-                  <label class="form-check-label" for="hospedagem">
-                    Hospedagem
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="alimentacao" value="alimentacao" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
-                  <label class="form-check-label" for="alimentacao">
-                    Alimentação
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="local_trabalho" value="local_trabalho" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
-                  <label class="form-check-label" for="local_trabalho">
-                    Local de trabalho
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="outro" value="outro" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
-                  <label class="form-check-label" for="outro">
-                    Outro
-                  </label>
-                </div>
-              </div>
-            </div>
-
-          </fieldset>
-          <fieldset *ngIf="radio_service == 'hospedagem'">
-            <legend class="text-center">Serviços prestados - Hospedagem</legend>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos hóspedes? São exemplos: lavanderia,
-                  espaço de trabalho coletivo ou individual, cozinha, entre outros.</label>
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="internet_service" class="pergunta">O acesso a internet é liberado aos clientes?</label>
                   <div class="form-check">
-                    <div *ngFor="let item of _serviceList">
-                      <input class="form-check-input" value = "{{ item.nome }}" id = "{{ item.nome }}" type="checkbox" name = "{{ item.nome }}" [(ngModel)]="item.isselected">
-                      <label class="form-check-label" for = "{{ item.nome }}">{{ item.nome }}</label>
+                    <input class="form-check-input" type="radio" name="internet_service" id="internet_sim" value="sim" ngModel #internet_service="ngModel" [(ngModel)]="have_internet" [(ngModel)]="empresa.internet_service">
+                    <label class="form-check-label" for="internet_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="internet_service" id="internet_nao" value="nao" ngModel #internet_service="ngModel" [(ngModel)]="have_internet" [(ngModel)]="empresa.internet_service">
+                    <label class="form-check-label" for="internet_nao">
+                      Não
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="internet_speed" class="pergunta">Qual a velocidade da internet do estabelecimento, em Mbps?</label>
+                  <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
+                    <label class="form-check-label" for="low_30mbps">
+                      Abaixo de 30 Mbps
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="30mbps" value="30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
+                    <label class="form-check-label" for="30mbps">
+                      30 Mbps
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
+                    <label class="form-check-label" for="high_30mbps">
+                      Acima de 30 Mbps
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="speed_quality == 'abaixo_30' || have_internet == 'nao'" class="row">
+                <div class="col-sm-12 col-12 mb-3">
+                  <div class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">ATENÇÃO</h4>
+                    <p>Na seção anterior, suas respostas não atendem a um dos requisitos para atendimento aos Nômades Digitais, que são:</p>
+                    <ol>
+                      <li style="font-weight: bold;">Fornecer internet de qualidade para os clientes;</li>
+                      <li style="font-weight: bold;">Possuir internet de qualidade superior à 30 Mbps.</li>
+                    </ol>
+                    <p>Caso opte por continuar, você pode concluir o preenchimento do formulário e se comprometer a enviar posteriormente e-mail comprovando atendimento aos critérios que faltaram.</p>
+                    <hr>
+                    <p class="mb-0">Dúvidas ou comprovantes, envie e-mail para: <a href = "mailto: digital.nomads@sedet.ce.gov.br">digital.nomads@sedet.ce.gov.br</a></p>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend class="text-center pergunta"> Tipo de serviços</legend>
+              <div class="row">
+                <div class="col-sm-12 col-12 mb-3">
+                  <label for="tipo_service" class="text-center pergunta">Enquadra-se em qual tipo de local abaixo?</label><br><br>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="hospedagem" value="hospedagem" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
+                    <label class="form-check-label" for="hospedagem">
+                      Hospedagem
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="alimentacao" value="alimentacao" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
+                    <label class="form-check-label" for="alimentacao">
+                      Alimentação
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="local_trabalho" value="local_trabalho" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
+                    <label class="form-check-label" for="local_trabalho">
+                      Local de trabalho
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" id="outro" value="outro" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
+                    <label class="form-check-label" for="outro">
+                      Outro
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            </fieldset>
+            <fieldset *ngIf="radio_service == 'hospedagem'">
+              <legend class="text-center">Serviços prestados - Hospedagem</legend>
+              <div class="row">
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos hóspedes? São exemplos: lavanderia,
+                    espaço de trabalho coletivo ou individual, cozinha, entre outros.</label>
+                    <div class="form-check">
+                      <div *ngFor="let item of _serviceList">
+                        <input class="form-check-input" value = "{{ item.nome }}" id = "{{ item.nome }}" type="checkbox" name = "{{ item.nome }}" [(ngModel)]="item.isselected">
+                        <label class="form-check-label" for = "{{ item.nome }}">{{ item.nome }}</label>
+                      </div>
                     </div>
+                </div>
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="outro_servico" class="pergunta">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
+                    ofertados.</label>
+                  <textarea [maxlength]="maxChars" data-ls-module="charCounter" maxlength="100" class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.outro_servico.length }} / {{ maxChars }}</strong></div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset *ngIf="radio_service == 'alimentacao'">
+              <legend class="text-center">Serviços prestados - Alimentação</legend>
+              <div class="row">
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="internet_service_alimentacao" class="pergunta">Possui espaços que sejam possíveis de trabalhar?</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_sim" value="sim" ngModel #internet_service_alimentacao="ngModel" [(ngModel)]="empresa.internet_service_alimentacao">
+                    <label class="form-check-label" for="trabalho_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_nao" value="nao" ngModel #internet_service_alimentacao="ngModel" [(ngModel)]="empresa.internet_service_alimentacao">
+                    <label class="form-check-label" for="trabalho_nao">
+                      Não
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="orienta_equipe" class="pergunta">Sua equipe é orientada para atender clientes que trabalham no local? Por
+                    exemplo: não questiona muito sobre o nível de consumo do cliente.</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_sim" value="sim" name="orienta_equipe" ngModel #orienta_equipe="ngModel" [(ngModel)]="empresa.orienta_equipe">
+                    <label class="form-check-label" for="orienta_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_nao" value="nao" name="orienta_equipe" ngModel #orienta_equipe="ngModel" [(ngModel)]="empresa.orienta_equipe">
+                    <label class="form-check-label" for="orienta_nao">
+                      Não
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset *ngIf="radio_service == 'local_trabalho'">
+              <legend class="text-center">Serviços prestados - Locais de trabalho</legend>
+              <div class="row">
+                <div class="col-sm-12 col-12 mb-3">
+                  <label for="localizacao" class="pergunta">Possui boa localização? (Fácil acesso ao estabelecimento, próximo aos
+                    hotéis, restaurantes e centros comerciais).</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="localizacao" id="localizacao_sim" value="sim" name="localizacao" ngModel #localizacao="ngModel" [(ngModel)]="empresa.localizacao">
+                    <label class="form-check-label" for="localizacao_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="localizacao" id="localizacao_nao" value="nao" name="localizacao" ngModel #localizacao="ngModel" [(ngModel)]="empresa.localizacao">
+                    <label class="form-check-label" for="localizacao_nao">
+                      Não
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset *ngIf="radio_service == 'outro'">
+              <legend class="text-center">Serviços prestados</legend>
+              <div class="row">
+                <div class="col-sm-6 col-12 mb-3">
+                  <label for="ramo" class="pergunta">Qual o ramo de atividade do estabelecimento?</label>
+                  <textarea [maxlength]="qtdeChars" class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.ramo.length }} / {{ qtdeChars }}</strong></div>
+                </div>
+                <div class="col-sm-6 col-12 mb-3">
+                  <label class="mt-3 pergunta" for="beneficios" >Quais os beneficios que o estabelecimento tem a oferecer aos
+                    <span>Nômades Digitais</span>?</label>
+                  <textarea [maxlength]="maxChars" class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel" [(ngModel)]="empresa.beneficios"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.beneficios.length }} / {{ maxChars }}</strong></div>
+                </div>
+              </div>
+            </fieldset>
+            <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'" class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="trabalho_reunioes" class="pergunta">Possui espaço que possibilite o trabalho em grupo e individual.</label>
+                <div class="form-check">
+                  <div *ngFor="let space of _meetList">
+                    <input class="form-check-input" value = "{{ space.nome }}" id = "{{ space.nome }}" type="checkbox" name = "{{ space.nome }}" [(ngModel)]="space.isselected">
+                    <label class="form-check-label" for = "{{ space.nome }}">{{ space.nome }}</label>
+                   </div>
+                </div>
+                </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <div class="form-group mb-3">
+                  <label for="tarifa_especial" class="pergunta">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos: preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
+                  <textarea [maxlength]="maxChars" class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel" [(ngModel)]="empresa.tarifa_especial"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.tarifa_especial.length }} / {{ maxChars }}</strong></div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'outro' || radio_service == 'alimentacao'" class="row">
+              <div class="form-group col-sm-8 col-12 mb-3">
+                <label for="espacos_culturais" class="pergunta">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
+                <textarea [maxlength]="maxChars" class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel" [(ngModel)]="empresa.espacos_culturais"></textarea>
+                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.espacos_culturais.length }} / {{ maxChars }}</strong></div>
+              </div>
+              <div class="form-group col-sm-4 col-12 mb-3">
+                <label for="idioma_service" class="pergunta">Trabalha com outro idioma?</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="idioma" id="idioma_sim" value="sim" ngModel #idioma="ngModel" [(ngModel)]="have_idioma" [(ngModel)]="empresa.idioma">
+                    <label class="form-check-label" for="idioma_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="idioma_service" id="idioma_nao" value="nao" ngModel #idioma="ngModel" [(ngModel)]="have_idioma" [(ngModel)]="empresa.idioma">
+                    <label class="form-check-label" for="idioma_nao">
+                      Não
+                    </label>
+                  </div>
+                  <div *ngIf="have_idioma == 'sim'">
+                    <label for="qual_idioma" class="form-label pergunta">Informe o idioma.</label>
+                    <input class="form-control" list="datalistIdioma" id="qual_idioma" placeholder="Selecione o idioma." name="qual_idioma" #qual_idioma="ngModel" [(ngModel)]="empresa.qual_idioma">
+                    <datalist id="datalistIdioma">
+                      <option value="Alemão">Alemão</option>
+                      <option value="Chinês">Chinês</option>
+                      <option value="Espanhol">Espanhol</option>
+                      <option value="Francês">Francês</option>
+                      <option value="Inglês">Inglês</option>
+                    </datalist>
                   </div>
               </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="outro_servico" class="pergunta">Se você marcou a opção "outros, detalhe abaixo quais são os demais serviços
-                  ofertados.</label>
-                <textarea [maxlength]="maxChars" data-ls-module="charCounter" maxlength="100" class="form-control" id="outro_servico" rows="10" name="outro_servico" ngModel #outro_servico="ngModel" [(ngModel)]="empresa.outro_servico"></textarea>
-                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.outro_servico.length }} / {{ maxChars }}</strong></div>
-              </div>
             </div>
-          </fieldset>
-          <fieldset *ngIf="radio_service == 'alimentacao'">
-            <legend class="text-center">Serviços prestados - Alimentação</legend>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="internet_service_alimentacao" class="pergunta">Possui espaços que sejam possíveis de trabalhar?</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_sim" value="sim" ngModel #internet_service_alimentacao="ngModel" [(ngModel)]="empresa.internet_service_alimentacao">
-                  <label class="form-check-label" for="trabalho_sim">
-                    Sim
-                  </label>
+            <fieldset>
+              <!--
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label for="formFile" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
+                  <input class="form-control" type="file" id="formFile">
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="internet_service_alimentacao" id="trabalho_nao" value="nao" ngModel #internet_service_alimentacao="ngModel" [(ngModel)]="empresa.internet_service_alimentacao">
-                  <label class="form-check-label" for="trabalho_nao">
-                    Não
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="orienta_equipe" class="pergunta">Sua equipe é orientada para atender clientes que trabalham no local? Por
-                  exemplo: não questiona muito sobre o nível de consumo do cliente.</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_sim" value="sim" name="orienta_equipe" ngModel #orienta_equipe="ngModel" [(ngModel)]="empresa.orienta_equipe">
-                  <label class="form-check-label" for="orienta_sim">
-                    Sim
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="orienta_equipe" id="orienta_nao" value="nao" name="orienta_equipe" ngModel #orienta_equipe="ngModel" [(ngModel)]="empresa.orienta_equipe">
-                  <label class="form-check-label" for="orienta_nao">
-                    Não
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset *ngIf="radio_service == 'local_trabalho'">
-            <legend class="text-center">Serviços prestados - Locais de trabalho</legend>
-            <div class="row">
-              <div class="col-sm-12 col-12 mb-3">
-                <label for="localizacao" class="pergunta">Possui boa localização? (Fácil acesso ao estabelecimento, próximo aos
-                  hotéis, restaurantes e centros comerciais).</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_sim" value="sim" name="localizacao" ngModel #localizacao="ngModel" [(ngModel)]="empresa.localizacao">
-                  <label class="form-check-label" for="localizacao_sim">
-                    Sim
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="localizacao" id="localizacao_nao" value="nao" name="localizacao" ngModel #localizacao="ngModel" [(ngModel)]="empresa.localizacao">
-                  <label class="form-check-label" for="localizacao_nao">
-                    Não
-                  </label>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset *ngIf="radio_service == 'outro'">
-            <legend class="text-center">Serviços prestados</legend>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="ramo" class="pergunta">Qual o ramo de atividade do estabelecimento?</label>
-                <textarea [maxlength]="qtdeChars" class="form-control" id="outro_servico" rows="3" name="ramo" ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
-                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.ramo.length }} / {{ qtdeChars }}</strong></div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label class="mt-3 pergunta" for="beneficios" >Quais os beneficios que o estabelecimento tem a oferecer aos
-                  <span>Nômades Digitais</span>?</label>
-                <textarea [maxlength]="maxChars" class="form-control" id="beneficios" rows="3" name="beneficios" ngModel #beneficios="ngModel" [(ngModel)]="empresa.beneficios"></textarea>
-                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.beneficios.length }} / {{ maxChars }}</strong></div>
-              </div>
-            </div>
-          </fieldset>
-          <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'" class="row">
-            <div class="col-sm-6 col-12 mb-3">
-              <label for="trabalho_reunioes" class="pergunta">Possui espaço que possibilite o trabalho em grupo e individual.</label>
-              <div class="form-check">
-                <div *ngFor="let space of _meetList">
-                  <input class="form-check-input" value = "{{ space.nome }}" id = "{{ space.nome }}" type="checkbox" name = "{{ space.nome }}" [(ngModel)]="space.isselected">
-                  <label class="form-check-label" for = "{{ space.nome }}">{{ space.nome }}</label>
-                 </div>
-              </div>
-              </div>
-            <div class="col-sm-6 col-12 mb-3">
-              <div class="form-group mb-3">
-                <label for="tarifa_especial" class="pergunta">Detalhe sua proposta de tarifa para utilização temporária do espaço. Exemplos: preço para aluguel mensal, percentual de desconto, flexibilidade no contrato, etc. </label>
-                <textarea [maxlength]="maxChars" class="form-control" id="tarifa_especial" rows="3" name="tarifa_especial" ngModel #tarifa_especial="ngModel" [(ngModel)]="empresa.tarifa_especial"></textarea>
-                <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.tarifa_especial.length }} / {{ maxChars }}</strong></div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'outro' || radio_service == 'alimentacao'" class="row">
-            <div class="form-group col-sm-8 col-12 mb-3">
-              <label for="espacos_culturais" class="pergunta">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
-              <textarea [maxlength]="maxChars" class="form-control" id="espacos_culturais" rows="3" name="espacos_culturais" ngModel #espacos_culturais="ngModel" [(ngModel)]="empresa.espacos_culturais"></textarea>
-              <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.espacos_culturais.length }} / {{ maxChars }}</strong></div>
-            </div>
-            <div class="form-group col-sm-4 col-12 mb-3">
-              <label for="idioma_service" class="pergunta">Trabalha com outro idioma?</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="idioma" id="idioma_sim" value="sim" ngModel #idioma="ngModel" [(ngModel)]="have_idioma" [(ngModel)]="empresa.idioma">
-                  <label class="form-check-label" for="idioma_sim">
-                    Sim
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="idioma_service" id="idioma_nao" value="nao" ngModel #idioma="ngModel" [(ngModel)]="have_idioma" [(ngModel)]="empresa.idioma">
-                  <label class="form-check-label" for="idioma_nao">
-                    Não
-                  </label>
-                </div>
-                <div *ngIf="have_idioma == 'sim'">
-                  <label for="qual_idioma" class="form-label pergunta">Informe o idioma.</label>
-                  <input class="form-control" list="datalistIdioma" id="qual_idioma" placeholder="Selecione o idioma." name="qual_idioma" #qual_idioma="ngModel" [(ngModel)]="empresa.qual_idioma">
-                  <datalist id="datalistIdioma">
-                    <option value="Alemão">Alemão</option>
-                    <option value="Chinês">Chinês</option>
-                    <option value="Espanhol">Espanhol</option>
-                    <option value="Francês">Francês</option>
-                    <option value="Inglês">Inglês</option>
-                  </datalist>
-                </div>
-            </div>
-          </div>
-          <fieldset>
-            <!--
-            <div class="row">
-              <div class="col-12 mb-3">
-                <label for="formFile" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
-                <input class="form-control" type="file" id="formFile">
-              </div>
-            </div>-->
-          </fieldset>
+              </div>-->
+            </fieldset>
 
-          <button type="submit" class="btn btn-info mb-3" [disabled]="!parceiro.valid" (click)="savePartner()">Cadastrar Parceiro</button>
-        </form>
+            <button type="submit" class="btn btn-info mb-3" [disabled]="!parceiro.valid" (click)="savePartner()">Cadastrar Parceiro</button>
+          </form>
+        </div>
+      </div>
       </div>
       <div class="col-sm-6 col-12" *ngIf="submitted">
         <h3>O Munícipio foi cadastrado com sucesso!</h3>
