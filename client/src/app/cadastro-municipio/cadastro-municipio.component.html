@@ -206,9 +206,7 @@
                 <div *ngIf="!espacos_culturais.valid && espacos_culturais.touched" class="alert alert-danger" role="alert">Se não houver favor escrever "Não possuimos espaço cultural".</div>
               </div>-->
                 <div class="form-group mb-3">
-                  <label for="espacos_lazer" class="pergunta">Espaços de lazer (praças públicas, parques de diversão,
-                    espaços para crianças,
-                    bibliotecas, entre outros).</label>
+                  <label for="espacos_lazer" class="pergunta">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças, bibliotecas, entre outros).</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="espacos_lazer" rows="5" name="espacos_lazer"
                     ngModel required #espacos_lazer="ngModel" [(ngModel)]="cadastro_cidade.espacos_lazer"></textarea>
                   <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
@@ -232,7 +230,7 @@
                     <label for="rota" class="pergunta">A cidade faz parte de alguma rota turística ?</label>
                     <div class="form-check">
                       <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota"
-                        id="rota_sim" value="sim" name="rota" ngModel #rota="ngModel"
+                        id="rota_sim" value="sim" name="rota" required ngModel #rota="ngModel"
                         [(ngModel)]="cadastro_cidade.rota">
                       <label class="form-check-label" for="rota_sim">
                         Sim
@@ -240,7 +238,7 @@
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" [(ngModel)]="rota_turistica" type="radio" name="rota"
-                        id="rota_nao" value="nao" name="rota" ngModel #rota="ngModel"
+                        id="rota_nao" value="nao" name="rota" required ngModel #rota="ngModel"
                         [(ngModel)]="cadastro_cidade.rota">
                       <label class="form-check-label" for="rota_nao">
                         Não
@@ -343,95 +341,131 @@
           </div>
         </div>
       </div>
-      <div class="card card_form mb-5">
         <div class="col-12" *ngIf="submitted">
-          <h3 class="text-center">O Munícipio foi cadastrado com sucesso!</h3>
-          <h4 class="text-center mt-2 mb-3">Dados cadastrados</h4>
+          <div class="card card_form mb-5">
+          <h3 class="pb-3 pt-3 bg-primary text-center text-white">O Munícipio foi cadastrado com sucesso!</h3>
           <div class="container">
             <!--<div class="row">
               <div class="col-6 col-sm-4 mb-3">ID: </div>
               <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.id }}</div>
             </div>-->
-            <div class="row">
-              <div class="col-6 col-sm-4 mb-3">Nome da Cidade: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.cidade }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Região de Planejamento: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.regiao }}</div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-sm-4 mb-3">Email de Contato: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.email_prefeitura }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Telefone de Contato: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.contato_prefeitura }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Site da prefeitura: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.link_prefeitura }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Histórico da Cidade: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.historia_cidade }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-            </div>
-            <div *ngIf="cadastro_cidade.wifi_service !==''" class="row">
-              <div class="col-6 col-sm-4 mb-3">Possui Wifi em pontos públicos? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_service }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div *ngIf="cadastro_cidade.wifi_cidade !==''" class="col-6 col-sm-4 mb-3">Quais locais? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.wifi_cidade }}</div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-sm-4 mb-3">Quais são os serviços ofertados para turistas e/ou estrangeiros? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_estrangeiro }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Se houver serviços, onde são ofertados (endereços)? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_cidade }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Quais são os serviços oferecidos para empresários? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_empresario }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Quais são as medidas de segurança pública do município? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.service_seguranca }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-sm-4 mb-3">Principais pontos turísticos da cidade: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.pontos_turisticos }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <!--<div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Espaços culturais:</div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_culturais }}</div>-->
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Espaços de Lazer: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.espacos_lazer }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-sm-4 mb-3">Tipo de turismo predominante: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.tipo_turismo }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div class="col-6 col-sm-4 mb-3">Faz parte de alguma rota turística? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.rota }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-              <div *ngIf="cadastro_cidade.qual_rota !==''" class="col-6 col-sm-4 mb-3">Qual rota? </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.qual_rota }}</div>
-              <!-- Force next columns to break to new line at md breakpoint and up -->
-              <div class="w-100 d-none d-md-block"></div>
-            </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="table-primary" colspan="2">Dados Cadastrados</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td class="table-primary" colspan="2">Um email de confimação foi enviado!</td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <!--
+                  <tr class="table-info">
+                  <td>Id:</td>
+                  <td>{{ cadastro_cidade.id }}</td>
+                </tr>
+                -->
+                <tr class="table-info">
+                  <td>Cidade</td>
+                  <td>{{ cadastro_cidade.cidade }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Região de Planejamento</td>
+                  <td>{{ cadastro_cidade.regiao }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Email de contato</td>
+                  <td>{{ cadastro_cidade.email_prefeitura }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Telefone de Contato</td>
+                  <td>{{ cadastro_cidade.contato_prefeitura }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Site da prefeitura</td>
+                  <td>{{ cadastro_cidade.link_prefeitura }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Histórico da cidade</td>
+                  <td>{{ cadastro_cidade.historia_cidade }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Possui Wifi em pontos públicos?</td>
+                  <td>{{ cadastro_cidade.wifi_service }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.wifi_cidade !==''" class="table-light">
+                  <td>Quais locais?</td>
+                  <td>{{ cadastro_cidade.wifi_cidade }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Quais são os serviços ofertados para turistas e/ou estrangeiros?</td>
+                  <td>{{ cadastro_cidade.service_estrangeiro }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.service_cidade !==''" class="table-light">
+                  <td>Se houver serviços, onde são ofertados (endereços)?</td>
+                  <td>{{ cadastro_cidade.service_cidade }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Quais são os serviços oferecidos para empresários?</td>
+                  <td>{{ cadastro_cidade.service_empresario }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Quais são as medidas de segurança pública do município?</td>
+                  <td>{{ cadastro_cidade.service_seguranca }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Principais pontos turísticos da cidade</td>
+                  <td>{{ cadastro_cidade.pontos_turisticos }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.espacos_culturais !==''" class="table-light">
+                  <td>Espaços culturais</td>
+                  <td>{{ cadastro_cidade.espacos_culturais }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Espaços de Lazer</td>
+                  <td>{{ cadastro_cidade.espacos_lazer }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Tipo de turismo predominante</td>
+                  <td>{{ cadastro_cidade.tipo_turismo }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.tourism_ecologico !==''" class="table-info">
+                  <td>Turismo ecologico</td>
+                  <td>{{ cadastro_cidade.tourism_ecologico }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.tourism_praiano !==''" class="table-light">
+                  <td>Turismo praiano</td>
+                  <td>{{ cadastro_cidade.tourism_praiano }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.tourism_radical !==''" class="table-info">
+                  <td>Turismo radical</td>
+                  <td>{{ cadastro_cidade.tourism_radical }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.tourism_religioso !==''" class="table-light">
+                  <td>Turismo religioso</td>
+                  <td>{{ cadastro_cidade.tourism_religioso }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.tourism_serrano !==''" class="table-info">
+                  <td>Turismo serrano</td>
+                  <td>{{ cadastro_cidade.tourism_serrano }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.tourism_sertanejo !==''" class="table-light">
+                  <td>Turismo sertanejo</td>
+                  <td>{{ cadastro_cidade.tourism_sertanejo }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.rota !==''" class="table-info">
+                  <td>Faz parte de alguma rota turística?</td>
+                  <td>{{ cadastro_cidade.rota }}</td>
+                </tr>
+                <tr *ngIf="cadastro_cidade.qual_rota !==''" class="table-light">
+                  <td>Qual rota</td>
+                  <td>{{ cadastro_cidade.qual_rota }}</td>
+                </tr>
+              </tbody>
+            </table>
+
             <fieldset>
               <legend>Anexos</legend>
               <div class="row">
