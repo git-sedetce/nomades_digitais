@@ -124,7 +124,7 @@
                 </div>
                 <div *ngIf="service_wifi == 'sim'" class="form-group mb-3">
                   <label for="wifi_cidade" class="pergunta">Quais locais? (nomes de praças, bairros, etc).</label>
-                  <textarea [maxlength]="maxChars" class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade"
+                  <textarea [maxlength]="qtdeChars" class="form-control" id="wifi_cidade" rows="3" name="wifi_cidade"
                     ngModel required #wifi_cidade="ngModel" [(ngModel)]="cadastro_cidade.wifi_cidade"></textarea>
                   <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
                       cadastro_cidade.wifi_cidade.length }} / {{ qtdeChars }}</strong></div>

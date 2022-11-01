@@ -75,6 +75,8 @@ class CadastroMunicipioController {
       }
 
       static async anexosMunicipioParceiro(req, res) {
+        //var email_grupo = "admdigitalnomads@sedet.ce.gov.br"
+        var name_arquivo =[]
         const file = req.files
         const { id } = req.params;      
         //console.log(file)        
@@ -83,6 +85,7 @@ class CadastroMunicipioController {
             const caminho = file[img].path;
             const nome_arquivo = file[img].filename;
             const type = file[img].mimetype; 
+            name_arquivo.push(nome_arquivo)
             //console.log(file[img].originalname)         
               const anexarMunicipio = await database.anexo_municipio.create({
                 mimetype: type,
@@ -90,8 +93,10 @@ class CadastroMunicipioController {
                 path: caminho,
                 municipio_id: id
               });    
+              
              //console.log(res.status(200).json(anexarMunicipio));
             }
+            //console.log('name_arquivo', name_arquivo)
             return res.status(200).json({message: 'Anexo enviado com Sucesso!'})
         }else{
           return res.status(500).json(error.message);
