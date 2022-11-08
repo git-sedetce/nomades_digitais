@@ -107,6 +107,19 @@ export class CadastroParceiroComponent implements OnInit {
 
     //fim do metodo cep
 
+    //consulta cnpj
+
+    buscarCNPJ(cnpj:any){
+      this.service.pegar_cnpj(cnpj)
+      .subscribe(pj => {
+        if(pj.cnpj === cnpj){
+          console.log('criar uma página de dialogo bloqueando o cadastro.')
+        }
+      })
+    }
+
+    //salvar parceiro
+
     savePartner(): void {
       this.empresa.essential_service = this._serviceList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
       this.empresa.trabalho_reunioes = this._meetList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()

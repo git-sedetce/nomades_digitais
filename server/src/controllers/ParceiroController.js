@@ -10,6 +10,7 @@ class ParceiroController {
       return res.status(500).json(error.message);
     }
   }
+
   static async parceiroById(req, res) {
     const { id } = req.params;
     try {
@@ -21,6 +22,19 @@ class ParceiroController {
       return res.status(500).json(error.message);
     }
   }
+
+  static async parceiroByCnpj(req, res) {
+    const { cnpj } = req.body;
+    try {
+      const parceiro_cnpj = await database.cadastra_parceiros.findOne({
+        where: { cnpj: cnpj },
+      });
+      return res.status(200).json(parceiro_cnpj);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async cadastraParceiro(req, res) {    
     var email_grupo = "admdigitalnomads@sedet.ce.gov.br"
     const novoParceiro = req.body;

@@ -20,6 +20,11 @@ export class ServiceService {
     return this.http.post(environment.url + 'parceiro', data)
   }
 
+  pegar_cnpj(cnpj: any): Observable<any> {
+    console.log('cnpj', environment.url + cnpj)
+    return this.http.post(environment.url + 'buscarcnpj', cnpj)
+  }
+
   anexar_arquivo(file: File): Observable<any> {
     console.log('anexar_arquivo', environment.url + file)
     return this.http.post(environment.url + 'parceiro', file)
