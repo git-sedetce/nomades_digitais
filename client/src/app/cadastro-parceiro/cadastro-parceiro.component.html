@@ -600,8 +600,9 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="formFile" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
-                  <input #logoInput class="form-control" type="file" id="formFile">
+                  <label for="formFileMultiple" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
+                  <input #logoInput class="form-control" type="file" id="formFileMultiple" multiple
+                  (change)="selectMultipleFiles($event)">
                   <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_logo"
                     (click)="logoUpload()">upLoad</button>
                   <div *ngIf="habilita_anexo_logo == true" class="alert alert-success" role="alert">

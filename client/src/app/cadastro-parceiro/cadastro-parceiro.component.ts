@@ -22,6 +22,7 @@ export class CadastroParceiroComponent implements OnInit {
   resposta_anexo: any;
   habilita_anexo!: boolean;
   alvara_anexo: any;
+  multipleFiles = [];
   habilita_anexo_alvara!: boolean;
   logo_anexo: any;
   habilita_anexo_logo!: boolean;
@@ -269,6 +270,32 @@ export class CadastroParceiroComponent implements OnInit {
       })
     }
 
+    selectMultipleFiles(event: any) {
+      if (event.target.files.length > 0) {
+        this.multipleFiles = event.target.files;
+      }
+    }
+
+    logoUpload(){
+      const files = new FormData()
+      const user_id = this.empresa.id
+
+      for(let file of this.multipleFiles){
+        files.append('files', file)
+      }
+      this.http.post(environment.url + 'anexo_logo' + '/'+ user_id , files).subscribe((response: any) => {
+        console.log(response)
+        this.logo_anexo = response;
+
+        if(response=='Logo enviado com Sucesso!'){
+          this.habilita_anexo_logo = false
+        }else{
+          this.habilita_anexo_logo = true
+        }
+      })
+
+    }
+/*
     logoUpload(){
       const imageLogo = this.logoInput.nativeElement.files[0]
       const logo = new FormData()
@@ -288,7 +315,7 @@ export class CadastroParceiroComponent implements OnInit {
           this.habilita_anexo_logo = true
         }
       })
-    }
+    }*/
 
 }
 class typeService {
