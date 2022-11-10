@@ -143,7 +143,7 @@
                     <label for="internet_service" class="pergunta">O acesso a internet é liberado aos clientes?</label>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="internet_service" id="internet_sim" value="sim"
-                        ngModel #internet_service="ngModel" [(ngModel)]="have_internet"
+                        ngModel required #internet_service="ngModel" [(ngModel)]="have_internet"
                         [(ngModel)]="empresa.internet_service">
                       <label class="form-check-label" for="internet_sim">
                         Sim
@@ -151,7 +151,7 @@
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="internet_service" id="internet_nao" value="nao"
-                        ngModel #internet_service="ngModel" [(ngModel)]="have_internet"
+                        ngModel required #internet_service="ngModel" [(ngModel)]="have_internet"
                         [(ngModel)]="empresa.internet_service">
                       <label class="form-check-label" for="internet_nao">
                         Não
@@ -162,24 +162,22 @@
                     <label for="internet_speed" class="pergunta">Qual a velocidade da internet do estabelecimento, em
                       Mbps?</label>
                     <div class="form-check">
-                      <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed"
-                        id="low_30mbps" value="abaixo_30" name="internet_speed" ngModel #internet_speed="ngModel"
-                        [(ngModel)]="empresa.internet_speed">
+                      <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" required
+                        id="low_30mbps" value="abaixo_30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
                       <label class="form-check-label" for="low_30mbps">
                         Abaixo de 30 Mbps
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed"
+                      <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" required
                         id="30mbps" value="30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
                       <label class="form-check-label" for="30mbps">
                         30 Mbps
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed"
-                        id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel"
-                        [(ngModel)]="empresa.internet_speed">
+                      <input class="form-check-input" [(ngModel)]="speed_quality" type="radio" name="internet_speed" required
+                        id="high_30mbps" value="acima_30" ngModel #internet_speed="ngModel" [(ngModel)]="empresa.internet_speed">
                       <label class="form-check-label" for="high_30mbps">
                         Acima de 30 Mbps
                       </label>
@@ -213,7 +211,7 @@
                     <label for="tipo_service" class="text-center pergunta">Enquadra-se em qual tipo de local
                       abaixo?</label><br><br>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service"
+                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" required
                         id="hospedagem" value="hospedagem" ngModel #tipo_service="ngModel"
                         [(ngModel)]="empresa.tipo_service">
                       <label class="form-check-label" for="hospedagem">
@@ -221,7 +219,7 @@
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service"
+                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" required
                         id="alimentacao" value="alimentacao" ngModel #tipo_service="ngModel"
                         [(ngModel)]="empresa.tipo_service">
                       <label class="form-check-label" for="alimentacao">
@@ -229,7 +227,7 @@
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service"
+                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" required
                         id="local_trabalho" value="local_trabalho" ngModel #tipo_service="ngModel"
                         [(ngModel)]="empresa.tipo_service">
                       <label class="form-check-label" for="local_trabalho">
@@ -237,7 +235,7 @@
                       </label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service"
+                      <input class="form-check-input" [(ngModel)]="radio_service" type="radio" name="tipo_service" required
                         id="outro" value="outro" ngModel #tipo_service="ngModel" [(ngModel)]="empresa.tipo_service">
                       <label class="form-check-label" for="outro">
                         Outro
@@ -357,7 +355,7 @@
                       oferecer aos
                       <span>Nômades Digitais</span>?</label>
                     <textarea [maxlength]="maxChars" class="form-control" id="beneficios" rows="3" name="beneficios"
-                      ngModel #beneficios="ngModel" [(ngModel)]="empresa.beneficios"></textarea>
+                      ngModel #beneficios="ngModel" required [(ngModel)]="empresa.beneficios"></textarea>
                     <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
                         empresa.beneficios.length }} / {{ maxChars }}</strong></div>
                   </div>
@@ -380,7 +378,7 @@
                     <label for="tarifa_especial" class="pergunta">Detalhe sua proposta de tarifa para utilização
                       temporária do espaço. Exemplos: preço para aluguel mensal, percentual de desconto, flexibilidade
                       no contrato, etc. </label>
-                    <textarea [maxlength]="maxChars" class="form-control" id="tarifa_especial" rows="3"
+                    <textarea [maxlength]="maxChars" required class="form-control" id="tarifa_especial" rows="3"
                       name="tarifa_especial" ngModel #tarifa_especial="ngModel"
                       [(ngModel)]="empresa.tarifa_especial"></textarea>
                     <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
@@ -396,7 +394,7 @@
                     sem deixar de falar sobre os serviços prestados que são um diferencial para nômades
                     digitais!</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="espacos_culturais" rows="3"
-                    name="espacos_culturais" ngModel #espacos_culturais="ngModel"
+                    name="espacos_culturais" required ngModel #espacos_culturais="ngModel"
                     [(ngModel)]="empresa.espacos_culturais"></textarea>
                   <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
                       empresa.espacos_culturais.length }} / {{ maxChars }}</strong></div>
@@ -440,7 +438,6 @@
                 </div>
               </div>-->
               </fieldset>
-
               <button type="submit" class="btn btn-info mb-3" [disabled]="!parceiro.valid"
                 (click)="savePartner()">Cadastrar Parceiro</button>
             </form>
