@@ -14,6 +14,7 @@ export class CadastroParceiroComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   @ViewChild('alvaraInput') alvaraInput!: ElementRef;
   @ViewChild('logoInput') logoInput!: ElementRef;
+  @ViewChild('imgsInput') imgsInput!: ElementRef;
 
   radio_service: any;
   speed_quality: any;
@@ -26,6 +27,7 @@ export class CadastroParceiroComponent implements OnInit {
   habilita_anexo_alvara!: boolean;
   logo_anexo: any;
   habilita_anexo_logo!: boolean;
+  habilita_anexo_imgs!: boolean;
 
   empresa = {
     id: '',
@@ -270,27 +272,50 @@ export class CadastroParceiroComponent implements OnInit {
       })
     }
 
+    logoUpload(){
+      const imageLogo = this.logoInput.nativeElement.files[0]
+      const logo = new FormData()
+      const user_id = this.empresa.id
+      logo.append('file', imageLogo)
+      logo.append("id", user_id);
+      console.log('formData', logo)
+      //console.log('id', user_id)
+
+      this.http.post(environment.url + 'anexo_logo' + '/'+ user_id , logo).subscribe((response: any) => {
+        console.log(response)
+        this.alvara_anexo = response;
+
+        if(response=='Logo anexado com Sucesso!'){
+          this.habilita_anexo_alvara = false
+        }else{
+          this.habilita_anexo_alvara = true
+        }
+      })
+    }
+
+
+
     selectMultipleFiles(event: any) {
       if (event.target.files.length > 0) {
         this.multipleFiles = event.target.files;
       }
     }
 
-    logoUpload(){
+    imgsUpload(){
       const files = new FormData()
       const user_id = this.empresa.id
 
       for(let file of this.multipleFiles){
         files.append('files', file)
       }
-      this.http.post(environment.url + 'anexo_logo' + '/'+ user_id , files).subscribe((response: any) => {
+      this.http.post(environment.url + 'anexo_imgs' + '/'+ user_id , files).subscribe((response: any) => {
         console.log(response)
         this.logo_anexo = response;
 
-        if(response=='Logo enviado com Sucesso!'){
-          this.habilita_anexo_logo = false
+        if(response=='Imagens enviadas com Sucesso!'){
+          this.habilita_anexo_imgs = false
         }else{
-          this.habilita_anexo_logo = true
+          this.habilita_anexo_imgs = true
         }
       })
 

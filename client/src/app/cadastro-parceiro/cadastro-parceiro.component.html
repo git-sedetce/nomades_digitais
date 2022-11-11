@@ -576,6 +576,7 @@
             </table>
             <legend class="text-center">Anexos</legend>
             <div class="row">
+
               <div class="col-sm-6 col-12 mb-3">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione o comprovante de velocidade de internet (contrato
@@ -585,6 +586,16 @@
                     (click)="onFileUpload()">upLoad</button>
                   <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
                     Comprovante anexado com sucesso!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Adicione a logomarca do seu estabelecimento.</label>
+                  <input #logoInput class="form-control" type="file" id="formFile">
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_logo"
+                    (click)="logoUpload()">upLoad</button>
+                  <div *ngIf="habilita_anexo_logo == true" class="alert alert-success" role="alert">
+                    Logomarca enviado com Sucesso!
                   </div>
                 </div>
               </div>
@@ -600,13 +611,13 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="formFileMultiple" class="form-label">Adicione fotos e a logomarca do seu estabelecimento.</label>
-                  <input #logoInput class="form-control" type="file" id="formFileMultiple" multiple
+                  <label for="formFileMultiple" class="form-label">Adicione fotos de seu estabelecimento.</label>
+                  <input #imgsInput class="form-control" type="file" id="formFileMultiple" multiple
                   (change)="selectMultipleFiles($event)">
-                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_logo"
-                    (click)="logoUpload()">upLoad</button>
-                  <div *ngIf="habilita_anexo_logo == true" class="alert alert-success" role="alert">
-                    Logo enviado com Sucesso!
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_imgs"
+                    (click)="imgsUpload()">upLoad</button>
+                  <div *ngIf="habilita_anexo_imgs == true" class="alert alert-success" role="alert">
+                    Imagens encadas com Sucesso!
                   </div>
                 </div>
               </div>

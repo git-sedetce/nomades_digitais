@@ -154,8 +154,36 @@ class ParceiroController {
     //res.send("Arquivo recebido!")
   }
 
-
   static async logoParceiro(req, res) {
+    const file = req.file;
+    const { id } = req.params;
+    const caminho = file.path;
+    const nome_arquivo = file.filename;
+    const type = file.mimetype;    
+    console.log(file);
+    console.log(id);
+    try {
+      /*if (file) {
+        res.json(file);
+      } else {
+        throw new Error("File upload unseccessful");
+      }*/
+      const anexarParceiro = await database.anexos.create({
+        mimetype: type,
+        filename: nome_arquivo,
+        path: caminho,
+        user_id: id
+      });
+      return res.status(200).json({message: 'Logo anexado com Sucesso!'});
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+
+    //res.send("Arquivo recebido!")
+  }
+
+
+  static async imgsParceiro(req, res) {
     var name_arquivo =[]
         const file = req.files
         const { id } = req.params;      
@@ -177,7 +205,7 @@ class ParceiroController {
              //console.log(res.status(200).json(anexarParceiro));
             }
             //console.log('name_arquivo', name_arquivo)
-            return res.status(200).json({message: 'Anexo enviado com Sucesso!'})
+            return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
         }else{
           return res.status(500).json(error.message);
         }
