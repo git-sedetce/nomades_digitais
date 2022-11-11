@@ -1,3 +1,4 @@
+import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
 import { ManualComponent } from './manual/manual.component';
 import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
 import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
@@ -19,6 +20,7 @@ const APP_ROUTES: Routes = [
   { path: 'cadastro_municipio', component: CadastroMunicipioComponent },
   { path: 'cadastro_parceiro', component: CadastroParceiroComponent },
   { path: 'cadastro_nomad', component: CadastroNomadComponent },
+  { path: 'proxima_parada', component: ProximaParadaComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 

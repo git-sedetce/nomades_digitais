@@ -15,7 +15,8 @@ import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.componen
 import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { ManualComponent } from './manual/manual.component';
 import { SeloComponent } from './selo/selo.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component'
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
       CadastroNomadComponent,
       O_que_eComponent,
       ManualComponent,
-      SeloComponent
+      SeloComponent,
+      ProximaParadaComponent
    ],
   imports: [
     BrowserModule,
