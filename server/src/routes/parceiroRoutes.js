@@ -13,19 +13,7 @@ const storage = multer.diskStorage({
     }
 })
 
-const storageLogo = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, 'uploads/parceiros/logo')
-    },
-    filename: function(req, file, cb){
-          cb(null,  Date.now() + '_digital_nomads_' + 'logo_' + 'parceiros_' + file.originalname)
-        //cb(null, file.originalname + Date.now() + '.' + file.mimetype.split('/')[1])
-        //cb(null, file.originalname + Date.now() + path.extname(file.originalname))
-    }
-})
-
 const upload = multer({ storage })
-const uploadLogo = multer({ storageLogo })
 
 const router = Router()
 router.get('/parceiro', ParceiroController.pegarParceiro)
@@ -34,8 +22,8 @@ router.post('/buscarcnpj', ParceiroController.parceiroByCnpj)
 router.post('/parceiro', ParceiroController.cadastraParceiro)
 router.post('/anexo/:id', upload.single('file'), ParceiroController.anexoParceiro)
 router.post('/anexo_alvara/:id', upload.single('file'), ParceiroController.alvaraParceiro)
+//router.post('/anexo_logo/:id', uploadLogo.single('file'), ParceiroController.logoParceiro)
 router.post('/anexo_imgs/:id', upload.array('files'), ParceiroController.imgsParceiro)
-router.post('/anexo_logo/:id', uploadLogo.array('file'), ParceiroController.logoParceiro)
 router.post('/anexos', upload.array('files'), ParceiroController.anexosParceiro)
 
 

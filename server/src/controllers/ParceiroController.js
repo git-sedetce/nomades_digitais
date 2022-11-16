@@ -154,6 +154,7 @@ class ParceiroController {
     //res.send("Arquivo recebido!")
   }
 
+
   static async logoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
@@ -174,14 +175,13 @@ class ParceiroController {
         path: caminho,
         user_id: id
       });
-      return res.status(200).json({message: 'Logo anexado com Sucesso!'});
+      return res.status(200).json({message: 'Logo enviado com Sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
     }
 
     //res.send("Arquivo recebido!")
   }
-
 
   static async imgsParceiro(req, res) {
     var name_arquivo =[]
@@ -211,8 +211,7 @@ class ParceiroController {
         }
 
     //res.send("Arquivo recebido!")
-  }
-  
+  }  
 
   static async anexosParceiro(req, res) {
     const file = req.files
