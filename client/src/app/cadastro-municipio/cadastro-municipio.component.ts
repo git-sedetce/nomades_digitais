@@ -118,7 +118,7 @@ export class CadastroMunicipioComponent implements OnInit {
       this.service.cadastrar_municipio(data)
       .subscribe({
           next: (res: any) => {
-            console.log(res);
+            //console.log(res);
             this.cadastro_cidade.id = res.id
             this.submitted = true;
           },
@@ -143,6 +143,10 @@ export class CadastroMunicipioComponent implements OnInit {
         }, (erro: any) => console.log(erro)
         );
       }
+
+      novoCadastro(){
+        window.location.reload();
+      }/*
 
     novoCadastro(): void {
       this.submitted = false;
@@ -174,7 +178,7 @@ export class CadastroMunicipioComponent implements OnInit {
         rota: '',
         qual_rota: '',
       };
-    }
+    }*/
 
     _tourismList!: typeTourism[];
 
@@ -219,7 +223,7 @@ export class CadastroMunicipioComponent implements OnInit {
       console.log('id', this.cadastro_cidade.id)*/
 
       this.http.post(environment.url + 'anexosMunicipio' + '/'+ user_id, files).subscribe((response: any) => {
-        console.log(response)
+        //console.log(response)
         this.resposta_anexo = response;
 
         if(response=='Anexo enviado com Sucesso!'){

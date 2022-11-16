@@ -171,6 +171,10 @@ export class CadastroParceiroComponent implements OnInit {
       })
     }
 
+    novoCadastroParceiro(){
+      window.location.reload();
+    }
+/*
     novoCadastroParceiro(): void {
       this.submitted = false;
       this.getService();
@@ -207,7 +211,7 @@ export class CadastroParceiroComponent implements OnInit {
         idioma: '',
         qual_idioma: '',
       }
-    }
+    }*/
 
     //anexar arquivos
     onFileUpload(){
@@ -220,7 +224,7 @@ export class CadastroParceiroComponent implements OnInit {
       //console.log('id', user_id)
 
       this.http.post(environment.url + 'anexo' + '/'+ user_id, file).subscribe((response: any) => {
-        console.log(response)
+        //console.log(response)
         this.resposta_anexo = response;
 
         if(response=='Comprovante anexado com sucesso!'){
@@ -241,7 +245,7 @@ export class CadastroParceiroComponent implements OnInit {
       //console.log('id', user_id)
 
       this.http.post(environment.url + 'anexo_alvara' + '/'+ user_id , alvara).subscribe((response: any) => {
-        console.log(response)
+        //console.log(response)
         this.alvara_anexo = response;
 
         if(response=='Alvará anexado com Sucesso!'){
@@ -262,7 +266,7 @@ export class CadastroParceiroComponent implements OnInit {
       //console.log('id', user_id)
 
       this.http.post(environment.url + 'anexo_logo' + '/'+ user_id , logo).subscribe((response: any) => {
-        console.log(response)
+        //console.log(response)
         this.logo_anexo = response;
 
         if(response=='Logo enviado com Sucesso!'){
@@ -287,7 +291,7 @@ export class CadastroParceiroComponent implements OnInit {
         files.append('files', file)
       }
       this.http.post(environment.url + 'anexo_imgs' + '/'+ user_id , files).subscribe((response: any) => {
-        console.log(response)
+        //console.log(response)
         this.logo_anexo = response;
 
         if(response=='Imagens enviadas com Sucesso!'){
