@@ -4,8 +4,8 @@
       <div class="col-12">
         <div class="card card_manual mb-5 mt-5 manual">
           <div class="card-body">
-            <p class="mb-3 mt-3 text-center">Trabalhe remotamente do Ceará e aproveite para conhecer as belezas que este Estado tem à oferecer.</p>
-            <h5 class="mb-3 mt-3 text-center">Venha fazer parte dessa comunidade você também!!</h5>
+            <p class="mb-3 mt-3 text-center">Trabalhe remotamente do Ceará e aproveite para conhecer as belezas que este Estado tem à oferecer.<br>Work remotely from Ceará and take the opportunity to discover the beauties that this state has to offer.</p>
+            <h5 class="mb-3 mt-3 text-center">Venha fazer parte dessa comunidade você também!!<br>Come be part of this community you too!!</h5>
           </div>
         </div>
         <div class="card card_form mb-5">
@@ -37,14 +37,14 @@
                     <label for="nomad_email" class="form-label pergunta">Email</label>
                     <input type="email" class="form-control" id="nomad_email" name="nomad_email" aria-describedby="nomad_email"
                       placeholder="Insira um email válido! / Please enter a valid email!" required #nomad_email="ngModel" [(ngModel)]="nomad.nomad_email">
-                    <div id="emailHelp" class="form-text">Não compartilhe email com terceiros. / Do not share email with third
-                      parties.</div>
+                    <div id="emailHelp" class="form-text alert alert-warning">Não compartilhe email com terceiros.<br> <strong>Do not share email with third parties.</strong></div>
                       <div *ngIf="!nomad_email.valid && nomad_email.touched" class="alert alert-danger"
                       role="alert">Email inválido</div>
                   </div>
                   <div class="col-sm-6 col-12 mb-3">
                     <label for="contato_nomad" class="form-label pergunta">Telefone / Phone Number</label>
-                    <input type="text" class="form-control" id="contato_nomad" name="contato_nomad" placeholder=" +XX (XX) x xxxx xxxx" required #contato_nomad="ngModel" [(ngModel)]="nomad.contato_nomad" mask="+00 (00) 0 0000-0000||+00 (00) 0000-0000">
+                    <input type="text" class="form-control" id="contato_nomad" name="contato_nomad" placeholder="Insira o número do telefone. / Enter the phone number." required #contato_nomad="ngModel" [(ngModel)]="nomad.contato_nomad">
+                    <div id="emailHelp" class="form-text alert alert-warning">Insira o código do país, da região e o número do telefone.<br> <strong>Enter the country code, region code and phone number.</strong></div>
                     <div *ngIf="!contato_nomad.valid && contato_nomad.touched" class="alert alert-danger" role="alert">
                       Informe o número do telefone</div>
                   </div>
