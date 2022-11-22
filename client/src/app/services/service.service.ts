@@ -11,13 +11,18 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 
   cadastrar_municipio(data: any): Observable<any> {
-    console.log('cadastrar_municipio', environment.url + data)
+    //console.log('cadastrar_municipio', environment.url + data)
     return this.http.post(environment.url + 'parceiroMunicipio', data)
   }
 
   cadastrar_parceiro(data: any): Observable<any> {
-    console.log('cadastrar_parceiro', environment.url + data)
+    //console.log('cadastrar_parceiro', environment.url + data)
     return this.http.post(environment.url + 'parceiro', data)
+  }
+
+  cadastrar_nomad(data: any): Observable<any> {
+    //console.log('cadastrar_parceiro', environment.url + data)
+    return this.http.post(environment.url + 'nomad', data)
   }
 
   pegar_cnpj(cnpj: any): Observable<any> {
@@ -26,7 +31,7 @@ export class ServiceService {
   }
 
   anexar_arquivo(file: File): Observable<any> {
-    console.log('anexar_arquivo', environment.url + file)
+    //console.log('anexar_arquivo', environment.url + file)
     return this.http.post(environment.url + 'parceiro', file)
   }
 }

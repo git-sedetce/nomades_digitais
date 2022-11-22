@@ -1,117 +1,194 @@
 <section id="forms">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-12">
-        <p class="mb-3 mt-3">
-          Trabalhe remotamente do Ceará e aproveite para conhecer as belezas que este Estado tem à oferecer.
-        </p>
-        <h5 class="mb-3 mt-3 tex-center">Venha fazer parte dessa comunidade você também!</h5>
-        <!--<a href="#" target="_blank">Inscreva-se</a><br>-->
-        <figure class="figure">
-          <img src="../../assets/imgs/extras/turistas.png" class="figure-img img-fluid rounded" alt="...">
-          <figcaption class="figure-caption text-end">Ceará e suas regiões</figcaption>
-        </figure>
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual">
+          <div class="card-body">
+            <p class="mb-3 mt-3 text-center">Trabalhe remotamente do Ceará e aproveite para conhecer as belezas que este Estado tem à oferecer.</p>
+            <h5 class="mb-3 mt-3 text-center">Venha fazer parte dessa comunidade você também!!</h5>
+          </div>
+        </div>
+        <div class="card card_form mb-5">
+          <div *ngIf="!submitted">
+            <div class="bg-primary">
+              <h3 class="pb-3 pt-3 text-center text-white">Cadastro dos Nômades Digitais no Ceará / Register of Digital Nomads in Ceará</h3>
+            </div>
+            <form class="cadastro_nomads" #nomads="ngForm" (ngSubmit)="submitNomads(nomads)">
+              <fieldset>
+                <legend>
+                  Dados pessoais / Personal Data
+                </legend>
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="name" class="form-label pergunta">Nome / Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome / Type your name" required #name="ngModel" [(ngModel)]="nomad.name">
+                    <div *ngIf="!name.valid && name.touched" class="alert alert-danger" role="alert">
+                      Informe o primeiro nome</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="lastName" class="form-label pergunta">Sobrenome / Last name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Digite seu Sobrenome / Type your Last name" required #lastName="ngModel" [(ngModel)]="nomad.lastName">
+                    <div *ngIf="!lastName.valid && lastName.touched" class="alert alert-danger" role="alert">
+                      Informe o Sobrenome</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="nomad_email" class="form-label pergunta">Email</label>
+                    <input type="email" class="form-control" id="nomad_email" name="nomad_email" aria-describedby="nomad_email"
+                      placeholder="Insira um email válido! / Please enter a valid email!" required #nomad_email="ngModel" [(ngModel)]="nomad.nomad_email">
+                    <div id="emailHelp" class="form-text">Não compartilhe email com terceiros. / Do not share email with third
+                      parties.</div>
+                      <div *ngIf="!nomad_email.valid && nomad_email.touched" class="alert alert-danger"
+                      role="alert">Email inválido</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="contato_nomad" class="form-label pergunta">Telefone / Phone Number</label>
+                    <input type="text" class="form-control" id="contato_nomad" name="contato_nomad" placeholder=" +XX (XX) x xxxx xxxx" required #contato_nomad="ngModel" [(ngModel)]="nomad.contato_nomad" mask="+00 (00) 0 0000-0000||+00 (00) 0000-0000">
+                    <div *ngIf="!contato_nomad.valid && contato_nomad.touched" class="alert alert-danger" role="alert">
+                      Informe o número do telefone</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="cidade" class="form-label pergunta">Cidade / City</label>
+                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite sua cidade / Type your city" required #cidade="ngModel" [(ngModel)]="nomad.cidade">
+                    <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">
+                      Informe a cidade de origem</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="regiao" class="form-label pergunta">Região ou Estado / State or Region</label>
+                    <input type="text" class="form-control" id="regiao" name="regiao" placeholder="Digite seu Estado / Type your State or Region" required #regiao="ngModel" [(ngModel)]="nomad.regiao">
+                    <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">
+                      Informe a regiao de origem / Type your State or Region</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="country" class="form-label pergunta">País / Country</label>
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Digite seu País / Type your Country" required #country="ngModel" [(ngModel)]="nomad.country">
+                    <div *ngIf="!country.valid && country.touched" class="alert alert-danger" role="alert">Digite seu País / Type your Country</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="departure_date" class="form-label pergunta">Data de partida / Departure Date</label>
+                    <input type="date" class="form-control" id="departure_date" name="departure_date" placeholder="Data" required #departure_date="ngModel" [(ngModel)]="nomad.departure_date">
+                    <div *ngIf="!departure_date.valid && departure_date.touched" class="alert alert-danger" role="alert">Informe a data de partida / Type your departure date</div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="pergunta" for="shared_info">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos
+                    parceiros do Projeto Digital Nomads Ceará para receber informações sobre o turismo no Estado do Ceará?
+                    Ressaltamos que estes dados podem ser descartados a qualquer momento conforme a solicitação do titular.
+                    // Do you agree to share your information and personal data with partner establishments of the Digital
+                    Nomads Ceará Project to receive information about tourism in the State of Ceará? We emphasize that this
+                    data can be discarded at any time by the request of the holder.</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="shared_info" id="data_sim" value="sim" ngModel required #shared_info="ngModel" [(ngModel)]="nomad.shared_info">
+                    <label class="form-check-label" for="data_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="shared_info" id="data_nao" value="nao" ngModel required #shared_info="ngModel" [(ngModel)]="nomad.shared_info">
+                    <label class="form-check-label" for="data_nao">
+                      Não
+                    </label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="pergunta" for="nomads_news">Deseja receber as novidades do Projeto Digital Nomads Ceará? / Would you like to
+                    receive news about the Digital Nomads Ceará Project?</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nomads_news" id="news_sim" value="sim" ngModel required #nomads_news="ngModel" [(ngModel)]="nomad.nomads_news">
+                    <label class="form-check-label" for="news_sim">
+                      Sim
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="nomads_news" id="news_nao" value="nao" ngModel required #nomads_news="ngModel" [(ngModel)]="nomad.nomads_news">
+                    <label class="form-check-label" for="news_nao">
+                      Não
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="pergunta" for="suggestion">Se tiver alguma sugestão deixe ela aqui para a gente! / If you have any
+                    suggestion, please leave it here.</label>
+                  <textarea [maxLength]="maxChars" data-ls-module="charCounter" maxlength="500" class="form-control" id="suggestion" rows="5" name="suggestion" ngModel #suggestion="ngModel" [(ngModel)]="nomad.suggestion"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                    nomad.suggestion.length }} / {{ maxChars }}</strong></div>
+                </div>
+              </fieldset>
+              <button type="submit" class="btn btn-success mb-3" [disabled]="!nomads.valid" (click)="saveNomad()">Cadastrar Nomad</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-6 col-12">
-        <h3 class="mb-3 mt-3 tex-center">Cadastro dos Nômades Digitais no Ceará / Register of Digital Nomads in Ceará
-        </h3>
-        <form>
-          <fieldset>
-            <legend>
-              Dados pessoais / Personal Data
-            </legend>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="nomad_name" class="form-label">Nome / Name</label>
-                <input type="text" class="form-control" id="nomad_name" placeholder="Digite seu nome / Type your name">
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="nomad_lastName" class="form-label">Sobrenome / Last name</label>
-                <input type="text" class="form-control" id="nomad_lastName"
-                  placeholder="Digite seu Sobrenome / Type your Last name">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="email_nomad" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email_nomad" aria-describedby="emailNomad"
-                  placeholder="Insira um email válido! / Please enter a valid email!">
-                <div id="emailHelp" class="form-text">Não compartilhe email com terceiros. / Do not share email with third
-                  parties.</div>
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="contato_nomad" class="form-label">Telefone / Phone Number</label>
-                <input type="text" class="form-control" id="contato_prefeitura" placeholder="(XX) x xxxx xxxx">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="nomad_city" class="form-label">Cidade / City</label>
-                <input type="text" class="form-control" id="nomad_city" placeholder="Digite sua cidade / Type your city">
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="nomad_state" class="form-label">Região ou Estado / State or Region</label>
-                <input type="text" class="form-control" id="nomad_state"
-                  placeholder="Digite seu Estado / Type your State or Region">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="nomad_country" class="form-label">País / Country</label>
-                <input type="text" class="form-control" id="nomad_country"
-                  placeholder="Digite seu País / Type your Country">
-              </div>
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="nomad_date" class="form-label">Data de partida / Departure Date</label>
-                <input type="date" class="form-control" id="nomad_date"
-                  placeholder="Data">
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="wifi_service">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos
-                parceiros do Projeto Digital Nomads Ceará para receber informações sobre o turismo no Estado do Ceará?
-                Ressaltamos que estes dados podem ser descartados a qualquer momento conforme a solicitação do titular.
-                // Do you agree to share your information and personal data with partner establishments of the Digital
-                Nomads Ceará Project to receive information about tourism in the State of Ceará? We emphasize that this
-                data can be discarded at any time by the request of the holder.</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="data_sim" value="sim">
-                <label class="form-check-label" for="data_sim">
-                  Sim
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="data_nao" value="nao">
-                <label class="form-check-label" for="data_nao">
-                  Não
-                </label>
-              </div>
-            </div>
-            <div class="mb-3">
-              <label for="wifi_service">Deseja receber as novidades do Projeto Digital Nomads Ceará? / Would you like to
-                receive news about the Digital Nomads Ceará Project?</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="news_sim" value="sim">
-                <label class="form-check-label" for="news_sim">
-                  Sim
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="news_nao" value="nao">
-                <label class="form-check-label" for="news_nao">
-                  Não
-                </label>
-              </div>
-            </div>
-            <div class="form-group mb-3">
-              <label for="suggestion">Se tiver alguma sugestão deixe ela aqui para a gente! / If you have any
-                suggestion, please leave it here.</label>
-              <textarea class="form-control" id="suggestion" rows="3"></textarea>
-            </div>
-          </fieldset>
-
-          <button type="submit" class="btn btn-success mb-3">Cadastrar Nomad</button>
-        </form>
+      <div class="col-12" *ngIf="submitted">
+        <div class="card card_form mb-5">
+          <h3 class="pb-3 pt-3 bg-primary text-center text-white">O <strong>Digital Nomad</strong> foi cadastrado com sucesso!</h3>
+          <div class="container">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="table-primary" colspan="2">Dados Cadastrados</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td class="table-primary" colspan="2">Um email de confimação foi enviado!</td>
+                </tr>
+              </tfoot>
+              <tbody>
+                <tr class="table-info">
+                  <td>Nome</td>
+                  <td>{{ nomad.name }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Sobrenome</td>
+                  <td>{{ nomad.lastName }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Email</td>
+                  <td>{{ nomad.nomad_email }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Telefone de Contato</td>
+                  <td>{{ nomad.contato_nomad }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Cidade</td>
+                  <td>{{ nomad.cidade }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Região</td>
+                  <td>{{ nomad.regiao }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>País</td>
+                  <td>{{ nomad.country }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Data da partida</td>
+                  <td>{{ nomad.departure_date }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Autoriza compartilhar informações?</td>
+                  <td>{{ nomad.shared_info }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Deseja receber notícias?</td>
+                  <td>{{ nomad.nomads_news }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Sugestão</td>
+                  <td>{{ nomad.suggestion }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="submit" class="btn btn-success mb-3" (click)="novoCadastroNomad()">Novo Cadastro</button>
+        </div>
       </div>
     </div>
   </div>

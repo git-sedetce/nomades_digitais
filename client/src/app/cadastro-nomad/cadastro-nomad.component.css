@@ -1,3 +1,47 @@
 #forms {
-  margin-top: 100px;
+  margin-top: 50px;
+}
+.pergunta{
+  font-weight: bold;
+}
+legend{
+  font-weight: bold;
+  text-decoration: underline;
+}
+h3{
+  font-weight: bolder;
+}
+textarea {
+  resize: none;
+}
+.limite_caractere{
+  padding: 0.3rem 0.3rem !important;
+}
+
+section {
+  background: url("../../assets/imgs/LiTORIAL-Fortaleza-2.png") no-repeat fixed center;
+}
+
+.manual p, a{
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.card_manual{
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.card_form{
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cadastro_nomads{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.card {
+  box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
 }
