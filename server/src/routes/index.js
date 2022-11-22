@@ -2,6 +2,7 @@ const bodyParser = require('body-parser')
 
 const municipio = require('./municipioRoutes')
 const parceiro = require('./parceiroRoutes')
+const nomads = require('./nomadsRoutes')
 const parceiroLogo = require('./logoParceiroRoutes')
 const municipioParceiro = require('./cadastroMunicipioRoutes')
 
@@ -10,6 +11,7 @@ module.exports = app => {
           bodyParser.urlencoded({ extended: false }),
           municipio,
           parceiro,
+          nomads,
           parceiroLogo,
           municipioParceiro
           )  

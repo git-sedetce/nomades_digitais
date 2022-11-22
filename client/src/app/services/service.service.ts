@@ -22,7 +22,7 @@ export class ServiceService {
 
   cadastrar_nomad(data: any): Observable<any> {
     //console.log('cadastrar_parceiro', environment.url + data)
-    return this.http.post(environment.url + 'nomad', data)
+    return this.http.post(environment.url + 'nomads', data)
   }
 
   pegar_cnpj(cnpj: any): Observable<any> {
