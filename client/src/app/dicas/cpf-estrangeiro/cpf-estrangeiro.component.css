@@ -1,0 +1,114 @@
+.about{
+  margin-top: 50px;
+  padding: 50px 0;
+  background: url("../../../assets/imgs/about-bg.png") top center no-repeat;
+  position: relative;
+}
+.about h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f394c;
+  margin-bottom: 15px;
+}
+
+.foreigner_cpf {
+  box-sizing: content-box;
+  padding: 40px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.20);
+  position: relative;
+  background: #fff;
+}
+
+.imagem {
+  padding: 0;
+  margin: 50px auto 20px auto;
+  list-style: none;
+  text-align: center;
+  background: #f2f3f3;
+}
+
+.imagem .img-wrap {
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.img-wrap::before {
+  content: "";
+  background: rgba(57, 64, 71, 0.6);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all ease-in-out 0.3s;
+  z-index: 2;
+  opacity: 0;
+}
+
+.img-wrap img {
+  transition: all ease-in-out 0.3s;
+}
+
+.img-wrap .img-info {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  transition: all ease-in-out 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.img-wrap .img-info h4 {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.img-wrap .img-info p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+  font-style: italic;
+}
+
+.img-wrap .img-links {
+  text-align: center;
+  z-index: 4;
+}
+
+.img-wrap .img-links a {
+  color: #fff;
+  margin: 0 5px 0 0;
+  font-size: 28px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.img-wrap .img-links a:hover {
+  color: #6aa3d5;
+}
+
+.img-wrap:hover::before {
+  opacity: 1;
+}
+
+.img-wrap:hover img {
+  transform: scale(1.2);
+}
+
+.img-wrap:hover .img-info {
+  opacity: 1;
+}
+

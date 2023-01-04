@@ -16,7 +16,9 @@ import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { ManualComponent } from './manual/manual.component';
 import { SeloComponent } from './selo/selo.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component'
+import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
+import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
+import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component'
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { ProximaParadaComponent } from './proxima-parada/proxima-parada.componen
       O_que_eComponent,
       ManualComponent,
       SeloComponent,
-      ProximaParadaComponent
+      ProximaParadaComponent,
+      CpfEstrangeiroComponent,
+      VistoNomadeComponent
    ],
   imports: [
     BrowserModule,

@@ -1,3 +1,5 @@
+import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
+import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
 import { ManualComponent } from './manual/manual.component';
 import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
@@ -21,6 +23,8 @@ const APP_ROUTES: Routes = [
   { path: 'cadastro_parceiro', component: CadastroParceiroComponent },
   { path: 'cadastro_nomad', component: CadastroNomadComponent },
   { path: 'proxima_parada', component: ProximaParadaComponent },
+  { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
+  { path: 'visto_nomade', component: VistoNomadeComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
