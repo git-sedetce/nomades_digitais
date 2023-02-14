@@ -1,0 +1,22 @@
+.menu li{
+  font-size: clamp(0.90em, 0.2em + 1vw, 1.25em);
+}
+
+.busca{
+  background: url(../../assets/imgs/icons/lupa_white_20.png) no-repeat center right;
+  padding: 5px;
+  border: none;
+  width: 20px;
+  -webkit-transition: all 0.8s linear;
+  transition: all 0.5s linear;
+}
+.busca:focus{
+  width: 200px;
+  border: solid 1px #ddd;
+  background-color: aliceblue;
+  outline: none;
+
+}
+.busca::placeholder{
+  color: #1f1c1c;
+}
