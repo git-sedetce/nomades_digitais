@@ -15,6 +15,7 @@ import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { SeloComponent } from './selo/selo.component';
 
 const APP_ROUTES: Routes = [
+
   { path: 'ceara_pronto', component: Ceara_prontoComponent },
   { path: 'o_que_e', component: O_que_eComponent },
   { path: 'manual', component: ManualComponent },
