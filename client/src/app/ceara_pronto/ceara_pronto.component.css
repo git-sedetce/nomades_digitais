@@ -1,8 +1,8 @@
 /*css atualizado*/
 .cta {
-  background: linear-gradient(rgba(5, 74, 133, 0.6), rgba(5, 74, 133, 0.7)), url("../../assets/midia/imgs/datacenter.jpg") fixed center center;
+  background: linear-gradient(rgba(5, 74, 133, 0.6), rgba(5, 74, 133, 0.7)), url("../../assets/midia/imgs/datacenter.jpg") fixed bottom center;
   background-size: cover;
-  padding: 150px 0;
+  padding: 180px 0;
 }
 
 .cta h3 {
@@ -79,11 +79,18 @@
 .hub .icon-box .description {
   margin-left: 85px;
   line-height: 24px;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+.img {
+  max-width:700px;
+  max-height:450px;
+  width: auto;
+  height: auto;
 }
 
 /*.hub .video-box {
-  background: url("../../assets/imgs/181017_MUCURIPE-TANCAGEM_DP06726.jpg") center center no-repeat;
+  background: url("../../assets/midia/imgs/Localizacao_estrategica.png") center center no-repeat;
   background-size: cover;
   min-height: 500px;
 }*/
@@ -175,7 +182,6 @@
 
 /*css antigo*/
 .legenda{
-  background-color: #f8f9fac1;
   color:rgb(22, 19, 19);
   font-weight: bold  !important;
   font-size: 1.5rem;
@@ -183,6 +189,7 @@
   padding: 15px 15px;
 }
 span {
+  background-color: #f8f9fac1;
   color: #1400C7;
   font-weight: bolder;
 }
