@@ -237,6 +237,62 @@
   font-size: 26px;
 }
 
+/*Section SmartCity*/
+#smartCity {
+  width: 100%;
+  height: 80vh;
+  background: url("../../assets/midia/imgs/cidade_conectada.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#smartCity:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#smartCity .container {
+  padding-top: 72px;
+}
+
+@media (max-width: 992px) {
+  #smartCity .container {
+    padding-top: 62px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #smartCity {
+    background-attachment: fixed;
+  }
+}
+
+#smartCity h3 {
+  margin: 0;
+  font-size: 35px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#smartCity h4 {
+  color: #eee;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#smartCity h4 span {
+  color: #eee;
+  margin: 10px 0 0 0;
+  font-size: 26px;
+}
+
 /*css antigo*/
 .legenda{
   color:rgb(22, 19, 19);
