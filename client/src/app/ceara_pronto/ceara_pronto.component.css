@@ -96,8 +96,6 @@
   width: 100%;
 }
 
-
-
 .hub .play-btn {
   width: 94px;
   height: 94px;
@@ -183,6 +181,62 @@
   }
 }
 
+/*Section Fiber*/
+#fiber {
+  width: 100%;
+  height: 80vh;
+  background: url("../../assets/midia/imgs/fibra_optica.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+
+#fiber:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#fiber .container {
+  padding-top: 72px;
+}
+
+@media (max-width: 992px) {
+  #fiber .container {
+    padding-top: 62px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #fiber {
+    background-attachment: fixed;
+  }
+}
+
+#fiber h3 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+#fiber h4 {
+  color: #eee;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#fiber h4 span {
+  color: #eee;
+  margin: 10px 0 0 0;
+  font-size: 26px;
+}
+
 /*css antigo*/
 .legenda{
   color:rgb(22, 19, 19);
@@ -191,11 +245,13 @@
   line-height: 30px;
   padding: 15px 15px;
 }
+
 span {
-  background-color: #f8f9fac1;
+  /*background-color: #f8f9fac1;*/
   color: #1400C7;
   font-weight: bolder;
 }
+
 .imagem-carousel {
   object-fit: cover;
   object-position: 0 15%;
