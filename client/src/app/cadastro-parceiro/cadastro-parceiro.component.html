@@ -348,17 +348,16 @@
               <fieldset *ngIf="radio_service == 'outro'">
                 <legend class="text-center">Serviços prestados</legend>
                 <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-5 col-12 mt-3">
                     <label for="ramo" class="pergunta">Qual o ramo de atividade do estabelecimento?</label>
                     <textarea [maxlength]="qtdeChars" class="form-control" id="outro_servico" required rows="3" name="ramo"
                       ngModel #ramo="ngModel" [(ngModel)]="empresa.ramo"></textarea>
                     <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
                         empresa.ramo.length }} / {{ qtdeChars }}</strong></div>
                   </div>
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-7 col-12 mb-3">
                     <label class="mt-3 pergunta" for="beneficios">Quais os beneficios que o estabelecimento tem a
-                      oferecer aos
-                      <span>Nômades Digitais</span>?</label>
+                      oferecer aos <span>Nômades Digitais</span>?</label>
                     <textarea [maxlength]="maxChars" class="form-control" id="beneficios" rows="3" name="beneficios"
                       ngModel #beneficios="ngModel" required [(ngModel)]="empresa.beneficios"></textarea>
                     <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
@@ -391,9 +390,40 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'alimentacao'" class="row">
+                <div class="form-group col-sm-4 col-12 mb-5">
+                  <label for="tipo" class="pergunta mb-2">Tipo de <span *ngIf="radio_service == 'hospedagem'">hospedagem</span><span *ngIf="radio_service == 'local_trabalho'">Local de Trabalho</span><span *ngIf="radio_service == 'alimentacao'">Local de alimentação</span><span *ngIf="radio_service == 'outro'"> estabelecimento</span></label>
+                <select name="tipo" class="form-select" id="tipo" required ngModel [(ngModel)]="tipo_outros" #tipo="ngModel"
+                [(ngModel)]="empresa.tipo">
+                  <option value="" class="text-center">----------------------Selecione----------------------</option>
+                  <option value="albergue"  *ngIf="radio_service == 'hospedagem'">Albergue</option>
+                  <option value="hotel"  *ngIf="radio_service == 'hospedagem'">Hotel</option>
+                  <option value="hostel"  *ngIf="radio_service == 'hospedagem'">Hostel</option>
+                  <option value="Pousada"  *ngIf="radio_service == 'hospedagem'">Pousada</option>
+                  <option value="resort"  *ngIf="radio_service == 'hospedagem'">Resort</option>
+                  <option value="cafeteria"  *ngIf="radio_service == 'alimentacao'">Cafeteria</option>
+                  <option value="churrascaria"  *ngIf="radio_service == 'alimentacao'">Churrascaria</option>
+                  <option value="food_truck"  *ngIf="radio_service == 'alimentacao'">Food Truck</option>
+                  <option value="hamburgueria"  *ngIf="radio_service == 'alimentacao'">Hamburgueria</option>
+                  <option value="lanchonete"  *ngIf="radio_service == 'alimentacao'">Lanchonete</option>
+                  <option value="pub"  *ngIf="radio_service == 'alimentacao'">Pub</option>
+                  <option value="restaurante"  *ngIf="radio_service == 'alimentacao'">Restaurante</option>
+                  <option value="cooworking"  *ngIf="radio_service == 'local_trabalho'">Cooworking</option>
+                  <option value="shoppings"  *ngIf="radio_service == 'local_trabalho'">Shoppings</option>
+                  <option value="livrarias"  *ngIf="radio_service == 'local_trabalho'">Livrarias</option>
+                  <option value="centro_comerciais"  *ngIf="radio_service == 'local_trabalho'">Centro Comerciais</option>
+                  <option value="instituicao_ensino"  *ngIf="radio_service == 'local_trabalho'">Instituição de Ensino</option>
+                  <option value="outros" >Outros</option>
+                </select>
+                </div>
+                <div *ngIf="tipo_outros == 'outros'" class="form-group col-sm-8 col-12 mb-3">
+                  <label for="tipo_outros" class="form-label pergunta">Outros</label>
+                  <input type="text" class="form-control" id="tipo_outros" placeholder="Digite o tipo de estabelecimento" name="tipo_outros"
+                    ngModel required #tipo_outros="ngModel" [(ngModel)]="empresa.tipo_outros">
+                </div>
+              </div>
               <div
-                *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'outro' || radio_service == 'alimentacao'"
-                class="row">
+                *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'outro' || radio_service == 'alimentacao'" class="row">
                 <div class="form-group col-sm-8 col-12 mb-3">
                   <label for="espacos_culturais" class="pergunta">Faça um breve resumo promovendo o seu estabelecimento, sem deixar de falar sobre os serviços prestados que são um diferencial para nômades digitais!</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="espacos_culturais" rows="3"
