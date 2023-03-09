@@ -26,6 +26,7 @@ export class CadastroMunicipioComponent implements OnInit {
     id: '',
     cidade: '',
     regiao: '',
+    cod_ibge: '',
     email_prefeitura: '',
     contato_prefeitura: '',
     link_prefeitura: '',
@@ -92,6 +93,7 @@ export class CadastroMunicipioComponent implements OnInit {
       const data = {
         cidade: this.cadastro_cidade.cidade,
         regiao: this.cadastro_cidade.regiao,
+        cod_ibge: this.cadastro_cidade.cod_ibge,
         email_prefeitura: this.cadastro_cidade.email_prefeitura,
         contato_prefeitura: this.cadastro_cidade.contato_prefeitura,
         link_prefeitura: this.cadastro_cidade.link_prefeitura,
@@ -131,7 +133,11 @@ export class CadastroMunicipioComponent implements OnInit {
     localizaregiao(cidade: any, form: any){
       //console.log('cidade', cidade)
       this.services.pegar_municipio('municipio/', cidade)
-      .subscribe((regiao: any) => this.pegarnomeRegiao(regiao.regiao_id)
+      .subscribe((regiao: any) => {
+        console.log('regiao', regiao)
+        this.cadastro_cidade.cod_ibge = regiao.cod_ibge
+        this.pegarnomeRegiao(regiao.regiao_id)
+      }
       );
       }
 
