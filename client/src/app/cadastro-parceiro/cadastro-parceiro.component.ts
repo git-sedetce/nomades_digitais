@@ -19,7 +19,7 @@ export class CadastroParceiroComponent implements OnInit {
   speed_quality: any;
   have_internet: any;
   have_idioma: any;
-  tipo_outros: any;
+  tipo_estabelecimento_outros: any;
   resposta_anexo: any;
   habilita_anexo!: boolean;
   alvara_anexo: any;
@@ -46,8 +46,8 @@ export class CadastroParceiroComponent implements OnInit {
     midia_social: '',
     instagram_parceiro: '',
     tipo_service: '',
-    tipo: '',
-    tipo_outros:'',
+    tipo_estabelecimento: '',
+    tipo_estabelecimento_outros:'',
     essential_service: '',
     internet_speed: '',
     internet_service: '',
@@ -147,8 +147,8 @@ export class CadastroParceiroComponent implements OnInit {
         midia_social: this.empresa.midia_social,
         instagram_parceiro: this.empresa.instagram_parceiro,
         tipo_service: this.empresa.tipo_service,
-        tipo: this.empresa.tipo,
-        tipo_outros: this.empresa.tipo_outros,
+        tipo_estabelecimento: this.empresa.tipo_estabelecimento,
+        tipo_estabelecimento_outros: this.empresa.tipo_estabelecimento_outros,
         essential_service: this.empresa.essential_service,
         internet_speed: this.empresa.internet_speed,
         internet_service: this.empresa.internet_service,

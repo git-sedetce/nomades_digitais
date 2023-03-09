@@ -392,9 +392,9 @@
               </div>
               <div *ngIf="radio_service == 'local_trabalho' || radio_service == 'hospedagem'  || radio_service == 'alimentacao'" class="row">
                 <div class="form-group col-sm-4 col-12 mb-5">
-                  <label for="tipo" class="pergunta mb-2">Tipo de <span *ngIf="radio_service == 'hospedagem'">hospedagem</span><span *ngIf="radio_service == 'local_trabalho'">Local de Trabalho</span><span *ngIf="radio_service == 'alimentacao'">Local de alimentação</span><span *ngIf="radio_service == 'outro'"> estabelecimento</span></label>
-                <select name="tipo" class="form-select" id="tipo" required ngModel [(ngModel)]="tipo_outros" #tipo="ngModel"
-                [(ngModel)]="empresa.tipo">
+                  <label for="tipo_estabelecimento" class="pergunta mb-2">Tipo de <span *ngIf="radio_service == 'hospedagem'">hospedagem</span><span *ngIf="radio_service == 'local_trabalho'">Local de Trabalho</span><span *ngIf="radio_service == 'alimentacao'">Local de alimentação</span><span *ngIf="radio_service == 'outro'"> estabelecimento</span></label>
+                <select name="tipo_estabelecimento" class="form-select" id="tipo_estabelecimento" required ngModel [(ngModel)]="tipo_estabelecimento_outros" #tipo="ngModel"
+                [(ngModel)]="empresa.tipo_estabelecimento">
                   <option value="" class="text-center">----------------------Selecione----------------------</option>
                   <option value="albergue"  *ngIf="radio_service == 'hospedagem'">Albergue</option>
                   <option value="hotel"  *ngIf="radio_service == 'hospedagem'">Hotel</option>
@@ -416,10 +416,10 @@
                   <option value="outros" >Outros</option>
                 </select>
                 </div>
-                <div *ngIf="tipo_outros == 'outros'" class="form-group col-sm-8 col-12 mb-3">
-                  <label for="tipo_outros" class="form-label pergunta">Outros</label>
-                  <input type="text" class="form-control" id="tipo_outros" placeholder="Digite o tipo de estabelecimento" name="tipo_outros"
-                    ngModel required #tipo_outros="ngModel" [(ngModel)]="empresa.tipo_outros">
+                <div *ngIf="tipo_estabelecimento_outros == 'outros'" class="form-group col-sm-8 col-12 mb-3">
+                  <label for="tipo_estabelecimento_outros" class="form-label pergunta">Outros</label>
+                  <input type="text" class="form-control" id="tipo_estabelecimento_outros" placeholder="Digite o tipo de estabelecimento" name="tipo_estabelecimento_outros"
+                    ngModel required #tipo_estabelecimento_outros="ngModel" [(ngModel)]="empresa.tipo_estabelecimento_outros">
                 </div>
               </div>
               <div
