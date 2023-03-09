@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   cadastra_municipios.init({
     cidade: DataTypes.STRING,
     regiao: DataTypes.STRING,
+    cod_ibge: DataTypes.STRING,
     email_prefeitura: DataTypes.STRING,
     contato_prefeitura: DataTypes.STRING,
     link_prefeitura: DataTypes.STRING,

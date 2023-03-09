@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cidades.init({
-    nome_municipio: DataTypes.STRING
+    nome_municipio: DataTypes.STRING,
+    cod_ibge: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Cidades',

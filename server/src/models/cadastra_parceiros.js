@@ -29,6 +29,8 @@ module.exports = (sequelize, DataTypes) => {
     midia_social: DataTypes.STRING,
     instagram_parceiro: DataTypes.STRING,
     tipo_service: DataTypes.STRING,
+    tipo_estabelecimento: DataTypes.STRING,
+    tipo_estabelecimento_outros: DataTypes.STRING,
     essential_service: DataTypes.STRING,
     internet_speed: DataTypes.STRING,
     internet_service: DataTypes.STRING,
