@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     suggestion: DataTypes.STRING
   }, {
     sequelize,
+    paranoid: true,
     modelName: 'cadastra_nomads',
   });
   return cadastra_nomads;
