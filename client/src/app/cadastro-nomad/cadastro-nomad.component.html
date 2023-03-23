@@ -69,11 +69,11 @@
                     <input type="text" class="form-control" id="country" name="country" placeholder="Digite seu País / Type your Country" required #country="ngModel" [(ngModel)]="nomad.country">
                     <div *ngIf="!country.valid && country.touched" class="alert alert-danger" role="alert">Digite seu País / Type your Country</div>
                   </div>
-                  <div class="col-sm-6 col-12 mb-3">
+                  <!--<div class="col-sm-6 col-12 mb-3">
                     <label for="departure_date" class="form-label pergunta">Data de partida / Departure Date</label>
                     <input type="date" class="form-control" id="departure_date" name="departure_date" placeholder="Data" required #departure_date="ngModel" [(ngModel)]="nomad.departure_date">
                     <div *ngIf="!departure_date.valid && departure_date.touched" class="alert alert-danger" role="alert">Informe a data de partida / Type your departure date</div>
-                  </div>
+                  </div>-->
                 </div>
                 <div class="mb-3">
                   <label class="pergunta" for="shared_info">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos
@@ -168,10 +168,10 @@
                   <td>País</td>
                   <td>{{ nomad.country }}</td>
                 </tr>
-                <tr class="table-light">
+                <!--<tr class="table-light">
                   <td>Data da partida</td>
                   <td>{{ nomad.departure_date }}</td>
-                </tr>
+                </tr>-->
                 <tr class="table-info">
                   <td>Autoriza compartilhar informações?</td>
                   <td>{{ nomad.shared_info }}</td>
