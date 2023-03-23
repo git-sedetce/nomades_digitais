@@ -55,6 +55,59 @@ class NomadsController{
         }
       }
 
+      static async pegaTodosNomads(req, res){
+        try{
+          const todosNomads = await database.cadastra_nomads.findAll()
+          return res.status(200).json(todosNomads)
+        }
+        catch(error){
+          return res.status(500).json(error.message)
+        }
+      }
+
+      static async pegaUmNomad(req, res){
+        const { id } = req.params
+        try{
+          const umNomad = await database.cadastra_nomads.findOne({ where:{ id:Number(id) } })
+          return res.status(200).json(umNomad)
+        }catch (error){
+          return res.status(500).json(error.message)
+        }
+      }
+
+      static async atualizaNomad(req, res){
+        const { id } = req.params
+        const updateInfos = req.body
+        try{
+          await database.cadastra_nomads.update( updateInfos, { where: { id: Number(id) } } )
+          const updateNomads = await database.cadastra_nomads.findOne( { where: { id: Number(id) } } )
+          return res.status(200).json(updateNomads)
+        }catch (error){
+          return res.status(500).json(error.message)
+      }
+    }
+
+    static async apagaNomad(req, res){
+      const { id } = req.params
+      try{
+        await database.cadastra_nomads.destroy( { where: {id: Number(id) } } )
+        return res.status(200).json({ message:`O Nomad de id ${id} foi deletado com sucesso`})
+      }catch(error){
+        return res.status(500).json(error.message)
+      }
+    }
+
+    static async restauraNomad(req, res){
+      const { id } = req.params
+      try{
+        await database.cadastra_nomads.restore( { where: { id: Number(id) } } )
+        return res.status(200).json({mensage: `O Nomad de id ${id} foi restaurado`})
+      }catch(error){
+        return res.status(500).json(error.message)
+      }
+
+    }
+
 }
 
 module.exports = NomadsController
