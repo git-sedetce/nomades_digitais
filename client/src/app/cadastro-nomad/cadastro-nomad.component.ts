@@ -35,9 +35,9 @@ export class CadastroNomadComponent implements OnInit {
   saveNomad(): void{
     this.service.cadastrar_nomad(this.nomad).subscribe({
       next: (res: any) => {
-        console.log(res);
+        //console.log(res);
         this.nomad.id = res.id
-        console.log("Id", this.nomad.id)
+        //console.log("Id", this.nomad.id)
         this.submitted = true;
       },
       error: (e) => console.error(e)
