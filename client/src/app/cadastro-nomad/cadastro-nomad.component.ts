@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Nomad } from './../models/nomad/nomad.model';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ServiceService } from '../services/service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-nomad',
@@ -8,20 +11,8 @@ import { ServiceService } from '../services/service.service';
 })
 export class CadastroNomadComponent implements OnInit {
 
-  nomad = {
-    id: '',
-    name: '',
-    lastName: '',
-    nomad_email: '',
-    contato_nomad: '',
-    cidade: '',
-    regiao: '',
-    country: '',
-    //departure_date: '',
-    shared_info: '',
-    nomads_news: '',
-    suggestion: '',
-  }
+  @ViewChild("formNomad") formNomad!: NgForm
+  nomad!: Nomad
 
   submitted = false
   maxChars = 500
@@ -33,11 +24,27 @@ export class CadastroNomadComponent implements OnInit {
     //console.log(this.empresa)
   }
 
-  constructor(public service: ServiceService) { }
+  constructor(public service: ServiceService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+    this.nomad = new Nomad();
   }
 
+  saveNomad(): void{
+    this.service.cadastrar_nomad(this.nomad).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.nomad.id = res.id
+        console.log("Id", this.nomad.id)
+        this.submitted = true;
+      },
+      error: (e) => console.error(e)
+    })
+
+  }
+/*
   saveNomad(): void {
     const data ={
       name: this.nomad.name,
@@ -63,7 +70,7 @@ export class CadastroNomadComponent implements OnInit {
       },
       error: (e) => console.error(e)
     })
-  }
+  }*/
 
   novoCadastroNomad(){
     window.location.reload();

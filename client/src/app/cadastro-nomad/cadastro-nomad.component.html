@@ -13,7 +13,7 @@
             <div class="bg-primary">
               <h3 class="pb-3 pt-3 text-center text-white">Cadastro dos Nômades Digitais no Ceará / Register of Digital Nomads in Ceará</h3>
             </div>
-            <form class="cadastro_nomads" #nomads="ngForm" (ngSubmit)="submitNomads(nomads)">
+            <form class="cadastro_nomads" #formNomad="ngForm">
               <fieldset>
                 <legend>
                   Dados pessoais / Personal Data
@@ -116,10 +116,10 @@
                     suggestion, please leave it here.</label>
                   <textarea [maxLength]="maxChars" data-ls-module="charCounter" maxlength="500" class="form-control" id="suggestion" rows="5" name="suggestion" ngModel #suggestion="ngModel" [(ngModel)]="nomad.suggestion"></textarea>
                   <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
-                    nomad.suggestion.length }} / {{ maxChars }}</strong></div>
+                    nomad.suggestion?.length }} / {{ maxChars }}</strong></div>
                 </div>
               </fieldset>
-              <button type="submit" class="btn btn-success mb-3" [disabled]="!nomads.valid" (click)="saveNomad()">Cadastrar Nomad</button>
+              <button type="submit" class="btn btn-success mb-3" [disabled]="!formNomad.valid" (click)="saveNomad()">Cadastrar Nomad</button>
             </form>
           </div>
         </div>
@@ -131,7 +131,9 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th class="table-primary" colspan="2">Dados Cadastrados</th>
+                  <th class="table-primary">Dados Cadastrados</th>
+                  <th class="table-primary"><a [routerLink]="['/editar_nomad']" class="btn btn-warning">
+                    <i class="bi bi-pencil-square" aria-hidden="true"></i> Editar</a></th>
                 </tr>
               </thead>
               <tfoot>
@@ -172,15 +174,15 @@
                   <td>Data da partida</td>
                   <td>{{ nomad.departure_date }}</td>
                 </tr>-->
-                <tr class="table-info">
+                <tr class="table-light">
                   <td>Autoriza compartilhar informações?</td>
                   <td>{{ nomad.shared_info }}</td>
                 </tr>
-                <tr class="table-light">
+                <tr class="table-info">
                   <td>Deseja receber notícias?</td>
                   <td>{{ nomad.nomads_news }}</td>
                 </tr>
-                <tr class="table-info">
+                <tr class="table-light">
                   <td>Sugestão</td>
                   <td>{{ nomad.suggestion }}</td>
                 </tr>
