@@ -19,10 +19,6 @@ export class CadastroNomadComponent implements OnInit {
   qtdeChars = 255
   maxChars_link = 150
 
-  submitNomads(nomads:any){
-    console.log(nomads)
-    //console.log(this.empresa)
-  }
 
   constructor(public service: ServiceService,
               private route: ActivatedRoute,
@@ -33,11 +29,12 @@ export class CadastroNomadComponent implements OnInit {
   }
 
   saveNomad(): void{
+   // console.log('nomad', this.nomad);
     this.service.cadastrar_nomad(this.nomad).subscribe({
       next: (res: any) => {
-        //console.log(res);
+       // console.log(res);
         this.nomad.id = res.id
-        //console.log("Id", this.nomad.id)
+       // console.log("Id", this.nomad.id)
         this.submitted = true;
       },
       error: (e) => console.error(e)

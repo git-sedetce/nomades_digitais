@@ -10,7 +10,10 @@ export class Nomad {
     public country?: string,
     public shared_info?: string,
     public nomads_news?: string,
-    public suggestion?: string
+    public suggestion?: string,
+    public first_time_ce?: string,
+    public data_nascimento?: Date,
+    public passaporte?: string
   ){
 
   }

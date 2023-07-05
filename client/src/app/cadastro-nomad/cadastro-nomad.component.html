@@ -19,20 +19,30 @@
                   Dados pessoais / Personal Data
                 </legend>
                 <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="name" class="form-label pergunta">Nome / Name</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Digite seu nome / Type your name" required #name="ngModel" [(ngModel)]="nomad.name">
                     <div *ngIf="!name.valid && name.touched" class="alert alert-danger" role="alert">
                       Informe o primeiro nome</div>
                   </div>
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="lastName" class="form-label pergunta">Sobrenome / Last name</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Digite seu Sobrenome / Type your Last name" required #lastName="ngModel" [(ngModel)]="nomad.lastName">
                     <div *ngIf="!lastName.valid && lastName.touched" class="alert alert-danger" role="alert">
                       Informe o Sobrenome</div>
                   </div>
+
+                  <div class="col-sm-4 col-12 mb-3">
+                    <label for="data_nascimento" class="form-label pergunta">Data de Nascimento / Date of Birth</label>
+                    <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" aria-describedby="data_nascimento"
+                      placeholder="Data de Nascimento / Date of Birth" required #data_nascimento="ngModel" [(ngModel)]="nomad.data_nascimento">
+                      <div *ngIf="!data_nascimento.valid && data_nascimento.touched" class="alert alert-danger"
+                      role="alert">Insira a data de Nascimento / Enter the date of birth</div>
+                  </div>
                 </div>
+
                 <div class="row">
+
                   <div class="col-sm-6 col-12 mb-3">
                     <label for="nomad_email" class="form-label pergunta">Email</label>
                     <input type="email" class="form-control" id="nomad_email" name="nomad_email" aria-describedby="nomad_email"
@@ -41,6 +51,7 @@
                       <div *ngIf="!nomad_email.valid && nomad_email.touched" class="alert alert-danger"
                       role="alert">Email inválido</div>
                   </div>
+
                   <div class="col-sm-6 col-12 mb-3">
                     <label for="contato_nomad" class="form-label pergunta">Telefone / Phone Number</label>
                     <input type="text" class="form-control" id="contato_nomad" name="contato_nomad" placeholder="Insira o número do telefone. / Enter the phone number." required #contato_nomad="ngModel" [(ngModel)]="nomad.contato_nomad">
@@ -49,25 +60,55 @@
                       Informe o número do telefone</div>
                   </div>
                 </div>
+              </fieldset>
+              <fieldset>
+                <legend>
+                  Sobre você / About you
+                </legend>
                 <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="cidade" class="form-label pergunta">Cidade / City</label>
                     <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite sua cidade / Type your city" required #cidade="ngModel" [(ngModel)]="nomad.cidade">
                     <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">
                       Informe a cidade de origem</div>
                   </div>
-                  <div class="col-sm-6 col-12 mb-3">
+
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="regiao" class="form-label pergunta">Região ou Estado / State or Region</label>
                     <input type="text" class="form-control" id="regiao" name="regiao" placeholder="Digite seu Estado / Type your State or Region" required #regiao="ngModel" [(ngModel)]="nomad.regiao">
                     <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">
                       Informe a regiao de origem / Type your State or Region</div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="country" class="form-label pergunta">País / Country</label>
                     <input type="text" class="form-control" id="country" name="country" placeholder="Digite seu País / Type your Country" required #country="ngModel" [(ngModel)]="nomad.country">
                     <div *ngIf="!country.valid && country.touched" class="alert alert-danger" role="alert">Digite seu País / Type your Country</div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="passaporte" class="form-label pergunta">Número do Passaporte / Passport Number</label>
+                    <input type="text" class="form-control" id="passaporte" name="passaporte" placeholder="Digite o número do passaporte / Type your passport number" required #passaporte="ngModel" [(ngModel)]="nomad.passaporte">
+                    <div *ngIf="!passaporte.valid && passaporte.touched" class="alert alert-danger" role="alert">
+                      Informe o número do seu passaporte / Enter your passport number</div>
+                  </div>
+
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="first_time_ce">Primeira vez no Ceará? / First time in Ceará?</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="first_time_ce" id="news_sim" value="sim" ngModel required #first_time_ce="ngModel" [(ngModel)]="nomad.first_time_ce">
+                      <label class="form-check-label" for="news_sim">
+                        Sim
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="first_time_ce" id="news_nao" value="nao" ngModel required #first_time_ce="ngModel" [(ngModel)]="nomad.first_time_ce">
+                      <label class="form-check-label" for="news_nao">
+                        Não
+                      </label>
+                    </div>
                   </div>
                   <!--<div class="col-sm-6 col-12 mb-3">
                     <label for="departure_date" class="form-label pergunta">Data de partida / Departure Date</label>
@@ -75,6 +116,11 @@
                     <div *ngIf="!departure_date.valid && departure_date.touched" class="alert alert-danger" role="alert">Informe a data de partida / Type your departure date</div>
                   </div>-->
                 </div>
+              </fieldset>
+            <fieldset>
+              <legend>
+                Termos & Condições / Terms & Conditions
+              </legend>
                 <div class="mb-3">
                   <label class="pergunta" for="shared_info">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos
                     parceiros do Projeto Digital Nomads Ceará para receber informações sobre o turismo no Estado do Ceará?
@@ -130,11 +176,11 @@
           <div class="container">
             <table class="table table-hover" style="width:100%">
               <thead>
-                <tr>
+                <!--<tr>
                   <th class="table-primary" style="width:60%">Dados Cadastrados</th>
                   <th class="table-primary"><a [routerLink]="['/editar_nomad']" class="btn btn-warning">
                     <i class="bi bi-pencil-square" aria-hidden="true"></i> Editar</a></th>
-                </tr>
+                </tr>-->
               </thead>
               <tfoot>
                 <tr>

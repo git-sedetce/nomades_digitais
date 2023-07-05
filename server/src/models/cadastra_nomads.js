@@ -21,10 +21,13 @@ module.exports = (sequelize, DataTypes) => {
     cidade: DataTypes.STRING,
     regiao: DataTypes.STRING,
     country: DataTypes.STRING,
-    departure_date: DataTypes.DATE,
+    //departure_date: DataTypes.DATE,
     shared_info: DataTypes.STRING,
     nomads_news: DataTypes.STRING,
-    suggestion: DataTypes.STRING
+    suggestion: DataTypes.STRING,
+    first_time_ce: DataTypes.STRING,
+    data_nascimento: DataTypes.DATE,
+    passaporte: DataTypes.STRING
   }, {
     sequelize,
     paranoid: true,
