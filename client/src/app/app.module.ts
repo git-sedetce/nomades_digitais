@@ -18,7 +18,8 @@ import { SeloComponent } from './selo/selo.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
-import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component'
+import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
+import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component'
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.componen
       SeloComponent,
       ProximaParadaComponent,
       CpfEstrangeiroComponent,
-      VistoNomadeComponent
+      VistoNomadeComponent,
+      EditarNomadComponent
    ],
   imports: [
     BrowserModule,

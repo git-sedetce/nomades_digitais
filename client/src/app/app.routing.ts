@@ -1,3 +1,4 @@
+import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
@@ -23,6 +24,7 @@ const APP_ROUTES: Routes = [
   { path: 'cadastro_municipio', component: CadastroMunicipioComponent },
   { path: 'cadastro_parceiro', component: CadastroParceiroComponent },
   { path: 'cadastro_nomad', component: CadastroNomadComponent },
+  { path: 'editar_nomad', component: EditarNomadComponent },
   { path: 'proxima_parada', component: ProximaParadaComponent },
   { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
   { path: 'visto_nomade', component: VistoNomadeComponent },
