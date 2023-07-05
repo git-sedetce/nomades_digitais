@@ -1,5 +1,5 @@
 const bodyParser = require('body-parser')
-const  express = require('express')
+const express = require('express')
 const municipio = require('./municipioRoutes')
 const parceiro = require('./parceiroRoutes')
 const nomads = require('./nomadsRoutes')
