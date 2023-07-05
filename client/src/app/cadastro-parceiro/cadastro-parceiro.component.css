@@ -1,6 +1,6 @@
-#forms {
+/*#forms {
   margin-top: 50px;
-}
+}*/
 .pergunta{
   font-weight: bold;
 }
@@ -30,6 +30,7 @@ section {
 }
 
 .card_manual{
+  margin-top: 90px !important;
   background: rgba(255, 255, 255, 0.8);
 }
 

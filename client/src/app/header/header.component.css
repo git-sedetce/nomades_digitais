@@ -1,3 +1,7 @@
+.navBar {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .menu li{
   font-size: clamp(0.90em, 0.2em + 1vw, 1.25em);
 }
@@ -19,4 +23,18 @@
 }
 .busca::placeholder{
   color: #1f1c1c;
+}
+
+.menu ul li{
+  transition: 0.7s all;
+}
+.menu ul li:hover{
+  background-color:#088;
+}
+.menu ul li a{
+  padding: 20px 30px;
+}
+.menuOpcoes {
+  margin-left: auto;
+  margin-right: auto;
 }
