@@ -14,6 +14,7 @@ import { CadastroMunicipioComponent } from './cadastro-municipio/cadastro-munici
 import { Ceara_prontoComponent } from './ceara_pronto/ceara_pronto.component';
 import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { SeloComponent } from './selo/selo.component';
+import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component';
 
 const APP_ROUTES: Routes = [
 
@@ -29,6 +30,7 @@ const APP_ROUTES: Routes = [
   { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
   { path: 'visto_nomade', component: VistoNomadeComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'parceria', component: EmpresasParceirasComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 ];

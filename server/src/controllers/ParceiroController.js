@@ -1,5 +1,6 @@
 const database = require("../models");
 const nodemailer = require("nodemailer")
+const { Sequelize, QueryTypes } = require('sequelize');
 
 class ParceiroController {
   static async pegarParceiro(req, res) {
@@ -18,6 +19,64 @@ class ParceiroController {
         where: { id: Number(id) },
       });
       return res.status(200).json(umParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async listarBairros(req, res) {
+    // const { bairro } = req.params;
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        // where: { bairro: bairro },
+        attributes: [
+          [Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")), "cadastra_parceiros.id"],
+          "bairro",
+        ],
+        group: ["bairro"],
+      });
+      return res.status(200).json(parceiros);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async listarCidades(req, res) {
+    // const { bairro } = req.params;
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        // where: { bairro: bairro },
+        attributes: [
+          [Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")), "cadastra_parceiros.id"],
+          "cidade",
+        ],
+        group: ["cidade"],
+      });
+      return res.status(200).json(parceiros);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async partnerByNeighborhood(req, res) {
+    const { bairro } = req.params;
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        where: { bairro: bairro },
+      });
+      return res.status(200).json(parceiros);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async partnerByCity(req, res) {
+    const { city } = req.params;
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        where: { cidade: city },
+      });
+      return res.status(200).json(parceiros);
     } catch (error) {
       return res.status(500).json(error.message);
     }

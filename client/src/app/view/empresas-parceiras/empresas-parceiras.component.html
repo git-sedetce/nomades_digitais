@@ -1,1 +1,63 @@
-<p>empresas-parceiras works!</p>
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual text-center fw-bold">
+          <div class="card-body">
+            <h3 class="mb-3 mt-3">Grandes Parceiras</h3>
+          </div>
+        </div>
+
+        <div class="row mt-2 mb-2">
+
+          <div class="form-floating col-sm-3 col-12 mt-2">
+            <select class="form-select" #bairro id="bairro" aria-label="Bairros de Parceiros"
+              (change)="(filtroBairro(bairro.value))">
+              <option *ngFor="let bairro of lista_bairro" value="{{ bairro.bairro }}">{{ bairro.bairro }}
+              </option>
+            </select>
+            <label class="form-label ms-3" for="bairro">Selecione o bairro</label>
+          </div>
+
+          <div class="form-floating col-sm-3 col-12 mt-2">
+            <select class="form-select" #municipio id="municipio" aria-label="Cidade de Parceiros"
+              (change)="(filtroCidade(municipio.value))">
+              <option *ngFor="let cidade of lista_cidade" value="{{ cidade.cidade }}">{{
+                cidade.cidade }}</option>
+            </select>
+            <label class="form-label ms-3" for="municipio">Selecione o Municipio</label>
+          </div>
+        </div>
+
+        <div class="card card_table mb-5">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Razão Social</th>
+                <th scope="col">Email</th>
+                <th scope="col">Tipo de Serviço</th>
+                <th scope="col">Bairro</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Saiba Mais</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let parcerias of lista_parcerias">
+                <td>{{ parcerias.razao_social }}</td>
+                <td>{{ parcerias.email }}</td>
+                <td>{{ parcerias.tipo_service }}</td>
+                <td>{{ parcerias.bairro }}</td>
+                <td>{{ parcerias.cidade }}</td>
+                <td><button (click)="onView(parcerias)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal"
+                    data-bs-target="#modalDependentes"><i class="bi bi-pencil-square"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
