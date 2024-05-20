@@ -19,7 +19,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
-import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component'
+import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
+import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component'
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad
       ProximaParadaComponent,
       CpfEstrangeiroComponent,
       VistoNomadeComponent,
-      EditarNomadComponent
+      EditarNomadComponent,
+      EmpresasParceirasComponent
    ],
   imports: [
     BrowserModule,
