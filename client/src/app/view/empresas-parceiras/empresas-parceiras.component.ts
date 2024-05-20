@@ -33,7 +33,7 @@ export class EmpresasParceirasComponent implements OnInit {
     this.service.listarBairros('listaBairros').subscribe(
       (neighborhood: any[]) => {
         this.lista_bairro = neighborhood;
-        console.log('neighborhoods', this.lista_bairro);
+        // console.log('neighborhoods', this.lista_bairro);
       },
       (erro: any) => console.log(erro)
     );
@@ -43,7 +43,7 @@ export class EmpresasParceirasComponent implements OnInit {
     this.service.listarCidades('listaCidades').subscribe(
       (city: any[]) => {
         this.lista_cidade = city;
-        console.log('citys', this.lista_cidade);
+        // console.log('citys', this.lista_cidade);
       },
       (erro: any) => console.log(erro)
     );
@@ -53,7 +53,7 @@ export class EmpresasParceirasComponent implements OnInit {
     this.service.parceirosByMunicipio('parceiroByBairro/', bairro).subscribe(
       (partner: any[]) => {
         this.lista_parcerias = partner;
-        console.log('partners', this.lista_parcerias);
+        // console.log('partners', this.lista_parcerias);
       },
       (erro: any) => console.log(erro)
     );
@@ -63,7 +63,7 @@ export class EmpresasParceirasComponent implements OnInit {
     this.service.parceirosByMunicipio('parceiroByCidade/', cidade).subscribe(
       (partner: any[]) => {
         this.lista_parcerias = partner;
-        console.log('partners', this.lista_parcerias);
+        // console.log('partners', this.lista_parcerias);
       },
       (erro: any) => console.log(erro)
     );
