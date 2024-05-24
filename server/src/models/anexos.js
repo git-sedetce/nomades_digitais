@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   anexos.init({
     mimetype: DataTypes.STRING,
     filename: DataTypes.STRING,
-    path: DataTypes.STRING
+    path: DataTypes.STRING,
+    tipo_anexo: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'anexos',
