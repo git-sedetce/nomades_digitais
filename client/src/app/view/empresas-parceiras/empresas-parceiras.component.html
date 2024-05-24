@@ -4,13 +4,13 @@
       <div class="col-12">
         <div class="card card_manual mb-5 mt-5 manual text-center fw-bold">
           <div class="card-body">
-            <h3 class="mb-3 mt-3">Grandes Parceiras</h3>
+            <h3 class="mb-3 mt-3">Grandes Parcerias</h3>
           </div>
         </div>
 
-        <div class="row mt-2 mb-2">
+        <div class="row mt-2 mb-2 mx-auto">
 
-          <div class="form-floating col-sm-3 col-12 mt-2">
+          <div class="form-floating col-sm-3 col-12 mt-2 mx-auto">
             <select class="form-select" #bairro id="bairro" aria-label="Bairros de Parceiros"
               (change)="(filtroBairro(bairro.value))">
               <option *ngFor="let bairro of lista_bairro" value="{{ bairro.bairro }}">{{ bairro.bairro }}
@@ -19,7 +19,7 @@
             <label class="form-label ms-3" for="bairro">Selecione o bairro</label>
           </div>
 
-          <div class="form-floating col-sm-3 col-12 mt-2">
+          <div class="form-floating col-sm-3 col-12 mt-2 mx-auto">
             <select class="form-select" #municipio id="municipio" aria-label="Cidade de Parceiros"
               (change)="(filtroCidade(municipio.value))">
               <option *ngFor="let cidade of lista_cidade" value="{{ cidade.cidade }}">{{
@@ -27,29 +27,34 @@
             </select>
             <label class="form-label ms-3" for="municipio">Selecione o Municipio</label>
           </div>
+          <div class="col-sm-3 col-12 mx-auto">
+            <div class="filter-nav d-flex flex-center mt-2 mb-3">
+              <button class="mx-2 btn btn-success text-center" (click)="getEmpresa()">Todas Empresas<br>Parceiras</button>
+            </div>
+          </div>
         </div>
 
         <div class="card card_table mb-5">
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <th scope="col">Razão Social</th>
-                <th scope="col">Email</th>
-                <th scope="col">Tipo de Serviço</th>
-                <th scope="col">Bairro</th>
-                <th scope="col">Cidade</th>
-                <th scope="col">Saiba Mais</th>
+                <th scope="col" class="text-center">Razão Social</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Tipo de Serviço</th>
+                <th scope="col" class="text-center">Bairro</th>
+                <th scope="col" class="text-center">Cidade</th>
+                <th scope="col" class="text-center">Saiba Mais</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let parcerias of lista_parcerias">
-                <td>{{ parcerias.razao_social }}</td>
-                <td>{{ parcerias.email }}</td>
-                <td>{{ parcerias.tipo_service }}</td>
-                <td>{{ parcerias.bairro }}</td>
-                <td>{{ parcerias.cidade }}</td>
-                <td><button (click)="onView(parcerias)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal"
-                    data-bs-target="#modalDependentes"><i class="bi bi-pencil-square"></i></button></td>
+                <td class="table align-middle ps-2">{{ parcerias.razao_social }}</td>
+                <td class="table align-middle">{{ parcerias.email_parceiro }}</td>
+                <td class="table align-middle">{{ parcerias.tipo_service }}</td>
+                <td class="table align-middle">{{ parcerias.bairro }}</td>
+                <td class="table align-middle">{{ parcerias.cidade }}</td>
+                <td class="table align-middle"><button (click)="onView(parcerias.id)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal"
+                    data-bs-target="#modalParceria"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -61,3 +66,236 @@
   </div>
 
 </section>
+
+
+<!--Modal Parceria-->
+<div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-labelledby="modalParceriaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title fs-5" id="modalParceriaLabel">{{ nome_empresa }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-3 col-12">
+              <img src="" alt="Aqui vai aparecer a logo da empresa">
+            </div>
+            <div class="col-sm-9 col-12">
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'outro'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Ramo de atividade:</th>
+                    <td colspan="2">{{ ramo }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Benefícios:</th>
+                    <td colspan="2">{{ beneficios }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr >
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'local_trabalho'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tipo de estabelecimento:</th>
+                    <td colspan="2">{{ tipo_estabelecimento }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Possui espaço para reuniões?</th>
+                    <td colspan="2">{{ reunioes }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'alimentacao'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tipo de estabelecimento:</th>
+                    <td colspan="2">{{ tipo_estabelecimento }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Possui espaço para trabalho?</th>
+                    <td colspan="2">{{ espaco_trabalho }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Sua equipe é orientada para atender clientes que trabalham no local?</th>
+                    <td colspan="2">{{ orienta_equipe }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr  class="table-success">
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'hospedagem'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tipo de Estabelecimento</th>
+                    <td>{{ tipo_estabelecimento }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Serviços essenciais:</th>
+                    <td colspan="2">{{ essential_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
