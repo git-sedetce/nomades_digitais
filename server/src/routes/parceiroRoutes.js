@@ -1,10 +1,14 @@
-const { Router } = require('express')
-const multer = require('multer')
-const ParceiroController = require('../controllers/ParceiroController')
+const { Router } = require('express');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+const ParceiroController = require('../controllers/ParceiroController');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, 'uploads/parceiros/')
+        const pastaUploads = path.join(__dirname, '../../uploads/parceiros');
+        verificarECriarPasta(pastaUploads);
+        cb(null, pastaUploads)
     },
     filename: function(req, file, cb){
           cb(null,  Date.now() + '_digital_nomads_' + 'parceiros_' + file.originalname)
@@ -12,6 +16,16 @@ const storage = multer.diskStorage({
         //cb(null, file.originalname + Date.now() + path.extname(file.originalname))
     }
 })
+
+// Função para verificar se a pasta existe e criar se não existir
+function verificarECriarPasta(pastaPath) {
+    if (!fs.existsSync(pastaPath)) {
+        fs.mkdirSync(pastaPath, { recursive: true });
+        console.log(`A pasta ${pastaPath} foi criada.`);
+    } else {
+        console.log(`A pasta ${pastaPath} já existe.`);
+    }
+  }
 
 const upload = multer({ storage })
 

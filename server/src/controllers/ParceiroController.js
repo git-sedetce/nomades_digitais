@@ -1,6 +1,9 @@
 const database = require("../models");
 const nodemailer = require("nodemailer")
 const { Sequelize, QueryTypes } = require('sequelize');
+const path = require("path");
+const fs = require("fs");
+const baseUrl = process.cwd() + "/api"; //__dirname + '.
 
 class ParceiroController {
   static async pegarParceiro(req, res) {
@@ -17,7 +20,16 @@ class ParceiroController {
     try {
       const umParceiro = await database.cadastra_parceiros.findOne({
         where: { id: Number(id) },
+        include: [
+          {
+            association: "ass_imgsParceiros",
+            where: (database.cadastra_parceiros.id = database.anexos.user_id),
+            attributes: ["mimetype", "path"]
+          },
+        ],
+        //raw: true,
       });
+      // console.log('Parceiro', umParceiro)
       return res.status(200).json(umParceiro);
     } catch (error) {
       return res.status(500).json(error.message);
@@ -97,7 +109,7 @@ class ParceiroController {
   static async cadastraParceiro(req, res) {    
     var email_grupo = "admdigitalnomads@sedet.ce.gov.br"
     const novoParceiro = req.body;
-    console.log('novoParceiro', novoParceiro)
+    // console.log('novoParceiro', novoParceiro)
     try {
       const criarParceiro = await database.cadastra_parceiros.create(
         novoParceiro
@@ -125,14 +137,14 @@ class ParceiroController {
           //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
         };
 
-        console.log("mailOptions", mailOptions);
+        // console.log("mailOptions", mailOptions);
         var emailRetorno = null;
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
             console.log(error);
             emailRetorno = error;
           } else {
-            console.log("Email sent: " + info.response);
+            // console.log("Email sent: " + info.response);
             emailRetorno = {
               messagem: "email enviado com sucesso!",
               info: info.response,
@@ -160,11 +172,11 @@ class ParceiroController {
   static async anexoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path;
+    const caminho = file.path.split("server")[1];
     const nome_arquivo = file.filename;
     const type = file.mimetype;    
-    console.log(file);
-    console.log(id);
+    // console.log(file);
+    // console.log(id);
     try {
       /*if (file) {
         res.json(file);
@@ -175,8 +187,11 @@ class ParceiroController {
         mimetype: type,
         filename: nome_arquivo,
         path: caminho,
-        user_id: id
+        user_id: id,
+        tipo_anexo: 'comprovante',
+        raw: true
       });
+      // console.log('anexarParceiro', anexarParceiro)
       return res.status(200).json({message: 'Comprovante anexado com sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
@@ -188,11 +203,11 @@ class ParceiroController {
   static async alvaraParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path;
+    const caminho = file.path.split("server")[1];
     const nome_arquivo = file.filename;
     const type = file.mimetype;    
-    console.log(file);
-    console.log(id);
+    // console.log(file);
+    // console.log(id);
     try {
       /*if (file) {
         res.json(file);
@@ -203,8 +218,11 @@ class ParceiroController {
         mimetype: type,
         filename: nome_arquivo,
         path: caminho,
-        user_id: id
+        user_id: id,
+        tipo_anexo: 'alvara',
+        raw: true
       });
+      // console.log('anexarParceiro', anexarParceiro)
       return res.status(200).json({message: 'Alvará anexado com Sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
@@ -217,11 +235,11 @@ class ParceiroController {
   static async logoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path;
+    const caminho = file.path.split("server")[1];
     const nome_arquivo = file.filename;
     const type = file.mimetype;    
-    console.log(file);
-    console.log(id);
+    // console.log(file);
+    // console.log(id);
     try {
       /*if (file) {
         res.json(file);
@@ -232,8 +250,10 @@ class ParceiroController {
         mimetype: type,
         filename: nome_arquivo,
         path: caminho,
-        user_id: id
+        user_id: id,
+        tipo_anexo: 'logo'
       });
+      // console.log('anexarParceiro', anexarParceiro)
       return res.status(200).json({message: 'Logo enviado com Sucesso!'});
     } catch (error) {
       return res.status(500).json(error.message);
@@ -246,10 +266,10 @@ class ParceiroController {
     var name_arquivo =[]
         const file = req.files
         const { id } = req.params;      
-        //console.log(file)        
+        // console.log(file)        
         if(file.length>0){
           for(let img = 0; img < file.length; img++){
-            const caminho = file[img].path;
+            const caminho = file[img].path.split("server")[1];
             const nome_arquivo = file[img].filename;
             const type = file[img].mimetype; 
             name_arquivo.push(nome_arquivo)
@@ -258,10 +278,11 @@ class ParceiroController {
                 mimetype: type,
                 filename: nome_arquivo,
                 path: caminho,
-                user_id: id
+                user_id: id,
+                tipo_anexo: 'image'
               });    
               
-             //console.log(res.status(200).json(anexarParceiro));
+            //  console.log(res.status(200).json(anexarParceiro));
             }
             //console.log('name_arquivo', name_arquivo)
             return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
@@ -280,6 +301,36 @@ class ParceiroController {
       throw new Error("File upload unseccessful")
     }
       //res.send("Arquivo recebido!")
+  }  
+
+  static async pegaLogoByID(req, res) {
+     const { id } = req.params;
+         try {
+             const evetnImg = await database.anexos.findOne({
+                 where: { user_id: Number(id) },
+                 attributes: ["path"],
+             });
+                if (!evetnImg) {
+                 return res.status(404).send({
+                     message: "Imagem não encontrada",
+                 });
+             }    
+          
+             const acesso = path.join(baseUrl, evetnImg.img)            
+                // Lendo o conteúdo do arquivo imagem
+             fs.readFile(acesso, 'base64', function (err, data) {
+                 if (err) {
+                     console.error(err);
+                     return res.status(500).send({
+                         message: "Erro ao ler a imagem",
+                     });
+                 }
+                 return res.status(200).json(data);
+             });
+         } catch (error) {
+             console.error(error);
+             return res.status(500).json(error.message);
+         }
   }
 }
 
