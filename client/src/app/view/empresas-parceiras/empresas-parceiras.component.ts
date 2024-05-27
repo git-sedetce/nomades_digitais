@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { ParceriaService } from 'src/app/services/parceria.service';
 
 @Component({
@@ -17,45 +17,14 @@ export class EmpresasParceirasComponent implements OnInit {
   formParceria!: FormGroup
   arquivoUrl: SafeResourceUrl | null = null
   imgUrl: SafeResourceUrl | null = null;
+  logo_parceria!: any[]
 
   constructor(
-    private service: ParceriaService
+    private service: ParceriaService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
-    // this.formParceria = this.formBuilder.group({
-    //   id: [''],
-    //   cnpj: [''],
-    //   nome_fantasia: [''],
-    //   razao_social: [''],
-    //   telefone: [''],
-    //   cep: [''],
-    //   logradouro: [''],
-    //   numero: [''],
-    //   complemento: [''],
-    //   bairro: [''],
-    //   cidade: [''],
-    //   estado:  [''],
-    //   email_parceiro:  [''],
-    //   midia_social:  [''],
-    //   tipo_service:  [''],
-    //   internet_speed: [''],
-    //   internet_service: [''],
-    //   outro_servico: [''],
-    //   trabalho_reunioes: [''],
-    //   tarifa_especial: [''],
-    //   internet_service_alimentacao: [''],
-    //   orienta_equipe:  [''],
-    //   localizacao:  [''],
-    //   ramo:  [''],
-    //   beneficios:  [''],
-    //   espacos_culturais: [''],
-    //   idioma: [''],
-    //   qual_idioma: [''],
-    //   instagram_parceiro: [''],
-    //   tipo_estabelecimento: [''],
-    //   tipo_estabelecimento_outros: ['']
-    // })
 
     this.getParceiros();
     this.getBairro();
@@ -133,6 +102,7 @@ export class EmpresasParceirasComponent implements OnInit {
   essential_service!: any;
 
   onView(id: any) {
+    this.getLogo(id);
     this.service.parceirosById(id).subscribe(
       (partnerID: any) => {
         this.nome_empresa = partnerID.razao_social
@@ -161,5 +131,30 @@ export class EmpresasParceirasComponent implements OnInit {
         console.log('partnerID', partnerID);
     },
     (erro: any) => console.log(erro))
+  }
+
+  getLogo(id: any) {
+    this.service.logoById(id).subscribe(
+      (logo: any) => {
+        const binaryString = window.atob(logo);
+        const binaryLen = binaryString.length;
+        const bytes = new Uint8Array(binaryLen)
+
+        for (let i = 0; i < binaryLen; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+      }
+
+      // Criar um Blob a partir do ArrayBuffer
+      const blob = new Blob([bytes], { type: 'image/jpeg' });
+
+       // Criar uma URL segura para a imagem Blob
+      const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+      this.imgUrl = imageUrl;
+         console.log('imgUrl', this.imgUrl);
+      },
+      error => {
+        console.error('Imagem não encontrada:', error);
+    }
+    );
   }
 }

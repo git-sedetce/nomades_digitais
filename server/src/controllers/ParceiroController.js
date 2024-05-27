@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer")
 const { Sequelize, QueryTypes } = require('sequelize');
 const path = require("path");
 const fs = require("fs");
-const baseUrl = process.cwd() + "/api"; //__dirname + '.
+const baseUrl = process.cwd() //+ "/src"; __dirname + '.
 
 class ParceiroController {
   static async pegarParceiro(req, res) {
@@ -306,17 +306,18 @@ class ParceiroController {
   static async pegaLogoByID(req, res) {
      const { id } = req.params;
          try {
-             const evetnImg = await database.anexos.findOne({
-                 where: { user_id: Number(id) },
+             const logoParceiro = await database.anexos.findOne({
+                 where: { user_id: Number(id), tipo_anexo: 'logo' },
                  attributes: ["path"],
              });
-                if (!evetnImg) {
+                if (!logoParceiro) {
                  return res.status(404).send({
                      message: "Imagem não encontrada",
                  });
-             }    
-          
-             const acesso = path.join(baseUrl, evetnImg.img)            
+             }  
+                       
+             const acesso = path.join(baseUrl, logoParceiro.path)   
+            //  console.log('acesso', acesso)         
                 // Lendo o conteúdo do arquivo imagem
              fs.readFile(acesso, 'base64', function (err, data) {
                  if (err) {

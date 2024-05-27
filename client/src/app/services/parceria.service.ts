@@ -34,5 +34,9 @@ export class ParceriaService {
     return this.http.get(environment.url + metodo)
   }
 
+  logoById(id: number): Observable<any> {
+    return this.http.get(environment.url + 'logo_parceiro/' + id)
+  }
+
 
 }

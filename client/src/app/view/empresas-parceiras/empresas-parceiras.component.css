@@ -46,3 +46,8 @@ section {
 .card {
   box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
 }
+
+.logo img{
+  width: 100%;
+  margin: 4rem auto;
+}
