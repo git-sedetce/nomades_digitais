@@ -38,5 +38,9 @@ export class ParceriaService {
     return this.http.get(environment.url + 'logo_parceiro/' + id)
   }
 
+  imagensById(id: number): Observable<any> {
+    return this.http.get(environment.url + 'pegaImageParceiro/' + id)
+  }
+
 
 }

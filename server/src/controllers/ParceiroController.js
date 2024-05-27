@@ -333,6 +333,40 @@ class ParceiroController {
              return res.status(500).json(error.message);
          }
   }
+
+  static async pegaImgPartner(req, res){
+    const { id } = req.params;
+    try{
+      const imagens = await database.anexos.findAll({
+        where: { user_id: Number(id), tipo_anexo: 'image' },
+        attributes: ['id', 'tipo_anexo', 'path']
+      });
+      if(!imagens || imagens.length === 0){
+        return res.status(404).send({
+          message: "Imagens não encontradas"
+        })
+      }
+
+      const imagensData = [];
+      for(const imagem of imagens){
+        const acesso = path.join(baseUrl, imagem.path)
+
+        const data = fs.readFileSync(acesso, 'base64');
+        imagensData.push({
+          id: imagem.id,
+          tipo_anexo: imagem.tipo_anexo,
+          base64: data
+        })
+      }
+
+      return res.status(200).json(imagensData)
+
+    } catch (error){
+      console.error(error);
+      return res.status(500).json({ message: 'Erro ao buscar as imagens'})
+    }
+
+  }
 }
 
 module.exports = ParceiroController;

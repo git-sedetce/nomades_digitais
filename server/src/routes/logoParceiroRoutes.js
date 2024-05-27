@@ -29,7 +29,7 @@ const upload = multer({ storage })
 
 const router = Router()
 router.post('/anexo_logo/:id', upload.single('file'), ParceiroController.logoParceiro)
-// router.get('/logo_parceiro', ParceiroController.pegaLogo)
+router.get('/pegaImageParceiro/:id', ParceiroController.pegaImgPartner)
 router.get('/logo_parceiro/:id', ParceiroController.pegaLogoByID)
 
 module.exports = router

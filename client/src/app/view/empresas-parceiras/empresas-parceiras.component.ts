@@ -13,11 +13,12 @@ export class EmpresasParceirasComponent implements OnInit {
   lista_parcerias_modal!: any[];
   lista_bairro!: any[];
   lista_cidade!: any[];
+  lista_imagens!: any[];
   nome_empresa!: any;
   formParceria!: FormGroup
   arquivoUrl: SafeResourceUrl | null = null
   imgUrl: SafeResourceUrl | null = null;
-  logo_parceria!: any[]
+  isLoading = false;
 
   constructor(
     private service: ParceriaService,
@@ -103,8 +104,11 @@ export class EmpresasParceirasComponent implements OnInit {
 
   onView(id: any) {
     this.getLogo(id);
+    this.getImagens(id);
     this.service.parceirosById(id).subscribe(
       (partnerID: any) => {
+        setTimeout(() =>{
+
         this.nome_empresa = partnerID.razao_social
         this.tipo_service = partnerID.tipo_service;
         this.espacos_culturais = partnerID.espacos_culturais;
@@ -129,8 +133,17 @@ export class EmpresasParceirasComponent implements OnInit {
         this.essential_service = partnerID.essential_service;
         this.tem_internet = partnerID.internet_service;
         console.log('partnerID', partnerID);
+        },2000)
+
+        setTimeout(() =>{
+          this.isLoading = true;
+        },2000)
     },
-    (erro: any) => console.log(erro))
+    (erro: any) => {
+      console.log(erro);
+
+    }
+    );
   }
 
   getLogo(id: any) {
@@ -156,5 +169,22 @@ export class EmpresasParceirasComponent implements OnInit {
         console.error('Imagem não encontrada:', error);
     }
     );
+  }
+
+  getImagens(id: any){
+    this.service.imagensById(id).subscribe((imagensData: any[]) => {
+      this.lista_imagens = imagensData.map(imagem => {
+        const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
+        const safeImageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(decodedImage);
+        return {
+            id: imagem.id,
+            tipo_anexo: imagem.tipo_anexo,
+            imagem: safeImageUrl
+        };
+    });
+
+       console.log('lista_imagens', this.lista_imagens)
+    }, (erro: any) => console.error(erro))
+
   }
 }
