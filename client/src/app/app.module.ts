@@ -21,6 +21,7 @@ import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
 import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
 import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component'
+//import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -47,7 +48,10 @@ import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-p
     FormsModule,
     AppRounting,
     HttpClientModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyDfBy0VnCUokM5oGAILEh8d9Wzj26yo2PM'
+    // })
   ],
   providers: [],
   bootstrap: [AppComponent]
