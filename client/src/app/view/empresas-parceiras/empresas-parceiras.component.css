@@ -30,7 +30,7 @@ section {
 }
 
 .card_manual{
-  margin-top: 100px !important;
+  margin-top: 300px !important;
   background: rgba(255, 255, 255, 0.8);
 }
 
@@ -50,4 +50,10 @@ section {
 .logo img{
   width: 100%;
   margin: 4rem auto;
+}
+
+.carrossel img{
+  width: 100% !important;
+  height: 75vh;
+  object-fit: cover;
 }

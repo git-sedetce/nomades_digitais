@@ -69,8 +69,8 @@
 
 
 <!--Modal Parceria-->
-<div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-labelledby="modalParceriaLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable mt-5">
+<div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-labelledby="modalParceriaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white text-center">
         <h1 class="modal-title fs-5" id="modalParceriaLabel">{{ nome_empresa }}</h1>
@@ -293,19 +293,32 @@
                 </table>
               </div>
             </div>
-            <div class="row row-cols-1 row-cols-sm-2 g-2">
-              <ng-container class="col-sm-6" *ngFor="let image of lista_imagens">
-                <div class="card">
-                  <div class="card-body">
-
-                    <img [src]="image.imagem" class="card-img-top" alt="Imagens do estabelecimento">
-                    <!-- <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a> -->
-
+            <div class="row row-cols-1">
+              <div class="col-12">
+                <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item carrossel" *ngFor="let image of lista_imagens; let i = index" [ngClass]="{'active': i === 0}">
+                      <img [src]="image.imagem" class="d-block w-100" alt="Imagens do estabelecimento">
+                    </div>
                   </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-              </ng-container>
+                <!-- <div class="card">
+                  <div class="card-body">
+                    <img [src]="image.imagem" class="card-img-top" alt="Imagens do estabelecimento">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div> -->
+              </div>
             </div>
           </div>
       </div>
