@@ -57,3 +57,9 @@ section {
   height: 75vh;
   object-fit: cover;
 }
+
+.locate {
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: bolder;
+  text-transform: uppercase;
+}
