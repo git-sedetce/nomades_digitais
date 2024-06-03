@@ -20,6 +20,9 @@ export class EmpresasParceirasComponent implements OnInit {
   imgUrl: SafeResourceUrl | null = null;
   isLoading = false;
 
+  center = { lat: -3.76749831490545, lng: -38.6232867006762 }; // Coordenadas de Jurema, Caucaia - Brasil
+  zoom = 12;
+
   constructor(
     private service: ParceriaService,
     private sanitizer: DomSanitizer

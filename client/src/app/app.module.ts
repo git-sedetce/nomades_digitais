@@ -21,6 +21,7 @@ import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
 import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
 import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component'
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-p
     FormsModule,
     AppRounting,
     HttpClientModule,
+    GoogleMapsModule,
     NgxMaskModule.forRoot()
   ],
   providers: [],

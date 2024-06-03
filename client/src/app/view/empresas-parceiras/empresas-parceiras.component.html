@@ -29,7 +29,8 @@
           </div>
           <div class="col-sm-3 col-12 mx-auto">
             <div class="filter-nav d-flex flex-center mt-2 mb-3">
-              <button class="mx-2 btn btn-success text-center" (click)="getEmpresa()">Todas Empresas<br>Parceiras</button>
+              <button class="mx-2 btn btn-success text-center" (click)="getEmpresa()">Todas
+                Empresas<br>Parceiras</button>
             </div>
           </div>
         </div>
@@ -53,8 +54,9 @@
                 <td class="table align-middle">{{ parcerias.tipo_service }}</td>
                 <td class="table align-middle">{{ parcerias.bairro }}</td>
                 <td class="table align-middle">{{ parcerias.cidade }}</td>
-                <td class="table align-middle"><button (click)="onView(parcerias.id)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal"
-                    data-bs-target="#modalParceria"><i class="bi bi-pencil-square"></i></button></td>
+                <td class="table align-middle"><button (click)="onView(parcerias.id)" type="button"
+                    class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalParceria"><i
+                      class="bi bi-pencil-square"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -69,7 +71,8 @@
 
 
 <!--Modal Parceria-->
-<div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-labelledby="modalParceriaLabel" aria-hidden="true">
+<div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalParceriaLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header bg-primary text-white text-center">
@@ -82,235 +85,238 @@
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-          <div *ngIf="isLoading">
-            <div class="row">
-              <div class="col-sm-4 col-12 logo text-center">
-                <img class="mx-auto d-block align-middle" [src]="imgUrl" alt="Parceiro sem logo">
-              </div>
-              <div class="col-sm-8 col-12">
-                <table class="table table-hover align-middle" *ngIf="tipo_service == 'outro'">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Descrição</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Tipo de Serviço</th>
-                      <td>{{ tipo_service }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Ramo de atividade:</th>
-                      <td colspan="2">{{ ramo }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Benefícios:</th>
-                      <td colspan="2">{{ beneficios }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Atende pelo(s) idioma(s):</th>
-                      <td colspan="2">{{ qual_idioma }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Telefone de contato:</th>
-                      <td colspan="2">{{ telefone }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Email:</th>
-                      <td colspan="2">{{ email }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Instagram:</th>
-                      <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Tem internet?</th>
-                      <td colspan="2">{{ tem_internet }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Qualidade da internet:</th>
-                      <td colspan="2">{{ internet }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <table class="table table-hover align-middle" *ngIf="tipo_service == 'local_trabalho'">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Descrição</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Tipo de Serviço</th>
-                      <td>{{ tipo_service }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Quem somos?</th>
-                      <td>{{ espacos_culturais }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Tipo de estabelecimento:</th>
-                      <td colspan="2">{{ tipo_estabelecimento }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Possui espaço para reuniões?</th>
-                      <td colspan="2">{{ reunioes }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Atende pelo(s) idioma(s):</th>
-                      <td colspan="2">{{ qual_idioma }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Telefone de contato:</th>
-                      <td colspan="2">{{ telefone }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Email:</th>
-                      <td colspan="2">{{ email }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Instagram:</th>
-                      <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Tem internet?</th>
-                      <td colspan="2">{{ tem_internet }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Qualidade da internet:</th>
-                      <td colspan="2">{{ internet }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <table class="table table-hover align-middle" *ngIf="tipo_service == 'alimentacao'">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Descrição</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Tipo de Serviço</th>
-                      <td>{{ tipo_service }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Quem somos?</th>
-                      <td>{{ espacos_culturais }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Tipo de estabelecimento:</th>
-                      <td colspan="2">{{ tipo_estabelecimento }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Possui espaço para trabalho?</th>
-                      <td colspan="2">{{ espaco_trabalho }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Sua equipe é orientada para atender clientes que trabalham no local?</th>
-                      <td colspan="2">{{ orienta_equipe }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Atende pelo(s) idioma(s):</th>
-                      <td colspan="2">{{ qual_idioma }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Telefone de contato:</th>
-                      <td colspan="2">{{ telefone }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Email:</th>
-                      <td colspan="2">{{ email }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Instagram:</th>
-                      <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Tem internet?</th>
-                      <td colspan="2">{{ tem_internet }}</td>
-                    </tr>
-                    <tr  class="table-success">
-                      <th scope="row">Qualidade da internet:</th>
-                      <td colspan="2">{{ internet }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <table class="table table-hover align-middle" *ngIf="tipo_service == 'hospedagem'">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Descrição</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Tipo de Serviço</th>
-                      <td>{{ tipo_service }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Quem somos?</th>
-                      <td>{{ espacos_culturais }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Tipo de Estabelecimento</th>
-                      <td>{{ tipo_estabelecimento }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Serviços essenciais:</th>
-                      <td colspan="2">{{ essential_service }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Atende pelo(s) idioma(s):</th>
-                      <td colspan="2">{{ qual_idioma }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Telefone de contato:</th>
-                      <td colspan="2">{{ telefone }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Email:</th>
-                      <td colspan="2">{{ email }}</td>
-                    </tr>
-                    <tr class="table-success">
-                      <th scope="row">Instagram:</th>
-                      <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
-                    </tr>
-                    <tr class="table-warning">
-                      <th scope="row">Tem internet?</th>
-                      <td colspan="2">{{ tem_internet }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Qualidade da internet:</th>
-                      <td colspan="2">{{ internet }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        <div *ngIf="isLoading">
+          <div class="row">
+            <div class="col-sm-4 col-12 logo text-center">
+              <img class="mx-auto d-block align-middle" [src]="imgUrl" alt="Parceiro sem logo">
             </div>
-            <div class="row row-cols-1">
-              <div class="col-12">
-                <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item carrossel" *ngFor="let image of lista_imagens; let i = index" [ngClass]="{'active': i === 0}">
-                      <img [src]="image.imagem" class="d-block w-100" alt="Imagens do estabelecimento">
-                    </div>
+            <div class="col-sm-8 col-12">
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'outro'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Ramo de atividade:</th>
+                    <td colspan="2">{{ ramo }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Benefícios:</th>
+                    <td colspan="2">{{ beneficios }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'local_trabalho'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tipo de estabelecimento:</th>
+                    <td colspan="2">{{ tipo_estabelecimento }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Possui espaço para reuniões?</th>
+                    <td colspan="2">{{ reunioes }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'alimentacao'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tipo de estabelecimento:</th>
+                    <td colspan="2">{{ tipo_estabelecimento }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Possui espaço para trabalho?</th>
+                    <td colspan="2">{{ espaco_trabalho }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Sua equipe é orientada para atender clientes que trabalham no local?</th>
+                    <td colspan="2">{{ orienta_equipe }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-hover align-middle" *ngIf="tipo_service == 'hospedagem'">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tipo de Serviço</th>
+                    <td>{{ tipo_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Quem somos?</th>
+                    <td>{{ espacos_culturais }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tipo de Estabelecimento</th>
+                    <td>{{ tipo_estabelecimento }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Serviços essenciais:</th>
+                    <td colspan="2">{{ essential_service }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Atende pelo(s) idioma(s):</th>
+                    <td colspan="2">{{ qual_idioma }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ telefone }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Email:</th>
+                    <td colspan="2">{{ email }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Instagram:</th>
+                    <td colspan="2"><i class="bi bi-instagram"></i> {{ instagram }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Tem internet?</th>
+                    <td colspan="2">{{ tem_internet }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Qualidade da internet:</th>
+                    <td colspan="2">{{ internet }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row row-cols-1">
+            <div class="col-12">
+              <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item carrossel" *ngFor="let image of lista_imagens; let i = index"
+                    [ngClass]="{'active': i === 0}">
+                    <img [src]="image.imagem" class="d-block w-100" alt="Imagens do estabelecimento">
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
                 </div>
-                <!-- <div class="card">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              <!-- <div class="card">
                   <div class="card-body">
                     <img [src]="image.imagem" class="card-img-top" alt="Imagens do estabelecimento">
                     <h5 class="card-title">Special title treatment</h5>
@@ -318,9 +324,15 @@
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                   </div>
                 </div> -->
-              </div>
             </div>
           </div>
+          <div class="row">
+            <h3>Localização</h3>
+            <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
+              <map-marker [position]="center"></map-marker>
+            </google-map>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
