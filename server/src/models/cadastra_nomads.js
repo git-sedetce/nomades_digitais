@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      cadastra_nomads.hasMany( models.empresaNomade, { foreignKey: 'nomad_id', as: 'ass_nomade_empresa'})
     }
   }
   cadastra_nomads.init({
@@ -27,7 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     suggestion: DataTypes.STRING,
     first_time_ce: DataTypes.STRING,
     data_nascimento: DataTypes.DATE,
-    passaporte: DataTypes.STRING
+    passaporte: DataTypes.STRING,
+    motivo_viagem: DataTypes.STRING,
+    know_how: DataTypes.STRING,
+    profissao: DataTypes.STRING
   }, {
     sequelize,
     paranoid: true,
