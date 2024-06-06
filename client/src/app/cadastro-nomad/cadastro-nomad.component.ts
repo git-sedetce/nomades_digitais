@@ -32,7 +32,7 @@ export class CadastroNomadComponent implements OnInit {
 
   saveNomad(): void{
     this.nomad.know_how = this._knowhowList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
-    console.log('nomad', this.nomad);
+    // console.log('nomad', this.nomad);
     this.service.cadastrar_nomad(this.nomad).subscribe({
       next: (res: any) => {
        // console.log(res);

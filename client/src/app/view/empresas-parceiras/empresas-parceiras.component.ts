@@ -82,6 +82,16 @@ export class EmpresasParceirasComponent implements OnInit {
     );
   }
 
+  filtroByService(service: any) {
+    this.service.parceirosByService('parceiroserv/', service).subscribe(
+      (partner: any[]) => {
+        this.lista_parcerias = partner;
+        // console.log('partners', this.lista_parcerias);
+      },
+      (erro: any) => console.log(erro)
+    );
+  }
+
   filtroCidade(cidade: any) {
     this.service.parceirosByMunicipio('parceiroByCidade/', cidade).subscribe(
       (partner: any[]) => {

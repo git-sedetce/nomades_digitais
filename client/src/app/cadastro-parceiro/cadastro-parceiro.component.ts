@@ -90,7 +90,7 @@ export class CadastroParceiroComponent implements OnInit {
   //preencher o endereço usando o cep
 
   consultaCEP(cep: any, form: any) {
-    console.log(form)
+    // console.log(form)
 
     cep = cep.replace(/\D/g, '');
     if (cep != null && cep !== '') {

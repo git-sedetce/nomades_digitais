@@ -36,6 +36,20 @@ class ParceiroController {
     }
   }
 
+  static async parceiroByService(req, res) {
+    const { service } = req.params;
+    try {
+      const parceiroByService = await database.cadastra_parceiros.findAll({
+        where: { tipo_service: service },        
+        //raw: true,
+      });
+      // console.log('Parceiro', parceiroByService)
+      return res.status(200).json(parceiroByService);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async listarBairros(req, res) {
     // const { bairro } = req.params;
     try {
