@@ -13,6 +13,7 @@ export class CadastroNomadComponent implements OnInit {
 
   @ViewChild("formNomad") formNomad!: NgForm
   nomad!: Nomad
+  have_company!: any;
 
   submitted = false
   maxChars = 500
@@ -26,10 +27,12 @@ export class CadastroNomadComponent implements OnInit {
 
   ngOnInit() {
     this.nomad = new Nomad();
+    this.getKnowHow();
   }
 
   saveNomad(): void{
-   // console.log('nomad', this.nomad);
+    this.nomad.know_how = this._knowhowList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
+    console.log('nomad', this.nomad);
     this.service.cadastrar_nomad(this.nomad).subscribe({
       next: (res: any) => {
        // console.log(res);
@@ -40,6 +43,17 @@ export class CadastroNomadComponent implements OnInit {
       error: (e) => console.error(e)
     })
 
+  }
+
+  _knowhowList!: typeKnowHow[];
+
+  getKnowHow(){
+    this._knowhowList=[
+      { nome:"Indicação", isselected: false },
+      { nome:"Amigos", isselected: false },
+      { nome:"Internet", isselected: false },
+      { nome:"Grupos de Redes Sociais", isselected: false }
+    ]
   }
 /*
   saveNomad(): void {
@@ -73,4 +87,9 @@ export class CadastroNomadComponent implements OnInit {
     window.location.reload();
   }
 
+}
+
+class typeKnowHow{
+  nome: string | undefined;
+  isselected: boolean | undefined;
 }

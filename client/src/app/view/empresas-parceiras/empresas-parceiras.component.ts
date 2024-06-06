@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MapGeocoder } from '@angular/google-maps';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { ParceriaService } from 'src/app/services/parceria.service';
 
@@ -19,13 +20,15 @@ export class EmpresasParceirasComponent implements OnInit {
   arquivoUrl: SafeResourceUrl | null = null
   imgUrl: SafeResourceUrl | null = null;
   isLoading = false;
+  endereco!: any;
 
   center = { lat: -3.76749831490545, lng: -38.6232867006762 }; // Coordenadas de Jurema, Caucaia - Brasil
   zoom = 12;
 
   constructor(
     private service: ParceriaService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private geocoder: MapGeocoder
   ) {}
 
   ngOnInit(): void {
@@ -136,6 +139,14 @@ export class EmpresasParceirasComponent implements OnInit {
         this.essential_service = partnerID.essential_service;
         this.tem_internet = partnerID.internet_service;
         console.log('partnerID', partnerID);
+        this.endereco = partnerID.logradouro + ', ' + partnerID.numero + ' - ' + partnerID.bairro + ' - ' + partnerID.cidade + '/' + partnerID.estado;
+        console.log('endereco', this.endereco);
+        this.geocoder.geocode({
+          address: this.endereco
+        }).subscribe(({results}) => {
+          console.log(results);
+        });
+
         },2000)
 
         setTimeout(() =>{

@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       empresaNomade.belongsTo( models.cadastra_nomads, { foreignKey: 'nomad_id', as: 'ass_empresa_nomade'})
     }
   }
-  empresaNomade.init({
-    possui_empresa: DataTypes.STRING,
+  empresaNomade.init({    
     nome_empresa: DataTypes.STRING,
     cnpj: DataTypes.STRING,
     setor: DataTypes.STRING,

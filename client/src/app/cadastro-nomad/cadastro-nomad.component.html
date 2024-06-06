@@ -96,14 +96,14 @@
                   </div>
 
                   <div class="col-sm-6 col-12 mb-3">
-                    <label class="pergunta" for="first_time_ce">Primeira vez no Ceará? / First time in Ceará?</label>
-                    <div class="form-check">
+                    <label class="pergunta mb-3" for="first_time_ce">Primeira vez no Ceará? / First time in Ceará?</label><br>
+                    <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="first_time_ce" id="news_sim" value="sim" ngModel required #first_time_ce="ngModel" [(ngModel)]="nomad.first_time_ce">
                       <label class="form-check-label" for="news_sim">
                         Sim
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="first_time_ce" id="news_nao" value="nao" ngModel required #first_time_ce="ngModel" [(ngModel)]="nomad.first_time_ce">
                       <label class="form-check-label" for="news_nao">
                         Não
@@ -116,6 +116,90 @@
                     <div *ngIf="!departure_date.valid && departure_date.touched" class="alert alert-danger" role="alert">Informe a data de partida / Type your departure date</div>
                   </div>-->
                 </div>
+
+                <div class="row">
+                  <div class="form-group mb-3">
+                    <label class="pergunta" for="motivo_viagem">Qual o motivo de sua viagem? / What is the reason for your trip?</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" maxlength="500" class="form-control" id="motivo_viagem" rows="5" name="motivo_viagem" ngModel #motivo_viagem="ngModel" [(ngModel)]="nomad.motivo_viagem"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                      nomad.motivo_viagem?.length }} / {{ maxChars }}</strong></div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="profissao" class="form-label pergunta">Profissão / Profession</label>
+                    <input type="text" class="form-control" id="profissao" name="profissao" placeholder="Digite a sua profissão / Enter your profession" required #profissao="ngModel" [(ngModel)]="nomad.profissao">
+                    <div *ngIf="!profissao.valid && profissao.touched" class="alert alert-danger" role="alert">
+                      Informe a profissão / Enter your profession</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="know_how" class="pergunta mb-1">Como conheceu Digital Nomads Ceará / How did you find out about Digital Nomads Ceará?</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+
+                      <div *ngFor="let lista of _knowhowList">
+                        <input type="checkbox" class="form-check-input" value="{{ lista.nome }}" id="{{ lista.nome }}" name="{{ lista.nome }}" [(ngModel)]="lista.isselected">
+                        <label class="form-check-label" for="{{ lista.nome }}">{{ lista.nome }}</label>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>
+                  Nomad Empreendedor
+                </legend>
+                <div class="mb-3 mt-3">
+                  <div class="row ">
+                    <div class="col-sm-2 col-12 mb-3 mt-3">
+                      <label for="possui_empresa" class="pergunta">Tem empresa?</label>
+                      <div class="form-check mt-1">
+                        <input class="form-check-input" type="radio" name="possui_empresa" id="internet_sim" value="sim"
+                          ngModel required #possui_empresa="ngModel" [(ngModel)]="have_company"
+                          [(ngModel)]="nomad.possui_empresa">
+                        <label class="form-check-label" for="internet_sim">
+                          Sim
+                        </label>
+                      </div>
+                      <div class="form-check mt-1">
+                        <input class="form-check-input" type="radio" name="possui_empresa" id="internet_nao" value="nao"
+                          ngModel required #possui_empresa="ngModel" [(ngModel)]="have_company"
+                          [(ngModel)]="nomad.possui_empresa">
+                        <label class="form-check-label" for="internet_nao">
+                          Não
+                        </label>
+                      </div>
+                    </div>
+                    <div *ngIf="have_company == 'sim'" class="col-sm-10 col-12 mb-3">
+                      <div class="row">
+                        <div class="col-sm-6 mb-3 mt-3">
+                          <label for="company_name" class="form-label pergunta">Nome da empresa / Company name</label>
+                        <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Digite o nome de empresa / Type company name" required #company_name="ngModel" [(ngModel)]="nomad.company_name">
+                        </div>
+
+                        <div class="col-sm-6 mb-3 mt-3">
+                          <label for="setor" class="form-label pergunta">Qual setor? / Which sector?</label>
+                        <input type="text" class="form-control" id="setor" name="setor" placeholder="Digite o setor empresa / Enter the company sector" required #setor="ngModel" [(ngModel)]="nomad.setor">
+                        </div>
+                      </div>
+
+                      <div class="row mt-2">
+                        <div class="col-sm-6 mb-3 mt-3">
+                          <label for="registro" class="form-label pergunta">Registro da empresa (CNPJ) / Company registration</label>
+                        <input type="text" class="form-control" id="registro" name="registro" placeholder="Registro da empresa (CNPJ) / Company registration" required #registro="ngModel" [(ngModel)]="nomad.registro">
+                        </div>
+
+                        <div class="col-sm-6 mb-3 mt-3">
+                          <label for="site" class="form-label pergunta">Site? / Site?</label>
+                        <input type="text" class="form-control" id="site" name="site" placeholder="Digite o site empresa / Enter the company website" required #site="ngModel" [(ngModel)]="nomad.site">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </fieldset>
             <fieldset>
               <legend>
@@ -124,7 +208,7 @@
                 <div class="mb-3">
                   <label class="pergunta" for="shared_info">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos
                     parceiros do Projeto Digital Nomads Ceará para receber informações sobre o turismo no Estado do Ceará?
-                    Ressaltamos que estes dados podem ser descartados a qualquer momento conforme a solicitação do titular.
+                    Ressaltamos que estes dados podem ser descartados a qualquer momento conforme a solicitação do titular.<br>
                     // Do you agree to share your information and personal data with partner establishments of the Digital
                     Nomads Ceará Project to receive information about tourism in the State of Ceará? We emphasize that this
                     data can be discarded at any time by the request of the holder.</label>
@@ -216,10 +300,6 @@
                   <td>País</td>
                   <td>{{ nomad.country }}</td>
                 </tr>
-                <!--<tr class="table-light">
-                  <td>Data da partida</td>
-                  <td>{{ nomad.departure_date }}</td>
-                </tr>-->
                 <tr class="table-light">
                   <td>Autoriza compartilhar informações?</td>
                   <td>{{ nomad.shared_info }}</td>
@@ -231,6 +311,38 @@
                 <tr class="table-light">
                   <td>Sugestão</td>
                   <td>{{ nomad.suggestion }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Primeira Vez no Ceará?</td>
+                  <td>{{ nomad.first_time_ce }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Motivo da viagem</td>
+                  <td>{{ nomad.motivo_viagem }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Como soube do projeto?</td>
+                  <td>{{ nomad.know_how }}</td>
+                </tr>
+                <tr class="table-light">
+                  <td>Profissão</td>
+                  <td>{{ nomad.profissao }}</td>
+                </tr>
+                <tr class="table-info">
+                  <td>Possui empresa?</td>
+                  <td>{{ nomad.possui_empresa }}</td>
+                </tr>
+                <tr class="table-light" *ngIf="nomad.possui_empresa == 'sim'">
+                  <td>Nome da empresa</td>
+                  <td>{{ nomad.company_name }}</td>
+                </tr>
+                <tr class="table-info" *ngIf="nomad.possui_empresa == 'sim'">
+                  <td>Setor da Empresa</td>
+                  <td>{{ nomad.setor }}</td>
+                </tr>
+                <tr class="table-light" *ngIf="nomad.possui_empresa == 'sim'">
+                  <td>Site da empresa</td>
+                  <td>{{ nomad.site }}</td>
                 </tr>
               </tbody>
             </table>

@@ -3,7 +3,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.addColumn('cadastra_nomads', 'know_how',{
-      type: Sequelize.STRING(15),
+      type: Sequelize.STRING(100),
       allowNull: true
     });
   },

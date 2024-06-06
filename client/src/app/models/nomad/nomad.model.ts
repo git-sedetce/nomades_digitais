@@ -13,7 +13,15 @@ export class Nomad {
     public suggestion?: string,
     public first_time_ce?: string,
     public data_nascimento?: Date,
-    public passaporte?: string
+    public passaporte?: string,
+    public motivo_viagem?: string,
+    public know_how?: string,
+    public profissao?: string,
+    public possui_empresa?: string,
+    public company_name?: string,
+    public setor?: string,
+    public registro?: string,
+    public site?: string,
   ){
 
   }
