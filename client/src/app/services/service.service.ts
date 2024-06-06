@@ -35,9 +35,8 @@ export class ServiceService {
     return this.http.put<Nomad>(environment.url + 'nomads', nomad.id)
   }
 
-  pegar_cnpj(cnpj: any): Observable<any> {
-    console.log('cnpj', environment.url + cnpj)
-    return this.http.post(environment.url + 'buscarcnpj', cnpj)
+  pegar_cnpj(cnpj: string): Observable<any> {
+    return this.http.get(environment.url + 'buscarcnpj/' + cnpj)
   }
 
   anexar_arquivo(file: File): Observable<any> {

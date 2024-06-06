@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRounting } from './app.routing';
@@ -22,6 +23,7 @@ import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.componen
 import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
 import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component'
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -45,11 +47,13 @@ import { GoogleMapsModule } from '@angular/google-maps';
    ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRounting,
     HttpClientModule,
     GoogleMapsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

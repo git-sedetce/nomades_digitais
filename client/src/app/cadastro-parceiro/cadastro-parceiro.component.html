@@ -29,7 +29,7 @@
                   <div class="form-group col-sm-6 col-12 mb-3">
                     <label for="cnpj" class="form-label pergunta">CNPJ</label>
                     <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel
-                      required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" mask="00.000.000/0000-00" (blur)="buscarCNPJ(cnpj.value)">
+                      required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" mask="00.000.000/0000-00" (blur)="(buscarCNPJ(cnpj.value, parceiro))">
                     <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe apenas os números.</div>
                     <div *ngIf="!cnpj.valid && cnpj.touched" class="alert alert-danger" role="alert">CNPJ é obrigatório
                     </div>

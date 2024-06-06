@@ -3,6 +3,7 @@ import { ConsultaCepService }from '../service/consulta-cep.service';
 import { ServiceService } from '../services/service.service';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-parceiro',
@@ -77,7 +78,12 @@ export class CadastroParceiroComponent implements OnInit {
     //console.log(this.empresa)
   }
 
-  constructor(private cepsService: ConsultaCepService, public service: ServiceService, private http: HttpClient) { }
+  constructor(
+    private cepsService: ConsultaCepService,
+    public service: ServiceService,
+    private http: HttpClient,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
 
@@ -116,13 +122,23 @@ export class CadastroParceiroComponent implements OnInit {
 
     //consulta cnpj
 
-    buscarCNPJ(cnpj:any){
-      this.service.pegar_cnpj(cnpj)
-      .subscribe(pj => {
-        if(pj.cnpj === cnpj){
-          console.log('criar uma página de dialogo bloqueando o cadastro.')
-        }
-      })
+    buscarCNPJ(cnpj:any, form: any){
+        this.service.pegar_cnpj(cnpj).subscribe((res: any) => {
+          //console.log('res', res)
+          if(res.mensagem === 'CNPJ já cadastrado!'){
+            this.toastr.error(res.mensagem)
+            this.empresa.cnpj = '';
+          } else {
+            this.toastr.success(`CNPJ disponível para cadastro`)
+          }
+        })
+
+      // this.service.pegar_cnpj(cnpj)
+      // .subscribe(pj => {
+      //   if(pj.cnpj === cnpj){
+      //     console.log('criar uma página de dialogo bloqueando o cadastro.')
+      //   }
+      // })
     }
 
     //salvar parceiro

@@ -109,12 +109,19 @@ class ParceiroController {
   }
 
   static async parceiroByCnpj(req, res) {
-    const { cnpj } = req.body;
+    const { cnpj } = req.params;
     try {
       const parceiro_cnpj = await database.cadastra_parceiros.findOne({
         where: { cnpj: cnpj },
       });
-      return res.status(200).json(parceiro_cnpj);
+      if (parceiro_cnpj === null) {
+        return res
+          .status(200)
+          .json({ mensagem: `CNPJ autorizado para cadastro` });
+      } else {
+        return res.status(200).json({ mensagem: `CNPJ já cadastrado!` });
+      }
+      // return res.status(200).json(parceiro_cnpj);
     } catch (error) {
       return res.status(500).json(error.message);
     }
