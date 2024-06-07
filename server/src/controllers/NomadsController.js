@@ -96,6 +96,44 @@ class NomadsController {
     }
   }
 
+  static async nomadByEmail(req, res) {
+    const { email } = req.params;
+    try {
+      const email_nomad = await database.cadastra_nomads.findOne({
+        where: { nomad_email: email },
+      });
+      if (email_nomad === null) {
+        return res
+          .status(200)
+          .json({ mensagem: `Email autorizado para cadastro` });
+      } else {
+        return res.status(200).json({ mensagem: `Email já cadastrado!` });
+      }
+      // return res.status(200).json(parceiro_cnpj);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async nomadBycnpj(req, res) {
+    const { cnpj } = req.params;
+    try {
+      const nomad_cnpj = await database.empresaNomade.findOne({
+        where: { cnpj: cnpj },
+      });
+      if (nomad_cnpj === null) {
+        return res
+          .status(200)
+          .json({ mensagem: `CNPJ autorizado para cadastro` });
+      } else {
+        return res.status(200).json({ mensagem: `CNPJ já cadastrado!` });
+      }
+      // return res.status(200).json(parceiro_cnpj);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async atualizaNomad(req, res) {
     const { id } = req.params;
     const updateInfos = req.body;

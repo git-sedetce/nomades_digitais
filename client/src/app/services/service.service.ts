@@ -22,12 +22,10 @@ export class ServiceService {
   }
 
   cadastrar_nomad(data: any): Observable<any> {
-    //console.log('cadastrar_parceiro', environment.url + data)
     return this.http.post(environment.url + 'nomads', data)
   }
 
   nomadById(id: number): Observable<Nomad> {
-    console.log('nomadById', environment.url + id)
     return this.http.post<Nomad>(environment.url + 'nomads', id)
   }
 
@@ -37,6 +35,14 @@ export class ServiceService {
 
   pegar_cnpj(cnpj: string): Observable<any> {
     return this.http.get(environment.url + 'buscarcnpj/' + cnpj)
+  }
+
+  nomadByEmail(email: string): Observable<any> {
+    return this.http.get(environment.url + 'nomad/' + email)
+  }
+
+  pegar_cnpj_nomad(cnpj: string): Observable<any> {
+    return this.http.get(environment.url + 'verificacnpj/' + cnpj)
   }
 
   anexar_arquivo(file: File): Observable<any> {

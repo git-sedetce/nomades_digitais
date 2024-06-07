@@ -46,7 +46,7 @@
                   <div class="col-sm-6 col-12 mb-3">
                     <label for="nomad_email" class="form-label pergunta">Email</label>
                     <input type="email" class="form-control" id="nomad_email" name="nomad_email" aria-describedby="nomad_email"
-                      placeholder="Insira um email válido! / Please enter a valid email!" required #nomad_email="ngModel" [(ngModel)]="nomad.nomad_email">
+                      placeholder="Insira um email válido! / Please enter a valid email!" required #nomad_email="ngModel" [(ngModel)]="nomad.nomad_email" (blur)="(verificaEmail(nomad_email.value, formNomad))">
                     <div id="emailHelp" class="form-text alert alert-warning">Não compartilhe email com terceiros.<br> <strong>Do not share email with third parties.</strong></div>
                       <div *ngIf="!nomad_email.valid && nomad_email.touched" class="alert alert-danger"
                       role="alert">Email inválido</div>
@@ -189,7 +189,7 @@
                       <div class="row mt-2">
                         <div class="col-sm-6 mb-3 mt-3">
                           <label for="registro" class="form-label pergunta">Registro da empresa (CNPJ) / Company registration</label>
-                        <input type="text" class="form-control" id="registro" name="registro" placeholder="Registro da empresa (CNPJ) / Company registration" required #registro="ngModel" [(ngModel)]="nomad.registro">
+                        <input type="text" class="form-control" id="registro" name="registro" placeholder="Registro da empresa (CNPJ) / Company registration" required #registro="ngModel" [(ngModel)]="nomad.registro" mask="00.000.000/0000-00" (blur)="(buscarCNPJ(registro.value, formNomad))">
                         </div>
 
                         <div class="col-sm-6 mb-3 mt-3">

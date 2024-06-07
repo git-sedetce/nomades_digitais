@@ -132,13 +132,6 @@ export class CadastroParceiroComponent implements OnInit {
             this.toastr.success(`CNPJ disponível para cadastro`)
           }
         })
-
-      // this.service.pegar_cnpj(cnpj)
-      // .subscribe(pj => {
-      //   if(pj.cnpj === cnpj){
-      //     console.log('criar uma página de dialogo bloqueando o cadastro.')
-      //   }
-      // })
     }
 
     //salvar parceiro

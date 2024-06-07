@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ServiceService } from '../services/service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cadastro-nomad',
@@ -21,14 +22,41 @@ export class CadastroNomadComponent implements OnInit {
   maxChars_link = 150
 
 
-  constructor(public service: ServiceService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+  constructor(
+    public service: ServiceService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.nomad = new Nomad();
     this.getKnowHow();
   }
+
+  verificaEmail(email:any, form: any){
+    this.service.nomadByEmail(email).subscribe((res: any) => {
+      //console.log('res', res)
+      if(res.mensagem === 'Email já cadastrado!'){
+        this.toastr.error(res.mensagem)
+        this.nomad.nomad_email = '';
+      } else {
+        this.toastr.success(`Email disponível para cadastro`)
+      }
+    })
+}
+
+buscarCNPJ(cnpj:any, form: any){
+  this.service.pegar_cnpj_nomad(cnpj).subscribe((res: any) => {
+    //console.log('res', res)
+    if(res.mensagem === 'CNPJ já cadastrado!'){
+      this.toastr.error(res.mensagem)
+      this.nomad.registro = '';
+    } else {
+      this.toastr.success(`CNPJ disponível para cadastro`)
+    }
+  })
+}
 
   saveNomad(): void{
     this.nomad.know_how = this._knowhowList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
