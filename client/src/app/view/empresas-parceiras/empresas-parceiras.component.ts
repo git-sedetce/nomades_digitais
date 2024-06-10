@@ -42,7 +42,7 @@ export class EmpresasParceirasComponent implements OnInit {
     this.service.pegarParceiros('parceiro').subscribe(
       (partner: any[]) => {
         this.lista_parcerias = partner;
-        console.log('partners', this.lista_parcerias);
+        // console.log('partners', this.lista_parcerias);
       },
       (erro: any) => console.log(erro)
     );
@@ -148,9 +148,9 @@ export class EmpresasParceirasComponent implements OnInit {
         this.espaco_trabalho = partnerID.internet_service_alimentacao;
         this.essential_service = partnerID.essential_service;
         this.tem_internet = partnerID.internet_service;
-        console.log('partnerID', partnerID);
+        // console.log('partnerID', partnerID);
         this.endereco = partnerID.logradouro + ', ' + partnerID.numero + ' - ' + partnerID.bairro + ' - ' + partnerID.cidade + '/' + partnerID.estado;
-        console.log('endereco', this.endereco);
+        // console.log('endereco', this.endereco);
         this.geocoder.geocode({
           address: this.endereco
         }).subscribe(({results}) => {
@@ -207,7 +207,7 @@ export class EmpresasParceirasComponent implements OnInit {
         };
     });
 
-       console.log('lista_imagens', this.lista_imagens)
+      //  console.log('lista_imagens', this.lista_imagens)
     }, (erro: any) => console.error(erro))
 
   }

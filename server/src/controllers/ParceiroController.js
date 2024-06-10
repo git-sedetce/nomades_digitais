@@ -338,7 +338,7 @@ class ParceiroController {
              }  
                        
              const acesso = path.join(baseUrl, logoParceiro.path)   
-            //  console.log('acesso', acesso)         
+              // console.log('acesso', acesso)         
                 // Lendo o conteúdo do arquivo imagem
              fs.readFile(acesso, 'base64', function (err, data) {
                  if (err) {
