@@ -29,6 +29,18 @@ section {
   font-weight: bold;
 }
 
+.manual h3 {
+  font-size: 3.75rem;
+  color: #4ea091;
+  font-family: 'AristotelicaDemiBold';
+}
+
+.cabecalho th {
+  font-size: 1.5rem;
+  color: #4ea091;
+  font-family: 'AristotelicaDemiBold';
+}
+
 .card_manual{
   margin-top: 300px !important;
   background: rgba(255, 255, 255, 0.8);

@@ -1,6 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@font-face {
+  font-family: 'Aristotelica';
+  src: url('assets/fonts/AristotelicaSmallCaps-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AristotelicaDemiBold';
+  src: url('assets/fonts/AristotelicaDisplayDemiBoldTrial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AristotelicaExtraLight';
+  src: url('assets/fonts/AristotelicaDisplayExtraLightTrial.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 *{
     font-family: 'Montserrat', sans-serif;
 }
