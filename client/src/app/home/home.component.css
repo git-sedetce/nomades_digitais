@@ -7,6 +7,12 @@
   padding: 15px 15px;
 }
 
+.legenda h5 {
+  font-size: 3.75rem;
+  color: #4ea091;
+  font-family: 'AristotelicaDemiBold';
+}
+
 .imagem-carousel {
   object-fit: cover;
   object-position: 0 15%;

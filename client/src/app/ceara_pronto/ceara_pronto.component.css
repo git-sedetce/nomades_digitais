@@ -7,9 +7,10 @@
 
 .cta h3 {
   color: #fff;
-  font-size: 35px;
+  font-size: 45px;
   font-weight: 700;
   line-height: 40px;
+  font-family: 'AristotelicaDemiBold';
 }
 
 .cta h4 {
@@ -30,10 +31,11 @@
   margin: 20px 0;
 }
 .hub .icon-boxes h3 {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 700;
   color: #394047;
   margin-bottom: 15px;
+  font-family: 'AristotelicaDemiBold';
 }
 
 .hub .icon-box {
@@ -76,6 +78,8 @@
 .hub .icon-box .title a {
   color: #343a40;
   transition: 0.3s;
+  font-family: 'AristotelicaDemiBold';
+  font-size: 23px;
 }
 
 .hub .icon-box .title a:hover {

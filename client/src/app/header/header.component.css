@@ -1,5 +1,5 @@
 .navBar {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .brand_nomad {
@@ -9,12 +9,12 @@
 }
 
 .brand_nomad img {
-  width: 45%;
+  width: 55%;
   margin-left: 2.8rem;
 }
 
 .menu li{
-  font-size: clamp(0.90em, 0.2em + 1vw, 1.25em);
+  font-size: clamp(1.20em, 0.4em + 1vw, 1.45em);
 }
 
 .busca{

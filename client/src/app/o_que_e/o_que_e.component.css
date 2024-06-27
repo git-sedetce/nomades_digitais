@@ -16,8 +16,8 @@
 }
 
 .manual p{
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 22px;
+  margin-right: 24px;
   text-align: justify;
   font-weight: bold;
   letter-spacing: 2px;
@@ -32,16 +32,34 @@
 }
 
 .card_manual h4 {
-  font-size: clamp(1.50em, 1.8em, 3.1em);
+  font-size: clamp( 2em, 2.3em, 3.6em);
   /*font-size: 45px;*/
   padding: 15px 90px;
   font-weight: bold;
+  font-family: 'AristotelicaDemiBold';
+}
+
+.cadastro h4 {
+  font-size: clamp( 1.4em, 1.52em, 2.0em);
+  /*font-size: 45px;*/
+  padding: 15px 90px;
+  font-weight: bold;
+  font-family: 'AristotelicaDemiBold';
+}
+
+.cadastro a {
+  /* font-size: clamp( 1.3em, 1.5em, 1.9em);
+  padding: 15px 90px;*/
+  font-size: 20px;
+  font-family: 'AristotelicaDemiBold';
 }
 
 .card_manual p {
   font-size: clamp(1.20em, 1.4em, 1.8em);
   /*font-size: 45px;*/
   padding: 15px 90px;
+  text-align: justify;
+  font-family: 'AristotelicaExtraLight';
 }
 
 .card_manual_2{
@@ -51,7 +69,9 @@
 }
 
 .card_manual_2 p {
-  font-size: 16px;
+  font-size: 20px;
+  text-align: justify;
+  font-family: 'AristotelicaExtraLight';
 }
 
 .vantagens {
