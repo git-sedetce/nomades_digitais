@@ -198,26 +198,26 @@ class ParceiroController {
     const type = file.mimetype;    
     // console.log(file);
     // console.log(id);
-    try {
-      /*if (file) {
-        res.json(file);
-      } else {
-        throw new Error("File upload unseccessful");
-      }*/
-      const anexarParceiro = await database.anexos.create({
-        mimetype: type,
-        filename: nome_arquivo,
-        path: caminho,
-        user_id: id,
-        tipo_anexo: 'comprovante',
-        raw: true
+    if(type == "application/pdf"){
+      try {      
+        const anexarParceiro = await database.anexos.create({
+          mimetype: type,
+          filename: nome_arquivo,
+          path: caminho,
+          user_id: id,
+          tipo_anexo: 'comprovante',
+          raw: true
+        });
+        // console.log('anexarParceiro', anexarParceiro)
+        return res.status(200).json({message: 'Comprovante anexado com sucesso!'});
+      } catch (error) {
+        return res.status(500).json(error.message);
+      }
+    } else {
+      return res.status(500).json({
+        message: "Somente arquivo .pdf",
       });
-      // console.log('anexarParceiro', anexarParceiro)
-      return res.status(200).json({message: 'Comprovante anexado com sucesso!'});
-    } catch (error) {
-      return res.status(500).json(error.message);
     }
-
     //res.send("Arquivo recebido!")
   }
 
@@ -229,26 +229,26 @@ class ParceiroController {
     const type = file.mimetype;    
     // console.log(file);
     // console.log(id);
-    try {
-      /*if (file) {
-        res.json(file);
-      } else {
-        throw new Error("File upload unseccessful");
-      }*/
-      const anexarParceiro = await database.anexos.create({
-        mimetype: type,
-        filename: nome_arquivo,
-        path: caminho,
-        user_id: id,
-        tipo_anexo: 'alvara',
-        raw: true
+    if(type =="application/pdf"){
+      try {     
+        const anexarParceiro = await database.anexos.create({
+          mimetype: type,
+          filename: nome_arquivo,
+          path: caminho,
+          user_id: id,
+          tipo_anexo: 'alvara',
+          raw: true
+        });
+        // console.log('anexarParceiro', anexarParceiro)
+        return res.status(200).json({message: 'Alvará anexado com Sucesso!'});
+      } catch (error) {
+        return res.status(500).json(error.message);
+      }  
+    } else {
+      return res.status(500).json({
+        message: "Somente arquivo .pdf",
       });
-      // console.log('anexarParceiro', anexarParceiro)
-      return res.status(200).json({message: 'Alvará anexado com Sucesso!'});
-    } catch (error) {
-      return res.status(500).json(error.message);
     }
-
     //res.send("Arquivo recebido!")
   }
 
@@ -261,25 +261,25 @@ class ParceiroController {
     const type = file.mimetype;    
     // console.log(file);
     // console.log(id);
-    try {
-      /*if (file) {
-        res.json(file);
-      } else {
-        throw new Error("File upload unseccessful");
-      }*/
-      const anexarParceiro = await database.anexos.create({
-        mimetype: type,
-        filename: nome_arquivo,
-        path: caminho,
-        user_id: id,
-        tipo_anexo: 'logo'
+    if(type == "image/jpeg" || type == "image/png" || type == "image/jpg"){
+      try {      
+        const anexarParceiro = await database.anexos.create({
+          mimetype: type,
+          filename: nome_arquivo,
+          path: caminho,
+          user_id: id,
+          tipo_anexo: 'logo'
+        });
+        // console.log('anexarParceiro', anexarParceiro)
+        return res.status(200).json({message: 'Logo enviado com Sucesso!'});
+      } catch (error) {
+        return res.status(500).json(error.message);
+      }
+    } else {
+      return res.status(500).json({
+        message: "Somente arquivo .jpeg",
       });
-      // console.log('anexarParceiro', anexarParceiro)
-      return res.status(200).json({message: 'Logo enviado com Sucesso!'});
-    } catch (error) {
-      return res.status(500).json(error.message);
     }
-
     //res.send("Arquivo recebido!")
   }
 
@@ -295,13 +295,21 @@ class ParceiroController {
             const type = file[img].mimetype; 
             name_arquivo.push(nome_arquivo)
             //console.log(file[img].originalname)         
-              const anexarParceiro = await database.anexos.create({
-                mimetype: type,
-                filename: nome_arquivo,
-                path: caminho,
-                user_id: id,
-                tipo_anexo: 'image'
-              });    
+              if(type == "image/jpeg" || type == "image/png" || type == "image/jpg")   {
+                const anexarParceiro = await database.anexos.create({
+                  mimetype: type,
+                  filename: nome_arquivo,
+                  path: caminho,
+                  user_id: id,
+                  tipo_anexo: 'image'
+                }); 
+                return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
+              }
+              else {
+                return res.status(500).json({
+                  message: "Somente arquivo .jpeg",
+                });
+              }
               
             //  console.log(res.status(200).json(anexarParceiro));
             }

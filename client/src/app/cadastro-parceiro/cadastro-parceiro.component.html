@@ -17,7 +17,7 @@
         </div>
         <div class="card card_form mb-5">
           <div *ngIf="!submitted">
-            <div class="bg-primary">
+            <div class="bg-primary titulo">
               <h3 class="pb-3 pt-3 text-center text-white">Cadastro de Empresas</h3>
             </div>
             <form class="cadastro_parceiro" #parceiro="ngForm" (ngSubmit)="submitParceiro(parceiro)">
@@ -214,7 +214,7 @@
                 </div>
               </fieldset>
               <fieldset>
-                <legend class="text-center pergunta"> Tipo de serviços</legend>
+                <legend class="text-center">Tipo de serviços</legend>
                 <div class="row">
                   <div class="col-sm-12 col-12 mb-3">
                     <label for="tipo_service" class="text-center pergunta">Enquadra-se em qual tipo de local
@@ -475,7 +475,7 @@
         </div>
       </div>
       <div class="col-12" *ngIf="submitted">
-        <div class="card card_form mb-5">
+        <div class="card card_form mb-5 titulo">
           <h3 class="pb-3 pt-3 bg-primary text-center text-white">A Empresa foi cadastrada com sucesso!</h3>
           <div class="container">
             <table class="table table-hover">
@@ -614,21 +614,27 @@
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione o comprovante de velocidade de internet (contrato
                     com a operadora ou documento similar vigente).</label>
-                  <input #fileInput class="form-control" type="file" id="formFile">
-                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo"
+                  <input #fileInput class="form-control" type="file" id="formFile" (change)="onComprovanteSelected($event)">
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo" [disabled]="!comprovanteSelected"
                     (click)="onFileUpload()">upLoad</button>
                   <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
-                    Comprovante anexado com sucesso!
+                    {{ resposta_anexo }}
+                  </div>
+                  <div *ngIf="habilita_anexo == false" class="alert alert-danger" role="alert">
+                    {{ resposta_anexo }}
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="formFileMultiple" class="form-label">Adicione fotos de seu estabelecimento.</label>
                   <input #imgsInput class="form-control" type="file" id="formFileMultiple" multiple
-                  (change)="selectMultipleFiles($event)">
-                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_imgs"
+                  (change)="selectMultipleFiles($event)" (change)="onImageSelected($event)">
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_imgs" [disabled]="!imageSelected"
                     (click)="imgsUpload()">upLoad</button>
                   <div *ngIf="habilita_anexo_imgs == true" class="alert alert-success" role="alert">
-                    Imagens enviadas com Sucesso!
+                    {{ imgs_anexo }}
+                  </div>
+                  <div *ngIf="habilita_anexo_imgs == false" class="alert alert-danger" role="alert">
+                    {{ imgs_anexo }}
                   </div>
                 </div>
               </div>
@@ -636,20 +642,26 @@
               <div class="col-sm-6 col-12 mb-3">
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione o Alvará de Funcionamento.</label>
-                  <input #alvaraInput class="form-control" type="file" id="formFile">
-                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_alvara"
+                  <input #alvaraInput class="form-control" type="file" id="formFile" (change)="onAlvaraSelected($event)">
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_alvara" [disabled]="!alvaraSelected"
                     (click)="alvaraUpload()">upLoad</button>
                   <div *ngIf="habilita_anexo_alvara == true" class="alert alert-success" role="alert">
-                    Alvará anexado com Sucesso!
+                    {{ alvara_anexo }}
+                  </div>
+                  <div *ngIf="habilita_anexo_alvara == false" class="alert alert-danger" role="alert">
+                    {{ alvara_anexo }}
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="formFile" class="form-label">Adicione a logomarca do seu estabelecimento.</label>
-                  <input #logoInput class="form-control" type="file" id="formFile">
-                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_logo"
+                  <input #logoInput class="form-control" type="file" id="formFile" (change)="onLogoSelected($event)">
+                  <button class="btn btn-primary mb-3" [disabled]="habilita_anexo_logo" [disabled]="!logoSelected"
                     (click)="logoUpload()">upLoad</button>
                   <div *ngIf="habilita_anexo_logo == true" class="alert alert-success" role="alert">
-                    Logo enviado com Sucesso!
+                    {{ logo_anexo }}
+                  </div>
+                  <div *ngIf="habilita_anexo_logo == false" class="alert alert-danger" role="alert">
+                    {{ logo_anexo }}
                   </div>
                 </div>
               </div>
@@ -666,7 +678,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success mb-3" (click)="novoCadastroParceiro()">Novo Cadastro</button>
+          <button [disabled]="finaliza < 4" type="submit" class="btn btn-success mb-3" (click)="finalizaCadastro()">Finalizar o Cadastro</button>
         </div>
       </div>
     </div>
