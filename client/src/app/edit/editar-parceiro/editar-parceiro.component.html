@@ -1,0 +1,516 @@
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual text-center fw-bold">
+          <div class="card-body">
+            <h3 class="mb-2 mt-2">Editar Parcerios</h3>
+          </div>
+        </div>
+
+        <div class="row mt-2 mb-3 mx-auto">
+          <!-- <div class="form-group col-sm-12 col-12 ">
+            <div class="form-floating">
+              <input list="companyList" class="form-control" id="company_id"
+                placeholder="Digite o nome da empresa parceira" name="company_id" required #company_id
+                (change)="filtroCompany(company_id.value)">
+              <datalist id="companyList">
+                <option *ngFor="let parceiro of lista_parcerias" [value]="parceiro.id">{{ parceiro.nome_fantasia }}
+                </option>
+              </datalist>
+              <label class="form-label" for="company_id">Selecione a empresa parceira</label>
+            </div>
+          </div> -->
+
+          <div class="form-floating col-sm-12 col-12 mt-2 mx-auto">
+            <select class="form-select" #company_id id="company_id" aria-label="Empresa Parceira"
+              (change)="(filtroCompany(company_id.value))">
+              <option *ngFor="let parceiro of lista_parcerias" value="{{ parceiro.id }}">{{
+                parceiro.nome_fantasia }}</option>
+            </select>
+            <label class="form-label ms-3" for="company_id">Selecione a Empresa Parceira</label>
+          </div>
+        </div>
+
+        <div class="card card_table mb-5">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr class="cabecalho">
+                <th scope="col" class="text-center align-middle">Razão Social</th>
+                <th scope="col" class="text-center align-middle">Email</th>
+                <th scope="col" class="text-center align-middle">Tipo de Serviço</th>
+                <th scope="col" class="text-center align-middle">Bairro</th>
+                <th scope="col" class="text-center align-middle">Cidade</th>
+                <th scope="col" class="text-center align-middle">Saiba Mais</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="table align-middle ps-2">{{ parceiro?.razao_social }}</td>
+                <td class="table align-middle">{{ parceiro?.email_parceiro }}</td>
+                <td class="table align-middle">{{ parceiro?.tipo_service }}</td>
+                <td class="table align-middle">{{ parceiro?.bairro }}</td>
+                <td class="table align-middle">{{ parceiro?.cidade }}</td>
+                <td class="table align-middle"><button (click)="onEdit(parceiro)" type="button"
+                    class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEditParceria"><i
+                      class="bi bi-pencil-square"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="images">
+    <div class="container mt-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
+        <ng-container class="col mb-5" *ngFor=" let image of lista_imagens">
+          <div class="card shadow-sm transparent-card">
+            <img [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="100%"
+              height="225">
+            <div class="card-body">
+              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button (click)="editImg(image)" type="button" class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal" data-bs-target="#editImagem">Editar</button>
+                  <button (click)="deleteImagem(image)" type="button"
+                    class="btn btn-sm btn-outline-danger">Deletar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Modal Edit Parceria-->
+<div class="modal fade" id="modalEditParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalEditParceriaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title text-center text-uppercase fs-5" id="modalEditParceriaLabel">Atualizar Empresa Parceira
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditPartner">
+          <fieldset>
+            <legend>Sobre o Parceiro</legend>
+            <div class="row">
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="cnpj" class="form-label">CNPJ da Empresa</label>
+                <input type="text" formControlName="cnpj" class="form-control" id="cnpj">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="nome_fantasia" class="form-label">Nome Fantasia</label>
+                <input type="text" formControlName="nome_fantasia" class="form-control" id="nome_fantasia">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="razao_social" class="form-label">Razão Social</label>
+                <input type="text" formControlName="razao_social" class="form-control" id="razao_social">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-2 col-12 mb-3">
+                <label for="cep" class="form-label">CEP</label>
+                <input type="text" formControlName="cep" class="form-control" id="cep">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="logradouro" class="form-label">Logradouro</label>
+                <input type="text" formControlName="logradouro" class="form-control" id="logradouro">
+              </div>
+
+              <div class="col-sm-2 col-12 mb-3">
+                <label for="numero" class="form-label">Número</label>
+                <input type="text" formControlName="numero" class="form-control" id="numero">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input type="text" formControlName="complemento" class="form-control" id="complemento">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-3 col-12 mb-3">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input type="text" formControlName="bairro" class="form-control" id="bairro">
+              </div>
+
+              <div class="col-sm-3 col-12 mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" formControlName="cidade" class="form-control" id="cidade">
+              </div>
+
+              <div class="col-sm-2 col-12 mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" formControlName="estado" class="form-control" id="estado">
+              </div>
+
+              <div class="col-sm-2 col-12 mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" formControlName="telefone" class="form-control" id="telefone">
+              </div>
+
+              <div class="col-sm-2 col-12 mb-3">
+                <label for="instagram_parceiro" class="form-label">Instagram</label>
+                <input type="text" formControlName="instagram_parceiro" class="form-control" id="instagram_parceiro">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="email_parceiro" class="form-label">Email da Empresa</label>
+                <input type="text" formControlName="email_parceiro" class="form-control" id="email_parceiro">
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="midia_social" class="form-label">Site da Empresa</label>
+                <input type="text" formControlName="midia_social" class="form-control" id="midia_social">
+              </div>
+
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Sobre a Internet</legend>
+            <div class="row">
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="internet_service" class="form-label">O acesso a internet é liberado aos
+                  clientes?</label><br>
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_service" name="internet_service"
+                    class="form-check-input" id="internet_service" value="sim">
+                  <label class="form-check-label" for="internet_service">
+                    Sim
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_service" name="internet_service"
+                    class="form-check-input" id="internet_service" value="nao">
+                  <label class="form-check-label" for="internet_service">
+                    Não
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="internet_speed" class="form-label">Velocidade da Internet</label><br>
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_speed" name="internet_speed" class="form-check-input"
+                    id="internet_speed" value="abaixo_30">
+                  <label class="form-check-label" for="internet_speed">
+                    Abaixo de 30 Mbps
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_speed" name="internet_speed" class="form-check-input"
+                    id="internet_speed" value="30">
+                  <label class="form-check-label" for="internet_speed">
+                    30 Mbps
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_speed" name="internet_speed" class="form-check-input"
+                    id="internet_speed" value="acima_30">
+                  <label class="form-check-label" for="internet_speed">
+                    Acima de 30 Mbps
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tipo de Serviço</legend>
+            <div class="row">
+
+              <div class="col-12 mb-3 mx-auto">
+                <label for="tipo_service" class="form-label">Tipo de serviços</label><br>
+                <div class="form-check form-check-inline">
+                  <input type="radio" [(ngModel)]="type_service" formControlName="tipo_service" name="tipo_service"
+                    class="form-check-input" id="tipo_service" value="hospedagem">
+                  <label class="form-check-label" for="tipo_service">
+                    Hospedagem
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" [(ngModel)]="type_service" formControlName="tipo_service" name="tipo_service"
+                    class="form-check-input" id="tipo_service" value="alimentacao">
+                  <label class="form-check-label" for="tipo_service">
+                    Alimentação
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" [(ngModel)]="type_service" formControlName="tipo_service" name="tipo_service"
+                    class="form-check-input" id="tipo_service" value="local_trabalho">
+                  <label class="form-check-label" for="tipo_service">
+                    Local de trabalho
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" [(ngModel)]="type_service" formControlName="tipo_service" name="tipo_service"
+                    class="form-check-input" id="tipo_service" value="outro">
+                  <label class="form-check-label" for="tipo_service">
+                    Outro
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+
+          <fieldset *ngIf="type_service == 'hospedagem'">
+            <legend>Serviço Hospedagem</legend>
+            <div class="row">
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos
+                  hóspedes?</label>
+                <div class="form-check">
+                  <div *ngFor="let item of _serviceList">
+                    <input class="form-check-input" value="{{ item.nome }}" id="{{ item.nome }}" type="checkbox"
+                      name="{{ item.nome }}">
+                    <label class="form-check-label" for="{{ item.nome }}">{{ item.nome }}</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="outro_servico" class="form-label pergunta">Se você marcou a opção "outros", detalhe abaixo
+                  quais são
+                  os demais serviços ofertados.</label>
+                <textarea [maxlength]="maxChars" data-ls-module="charCounter" maxlength="100" class="form-control"
+                  id="outro_servico" rows="10" name="outro_servico" formControlName="outro_servico"></textarea>
+                <!-- <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                  formEditPartner.outro_servico.length }} / {{ maxChars }}</strong></div> -->
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6 col-12 mb-5">
+                <label for="tipo_estabelecimento" class="pergunta mb-2">Tipo de Hospedagem</label>
+              <select name="tipo_estabelecimento" class="form-select" id="tipo_estabelecimento" required formControlName="tipo_estabelecimento">
+                <option value="" class="text-center">----------------------Selecione----------------------</option>
+                <option value="albergue">Albergue</option>
+                  <option value="hotel">Hotel</option>
+                  <option value="hostel">Hostel</option>
+                  <option value="Pousada">Pousada</option>
+                  <option value="resort">Resort</option>
+                <option value="outros">Outros</option>
+              </select>
+              </div>
+            </div>
+
+
+          </fieldset>
+
+          <fieldset *ngIf="type_service == 'alimentacao'">
+            <legend>Serviço Alimentação</legend>
+            <div class="row">
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="internet_service_alimentacao" class="form-label pergunta">Possui espaços que sejam possíveis
+                  de trabalhar?</label><br>
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_service_alimentacao" name="internet_service_alimentacao"
+                    class="form-check-input" id="internet_service_alimentacao" value="sim">
+                  <label class="form-check-label" for="internet_service_alimentacao">
+                    Sim
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="internet_service_alimentacao" name="internet_service_alimentacao"
+                    class="form-check-input" id="internet_service_alimentacao" value="nao">
+                  <label class="form-check-label" for="internet_service_alimentacao">
+                    Não
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="orienta_equipe" class="form-label pergunta">Sua equipe é orientada para atender clientes que
+                  trabalham no local?</label><br>
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="orienta_equipe" name="orienta_equipe"
+                    class="form-check-input" id="orienta_equipe" value="orienta_sim">
+                  <label class="form-check-label" for="orienta_equipe">
+                    Sim
+                  </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" formControlName="orienta_equipe" name="orienta_equipe"
+                    class="form-check-input" id="orienta_equipe" value="orienta_nao">
+                  <label class="form-check-label" for="orienta_equipe">
+                    Não
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group col-sm-4 col-12 mb-5">
+                <label for="tipo_estabelecimento" class="pergunta mb-2">Tipo de Local de alimentação</label>
+              <select name="tipo_estabelecimento" class="form-select" id="tipo_estabelecimento" required formControlName="tipo_estabelecimento">
+                <option value="" class="text-center">----------------------Selecione----------------------</option>
+                <option value="cafeteria">Cafeteria</option>
+                <option value="churrascaria">Churrascaria</option>
+                <option value="food_truck">Food Truck</option>
+                <option value="hamburgueria">Hamburgueria</option>
+                <option value="lanchonete">Lanchonete</option>
+                <option value="pub">Pub</option>
+                <option value="restaurante">Restaurante</option>
+                <option value="outros">Outros</option>
+              </select>
+              </div>
+            </div>
+
+
+          </fieldset>
+
+          <fieldset *ngIf="type_service == 'local_trabalho'">
+            <legend>Serviço de Local de Trabalho</legend>
+            <div class="row">
+
+              <div class="form-group col-sm-4 col-12 mb-5">
+                <label for="localizacao" class="pergunta">Possui boa localização?</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" required name="localizacao" id="localizacao_sim" value="sim"
+                    name="localizacao" formControlName="localizacao">
+                  <label class="form-check-label" for="localizacao_sim">
+                    Sim
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" required name="localizacao" id="localizacao_nao" value="nao"
+                    name="localizacao" formControlName="localizacao">
+                  <label class="form-check-label" for="localizacao_nao">
+                    Não
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group col-sm-4 col-12 mb-5">
+                <label for="tipo_estabelecimento" class="pergunta mb-2">Tipo de Local de trabalho</label>
+              <select name="tipo_estabelecimento" class="form-select" id="tipo_estabelecimento" required formControlName="tipo_estabelecimento">
+                <option value="" class="text-center">----------------------Selecione----------------------</option>
+                <option value="cooworking">Cooworking</option>
+                  <option value="shoppings">Shoppings</option>
+                  <option value="livrarias">Livrarias</option>
+                  <option value="centro_comerciais">Centro Comerciais</option>
+                  <option value="instituicao_ensino">Instituição de Ensino</option>
+                <option value="outros">Outros</option>
+              </select>
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos
+                  hóspedes?</label>
+                <div class="form-check">
+                  <div *ngFor="let item of _serviceList">
+                    <input class="form-check-input" value="{{ item.nome }}" id="{{ item.nome }}" type="checkbox"
+                      name="{{ item.nome }}">
+                    <label class="form-check-label" for="{{ item.nome }}">{{ item.nome }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset *ngIf="type_service == 'outro'">
+            <legend>Serviço Hospedagem</legend>
+            <div class="row">
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="ramo" class="form-label pergunta mt-2 mb-4">Qual o ramo de atividade do
+                  estabelecimento?.</label>
+                <textarea [maxlength]="maxChars" data-ls-module="charCounter" maxlength="100" class="form-control"
+                  id="ramo" rows="10" name="ramo" formControlName="ramo"></textarea>
+                <!-- <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                  formEditPartner.ramo.length }} / {{ maxChars }}</strong></div> -->
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="beneficios" class="form-label pergunta">Quais os beneficios que o estabelecimento tem a
+                  oferecer aos Nômades Digitais?</label>
+                <textarea [maxlength]="maxChars" data-ls-module="charCounter" maxlength="100" class="form-control"
+                  id="beneficios" rows="10" name="beneficios" formControlName="beneficios"></textarea>
+                <!-- <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                  formEditPartner.beneficios.length }} / {{ maxChars }}</strong></div> -->
+              </div>
+
+            </div>
+
+
+          </fieldset>
+
+          <div class="row">
+            <div class="col-sm-6 col-12 mb-3" *ngIf="type_service == 'hospedagem' || type_service == 'local_trabalho'">
+              <label for="tarifa_especial" class="form-label pergunta mb-1">Detalhe sua proposta de tarifa para utilização
+                temporária do espaço.</label>
+              <textarea [maxlength]="maxChars" required class="form-control" id="tarifa_especial" rows="3"
+                name="tarifa_especial" formControlName="tarifa_especial"></textarea>
+              <!-- <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.tarifa_especial.length }} / {{ maxChars }}</strong></div> -->
+            </div>
+
+            <div class="col-sm-6 col-12 mb-3">
+              <label for="espacos_culturais" class="form-label pergunta mb-4">Faça um breve resumo promovendo o seu
+                estabelecimento.</label>
+              <textarea [maxlength]="maxChars" required class="form-control" id="espacos_culturais" rows="3"
+                name="espacos_culturais" formControlName="espacos_culturais"></textarea>
+              <!-- <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ empresa.tarifa_especial.length }} / {{ maxChars }}</strong></div> -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 col-12 mb-3">
+              <label for="idioma" class="form-label pergunta">Trabalha com outro idioma?</label><br>
+              <div class="form-check form-check-inline">
+                <input type="radio" [(ngModel)]="have_idioma" formControlName="idioma" name="idioma"
+                  class="form-check-input" id="idioma" value="idioma_sim">
+                <label class="form-check-label" for="idioma">
+                  Sim
+                </label>
+              </div>
+
+              <div class="form-check form-check-inline">
+                <input type="radio" [(ngModel)]="have_idioma" formControlName="idioma" name="idioma"
+                  class="form-check-input" id="idioma" value="idioma_nao">
+                <label class="form-check-label" for="idioma">
+                  Não
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="updatePartner()" class="btn btn-warning">Update</button>
+
+      </div>
+    </div>
+  </div>
+</div>

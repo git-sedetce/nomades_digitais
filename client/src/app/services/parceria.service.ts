@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -34,6 +34,10 @@ export class ParceriaService {
     return this.http.get(environment.url + metodo)
   }
 
+  listarParceiros(metodo: string): Observable<any> {
+    return this.http.get(environment.url + metodo)
+  }
+
   listarCidades(metodo: string): Observable<any> {
     return this.http.get(environment.url + metodo)
   }
@@ -44,6 +48,13 @@ export class ParceriaService {
 
   imagensById(id: number): Observable<any> {
     return this.http.get(environment.url + 'pegaImageParceiro/' + id)
+  }
+
+  atualizarParceiro(data: any, id: any){
+    return this.http.put<any>(environment.url + 'atualizaParceiro/' +id, data)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
   }
 
 

@@ -67,6 +67,23 @@ class ParceiroController {
     }
   }
 
+  static async listarParceiros(req, res) {
+    // const { bairro } = req.params;
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        // where: { bairro: bairro },
+        attributes: [
+          [Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")), "id"],
+          "cnpj", "nome_fantasia"
+        ],
+        group: ["cnpj", "nome_fantasia"],
+      });
+      return res.status(200).json(parceiros);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async listarCidades(req, res) {
     // const { bairro } = req.params;
     try {
@@ -395,6 +412,22 @@ class ParceiroController {
       return res.status(500).json({ message: 'Erro ao buscar as imagens'})
     }
 
+  }
+
+  static async atualizaParceiro(req, res){
+    const { id } = req.params;
+    const updateParceiro = req.body;
+    try {
+      await database.cadastra_parceiros.update(updateParceiro, {
+        where: {id: Number(id) },
+      });
+      const parceiroAtualizado = await database.cadastra_parceiros.findOne({
+        where: { id: Number(id) }
+      });
+      return res.status(200).json(parceiroAtualizado);
+    }catch (error) {
+      return res.status(500).json(error.message);
+    }
   }
 }
 

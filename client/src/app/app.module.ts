@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRounting } from './app.routing';
 
@@ -24,6 +24,7 @@ import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad
 import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component'
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastrModule } from 'ngx-toastr';
+import { EditarParceiroComponent } from './edit/editar-parceiro/editar-parceiro.component';
 
 
 @NgModule({
@@ -43,12 +44,14 @@ import { ToastrModule } from 'ngx-toastr';
       CpfEstrangeiroComponent,
       VistoNomadeComponent,
       EditarNomadComponent,
-      EmpresasParceirasComponent
+      EmpresasParceirasComponent,
+      EditarParceiroComponent
    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRounting,
     HttpClientModule,
     GoogleMapsModule,

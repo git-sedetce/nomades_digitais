@@ -32,6 +32,7 @@ const upload = multer({ storage })
 const router = Router()
 router.get('/parceiro', ParceiroController.pegarParceiro)
 router.get('/listaBairros', ParceiroController.listarBairros)
+router.get('/listaParceiros', ParceiroController.listarParceiros)
 router.get('/listaCidades', ParceiroController.listarCidades)
 router.get('/parceiro/:id', ParceiroController.parceiroById)
 router.get('/parceiroserv/:service', ParceiroController.parceiroByService)
@@ -44,6 +45,7 @@ router.post('/anexo_alvara/:id', upload.single('file'), ParceiroController.alvar
 //router.post('/anexo_logo/:id', uploadLogo.single('file'), ParceiroController.logoParceiro)
 router.post('/anexo_imgs/:id', upload.array('files'), ParceiroController.imgsParceiro)
 router.post('/anexos', upload.array('files'), ParceiroController.anexosParceiro)
+router.put('/atualizaParceiro/:id', ParceiroController.atualizaParceiro)
 
 
 module.exports = router
