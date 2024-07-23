@@ -51,9 +51,7 @@
                 <td class="table align-middle">{{ parceiro?.tipo_service }}</td>
                 <td class="table align-middle">{{ parceiro?.bairro }}</td>
                 <td class="table align-middle">{{ parceiro?.cidade }}</td>
-                <td class="table align-middle"><button (click)="onEdit(parceiro)" type="button"
-                    class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEditParceria"><i
-                      class="bi bi-pencil-square"></i></button></td>
+                <td class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEditParceria"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -281,13 +279,16 @@
             <div class="row">
 
               <div class="col-sm-6 col-12 mb-3">
-                <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos
-                  hóspedes?</label>
+                <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos hóspedes?</label>
                 <div class="form-check">
-                  <div *ngFor="let item of _serviceList">
-                    <input class="form-check-input" value="{{ item.nome }}" id="{{ item.nome }}" type="checkbox"
-                      name="{{ item.nome }}">
-                    <label class="form-check-label" for="{{ item.nome }}">{{ item.nome }}</label>
+                  <div *ngFor="let item of _serviceList; let i = index">
+                    <input
+                      class="form-check-input"
+                      [id]="item.nome"
+                      type="checkbox"
+                      [formControl]="essentialServiceControls[i]"
+                    />
+                    <label class="form-check-label" [for]="item.nome">{{ item.nome }}</label>
                   </div>
                 </div>
               </div>
@@ -315,6 +316,22 @@
                   <option value="resort">Resort</option>
                 <option value="outros">Outros</option>
               </select>
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="trabalho_reunioes" class="pergunta">Possui espaço que possibilite o trabalho em grupo e
+                  individual.</label>
+                <div class="form-check">
+                  <div *ngFor="let space of _meetList; let i = index">
+                    <input
+                      class="form-check-input"
+                      [id]="space.nome"
+                      type="checkbox"
+                      [formControl]="meetServiceControls[i]"
+                    />
+                    <label class="form-check-label" for="{{ space.nome }}">{{ space.nome }}</label>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -388,7 +405,7 @@
             <legend>Serviço de Local de Trabalho</legend>
             <div class="row">
 
-              <div class="form-group col-sm-4 col-12 mb-5">
+              <div class="form-group col-sm-3 col-12 mb-5">
                 <label for="localizacao" class="pergunta">Possui boa localização?</label>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" required name="localizacao" id="localizacao_sim" value="sim"
@@ -406,9 +423,9 @@
                 </div>
               </div>
 
-              <div class="form-group col-sm-4 col-12 mb-5">
+              <div class="form-group col-sm-3 col-12 mb-5 pe-3">
                 <label for="tipo_estabelecimento" class="pergunta mb-2">Tipo de Local de trabalho</label>
-              <select name="tipo_estabelecimento" class="form-select" id="tipo_estabelecimento" required formControlName="tipo_estabelecimento">
+              <select name="tipo_estabelecimento" class="form-select pe-5" id="tipo_estabelecimento" required formControlName="tipo_estabelecimento">
                 <option value="" class="text-center">----------------------Selecione----------------------</option>
                 <option value="cooworking">Cooworking</option>
                   <option value="shoppings">Shoppings</option>
@@ -419,14 +436,18 @@
               </select>
               </div>
 
-              <div class="col-sm-4 col-12 mb-3">
-                <label for="essential_service" class="pergunta">Quais serviços essenciais você fornece aos
-                  hóspedes?</label>
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="trabalho_reunioes" class="pergunta">Possui espaço que possibilite o trabalho em grupo e
+                  individual.</label>
                 <div class="form-check">
-                  <div *ngFor="let item of _serviceList">
-                    <input class="form-check-input" value="{{ item.nome }}" id="{{ item.nome }}" type="checkbox"
-                      name="{{ item.nome }}">
-                    <label class="form-check-label" for="{{ item.nome }}">{{ item.nome }}</label>
+                  <div *ngFor="let space of _meetList; let i = index">
+                    <input
+                      class="form-check-input"
+                      [id]="space.nome"
+                      type="checkbox"
+                      [formControl]="meetServiceControls[i]"
+                    />
+                    <label class="form-check-label" for="{{ space.nome }}">{{ space.nome }}</label>
                   </div>
                 </div>
               </div>
@@ -497,6 +518,21 @@
                 </label>
               </div>
 
+            </div>
+
+            <div class="col-sm-6 col-12 mb-3" *ngIf="have_idioma == 'sim'">
+              <label for="qual_idioma" class="pergunta">Idioma no qual trabalha.</label>
+              <div class="form-check">
+                <div *ngFor="let idioma of _languageList; let i = index">
+                  <input
+                    class="form-check-input"
+                    [id]="idioma.nome"
+                    type="checkbox"
+                    [formControl]="languageServiceControls[i]"
+                  />
+                  <label class="form-check-label" for="{{ idioma.nome }}">{{ idioma.nome }}</label>
+                </div>
+              </div>
             </div>
           </div>
 
