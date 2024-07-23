@@ -90,7 +90,7 @@ export class EditarParceiroComponent implements OnInit {
     this.service.listarParceiros('listaParceiros').subscribe(
       (partner: any[]) => {
         this.lista_parcerias = partner;
-        console.log('partners', this.lista_parcerias);
+        // console.log('partners', this.lista_parcerias);
       },
       (erro: any) => console.log(erro)
     );
@@ -170,7 +170,7 @@ export class EditarParceiroComponent implements OnInit {
     this.service.parceirosById(id).subscribe(
       (partnerId: any) => {
         this.parceiro = partnerId;
-        console.log('parceiro', this.parceiro);
+        // console.log('parceiro', this.parceiro);
       },
       (erro: any) => console.log(erro)
     );
