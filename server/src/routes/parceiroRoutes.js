@@ -46,6 +46,11 @@ router.post('/anexo_alvara/:id', upload.single('file'), ParceiroController.alvar
 router.post('/anexo_imgs/:id', upload.array('files'), ParceiroController.imgsParceiro)
 router.post('/anexos', upload.array('files'), ParceiroController.anexosParceiro)
 router.put('/atualizaParceiro/:id', ParceiroController.atualizaParceiro)
+router.put('/atualizaImagem/:id',  upload.single('file'),ParceiroController.atualizaImagem)
+router.delete('/deletaimagem/:id', ParceiroController.deletaImagem)
+router.post('/documento/:id', ParceiroController.pegaAlvaraByID)
+router.get('/pegaImageParceiro/:id', ParceiroController.pegaImgPartner)
+// router.put('/atualizaDocumento/:id', upload.single('file'), ParceiroController.atualizarAlvara)
 
 
 module.exports = router

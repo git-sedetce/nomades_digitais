@@ -77,6 +77,7 @@ class ParceiroController {
           "cnpj", "nome_fantasia"
         ],
         group: ["cnpj", "nome_fantasia"],
+        order: ["nome_fantasia"]
       });
       return res.status(200).json(parceiros);
     } catch (error) {
@@ -380,11 +381,42 @@ class ParceiroController {
          }
   }
 
+  static async pegaAlvaraByID(req, res) {
+    const { id } = req.params;
+        try {
+            const alvara = await database.anexos.findOne({
+                where: { id: Number(id) }, //, tipo_anexo: 'alvara'
+                attributes: ["path"],
+            });
+               if (!alvara) {
+                return res.status(404).send({
+                    message: "Alvará não encontrado",
+                });
+            }  
+                      
+            const acesso = path.join(baseUrl, alvara.path)   
+             // console.log('acesso', acesso)         
+               // Lendo o conteúdo do arquivo imagem
+            fs.readFile(acesso, 'base64', function (err, data) {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).send({
+                        message: "Erro ao ler alvará",
+                    });
+                }
+                return res.status(200).json(data);
+            });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json(error.message);
+        }
+ }
+
   static async pegaImgPartner(req, res){
     const { id } = req.params;
     try{
       const imagens = await database.anexos.findAll({
-        where: { user_id: Number(id), tipo_anexo: 'image' },
+        where: { user_id: Number(id) }, //, tipo_anexo: 'image'
         attributes: ['id', 'tipo_anexo', 'path']
       });
       if(!imagens || imagens.length === 0){
@@ -426,6 +458,122 @@ class ParceiroController {
       });
       return res.status(200).json(parceiroAtualizado);
     }catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async atualizaImagem(req, res) {
+    const { id } = req.params;
+    const updateImage = req.body;
+    console.log('updateImage', updateImage)
+    const file = req.file;
+    updateImage.path = file.path.split("server")[1]; //file.path
+    console.log('path', updateImage.path)
+    try {
+      await database.anexos.update(updateImage, {
+        where: { id: Number(id) },
+      });
+      const updatedImage = await database.anexos.findOne({
+        where: { id: Number(id) },
+      });
+      return res.status(200).json(updatedImage);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async atualizaLogo(req, res) {
+    const { id } = req.params;
+    const updateImage = req.body;
+    console.log('updateImage', updateImage)
+    const file = req.file;
+    updateImage.path = file.path.split("server")[1]; //file.path
+    console.log('path', updateImage.path)
+    try {
+      await database.anexos.update(updateImage, {
+        where: { id: Number(id) },
+      });
+      const updatedImage = await database.anexos.findOne({
+        where: { id: Number(id) },
+      });
+      return res.status(200).json(updatedImage);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async deletaImagem(req, res) {
+    const { id } = req.params;
+    const apaga = req.body;
+    try {
+      const imagem = await database.anexos.findOne({
+        where: { id: Number(id) },
+      });
+
+      console.log('localização', imagem.path)
+
+      const imagemPath = path.join(baseUrl, imagem.path)
+      console.log('arquivo', imagemPath)
+
+      fs.access(imagemPath, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.error(`O arquivo ${imagem.filename} não existe.`);
+        } else {
+            console.log(`O arquivo ${imagem.filename} existe. Vou deletá-lo.`);
+            // Deletar o arquivo
+            fs.unlink(imagemPath, (err) => {
+                if (err) {
+                    console.error(`Erro ao deletar o arquivo ${imagem.filename}: ${err}`);
+                } else {
+                    console.log(`O arquivo ${imagem.filename} foi deletado com sucesso.`);
+                }
+            });
+        }
+      });
+
+      await database.anexos.destroy({ where: { id: Number(id) } });
+      return res.status(200).json({
+        mensagem: `A imagem ${apaga.id} foi excluida com sucesso!!`,
+      });
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async deletaLogo(req, res) {
+    const { id } = req.params;
+    const apaga = req.body;
+    try {
+      const logo = await database.anexos.findOne({
+        where: { id: Number(id) },
+      });
+
+      console.log('localização', logo.img)
+
+      const logoPath = path.join(baseUrl, logo.img)
+      console.log('arquivo', logoPath)
+
+      fs.access(logoPath, fs.constants.F_OK, (err) => {
+        if (err) {
+            console.error(`O arquivo ${logo.filename} não existe.`);
+        } else {
+            console.log(`O arquivo ${logo.filename} existe. Vou deletá-lo.`);
+            // Deletar o arquivo
+            fs.unlink(logoPath, (err) => {
+                if (err) {
+                    console.error(`Erro ao deletar o arquivo ${logo.filename}: ${err}`);
+                } else {
+                    console.log(`O arquivo ${logo.filename} foi deletado com sucesso.`);
+                }
+            });
+        }
+      });
+
+      await database.anexos.destroy({ where: { id: Number(id) } });
+      return res.status(200).json({
+        mensagem: `A logo ${apaga.id} foi excluida com sucesso!!`,
+      });
+    } catch (error) {
       return res.status(500).json(error.message);
     }
   }

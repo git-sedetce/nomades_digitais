@@ -7,6 +7,7 @@ import {
   SafeUrl,
 } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+import { ImgsParceiro } from 'src/app/models/parceria/imgs-parceiro.model';
 import { Parceiro } from 'src/app/models/parceria/parceiro.model';
 import { ParceriaService } from 'src/app/services/parceria.service';
 
@@ -17,14 +18,17 @@ import { ParceriaService } from 'src/app/services/parceria.service';
 })
 export class EditarParceiroComponent implements OnInit {
   formEditPartner!: FormGroup;
+  formEditImgPartner!: FormGroup;
   partnerObj: Parceiro = new Parceiro();
+  imgPartner: ImgsParceiro = new ImgsParceiro();
   @ViewChild('imagePartner') imagePartner!: ElementRef;
+
 
   lista_parcerias!: any[];
   parceiro!: any;
   lista_imagens!: any[];
   nome_empresa!: any;
-  arquivoUrl: SafeResourceUrl | null = null;
+  documentoUrl: SafeResourceUrl | null = null;
   imgUrl: SafeResourceUrl | null = null;
   isLoading = false;
   type_service!: any;
@@ -34,6 +38,7 @@ export class EditarParceiroComponent implements OnInit {
   _languageList!: typeLanguage[];
   have_idioma!: any;
   tipo_estabelecimento_outros!: any;
+  documentoFile: any;
 
   constructor(
     private service: ParceriaService,
@@ -43,6 +48,16 @@ export class EditarParceiroComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.formEditImgPartner = this.formBuilder.group({
+      id: [],
+      mimetype: [],
+      filename: [],
+      path: [],
+      user_id: [],
+      tipo_anexo: []
+    })
+
     this.formEditPartner = this.formBuilder.group({
       cnpj: [],
       nome_fantasia: [],
@@ -103,14 +118,8 @@ export class EditarParceiroComponent implements OnInit {
       { nome: 'Limpeza', isselected: false },
       { nome: 'Restaurante e/ou Bar', isselected: false },
       { nome: 'Café da manhã', isselected: false },
-      {
-        nome: 'Espaços de lazer individual (ex. tv no quarto)',
-        isselected: false,
-      },
-      {
-        nome: 'Espaços de lazer coletivo (sala de TV, de jogos, e/ou de leitura, etc)',
-        isselected: false,
-      },
+      { nome: 'Espaços de lazer individual (ex. tv no quarto)', isselected: false },
+      { nome: 'Espaços de lazer coletivo (sala de TV, de jogos, e/ou de leitura, etc)', isselected: false },
       { nome: 'Outro', isselected: false },
     ];
   }
@@ -160,9 +169,9 @@ export class EditarParceiroComponent implements OnInit {
     );
   }
 
-  getEmpresa() {
-    this.getParceiros();
-  }
+  // getEmpresa() {
+  //   this.getParceiros();
+  // }
 
   filtroCompany(id: any) {
     this.getLogo(id);
@@ -170,7 +179,7 @@ export class EditarParceiroComponent implements OnInit {
     this.service.parceirosById(id).subscribe(
       (partnerId: any) => {
         this.parceiro = partnerId;
-        // console.log('parceiro', this.parceiro);
+        console.log('parceiro', this.parceiro);
       },
       (erro: any) => console.log(erro)
     );
@@ -360,12 +369,6 @@ export class EditarParceiroComponent implements OnInit {
       .join(',')
       .toString();
 
-    // this.partnerObj.essential_service = this._serviceList
-    //   .filter((x) => x.isselected == true)
-    //   .map((x) => x.nome)
-    //   .join(',')
-    //   .toString();
-
     this.service
       .atualizarParceiro(this.partnerObj, Number(this.partnerObj.id))
       .subscribe((res) => {
@@ -424,11 +427,88 @@ export class EditarParceiroComponent implements OnInit {
   }
 
   editImg(img: any) {
-    console.log('Editar imagem', img);
+    this.imgPartner.id = img.id;
+    this.formEditImgPartner.controls
+    this.formEditImgPartner.controls['id'].setValue(img.id)
+    this.formEditImgPartner.controls['mimetype'].setValue(img.mimetype)
+    this.formEditImgPartner.controls['filename'].setValue(img.filename)
+    this.formEditImgPartner.controls['path'].setValue(img.path)
+    this.formEditImgPartner.controls['user_id'].setValue(img.user_id)
+    this.formEditImgPartner.controls['tipo_anexo'].setValue(img.tipo_anexo)
+  }
+
+  updateImagem(){
+    const imgParceiro = this.imagePartner.nativeElement.files[0]
+    const updateImgPar = new FormData();
+    updateImgPar.append('file', imgParceiro);
+
+    console.log('imgParceiro', imgParceiro)
+    console.log('Imagem', updateImgPar)
+
+    this.service.atualizarImagem(updateImgPar, this.imgPartner.id).subscribe({
+      next: (res: any) =>{
+        this.toastr.success('Imagem atualizada com sucesso!');
+        //window.location.reload();
+      },
+      error:(e) => {
+        console.error(e);
+        this.toastr.error('Problemas ao atualizar a imagem');
+        this.formEditImgPartner.reset();
+      }
+    })
   }
 
   deleteImagem(midia: any) {
-    console.log('Deletar imagem', midia);
+    this.service.deleteImagem(midia.id).subscribe(res => {
+      this.toastr.error("Imagem deletada com sucesso!!");
+      window.location.reload();
+    })
+  }
+
+  onEditFile(file: any) {
+    this.imgPartner.id = file.id;
+    this.formEditImgPartner.controls['id'].setValue(file.id)
+
+    this.carregarFile(file.id)
+  }
+
+  updateDocument(){
+    const documentParceiro = this.imagePartner.nativeElement.files[0]
+    const updateDocumentoPar = new FormData();
+    updateDocumentoPar.append('file', documentParceiro);
+
+    console.log('documentParceiro', documentParceiro)
+    console.log('Imagem', updateDocumentoPar)
+
+    this.service.atualizarDocumento(updateDocumentoPar, this.imgPartner.id).subscribe({
+      next: (res: any) =>{
+        this.toastr.success('Alvará atualizada com sucesso!');
+        window.location.reload();
+      },
+      error:(e) => {
+        console.error(e);
+        this.toastr.error('Problemas ao atualizar o alvará');
+        this.formEditImgPartner.reset();
+      }
+    })
+  }
+
+  carregarFile(id:number): void{
+    this.service.pegarDocumento(id).subscribe(
+      (dataDocument: any) => {
+        const byteArray = new Uint8Array(
+          atob(dataDocument).split("").map((char) => char.charCodeAt(0))
+        );
+        const file = new Blob([byteArray], { type: 'application/pdf'});
+        const fileURL = URL.createObjectURL(file);
+        this.documentoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+        this.documentoFile = 'true';
+      },
+      (error) => {
+        console.error('Error ao carregar o documento: ', error.error.message);
+        this.documentoFile = 'null'
+      }
+    )
   }
 }
 

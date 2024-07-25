@@ -57,5 +57,50 @@ export class ParceriaService {
     }))
   }
 
+  atualizarImagem(data: any, id: any) {
+    return this.http
+      .put<any>(environment.url + 'atualizaImagem/' + id, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 
+  deleteImagem(id: number) {
+    return this.http.delete<any>(environment.url + 'deletaimagem/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  atualizarLogo(data: any, id: any) {
+    return this.http
+      .put<any>(environment.url + 'atualizaLogo/' + id, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  deleteLogo(id: number) {
+    return this.http.delete<any>(environment.url + 'deletaLogo/' + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  pegarDocumento(id: number): Observable<any> {
+    return this.http.post(environment.url + 'documento/' + id, { responseType: 'text' })
+  }
+
+  atualizarDocumento(data: any, id: any){
+    return this.http.put<any>(environment.url + 'atualizaDocumento/' +id, data)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
 }

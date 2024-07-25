@@ -37,17 +37,17 @@
             <thead>
               <tr class="cabecalho">
                 <th scope="col" class="text-center align-middle">Razão Social</th>
-                <th scope="col" class="text-center align-middle">Email</th>
+                <!-- <th scope="col" class="text-center align-middle">Email</th> -->
                 <th scope="col" class="text-center align-middle">Tipo de Serviço</th>
                 <th scope="col" class="text-center align-middle">Bairro</th>
                 <th scope="col" class="text-center align-middle">Cidade</th>
-                <th scope="col" class="text-center align-middle">Saiba Mais</th>
+                <th scope="col" class="text-center align-middle ">Saiba Mais</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="table align-middle ps-2">{{ parceiro?.razao_social }}</td>
-                <td class="table align-middle">{{ parceiro?.email_parceiro }}</td>
+                <!-- <td class="table align-middle">{{ parceiro?.email_parceiro }}</td> -->
                 <td class="table align-middle">{{ parceiro?.tipo_service }}</td>
                 <td class="table align-middle">{{ parceiro?.bairro }}</td>
                 <td class="table align-middle">{{ parceiro?.cidade }}</td>
@@ -64,7 +64,7 @@
     <div class="container mt-4">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
         <ng-container class="col mb-5" *ngFor=" let image of lista_imagens">
-          <div class="card shadow-sm transparent-card">
+          <div *ngIf="image.tipo_anexo === 'image'" class="card shadow-sm transparent-card">
             <img [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="100%"
               height="225">
             <div class="card-body">
@@ -75,6 +75,27 @@
                     data-bs-toggle="modal" data-bs-target="#editImagem">Editar</button>
                   <button (click)="deleteImagem(image)" type="button"
                     class="btn btn-sm btn-outline-danger">Deletar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
+        <ng-container class="col mb-5" *ngFor=" let image of lista_imagens">
+          <div *ngIf="image.tipo_anexo != 'image'" class="card shadow-sm transparent-card">
+            <img *ngIf="image.tipo_anexo != 'logo'" src="./assets/imgs/icons/pdf_3.png" alt="Arquivos" class="bd-placeholder-img card-img-top" width="100%" height="225">
+            <img *ngIf="image.tipo_anexo === 'logo'" [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="50%" height="225">
+            <div class="card-body">
+              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button (click)="onEditFile(image)" type="button" class="btn btn-sm btn-outline-primary"
+                    data-bs-toggle="modal" data-bs-target="#editFile">Editar</button>
+                  <button (click)="deleteImagem(image)" type="button"
+                    class="btn btn-sm btn-outline-danger">Deletar</button>
+                    <h5 class="fw-bold ms-4">{{ image.tipo_anexo }}</h5>
                 </div>
               </div>
             </div>
@@ -546,6 +567,66 @@
         <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" (click)="updatePartner()" class="btn btn-warning">Update</button>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal editar imagem-->
+<div class="modal fade" id="editImagem" tabindex="-1" aria-labelledby="editImagemLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editImagemLabel">Atualizar Imagem</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditImgPartner">
+          <div class="row">
+            <div class="col-sm-12 col-12 mb-3">
+              <label for="img" class="form-label">Atualiza Imagem</label>
+              <input class="form-control" type="file" id="img" name="img" required #imagePartner>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="updateImagem()" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal editar arquivos-->
+<div class="modal fade" id="editFile" tabindex="-1" aria-labelledby="editFileLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editFileLabel">Atualização</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditImgPartner">
+          <div class="row">
+            <div class="col-sm-12 col-12 mb-3">
+              <label for="certificado" class="form-label pergunta">Atualiza Documento</label>
+              <input class="form-control" type="file" id="certificado" name="certificado" required #imagePartner>
+            </div>
+          </div>
+
+          <div class="row">
+            <div *ngIf="documentoFile == 'true'" class="mt-2">
+              <iframe class="mt-2" [src]="documentoUrl" type="application/pdf" width="100%" height="1200px"></iframe>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="updateDocument()" class="btn btn-warning">Update</button>
       </div>
     </div>
   </div>
