@@ -20,6 +20,7 @@ textarea {
 
 section {
   background: url("../../../assets/imgs/Foto de jaime dantas unsplash.jpg") no-repeat fixed center;
+  min-height: 70vh;
 }
 
 .manual p, a{

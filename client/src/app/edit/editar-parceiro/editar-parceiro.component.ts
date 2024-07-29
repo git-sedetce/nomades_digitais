@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { MapGeocoder } from '@angular/google-maps';
@@ -10,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ImgsParceiro } from 'src/app/models/parceria/imgs-parceiro.model';
 import { Parceiro } from 'src/app/models/parceria/parceiro.model';
 import { ParceriaService } from 'src/app/services/parceria.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-editar-parceiro',
@@ -22,6 +24,9 @@ export class EditarParceiroComponent implements OnInit {
   partnerObj: Parceiro = new Parceiro();
   imgPartner: ImgsParceiro = new ImgsParceiro();
   @ViewChild('imagePartner') imagePartner!: ElementRef;
+  @ViewChild('alvaraInput') alvaraInput!: ElementRef;
+  @ViewChild('logoInput') logoInput!: ElementRef;
+  @ViewChild('comprovanteInput') comprovanteInput!: ElementRef;
 
 
   lista_parcerias!: any[];
@@ -39,12 +44,23 @@ export class EditarParceiroComponent implements OnInit {
   have_idioma!: any;
   tipo_estabelecimento_outros!: any;
   documentoFile: any;
+  have_logo!:any;
+  have_imagens!:any;
+  have_alvara!:any;
+  have_comprovante!:any;
+  multipleFiles!: any[];
+  alvaraSelected: boolean = false;
+  comprovanteSelected: boolean = false;
+  imageSelected: boolean = false;
+  logoSelected: boolean = false;
+  mostrar_tabela: boolean = false;
 
   constructor(
     private service: ParceriaService,
     private sanitizer: DomSanitizer,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -176,6 +192,7 @@ export class EditarParceiroComponent implements OnInit {
   filtroCompany(id: any) {
     this.getLogo(id);
     this.getImagens(id);
+    this.mostrar_tabela = true
     this.service.parceirosById(id).subscribe(
       (partnerId: any) => {
         this.parceiro = partnerId;
@@ -411,18 +428,27 @@ export class EditarParceiroComponent implements OnInit {
       (imagensData: any[]) => {
         this.lista_imagens = imagensData.map((imagem) => {
           const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
-          const safeImageUrl: SafeUrl =
-            this.sanitizer.bypassSecurityTrustUrl(decodedImage);
+          const safeImageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(decodedImage);
           return {
             id: imagem.id,
             tipo_anexo: imagem.tipo_anexo,
             imagem: safeImageUrl,
           };
         });
+        this.have_logo = this.lista_imagens.filter(item => item.tipo_anexo === 'logo').length;
+        this.have_imagens = this.lista_imagens.filter(item => item.tipo_anexo === 'image').length;
+        this.have_alvara = this.lista_imagens.filter(item => item.tipo_anexo === 'alvara').length;
+        this.have_comprovante = this.lista_imagens.filter(item => item.tipo_anexo === 'comprovante').length;
 
         console.log('lista_imagens', this.lista_imagens);
       },
-      (erro: any) => console.error(erro)
+      (erro: any) => {
+        console.error(erro)
+        this.have_logo = 0
+        this.have_imagens = 0
+        this.have_alvara = 0
+        this.have_comprovante = 0
+      }
     );
   }
 
@@ -480,14 +506,14 @@ export class EditarParceiroComponent implements OnInit {
     console.log('documentParceiro', documentParceiro)
     console.log('Imagem', updateDocumentoPar)
 
-    this.service.atualizarDocumento(updateDocumentoPar, this.imgPartner.id).subscribe({
+    this.service.atualizarImagem(updateDocumentoPar, this.imgPartner.id).subscribe({
       next: (res: any) =>{
         this.toastr.success('Alvará atualizada com sucesso!');
         window.location.reload();
       },
       error:(e) => {
         console.error(e);
-        this.toastr.error('Problemas ao atualizar o alvará');
+        this.toastr.error('Problemas ao atualizar o alvará' ,e);
         this.formEditImgPartner.reset();
       }
     })
@@ -510,6 +536,150 @@ export class EditarParceiroComponent implements OnInit {
       }
     )
   }
+
+  //inserir os ausentes
+
+  onAlvaraSelected(event: any): void {
+    this.alvaraSelected = event.target.files.length > 0;
+    // console.log('alvaraSelected', this.alvaraSelected);
+  }
+
+  onImageSelected(event: any): void {
+    this.imageSelected = event.target.files.length > 0;
+    // console.log('imageSelected', this.imageSelected);
+  }
+
+  onComprovanteSelected(event: any): void {
+    this.comprovanteSelected = event.target.files.length > 0;
+    // console.log('comprovanteSelected', this.comprovanteSelected);
+  }
+
+  onLogoSelected(event: any): void {
+    this.logoSelected = event.target.files.length > 0;
+    // console.log('logoSelected', this.logoSelected);
+  }
+
+  logoUpload(parceiro: any){
+    const imageLogo = this.logoInput.nativeElement.files[0];
+    const logo = new FormData();
+    const user_id = parceiro.id;
+    logo.append('file', imageLogo);
+    logo.append('id', user_id);
+    //console.log('formData', logo)
+    //console.log('id', user_id)
+
+    this.http
+      .post(environment.url + 'anexo_logo' + '/' + user_id, logo).subscribe({
+        next: (response: any) => {
+          // console.log(response);
+          this.toastr.success('Imagens inseridas com sucesso!');
+          window.location.reload();
+          // console.log('logo_anexo', this.logo_anexo);
+        },
+        error: (e: string | undefined) => {
+          this.toastr.error('Problemas ao inserir imagens:', e);
+          // console.log('logo_anexo', this.logo_anexo);
+        },
+      });
+
+  }
+
+  inserirAlvara(parceiro: any){
+    const imageAlvara = this.alvaraInput.nativeElement.files[0];
+    const alvara = new FormData();
+    const user_id = this.parceiro.id;
+    alvara.append('file', imageAlvara);
+    alvara.append('id', user_id);
+    //console.log('formData', alvara)
+    //console.log('id', user_id)
+
+    this.http
+      .post(environment.url + 'anexo_alvara' + '/' + user_id, alvara).subscribe({
+        next: (response: any) => {
+          // console.log(response);
+          this.toastr.success('Alvará inserido com sucesso!');
+          window.location.reload();
+          // console.log('alvara_anexo', this.alvara_anexo);
+        },
+        error: (e: string | undefined) => {
+          this.toastr.error('Problemas ao inserir alvará:', e);
+
+
+          // console.log('alvara_anexo', this.alvara_anexo);
+        },
+      });
+
+  }
+
+  inserirComprovante(parceiro: any){
+    const imageBlob = this.comprovanteInput.nativeElement.files[0];
+    const file = new FormData();
+    const user_id = parceiro.id;
+    file.append('file', imageBlob);
+    file.append('id', user_id);
+    //console.log('formData', file)
+    //console.log('id', user_id)
+
+    this.http.post(environment.url + 'anexo' + '/' + user_id, file).subscribe({
+      next: (response: any) => {
+        // console.log(response);
+        this.toastr.success('Comprovante inserido com sucesso!');
+        window.location.reload();
+
+
+        // console.log('resposta_anexo', this.resposta_anexo);
+      },
+      error: (e: string | undefined) => {
+
+        this.toastr.error('Problemas ao inserir comprovante:', e);
+
+
+        // console.log('resposta_anexo', this.resposta_anexo);
+      },
+    });
+
+  }
+
+  selectMultipleFiles(event: any) {
+    if (event.target.files.length > 0) {
+      this.multipleFiles = event.target.files;
+    }
+  }
+
+  inserirImagens(parceiro: any) {
+    const files = new FormData();
+    const user_id = parceiro.id;
+    let allFilesAreJPEG = true;
+
+    for (let file of this.multipleFiles) {
+    //   const fileExtension = file.name.split('.').pop().toLowerCase();
+    // if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
+    //   allFilesAreJPEG = false;
+    //   break;
+    // }
+      files.append('files', file);
+    }
+
+    if (!allFilesAreJPEG) {
+      this.toastr.error('Somente arquivo .jpeg, .jpg ou .png');
+      // Aqui você pode adicionar um aviso para o usuário, se desejar
+      return;
+    }
+
+    this.http.post(environment.url + 'anexo_imgs' + '/' + user_id, files).subscribe({next: (response: any) => {
+          // console.log(response);
+          this.toastr.success('Imagens inseridas com sucesso!');
+          window.location.reload();
+
+          // console.log('imgs_anexo', this.imgs_anexo);
+        },
+
+        error: (e: string | undefined) => {
+          this.toastr.error('Problemas ao inserir imagens:', e);
+          // console.log('imgs_anexo', this.imgs_anexo);
+        },
+      });
+    }
 }
 
 class typeService {

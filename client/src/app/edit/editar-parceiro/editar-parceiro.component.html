@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="card card_table mb-5">
+        <div class="card card_table mb-5" *ngIf="mostrar_tabela">
           <table class="table table-striped table-hover">
             <thead>
               <tr class="cabecalho">
@@ -41,7 +41,7 @@
                 <th scope="col" class="text-center align-middle">Tipo de Serviço</th>
                 <th scope="col" class="text-center align-middle">Bairro</th>
                 <th scope="col" class="text-center align-middle">Cidade</th>
-                <th scope="col" class="text-center align-middle ">Saiba Mais</th>
+                <th colspan="2" scope="col" class="text-center align-middle ">Saiba Mais</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +52,32 @@
                 <td class="table align-middle">{{ parceiro?.bairro }}</td>
                 <td class="table align-middle">{{ parceiro?.cidade }}</td>
                 <td class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEditParceria"><i class="bi bi-pencil-square"></i></button></td>
+                <td class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#modalInserirImagens"><i class="bi bi-file-plus"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card card_table mb-5" *ngIf="have_logo == 0 || have_imagens == 0 || have_alvara == 0 || have_comprovante == 0">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr class="cabecalho">
+                <th scope="col" class="text-center align-middle">Observação</th>
+                <th scope="col" *ngIf="have_logo == 0" class="text-center align-middle">Inserir logo</th>
+                <th scope="col" *ngIf="have_imagens == 0"  class="text-center align-middle">Inserir Imagens</th>
+                <th scope="col" *ngIf="have_alvara == 0"  class="text-center align-middle">Inserir Alvará</th>
+                <th scope="col" *ngIf="have_comprovante == 0"  class="text-center align-middle ">Inserir Comrpovante de Internet</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="table align-middle ps-2">Esta empresa possui pendência no cadastro, por favor complete.</td>
+
+                <td *ngIf="have_logo == 0" class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalInserirlogo"><i class="bi bi-file-earmark-image"></i></button></td>
+                <td *ngIf="have_imagens == 0" class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-danger mx-3" data-bs-toggle="modal" data-bs-target="#modalInserirImagens"><i class="bi bi-images"></i></button></td>
+                <td *ngIf="have_alvara == 0" class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalInserirAlvara"><i class="bi bi-file-earmark-pdf-fill"></i></button></td>
+                <td *ngIf="have_comprovante == 0" class="table align-middle"><button (click)="onEdit(parceiro)" type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#modalInserirComprovante"><i class="bi bi-wifi"></i></button></td>
+
               </tr>
             </tbody>
           </table>
@@ -631,3 +657,107 @@
     </div>
   </div>
 </div>
+
+<!--Inseir Logo-->
+<div class="modal fade" id="modalInserirlogo" tabindex="-1" aria-labelledby="modalInserirlogoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalInserirlogoLabel">Inserir Logo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="formFile" class="form-label">Adicione a logomarca do seu estabelecimento.</label>
+        <input #logoInput class="form-control" type="file" id="formFile" (change)="onLogoSelected($event)">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="logoUpload(parceiro)" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal inserir imagens-->
+<div class="modal fade" id="modalInserirImagens" tabindex="-1" aria-labelledby="modalInserirImagensLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalInserirImagensLabel">Inserir Imagens</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditImgPartner">
+          <div class="row">
+            <div class="col-sm-12 col-12 mb-3">
+              <label for="formFileMultiple" class="form-label">Adicione fotos de seu estabelecimento.</label>
+                  <input #imgsInput class="form-control" type="file" id="formFileMultiple" multiple
+                  (change)="selectMultipleFiles($event)" (change)="onImageSelected($event)">
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="inserirImagens(parceiro)" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal inserir alvará-->
+<div class="modal fade" id="modalInserirAlvara" tabindex="-1" aria-labelledby="modalInserirAlvaraLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalInserirAlvaraLabel">Inserir Alvará</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditImgPartner">
+          <div class="row">
+            <div class="col-sm-12 col-12 mb-3">
+              <label for="formFile" class="form-label">Adicione o Alvará de Funcionamento.</label>
+              <input #alvaraInput class="form-control" type="file" id="formFile" (change)="onAlvaraSelected($event)">
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="inserirAlvara(parceiro)" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal inserir Comprovante-->
+<div class="modal fade" id="modalInserirComprovante" tabindex="-1" aria-labelledby="modalInserirComprovanteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalInserirComprovanteLabel">Inserir Comprovante de Internet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditImgPartner">
+          <div class="row">
+            <div class="col-sm-12 col-12 mb-3">
+              <label for="formFile" class="form-label">Adicione o comprovante de velocidade de internet (contrato
+                com a operadora ou documento similar vigente).</label>
+              <input #comprovanteInput class="form-control" type="file" id="formFile" (change)="onComprovanteSelected($event)">
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="inserirComprovante(parceiro)" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+

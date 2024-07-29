@@ -312,8 +312,7 @@ class ParceiroController {
             const nome_arquivo = file[img].filename;
             const type = file[img].mimetype; 
             name_arquivo.push(nome_arquivo)
-            //console.log(file[img].originalname)         
-              if(type == "image/jpeg" || type == "image/png" || type == "image/jpg")   {
+            //console.log(file[img].originalname)
                 const anexarParceiro = await database.anexos.create({
                   mimetype: type,
                   filename: nome_arquivo,
@@ -321,13 +320,7 @@ class ParceiroController {
                   user_id: id,
                   tipo_anexo: 'image'
                 }); 
-                return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
-              }
-              else {
-                return res.status(500).json({
-                  message: "Somente arquivo .jpeg",
-                });
-              }
+                return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})              
               
             //  console.log(res.status(200).json(anexarParceiro));
             }

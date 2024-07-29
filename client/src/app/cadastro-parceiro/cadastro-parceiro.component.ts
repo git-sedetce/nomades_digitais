@@ -29,7 +29,7 @@ export class CadastroParceiroComponent implements OnInit {
   imgs_anexo: any;
   habilita_anexo_logo!: boolean;
   habilita_anexo_imgs!: boolean;
-  multipleFiles = [];
+  multipleFiles!: any[];
 
   empresa = {
     id: '',
@@ -379,10 +379,24 @@ export class CadastroParceiroComponent implements OnInit {
   imgsUpload() {
     const files = new FormData();
     const user_id = this.empresa.id;
+    let allFilesAreJPEG = true;
 
     for (let file of this.multipleFiles) {
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
+      allFilesAreJPEG = false;
+      break;
+    }
       files.append('files', file);
     }
+
+    if (!allFilesAreJPEG) {
+      this.toastr.error('Somente arquivo .jpeg, .jpg ou .png');
+      this.imgs_anexo = 'Somente arquivo .jpeg, .jpg ou .png';
+      // Aqui você pode adicionar um aviso para o usuário, se desejar
+      return;
+    }
+
     this.http
       .post(environment.url + 'anexo_imgs' + '/' + user_id, files).subscribe({
         next: (response: any) => {
@@ -400,18 +414,6 @@ export class CadastroParceiroComponent implements OnInit {
         },
       });
     }
-  //     .subscribe((response: any) => {
-  //       console.log(response);
-  //       this.imgs_anexo = response;
-  //       console.log('imgs_anexo', this.imgs_anexo);
-
-  //       if (response == 'Imagens enviadas com Sucesso!') {
-  //         this.habilita_anexo_imgs = false;
-  //       } else {
-  //         this.habilita_anexo_imgs = true;
-  //       }
-  //     });
-  // }
 
   _serviceList!: typeService[];
   _meetList!: typeMeet[];
