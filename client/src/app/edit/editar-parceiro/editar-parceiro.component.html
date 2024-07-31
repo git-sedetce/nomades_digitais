@@ -25,6 +25,7 @@
           <div class="form-floating col-sm-12 col-12 mt-2 mx-auto">
             <select class="form-select" #company_id id="company_id" aria-label="Empresa Parceira"
               (change)="(filtroCompany(company_id.value))">
+              <option></option>
               <option *ngFor="let parceiro of lista_parcerias" value="{{ parceiro.id }}">{{
                 parceiro.nome_fantasia }}</option>
             </select>
@@ -86,47 +87,49 @@
     </div>
   </div>
 
-  <div id="images">
+  <div id="images" *ngIf="mostrar_imageFiles"><!--Galeria de Imagens-->
     <div class="container mt-4">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
-        <ng-container class="col mb-5" *ngFor=" let image of lista_imagens">
-          <div *ngIf="image.tipo_anexo === 'image'" class="card shadow-sm transparent-card">
-            <img [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="100%"
-              height="225">
-            <div class="card-body">
-              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button (click)="editImg(image)" type="button" class="btn btn-sm btn-outline-primary"
-                    data-bs-toggle="modal" data-bs-target="#editImagem">Editar</button>
-                  <button (click)="deleteImagem(image)" type="button"
-                    class="btn btn-sm btn-outline-danger">Deletar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ng-container>
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
-        <ng-container class="col mb-5" *ngFor=" let image of lista_imagens">
-          <div *ngIf="image.tipo_anexo != 'image'" class="card shadow-sm transparent-card">
-            <img *ngIf="image.tipo_anexo != 'logo'" src="./assets/imgs/icons/pdf_3.png" alt="Arquivos" class="bd-placeholder-img card-img-top" width="100%" height="225">
-            <img *ngIf="image.tipo_anexo === 'logo'" [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="50%" height="225">
-            <div class="card-body">
-              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button (click)="onEditFile(image)" type="button" class="btn btn-sm btn-outline-primary"
-                    data-bs-toggle="modal" data-bs-target="#editFile">Editar</button>
-                  <button (click)="deleteImagem(image)" type="button"
-                    class="btn btn-sm btn-outline-danger">Deletar</button>
-                    <h5 class="fw-bold ms-4">{{ image.tipo_anexo }}</h5>
+      <div *ngIf="!loading">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
+          <ng-container class="col mb-5" *ngFor="let image of lista_imagens">
+            <div *ngIf="image.tipo_anexo === 'image'" class="card shadow-sm transparent-card">
+              <img [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="100%" height="225">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button (click)="editImg(image)" type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editImagem">Editar</button>
+                    <button (click)="deleteImagem(image)" type="button" class="btn btn-sm btn-outline-danger">Deletar</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </ng-container>
+          </ng-container>
+        </div>
+
+        <!-- Documentos e Logo -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 pb-5 ms-3 me-3">
+          <ng-container class="col mb-5" *ngFor="let image of lista_imagens">
+            <div *ngIf="image.tipo_anexo != 'image'" class="card shadow-sm transparent-card">
+              <img *ngIf="image.tipo_anexo != 'logo'" src="./assets/imgs/icons/pdf_3.png" alt="Arquivos" class="bd-placeholder-img card-img-top" width="100%" height="225">
+              <img *ngIf="image.tipo_anexo === 'logo'" [src]="image.imagem" alt="Imagem {{ image.id }}" class="bd-placeholder-img card-img-top" width="50%" height="225">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button *ngIf="image.tipo_anexo != 'logo'" (click)="onEditFile(image)" type="button" class="text-capitalize btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editFile">Editar {{ image.tipo_anexo }}</button>
+                    <button *ngIf="image.tipo_anexo === 'logo'" (click)="editImg(image)" type="button" class="text-capitalize btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editFile">Editar {{ image.tipo_anexo }}</button>
+                    <button (click)="deleteImagem(image)" type="button" class="btn btn-sm btn-outline-danger">Deletar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>
@@ -610,7 +613,7 @@
         <form [formGroup]="formEditImgPartner">
           <div class="row">
             <div class="col-sm-12 col-12 mb-3">
-              <label for="img" class="form-label">Atualiza Imagem</label>
+              <label for="img" class="form-label pergunta">Atualiza Imagem</label>
               <input class="form-control" type="file" id="img" name="img" required #imagePartner>
             </div>
           </div>
@@ -637,8 +640,8 @@
         <form [formGroup]="formEditImgPartner">
           <div class="row">
             <div class="col-sm-12 col-12 mb-3">
-              <label for="certificado" class="form-label pergunta">Atualiza Documento</label>
-              <input class="form-control" type="file" id="certificado" name="certificado" required #imagePartner>
+              <label for="arquivo" class="form-label pergunta">Atualiza Documento</label>
+              <input class="form-control" type="file" id="arquivo" name="arquivo" required #arquivoPartner>
             </div>
           </div>
 
@@ -658,7 +661,7 @@
   </div>
 </div>
 
-<!--Inseir Logo-->
+<!--Modal Inseir Logo-->
 <div class="modal fade" id="modalInserirlogo" tabindex="-1" aria-labelledby="modalInserirlogoLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
     <div class="modal-content">

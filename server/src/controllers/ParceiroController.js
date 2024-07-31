@@ -305,25 +305,25 @@ class ParceiroController {
     var name_arquivo =[]
         const file = req.files
         const { id } = req.params;      
-        // console.log(file)        
+        console.log('file', file)        
         if(file.length>0){
           for(let img = 0; img < file.length; img++){
             const caminho = file[img].path.split("server")[1];
             const nome_arquivo = file[img].filename;
             const type = file[img].mimetype; 
             name_arquivo.push(nome_arquivo)
-            //console.log(file[img].originalname)
+            console.log('name', file[img].originalname)
                 const anexarParceiro = await database.anexos.create({
                   mimetype: type,
                   filename: nome_arquivo,
                   path: caminho,
                   user_id: id,
                   tipo_anexo: 'image'
-                }); 
-                return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})              
+                });                              
               
             //  console.log(res.status(200).json(anexarParceiro));
             }
+            return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
             //console.log('name_arquivo', name_arquivo)
             return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
         }else{

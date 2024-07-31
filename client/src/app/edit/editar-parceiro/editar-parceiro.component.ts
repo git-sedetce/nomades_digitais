@@ -24,6 +24,7 @@ export class EditarParceiroComponent implements OnInit {
   partnerObj: Parceiro = new Parceiro();
   imgPartner: ImgsParceiro = new ImgsParceiro();
   @ViewChild('imagePartner') imagePartner!: ElementRef;
+  @ViewChild('arquivoPartner') arquivoPartner!: ElementRef;
   @ViewChild('alvaraInput') alvaraInput!: ElementRef;
   @ViewChild('logoInput') logoInput!: ElementRef;
   @ViewChild('comprovanteInput') comprovanteInput!: ElementRef;
@@ -54,6 +55,8 @@ export class EditarParceiroComponent implements OnInit {
   imageSelected: boolean = false;
   logoSelected: boolean = false;
   mostrar_tabela: boolean = false;
+  mostrar_imageFiles: boolean = false;
+  loading = true;
 
   constructor(
     private service: ParceriaService,
@@ -123,7 +126,7 @@ export class EditarParceiroComponent implements OnInit {
         this.lista_parcerias = partner;
         // console.log('partners', this.lista_parcerias);
       },
-      (erro: any) => console.log(erro)
+      (erro: any) => console.error(erro)
     );
   }
 
@@ -196,9 +199,8 @@ export class EditarParceiroComponent implements OnInit {
     this.service.parceirosById(id).subscribe(
       (partnerId: any) => {
         this.parceiro = partnerId;
-        console.log('parceiro', this.parceiro);
       },
-      (erro: any) => console.log(erro)
+      (erro: any) => console.error(erro)
     );
   }
 
@@ -415,15 +417,15 @@ export class EditarParceiroComponent implements OnInit {
           URL.createObjectURL(blob)
         );
         this.imgUrl = imageUrl;
-        console.log('imgUrl', this.imgUrl);
       },
       (error) => {
-        console.error('Imagem não encontrada:', error);
+        // console.error('Imagem não encontrada:', error);
       }
     );
   }
 
   getImagens(id: any) {
+    this.loading = true; // Ativa o estado de carregamento
     this.service.imagensById(id).subscribe(
       (imagensData: any[]) => {
         this.lista_imagens = imagensData.map((imagem) => {
@@ -439,15 +441,17 @@ export class EditarParceiroComponent implements OnInit {
         this.have_imagens = this.lista_imagens.filter(item => item.tipo_anexo === 'image').length;
         this.have_alvara = this.lista_imagens.filter(item => item.tipo_anexo === 'alvara').length;
         this.have_comprovante = this.lista_imagens.filter(item => item.tipo_anexo === 'comprovante').length;
-
-        console.log('lista_imagens', this.lista_imagens);
+        this.mostrar_imageFiles = true;
+        this.loading = false; // Desativa o estado de carregamento após carregar as imagens
       },
       (erro: any) => {
-        console.error(erro)
-        this.have_logo = 0
-        this.have_imagens = 0
-        this.have_alvara = 0
-        this.have_comprovante = 0
+        // console.error(erro)
+        this.have_logo = 0;
+        this.have_imagens = 0;
+        this.have_alvara = 0;
+        this.have_comprovante = 0;
+        this.mostrar_imageFiles = false;
+        this.loading = false; // Desativa o estado de carregamento em caso de erro
       }
     );
   }
@@ -468,13 +472,11 @@ export class EditarParceiroComponent implements OnInit {
     const updateImgPar = new FormData();
     updateImgPar.append('file', imgParceiro);
 
-    console.log('imgParceiro', imgParceiro)
-    console.log('Imagem', updateImgPar)
-
     this.service.atualizarImagem(updateImgPar, this.imgPartner.id).subscribe({
       next: (res: any) =>{
         this.toastr.success('Imagem atualizada com sucesso!');
-        //window.location.reload();
+        // this.getImagens(this.imgPartner.id)
+        window.location.reload();
       },
       error:(e) => {
         console.error(e);
@@ -499,21 +501,18 @@ export class EditarParceiroComponent implements OnInit {
   }
 
   updateDocument(){
-    const documentParceiro = this.imagePartner.nativeElement.files[0]
+    const documentParceiro = this.arquivoPartner.nativeElement.files[0]
     const updateDocumentoPar = new FormData();
     updateDocumentoPar.append('file', documentParceiro);
 
-    console.log('documentParceiro', documentParceiro)
-    console.log('Imagem', updateDocumentoPar)
-
     this.service.atualizarImagem(updateDocumentoPar, this.imgPartner.id).subscribe({
       next: (res: any) =>{
-        this.toastr.success('Alvará atualizada com sucesso!');
+        this.toastr.success('Documento atualizado com sucesso!');
         window.location.reload();
       },
       error:(e) => {
         console.error(e);
-        this.toastr.error('Problemas ao atualizar o alvará' ,e);
+        this.toastr.error('Problemas ao atualizar o documento.' ,e);
         this.formEditImgPartner.reset();
       }
     })
@@ -652,11 +651,11 @@ export class EditarParceiroComponent implements OnInit {
     let allFilesAreJPEG = true;
 
     for (let file of this.multipleFiles) {
-    //   const fileExtension = file.name.split('.').pop().toLowerCase();
-    // if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
-    //   allFilesAreJPEG = false;
-    //   break;
-    // }
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
+      allFilesAreJPEG = false;
+      break;
+    }
       files.append('files', file);
     }
 
@@ -669,9 +668,10 @@ export class EditarParceiroComponent implements OnInit {
     this.http.post(environment.url + 'anexo_imgs' + '/' + user_id, files).subscribe({next: (response: any) => {
           // console.log(response);
           this.toastr.success('Imagens inseridas com sucesso!');
+          this.formEditImgPartner.reset();
           window.location.reload();
 
-          // console.log('imgs_anexo', this.imgs_anexo);
+
         },
 
         error: (e: string | undefined) => {
