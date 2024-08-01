@@ -309,11 +309,13 @@
           </div>
           <div class="row row-cols-1">
             <div class="col-12">
-              <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+              <div *ngIf="lista_imagens.length > 0" id="carouselControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item carrossel" *ngFor="let image of lista_imagens; let i = index"
                     [ngClass]="{'active': i === 0}">
-                    <img [src]="image.imagem" class="d-block w-100" alt="Imagens do estabelecimento">
+                    <div *ngIf="image.tipo_anexo === 'image'">
+                      <img [src]="image.imagem" class="d-block w-100" alt="Imagens do estabelecimento">
+                    </div>
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls"
@@ -326,6 +328,9 @@
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
+              </div>
+              <div *ngIf="lista_imagens.length == 0" class="alert alert-danger" role="alert">
+                {{ showMessage }}
               </div>
               <!-- <div class="card">
                   <div class="card-body">

@@ -21,6 +21,7 @@ export class EmpresasParceirasComponent implements OnInit {
   imgUrl: SafeResourceUrl | null = null;
   isLoading = false;
   endereco!: any;
+  showMessage!: any;
 
   center = { lat: -3.76749831490545, lng: -38.6232867006762 }; // Coordenadas de Jurema, Caucaia - Brasil
   zoom = 12;
@@ -187,7 +188,7 @@ export class EmpresasParceirasComponent implements OnInit {
        // Criar uma URL segura para a imagem Blob
       const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
       this.imgUrl = imageUrl;
-         console.log('imgUrl', this.imgUrl);
+        //  console.log('imgUrl', this.imgUrl);
       },
       error => {
         console.error('Imagem não encontrada:', error);
@@ -195,20 +196,34 @@ export class EmpresasParceirasComponent implements OnInit {
     );
   }
 
-  getImagens(id: any){
-    this.service.imagensById(id).subscribe((imagensData: any[]) => {
-      this.lista_imagens = imagensData.map(imagem => {
-        const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
-        const safeImageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(decodedImage);
-        return {
-            id: imagem.id,
-            tipo_anexo: imagem.tipo_anexo,
-            imagem: safeImageUrl
-        };
-    });
+  getImagens(id: any) {
+    this.service.imagensById(id).subscribe(
+        (imagensData: any[]) => {
+            if (imagensData && imagensData.length > 0) {
+                this.lista_imagens = imagensData.map(imagem => {
+                    const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
+                    const safeImageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(decodedImage);
+                    return {
+                        id: imagem.id,
+                        tipo_anexo: imagem.tipo_anexo,
+                        imagem: safeImageUrl
+                    };
+                });
+                console.log('imagens', this.lista_imagens)
+            } else {
+                this.lista_imagens = [];
+                console.warn('Nenhuma imagem encontrada');
+                // Exibir mensagem ao usuário, por exemplo:
+                this.showMessage('Nenhuma imagem encontrada.');
+            }
+            console.log('imagens', this.lista_imagens)
+        },
 
-      //  console.log('lista_imagens', this.lista_imagens)
-    }, (erro: any) => console.error(erro))
-
-  }
+        (erro: any) => {
+            console.error('Erro ao buscar imagens:', erro);
+            // Exibir mensagem ao usuário, por exemplo:
+            this.showMessage('Erro ao buscar imagens. Tente novamente mais tarde.');
+        }
+    );
+}
 }
