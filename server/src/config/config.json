@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "@Sedet_1008",
+    "username": "cotecsde",
+    "password": "",
     "database": "nomads_digitais",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
