@@ -541,9 +541,9 @@ class ParceiroController {
         where: { id: Number(id) },
       });
 
-      console.log('localização', logo.img)
+      console.log('localização', logo.path)
 
-      const logoPath = path.join(baseUrl, logo.img)
+      const logoPath = path.join(baseUrl, logo.path)
       console.log('arquivo', logoPath)
 
       fs.access(logoPath, fs.constants.F_OK, (err) => {

@@ -493,6 +493,13 @@ export class EditarParceiroComponent implements OnInit {
     })
   }
 
+  deleteLogo(midia: any) {
+    this.service.deleteLogo(midia.id).subscribe(res => {
+      this.toastr.error("Logo deletada com sucesso!!");
+      window.location.reload();
+    })
+  }
+
   onEditFile(file: any) {
     this.imgPartner.id = file.id;
     this.formEditImgPartner.controls['id'].setValue(file.id)

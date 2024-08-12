@@ -123,7 +123,8 @@
                   <div class="btn-group">
                     <button *ngIf="image.tipo_anexo != 'logo'" (click)="onEditFile(image)" type="button" class="text-capitalize btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editFile">Editar {{ image.tipo_anexo }}</button>
                     <button *ngIf="image.tipo_anexo === 'logo'" (click)="editImg(image)" type="button" class="text-capitalize btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editFile">Editar {{ image.tipo_anexo }}</button>
-                    <button (click)="deleteImagem(image)" type="button" class="btn btn-sm btn-outline-danger">Deletar</button>
+                    <button *ngIf="image.tipo_anexo === 'logo'" (click)="deleteLogo(image)" type="button" class="btn btn-sm btn-outline-danger">Deletar {{ image.tipo_anexo }}</button>
+                    <button *ngIf="image.tipo_anexo != 'logo'" (click)="deleteImagem(image)" type="button" class="btn btn-sm btn-outline-danger">Deletar {{ image.tipo_anexo }}</button>
                   </div>
                 </div>
               </div>
