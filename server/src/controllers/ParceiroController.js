@@ -180,7 +180,7 @@ class ParceiroController {
         var emailRetorno = null;
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
-            console.log(error);
+            console.err(error);
             emailRetorno = error;
           } else {
             // console.log("Email sent: " + info.response);
@@ -211,7 +211,7 @@ class ParceiroController {
   static async anexoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("server")[1];
+    const caminho = file.path.split("api-digitalnomadsce")[1]
     const nome_arquivo = file.filename;
     const type = file.mimetype;    
     // console.log(file);
@@ -242,7 +242,7 @@ class ParceiroController {
   static async alvaraParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("server")[1];
+    const caminho = file.path.split("api-digitalnomadsce")[1]
     const nome_arquivo = file.filename;
     const type = file.mimetype;    
     // console.log(file);
@@ -274,7 +274,7 @@ class ParceiroController {
   static async logoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("server")[1];
+    const caminho = file.path.split("api-digitalnomadsce")[1]
     const nome_arquivo = file.filename;
     const type = file.mimetype;    
     // console.log(file);
@@ -305,14 +305,14 @@ class ParceiroController {
     var name_arquivo =[]
         const file = req.files
         const { id } = req.params;      
-        console.log('file', file)        
+        // console.log('file', file)        
         if(file.length>0){
           for(let img = 0; img < file.length; img++){
-            const caminho = file[img].path.split("server")[1];
+            const caminho = file[img].path.split("api-digitalnomadsce")[1];
             const nome_arquivo = file[img].filename;
             const type = file[img].mimetype; 
             name_arquivo.push(nome_arquivo)
-            console.log('name', file[img].originalname)
+            // console.log('name', file[img].originalname)
                 const anexarParceiro = await database.anexos.create({
                   mimetype: type,
                   filename: nome_arquivo,
@@ -321,7 +321,8 @@ class ParceiroController {
                   tipo_anexo: 'image'
                 });                              
               
-            //  console.log(res.status(200).json(anexarParceiro));
+            // console.log(res.status(200).json(anexarParceiro));
+            // console.log('imagens', anexarParceiro)
             }
             return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
             //console.log('name_arquivo', name_arquivo)
@@ -458,10 +459,10 @@ class ParceiroController {
   static async atualizaImagem(req, res) {
     const { id } = req.params;
     const updateImage = req.body;
-    console.log('updateImage', updateImage)
+    // console.log('updateImage', updateImage)
     const file = req.file;
-    updateImage.path = file.path.split("server")[1]; //file.path
-    console.log('path', updateImage.path)
+    updateImage.path = file.path.split("api-digitalnomadsce")[1] //file.path
+    // console.log('path', updateImage.path)
     try {
       await database.anexos.update(updateImage, {
         where: { id: Number(id) },
@@ -478,10 +479,10 @@ class ParceiroController {
   static async atualizaLogo(req, res) {
     const { id } = req.params;
     const updateImage = req.body;
-    console.log('updateImage', updateImage)
+    // console.log('updateImage', updateImage)
     const file = req.file;
-    updateImage.path = file.path.split("server")[1]; //file.path
-    console.log('path', updateImage.path)
+    updateImage.path = file.path.split("api-digitalnomadsce")[1] //file.path
+    // console.log('path', updateImage.path)
     try {
       await database.anexos.update(updateImage, {
         where: { id: Number(id) },
@@ -503,10 +504,10 @@ class ParceiroController {
         where: { id: Number(id) },
       });
 
-      console.log('localização', imagem.path)
+      // console.log('localização', imagem.path)
 
       const imagemPath = path.join(baseUrl, imagem.path)
-      console.log('arquivo', imagemPath)
+      // console.log('arquivo', imagemPath)
 
       fs.access(imagemPath, fs.constants.F_OK, (err) => {
         if (err) {
@@ -541,10 +542,10 @@ class ParceiroController {
         where: { id: Number(id) },
       });
 
-      console.log('localização', logo.path)
+      // console.log('localização', logo.path)
 
       const logoPath = path.join(baseUrl, logo.path)
-      console.log('arquivo', logoPath)
+      // console.log('arquivo', logoPath)
 
       fs.access(logoPath, fs.constants.F_OK, (err) => {
         if (err) {
