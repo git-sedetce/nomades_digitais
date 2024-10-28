@@ -8,7 +8,9 @@ const baseUrl = process.cwd() //+ "/src"; __dirname + '.
 class ParceiroController {
   static async pegarParceiro(req, res) {
     try {
-      const mostraParceiro = await database.cadastra_parceiros.findAll();
+      const mostraParceiro = await database.cadastra_parceiros.findAll({
+        order: ["nome_fantasia"]
+      });
       return res.status(200).json(mostraParceiro);
     } catch (error) {
       return res.status(500).json(error.message);
