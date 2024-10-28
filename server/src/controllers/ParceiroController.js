@@ -180,7 +180,7 @@ class ParceiroController {
         var emailRetorno = null;
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
-            console.err(error);
+            console.log(error);
             emailRetorno = error;
           } else {
             // console.log("Email sent: " + info.response);
