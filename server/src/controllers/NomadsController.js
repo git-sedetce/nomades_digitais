@@ -33,7 +33,7 @@ class NomadsController {
       const pin = Math.floor(1000 + Math.random() * 9000);
       const nome_usuario = novoNomads.nomad_email.split("@")
 
-      const cadastroUser = await database.User.create({
+      await database.User.create({
         nome_completo: novoNomads.name + " "+ novoNomads.lastName,
         user_name: nome_usuario[0],
         user_email: novoNomads.nomad_email,

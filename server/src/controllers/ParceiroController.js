@@ -4,6 +4,7 @@ const { Sequelize, QueryTypes } = require('sequelize');
 const path = require("path");
 const fs = require("fs");
 const baseUrl = process.cwd() //+ "/src"; __dirname + '.
+const bcrypt = require('bcryptjs')
 
 class ParceiroController {
   static async pegarParceiro(req, res) {
@@ -155,6 +156,21 @@ class ParceiroController {
       const criarParceiro = await database.cadastra_parceiros.create(
         novoParceiro
       )
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(novoParceiro.email_parceiro, salt);
+      const pin = Math.floor(1000 + Math.random() * 9000);
+      const nome_usuario = novoParceiro.email_parceiro.split("@")
+
+      await database.User.create({
+        nome_completo: novoParceiro.nome_fantasia,
+        user_name: nome_usuario[0],
+        user_email: novoParceiro.email_parceiro,
+        user_active: false,
+        user_password: hashedPassword,
+        user_pin: pin,
+        profile_id: 2,
+      });
       
         var transporter = nodemailer.createTransport({
           host: "172.26.2.26",//"relay.etice.ce.gov.br",
