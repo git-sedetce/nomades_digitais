@@ -26,6 +26,7 @@
     "jquery": "^3.6.1",
     "ngx-mask": "^14.2.4",
     "ngx-toastr": "^19.0.0",
+    "nomades-digitais": "file:",
     "rxjs": "~7.5.7",
     "zone.js": "~0.13.3"
   },

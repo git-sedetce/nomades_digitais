@@ -1,11 +1,12 @@
 const database = require("../models");
 const nodemailer = require("nodemailer");
+const bcrypt = require('bcryptjs')
 
 class NomadsController {
   static async cadastraNomads(req, res) {
-    var email_grupo = "admdigitalnomads@sedet.ce.gov.br";
+    var email_grupo = "admdigitalnomads@sde.ce.gov.br";
     const novoNomads = req.body;
-    console.log("novoNomads", novoNomads);
+
     try {
       const criarNomads = await database.cadastra_nomads.create({
         name: novoNomads.name,
@@ -26,6 +27,22 @@ class NomadsController {
         profissao: novoNomads.profissao,
         possui_empresa: novoNomads.possui_empresa,
       });
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(novoNomads.nomad_email, salt);
+      const pin = Math.floor(1000 + Math.random() * 9000);
+      const nome_usuario = novoNomads.nomad_email.split("@")
+
+      const cadastroUser = await database.User.create({
+        nome_completo: novoNomads.name + " "+ novoNomads.lastName,
+        user_name: nome_usuario[0],
+        user_email: novoNomads.nomad_email,
+        user_active: false,
+        user_password: hashedPassword,
+        user_pin: pin,
+        profile_id: 1,
+      });
+
       var transporter = nodemailer.createTransport({
         host: "172.26.2.26", //"relay.etice.ce.gov.br",
         port: 25,
@@ -48,7 +65,7 @@ class NomadsController {
         //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
       };
 
-      console.log("mailOptions", mailOptions);
+      // console.log("mailOptions", mailOptions);
       var emailRetorno = null;
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
