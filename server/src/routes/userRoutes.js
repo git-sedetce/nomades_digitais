@@ -2,6 +2,7 @@ const { Router } = require('express')
 const UserController = require('../controllers/UserController')
 
 const router = Router()
+router.post('/register', UserController.cadastraUser)
 router.post('/login', UserController.login)
 router.get('/user', UserController.authenticatedUser)
 router.get('/allUser', UserController.listarUsers)

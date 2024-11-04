@@ -1,6 +1,7 @@
 const database = require('../models')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const nodemailer = require("nodemailer");
 const ACCESS_TOKEN = '2435ad45eaba5f54cc965500242123cf565489e4bbd18daca07349e713e7b261e59d6a03f1223432540d1c26cc0ef0454598cd83c07cadc8c966f419daf75d81'
 
 class UserController{
