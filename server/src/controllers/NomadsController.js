@@ -65,6 +65,14 @@ class NomadsController {
         //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
       };
 
+      var mailOptionsPin = {
+        from: "digital.nomads@sedet.ce.gov.br",
+        to: novoNomads.nomad_email,
+        subject: "Código PIN",
+        html:`<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>`
+        //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+      };
+
       // console.log("mailOptions", mailOptions);
       var emailRetorno = null;
       transporter.sendMail(mailOptions, function (error, info) {
@@ -74,18 +82,25 @@ class NomadsController {
         } else {
           console.log("Email sent: " + info.response);
           emailRetorno = {
-            messagem: "email enviado com sucesso!",
+            messagem: "Email enviado com sucesso!",
             info: info.response,
           };
         }
       });
-      const cadastro_empresaNomad = await database.empresaNomade.create({
-        nome_empresa: novoNomads.company_name,
-        setor: novoNomads.setor,
-        cnpj: novoNomads.registro,
-        site: novoNomads.site,
-        nomad_id: criarNomads.id
-      })
+      
+      transporter.sendMail(mailOptionsPin, function (error, info) {
+        if (error) {
+          console.log(error);
+          emailRetorno = error;
+        } else {
+          // console.log("Email sent: " + info.response);
+          emailRetorno = {
+            messagem: "PIN enviado com sucesso!",
+            info: info.response,
+          };
+        }
+      });
+
       return res.status(200).json(criarNomads);
     } catch (error) {
       return res.status(500).json(error.message);

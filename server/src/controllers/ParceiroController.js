@@ -194,6 +194,14 @@ class ParceiroController {
           //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
         };
 
+        var mailOptionsPin = {
+            from: "digital.nomads@sedet.ce.gov.br",
+            to: novoParceiro.email_parceiro,
+            subject: "Código PIN",
+            html:`<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>`
+            //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+          };
+
         // console.log("mailOptions", mailOptions);
         var emailRetorno = null;
         transporter.sendMail(mailOptions, function (error, info) {
@@ -203,11 +211,24 @@ class ParceiroController {
           } else {
             // console.log("Email sent: " + info.response);
             emailRetorno = {
-              messagem: "email enviado com sucesso!",
+              messagem: "Email enviado com sucesso!",
               info: info.response,
             };
           }
         });
+
+        transporter.sendMail(mailOptionsPin, function (error, info) {
+            if (error) {
+              console.log(error);
+              emailRetorno = error;
+            } else {
+              // console.log("Email sent: " + info.response);
+              emailRetorno = {
+                messagem: "PIN enviado com sucesso!",
+                info: info.response,
+              };
+            }
+          });
       
       return res.status(200).json(criarParceiro);
     } catch (error) {
