@@ -25,6 +25,9 @@ import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-p
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastrModule } from 'ngx-toastr';
 import { EditarParceiroComponent } from './edit/editar-parceiro/editar-parceiro.component';
+import { CadastroComponent } from './user/cadastro/cadastro.component';
+import { LoginComponent } from './user/login/login.component';
+import { ResetComponent } from './user/reset/reset.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import { EditarParceiroComponent } from './edit/editar-parceiro/editar-parceiro.
       VistoNomadeComponent,
       EditarNomadComponent,
       EmpresasParceirasComponent,
-      EditarParceiroComponent
+      EditarParceiroComponent,
+      CadastroComponent,
+      LoginComponent,
+      ResetComponent
    ],
   imports: [
     BrowserModule,

@@ -16,6 +16,9 @@ import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { SeloComponent } from './selo/selo.component';
 import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component';
 import { EditarParceiroComponent } from './edit/editar-parceiro/editar-parceiro.component';
+import { LoginComponent } from './user/login/login.component';
+import { CadastroComponent } from './user/cadastro/cadastro.component';
+import { ResetComponent } from './user/reset/reset.component';
 
 const APP_ROUTES: Routes = [
 
@@ -33,6 +36,9 @@ const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'parceria', component: EmpresasParceirasComponent },
   { path: 'editarparceria', component: EditarParceiroComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'cadastro', component: CadastroComponent },
+  { path: 'resetSenha', component: ResetComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 ];

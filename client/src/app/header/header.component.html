@@ -1,13 +1,13 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark shadow-5-strong navBar fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand brand_nomad"routerLink="">
+      <a class="navbar-brand brand_nomad" routerLink="">
         <img class="logo" src="../../assets/midia/imgs/logos/digital-nomads-1.png" alt="Logo Digital Nomads CE">
       </a>
       <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
         <ul class="menuOpcoes navbar-nav me-auto ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-           <a class="nav-link active" routerLink="/ceara_pronto">O Ceará está pronto</a>
+            <a class="nav-link active" routerLink="/ceara_pronto">O Ceará está pronto</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -19,16 +19,42 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" routerLink="/cadastro_nomad">Nômades</a></li>
+              <li>
+                <a class="dropdown-item" routerLink="/cadastro_nomad">Nômades</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/cadastro">Admin</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link active" routerLink="/parceria">Parceiros</a>
-           </li>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              Dicas para Nômades Digitais
+              Parceiros
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li class="nav-item">
+                <a class="dropdown-item" routerLink="/parceria">Visualizar</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/editarparceria">Editar
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Dicas
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" routerLink="/cpf_estrangeiro">CPF para Estrangeiros</a></li>
@@ -36,8 +62,20 @@
                 <hr class="dropdown-divider">
               </li>
               <li><a class="dropdown-item" routerLink="/visto_nomade">Visto para Nômade Digital no Brasil
-              </a></li>
+                </a>
+              </li>
             </ul>
+          </li>
+          <li *ngIf="!authenticated" class=" pt-3">
+            <button type="button" routerLink="/login" class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
+          </li>
+          <!-- <li *ngIf="!authenticated" class=" pt-3">
+            <button type="button" routerLink="/cadastro" class="btn btn-warning fw-bold ms-2">Sign-up</button>
+          </li> -->
+          <li *ngIf="authenticated" class=" pt-3">
+            <button type="button" routerLink="/login" class="btn btn-danger text-dark fw-bold text-white ms-3 me-2"
+              (click)="logout()">Logout</button>
+            <!--<a routerLink="/login" class="nav-link" (click)="logout()">Logout</a>-->
           </li>
         </ul>
         <form action="" class="d-flex">

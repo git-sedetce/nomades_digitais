@@ -13,6 +13,8 @@ class UserController{
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(novoUser.user_password, salt);
         novoUser.user_password = hashedPassword;
+        novoUser.confirm_password = hashedPassword;
+        // console.log("novoUser", novoUser);
 
         try{
             const criarUser = await database.User.create(novoUser)
