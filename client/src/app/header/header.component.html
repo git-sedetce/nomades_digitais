@@ -22,18 +22,18 @@
               <li>
                 <a class="dropdown-item" routerLink="/cadastro_nomad">Nômades</a>
               </li>
-              <li>
+              <li *ngIf="profile === 3">
                 <hr class="dropdown-divider">
               </li>
-              <li>
+              <li *ngIf="profile === 3">
                 <a class="dropdown-item" routerLink="/cadastro">Admin</a>
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="profile != 3">
             <a class="nav-link active" routerLink="/parceria">Parceiros</a>
           </li>
-          <li class="nav-item dropdown">
+          <li *ngIf="profile === 3" class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Parceiros

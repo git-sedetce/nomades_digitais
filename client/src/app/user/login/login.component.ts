@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     //console.log('loginUser', this.loginUsers)
     this.serviceUser.login(this.loginUsers).subscribe(
       () =>{
-        this.toastr.success('Bem vindo ao Promoção e Atração');
+        this.toastr.success('Bem vindo ao Digital Nomads Ceará');
       },
       (error) => {
         this.toastr.error('Erro durante o login', error.error.message);
