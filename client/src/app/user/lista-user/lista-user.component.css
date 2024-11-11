@@ -1,0 +1,77 @@
+/*#forms {
+  margin-top: 50px;
+}*/
+.pergunta{
+  font-weight: bold;
+}
+legend{
+  font-weight: bold;
+  text-decoration: underline;
+}
+h3{
+  font-weight: bolder;
+}
+textarea {
+  resize: none;
+}
+.limite_caractere{
+  padding: 0.3rem 0.3rem !important;
+}
+
+section {
+  background: url("../../../assets/imgs/LiTORIAL-Fortaleza-2.png") no-repeat fixed center;
+}
+
+.manual p, a{
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.manual h3 {
+  font-size: 3.75rem;
+  color: #4ea091;
+  font-family: 'AristotelicaDemiBold';
+}
+
+.cabecalho th {
+  font-size: 1.5rem;
+  color: #4ea091;
+  font-family: 'AristotelicaDemiBold';
+}
+
+.card_manual{
+  margin-top: 150px !important;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.card_table{
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cadastro_parceiro{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.card {
+  box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
+}
+
+.logo img{
+  width: 100%;
+  margin: 4rem auto;
+}
+
+.carrossel img{
+  width: 100% !important;
+  height: 75vh;
+  object-fit: cover;
+}
+
+.locate {
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: bolder;
+  text-transform: uppercase;
+}

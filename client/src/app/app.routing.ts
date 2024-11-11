@@ -20,6 +20,7 @@ import { LoginComponent } from './user/login/login.component';
 import { CadastroComponent } from './user/cadastro/cadastro.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { guardGuard } from './user/guard/guard.guard';
+import { ListaUserComponent } from './user/lista-user/lista-user.component';
 
 const APP_ROUTES: Routes = [
 
@@ -39,6 +40,7 @@ const APP_ROUTES: Routes = [
   { path: 'editarparceria', component: EditarParceiroComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent, canActivate: [guardGuard], data: { roles: ['admin'] } },
+  { path: 'user', component: ListaUserComponent, canActivate: [guardGuard], data: { roles: ['admin'] } },
   { path: 'resetSenha', component: ResetComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
