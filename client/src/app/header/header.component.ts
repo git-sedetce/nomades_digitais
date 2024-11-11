@@ -1,4 +1,5 @@
 import { Component, DoCheck } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +11,30 @@ export class HeaderComponent implements DoCheck {
   user_name: any;
   profile: any;
 
-  constructor() { }
+  constructor(
+    private serviceUser: UserService,
+  ) { }
 
   ngDoCheck() {
+    this.isLogged();
   }
 
   isLogged(){
+    const token = localStorage.getItem('token');
+    // console.log('token', token)
+    if(token){
+      this.authenticated = true
+      // console.log('authenticated', this.authenticated)
+      const loginUsers:any =  JSON.parse(atob(token!.split('.')[1]))
+      this.user_name = loginUsers._user_name;
+      this.profile = loginUsers._profile_id
+      // console.log('loginUsers', loginUsers)
+    }
 
   }
 
   logout(){
-
+    this.serviceUser.logout()
   }
 
 }
