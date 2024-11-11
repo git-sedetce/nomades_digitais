@@ -138,7 +138,7 @@ class UserController{
     static async atualizaUser(req, res){ 
         const { id } = req.params;   
         const user = req.body;   
-        console.log('user', user) 
+        // console.log('user', user) 
             try{
                 // const cookie = req.cookies['token']
                 // const claims = jwt.verify(cookie, ACCESS_TOKEN)
@@ -159,12 +159,64 @@ class UserController{
             res.send({ message: 'Logout Success!'})
         }
 
+        static async gerarPin(req, res) {
+            const user = req.body;            
+            //console.log('user', user)
+            try{
+                const  verificaUser = await database.User.findOne({
+                    where: { user_email: user.user_email }
+                })
+                if(!verificaUser){
+                    return res.status(404).send({ message: 'Usuário não encontrado!'})
+                } 
+                let newPin = Math.floor(1000 + Math.random() * 9000);user.user_pin
+    
+                const novoPin = await database.User.update({ user_pin: newPin }, { where: { user_email: user.user_email } });  
+    
+                res.send({message: 'Pin alterado com sucesso!'})
+
+                var transporter = nodemailer.createTransport({
+                    host: "172.26.2.26", //relay.etice.ce.gov.br
+                    port: 25,
+                    secure: false,
+                    tls: {
+                      rejectUnauthorized: false,
+                    },
+                  });
+    
+                  var mailOptions = {
+                    from: "digital.nomads@sedet.ce.gov.br",
+                    to: user.user_email,
+                    subject: "Novo Pin para nova senha",
+                    html: `<h3>Segue o novo Pin!!</h3><p><strong>${newPin}</strong><br>Crie sua nova senha no seguinte link: <a href="https://digitalnomads.ce.gov.br/resetSenha">Resetar Senha</a>`,
+                  };
+                //   console.log("mailOptions", mailOptions);
+                  var emailRetorno = null;
+                  transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                      console.log(error);
+                      emailRetorno = error;
+                    } else {
+                    //   console.log("Email enviado: " + info.response);
+                      emailRetorno = {
+                        messagem: "Email enviado com sucesso!",
+                        info: info.response,
+                      };
+                    }
+                  });
+                
+            }catch(error){
+                //res.send(verificaUserEmail)
+                return res.status(500).json(error.message)
+            }        
+        }
+
         static async resetPassword(req, res) {
             const user = req.body;
             //console.log('user', user)
             try{
                 const  verificaUser = await database.User.findOne({
-                    where: { user_email: user.user_email }
+                    where: { user_email: user.user_email, user_pin: user.user_pin }
                 })
                 if(!verificaUser){
                     return res.status(404).send({ message: 'Usuário não encontrado!'})

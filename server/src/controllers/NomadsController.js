@@ -80,7 +80,7 @@ class NomadsController {
           console.log(error);
           emailRetorno = error;
         } else {
-          console.log("Email sent: " + info.response);
+          // console.log("Email sent: " + info.response);
           emailRetorno = {
             messagem: "Email enviado com sucesso!",
             info: info.response,

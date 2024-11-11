@@ -10,6 +10,7 @@ router.get('/allUser', UserController.listarUsers)
 router.put('/atualizaUser/:id', UserController.atualizaUser)
 router.post('/logout', UserController.logout)
 router.post('/reset', UserController.resetPassword)
+router.post('/newPin', UserController.gerarPin)
 router.delete('/user/:id', UserController.deletaUsers)
 
 module.exports = router

@@ -43,6 +43,10 @@ export class UserService {
       return this.token || localStorage.getItem('token');
     }
 
+    resetPin(data:any): Observable<any> {
+      return this.http.post(environment.url + 'newPin',  data)
+    }
+
     getUser(){
       return this.userSubject.asObservable();
     }
