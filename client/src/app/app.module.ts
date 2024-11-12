@@ -29,6 +29,7 @@ import { CadastroComponent } from './user/cadastro/cadastro.component';
 import { LoginComponent } from './user/login/login.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
+import { EditarDadosComponent } from './view/editar-dados/editar-dados.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ListaUserComponent } from './user/lista-user/lista-user.component';
       CadastroComponent,
       LoginComponent,
       ResetComponent,
-      ListaUserComponent
+      ListaUserComponent,
+      EditarDadosComponent
    ],
   imports: [
     BrowserModule,

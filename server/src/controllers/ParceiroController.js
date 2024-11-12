@@ -39,6 +39,27 @@ class ParceiroController {
     }
   }
 
+  static async parceiroByMail(req, res) {
+    const { email } = req.params;
+    try {
+      const umParceiro = await database.cadastra_parceiros.findOne({
+        where: { email_parceiro: email },
+        include: [
+          {
+            association: "ass_imgsParceiros",
+            where: (database.cadastra_parceiros.id = database.anexos.user_id),
+            attributes: ["mimetype", "path"]
+          },
+        ],
+        //raw: true,
+      });
+      // console.log('Parceiro', umParceiro)
+      return res.status(200).json(umParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async parceiroByService(req, res) {
     const { service } = req.params;
     try {

@@ -18,6 +18,10 @@ export class ParceriaService {
     return this.http.get(environment.url + 'parceiro/' + id)
   }
 
+  parceirosByEmail(email: any): Observable<any> {
+    return this.http.get(environment.url + 'parceiroMail/' + email)
+  }
+
   parceirosByService(metodo: string, service: string): Observable<any> {
     return this.http.get(environment.url + metodo + service)
   }

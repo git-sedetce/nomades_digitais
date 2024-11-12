@@ -76,8 +76,8 @@ class UserController{
             if(!await bcrypt.compare(user.user_password, verificaUser.user_password )){
                 return res.status(400).send({ message: 'Crendenciais inválidos!'})
             }
-            const token = jwt.sign({ _id: verificaUser.id, _profile_id: verificaUser.profile_id, _user_name: verificaUser.user_name }, ACCESS_TOKEN, {
-                expiresIn: 24*60*60*1000
+            const token = jwt.sign({ _id: verificaUser.id, _profile_id: verificaUser.profile_id, _user_name: verificaUser.user_name, _user_email: verificaUser.user_email }, ACCESS_TOKEN, {
+                expiresIn: 12*60*60*1000
             })
             return res.json({ token: token })
         }catch (error){
