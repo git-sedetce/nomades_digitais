@@ -33,7 +33,7 @@ export class ResetComponent implements OnInit{
         this.router.navigate(['/login'])
       },error: (e) => {
         console.error(e)
-        this.toastr.error('Problema ao recriar a senha!!!')
+        this.toastr.error(e.error.message)
         this.formResetPassword.reset()
       }
     })

@@ -12,7 +12,7 @@ export class EditarDadosComponent implements OnInit{
   user_id!: any;
   user_email!:any;
   token!: any;
-  parceiro!: any[];
+  parceiro!: any;
   nomad!: any[];
 
   constructor(
