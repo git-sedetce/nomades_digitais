@@ -45,7 +45,6 @@ export class EditarDadosComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.getPerfil();
 
     this.formEditPartner = this.formBuilder.group({
       cnpj: [],
@@ -80,6 +79,14 @@ export class EditarDadosComponent implements OnInit{
       idioma: [],
       qual_idioma: this.formBuilder.array([]),
     });
+
+    this.getPerfil();
+    this.getService();
+    this.addCheckboxes();
+    this.getMeet();
+    this.checkboxesMeet();
+    this.getLanguage();
+    this.checkboxesLanguage();
 
   }
 
@@ -202,9 +209,7 @@ export class EditarDadosComponent implements OnInit{
     this.formEditPartner.controls['idioma'].setValue(parceiro.idioma);
 
     // checkboxes essential services
-    const essentialServiceArray = this.formEditPartner.get(
-      'essential_service'
-    ) as FormArray;
+    const essentialServiceArray = this.formEditPartner.get('essential_service') as FormArray;
     // Reset all checkboxes
     essentialServiceArray.controls.forEach((control) =>
       control.setValue(false)
@@ -354,10 +359,10 @@ export class EditarDadosComponent implements OnInit{
     this.servicePartner
       .atualizarParceiro(this.partnerObj, Number(this.partnerObj.id))
       .subscribe((res) => {
-        this.toastr.success('Parceiro Cadastrado com sucesso!');
         this.formEditPartner.reset();
         // this.getParceiros();
         window.location.reload();
+        this.toastr.success('Parceiro atualizado com sucesso!');
       });
   }
 
