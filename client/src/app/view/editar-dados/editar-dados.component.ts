@@ -1,10 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { ImgsParceiro } from 'src/app/models/parceria/imgs-parceiro.model';
 import { Parceiro } from 'src/app/models/parceria/parceiro.model';
 import { ParceriaService } from 'src/app/services/parceria.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-editar-dados',
@@ -19,6 +21,21 @@ export class EditarDadosComponent implements OnInit{
   parceiro!: any;
   nomad!: any[];
   isLoading!: any[]
+  documentoFile: any;
+  have_logo!:any;
+  have_imagens!:any;
+  have_alvara!:any;
+  have_comprovante!:any;
+  multipleFiles!: any[];
+  alvaraSelected: boolean = false;
+  comprovanteSelected: boolean = false;
+  imageSelected: boolean = false;
+  logoSelected: boolean = false;
+  mostrar_tabela: boolean = false;
+  mostrar_imageFiles: boolean = false;
+  loading = true;
+  documentoUrl: SafeResourceUrl | null = null;
+  imgUrl: SafeResourceUrl | null = null;
 
   formEditPartner!: FormGroup;
   formEditImgPartner!: FormGroup;
@@ -42,6 +59,7 @@ export class EditarDadosComponent implements OnInit{
     private servicePartner: ParceriaService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -89,7 +107,6 @@ export class EditarDadosComponent implements OnInit{
     this.checkboxesLanguage();
 
   }
-
   // Visualizar Dados
 
   getPerfil(){
@@ -365,6 +382,40 @@ export class EditarDadosComponent implements OnInit{
         this.toastr.success('Parceiro atualizado com sucesso!');
       });
   }
+
+  //LOGO
+  onLogoSelected(event: any): void {
+    this.logoSelected = event.target.files.length > 0;
+    // console.log('logoSelected', this.logoSelected);
+  }
+
+  logoUpload(parceiro: any){
+    const imageLogo = this.logoInput.nativeElement.files[0];
+    const logo = new FormData();
+    const user_id = parceiro.id;
+    logo.append('file', imageLogo);
+    logo.append('id', user_id);
+    //console.log('formData', logo)
+    //console.log('id', user_id)
+
+    this.http.post(environment.url + 'anexo_logo' + '/' + user_id, logo).subscribe({
+        next: (response: any) => {
+          // console.log(response);
+          this.toastr.success('Imagens inseridas com sucesso!');
+          window.location.reload();
+          // console.log('logo_anexo', this.logo_anexo);
+        },
+        error: (e: string | undefined) => {
+          this.toastr.error('Problemas ao inserir imagens:', e);
+          // console.log('logo_anexo', this.logo_anexo);
+        },
+      });
+  }
+
+  //Alvará
+
+
+  //Comprovante
 
 }
 

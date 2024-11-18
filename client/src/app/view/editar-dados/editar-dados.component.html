@@ -647,3 +647,23 @@
     </div>
   </div>
 </div>
+
+<!--Modal Inseir Logo-->
+<div class="modal fade" id="modalInserirlogo" tabindex="-1" aria-labelledby="modalInserirlogoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable mt-5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalInserirlogoLabel">Inserir Logo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="formFile" class="form-label">Adicione a logomarca do seu estabelecimento.</label>
+        <input #logoInput class="form-control" type="file" id="formFile" (change)="onLogoSelected($event)">
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="logoUpload(parceiro)" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
