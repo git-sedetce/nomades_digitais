@@ -20,7 +20,8 @@ export class EditarDadosComponent implements OnInit{
   token!: any;
   parceiro!: any;
   nomad!: any[];
-  isLoading!: any[]
+  isLoading!: any[];
+  lista_imagens!: any[];
   documentoFile: any;
   have_logo!:any;
   have_imagens!:any;
@@ -59,7 +60,8 @@ export class EditarDadosComponent implements OnInit{
     private servicePartner: ParceriaService,
     private toastr: ToastrService,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -129,6 +131,7 @@ export class EditarDadosComponent implements OnInit{
       (partner: any) => {
         this.parceiro = partner;
         console.log('partner', this.parceiro);
+        this.getImagens(this.parceiro.id)
       },
       (erro: any) => console.error(erro)
     );
@@ -383,6 +386,39 @@ export class EditarDadosComponent implements OnInit{
       });
   }
 
+  //Verificar Anexos
+  getImagens(id: any) {
+    this.loading = true; // Ativa o estado de carregamento
+    this.servicePartner.imagensById(id).subscribe(
+      (imagensData: any[]) => {
+        this.lista_imagens = imagensData.map((imagem) => {
+          const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
+          const safeImageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(decodedImage);
+          return {
+            id: imagem.id,
+            tipo_anexo: imagem.tipo_anexo,
+            imagem: safeImageUrl,
+          };
+        });
+        this.have_logo = this.lista_imagens.filter(item => item.tipo_anexo === 'logo').length;
+        this.have_imagens = this.lista_imagens.filter(item => item.tipo_anexo === 'image').length;
+        this.have_alvara = this.lista_imagens.filter(item => item.tipo_anexo === 'alvara').length;
+        this.have_comprovante = this.lista_imagens.filter(item => item.tipo_anexo === 'comprovante').length;
+        this.mostrar_imageFiles = true;
+        this.loading = false; // Desativa o estado de carregamento após carregar as imagens
+      },
+      (erro: any) => {
+        // console.error(erro)
+        this.have_logo = 0;
+        this.have_imagens = 0;
+        this.have_alvara = 0;
+        this.have_comprovante = 0;
+        this.mostrar_imageFiles = false;
+        this.loading = false; // Desativa o estado de carregamento em caso de erro
+      }
+    );
+  }
+
   //LOGO
   onLogoSelected(event: any): void {
     this.logoSelected = event.target.files.length > 0;
@@ -410,6 +446,93 @@ export class EditarDadosComponent implements OnInit{
           // console.log('logo_anexo', this.logo_anexo);
         },
       });
+  }
+
+  editImg(img: any) {
+    this.imgPartner.id = img.id;
+    this.formEditImgPartner.controls
+    this.formEditImgPartner.controls['id'].setValue(img.id)
+    this.formEditImgPartner.controls['mimetype'].setValue(img.mimetype)
+    this.formEditImgPartner.controls['filename'].setValue(img.filename)
+    this.formEditImgPartner.controls['path'].setValue(img.path)
+    this.formEditImgPartner.controls['user_id'].setValue(img.user_id)
+    this.formEditImgPartner.controls['tipo_anexo'].setValue(img.tipo_anexo)
+  }
+
+  updateImagem(){
+    const imgParceiro = this.imagePartner.nativeElement.files[0]
+    const updateImgPar = new FormData();
+    updateImgPar.append('file', imgParceiro);
+
+    this.servicePartner.atualizarImagem(updateImgPar, this.imgPartner.id).subscribe({
+      next: (res: any) =>{
+        this.toastr.success('Imagem atualizada com sucesso!');
+        // this.getImagens(this.imgPartner.id)
+        window.location.reload();
+      },
+      error:(e) => {
+        console.error(e);
+        this.toastr.error('Problemas ao atualizar a imagem');
+        this.formEditImgPartner.reset();
+      }
+    })
+  }
+
+  deleteImagem(midia: any) {
+    this.servicePartner.deleteImagem(midia.id).subscribe(res => {
+      this.toastr.error("Imagem deletada com sucesso!!");
+      window.location.reload();
+    })
+  }
+
+  deleteLogo(midia: any) {
+    this.servicePartner.deleteLogo(midia.id).subscribe(res => {
+      this.toastr.error("Logo deletada com sucesso!!");
+      window.location.reload();
+    })
+  }
+
+  onEditFile(file: any) {
+    this.imgPartner.id = file.id;
+    this.formEditImgPartner.controls['id'].setValue(file.id)
+
+    this.carregarFile(file.id)
+  }
+
+  updateDocument(){
+    const documentParceiro = this.arquivoPartner.nativeElement.files[0]
+    const updateDocumentoPar = new FormData();
+    updateDocumentoPar.append('file', documentParceiro);
+
+    this.servicePartner.atualizarImagem(updateDocumentoPar, this.imgPartner.id).subscribe({
+      next: (res: any) =>{
+        this.toastr.success('Documento atualizado com sucesso!');
+        window.location.reload();
+      },
+      error:(e) => {
+        console.error(e);
+        this.toastr.error('Problemas ao atualizar o documento.' ,e);
+        this.formEditImgPartner.reset();
+      }
+    })
+  }
+
+  carregarFile(id:number): void{
+    this.servicePartner.pegarDocumento(id).subscribe(
+      (dataDocument: any) => {
+        const byteArray = new Uint8Array(
+          atob(dataDocument).split("").map((char) => char.charCodeAt(0))
+        );
+        const file = new Blob([byteArray], { type: 'application/pdf'});
+        const fileURL = URL.createObjectURL(file);
+        this.documentoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(fileURL);
+        this.documentoFile = 'true';
+      },
+      (error) => {
+        console.error('Error ao carregar o documento: ', error.error.message);
+        this.documentoFile = 'null'
+      }
+    )
   }
 
   //Alvará
