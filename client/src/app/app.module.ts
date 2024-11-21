@@ -30,6 +30,7 @@ import { LoginComponent } from './user/login/login.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
+import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component
       LoginComponent,
       ResetComponent,
       ListaUserComponent,
-      EditarDadosComponent
+      EditarDadosComponent,
+      EditarNomadsComponent
    ],
   imports: [
     BrowserModule,

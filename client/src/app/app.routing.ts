@@ -22,6 +22,7 @@ import { ResetComponent } from './user/reset/reset.component';
 import { guardGuard } from './user/guard/guard.guard';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
+import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
 
 const APP_ROUTES: Routes = [
 
@@ -44,6 +45,7 @@ const APP_ROUTES: Routes = [
   { path: 'user', component: ListaUserComponent, canActivate: [guardGuard], data: { roles: ['admin'] } },
   { path: 'resetSenha', component: ResetComponent },
   { path: 'editar', component: EditarDadosComponent },
+  { path: 'editarNomad', component: EditarNomadsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 ];

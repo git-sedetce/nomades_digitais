@@ -6,6 +6,7 @@ class NomadsController {
   static async cadastraNomads(req, res) {
     var email_grupo = "admdigitalnomads@sde.ce.gov.br";
     const novoNomads = req.body;
+    console.log('novoNomads', novoNomads)
 
     try {
       const criarNomads = await database.cadastra_nomads.create({
@@ -27,6 +28,14 @@ class NomadsController {
         profissao: novoNomads.profissao,
         possui_empresa: novoNomads.possui_empresa,
       });
+
+      await database.empresaNomade.create({
+        nome_empresa: novoNomads.company_name,
+        cnpj: novoNomads.registro,
+        setor: novoNomads.setor,
+        site: novoNomads.site,
+        nomad_id: criarNomads.id,
+      })
 
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(novoNomads.nomad_email, salt);
@@ -147,10 +156,30 @@ class NomadsController {
     }
   }
 
+  static async nomadEmail(req, res) {
+    const { email } = req.params;
+    try {
+      const email_nomad = await database.cadastra_nomads.findOne({
+        where: { nomad_email: email },
+        include: [
+          {
+            association: "ass_nomade_empresa",
+            where: (database.empresaNomade.nomad_id = database.cadastra_nomads.id),
+            attributes: ["id", "nome_empresa", "cnpj", "setor", "site"],
+          }
+        ],
+      });
+      return res.status(200).json(email_nomad);
+      // return res.status(200).json(parceiro_cnpj);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async nomadBycnpj(req, res) {
     const { cnpj } = req.params;
     try {
-      const nomad_cnpj = await database.empresaNomade.findOne({
+      const nomad_cnpj = await database.cadastra_nomads.findOne({
         where: { cnpj: cnpj },
       });
       if (nomad_cnpj === null) {

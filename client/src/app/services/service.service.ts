@@ -25,6 +25,10 @@ export class ServiceService {
     return this.http.post(environment.url + 'nomads', data)
   }
 
+  listar_nomads(metodo: string): Observable<any> {
+    return this.http.get(environment.url + metodo);
+  }
+
   nomadById(id: number): Observable<Nomad> {
     return this.http.post<Nomad>(environment.url + 'nomads', id)
   }
@@ -39,6 +43,10 @@ export class ServiceService {
 
   nomadByEmail(email: string): Observable<any> {
     return this.http.get(environment.url + 'nomad/' + email)
+  }
+
+  nomadEmail(email: string): Observable<any> {
+    return this.http.get(environment.url + 'nomadUser/' + email)
   }
 
   pegar_cnpj_nomad(cnpj: string): Observable<any> {

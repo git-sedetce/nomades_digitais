@@ -227,7 +227,7 @@ class UserController{
                 newPassword = hashedNewPassword
                 //console.log('newPassword', newPassword)
     
-                const novaSenha = await database.User.update({ user_password: newPassword }, { where: { user_email: user.user_email } });  
+                const novaSenha = await database.User.update({ user_password: newPassword, user_active: true }, { where: { user_email: user.user_email } });  
     
                 //const  result = await novaSenha.save()
                 //const { password, ...data } = await result.toJSON()

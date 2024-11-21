@@ -1,0 +1,66 @@
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual text-center fw-bold">
+          <div class="card-body">
+            <h3 class="mb-2 mt-2">Editar Cadastro</h3>
+          </div>
+        </div>
+
+        <div class="card card_table mb-5">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr class="cabecalho">
+                <th scope="col" class="text-center align-middle">Nome</th>
+                <th scope="col" class="text-center align-middle">Cidade</th>
+                <th scope="col" class="text-center align-middle">Região</th>
+                <th scope="col" class="text-center align-middle">País</th>
+                <th scope="col" class="text-center align-middle">Visualizar Dados</th>
+                <th scope="col" class="text-center align-middle">Editar Dados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.nome }} {{nomad?.lastName}}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.cidade }}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.regiao }}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.country }}</td>
+                <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalView"><i class="bi bi-table"></i></button></td>
+                <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="card card_table mb-5" *ngIf="nomad?.possui_empresa == 'sim'">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr class="cabecalho">
+                <th scope="col" class="text-center align-middle">Nome da Empresa</th>
+                <th scope="col" class="text-center align-middle">Setor</th>
+                <th scope="col" class="text-center align-middle">Site</th>
+                <th scope="col" class="text-center align-middle">Visualizar Dados</th>
+                <th scope="col" class="text-center align-middle">Editar Dados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa[0].nome_empresa }}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa[0].setor }}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa[0].site }}</td>
+                <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalView"><i class="bi bi-table"></i></button></td>
+                <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
