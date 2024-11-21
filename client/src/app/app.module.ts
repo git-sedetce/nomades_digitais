@@ -29,7 +29,7 @@ import { CadastroComponent } from './user/cadastro/cadastro.component';
 import { LoginComponent } from './user/login/login.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
-import { EditarDadosComponent } from './view/editar-dados/editar-dados.component';
+import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 
 
 @NgModule({

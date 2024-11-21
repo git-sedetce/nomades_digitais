@@ -66,6 +66,15 @@ export class EditarDadosComponent implements OnInit{
 
   ngOnInit(): void {
 
+    this.formEditImgPartner = this.formBuilder.group({
+      id: [],
+      mimetype: [],
+      filename: [],
+      path: [],
+      user_id: [],
+      tipo_anexo: []
+    })
+
     this.formEditPartner = this.formBuilder.group({
       cnpj: [],
       nome_fantasia: [],
@@ -400,6 +409,7 @@ export class EditarDadosComponent implements OnInit{
             imagem: safeImageUrl,
           };
         });
+        // console.log('lista_imagens', this.lista_imagens)
         this.have_logo = this.lista_imagens.filter(item => item.tipo_anexo === 'logo').length;
         this.have_imagens = this.lista_imagens.filter(item => item.tipo_anexo === 'image').length;
         this.have_alvara = this.lista_imagens.filter(item => item.tipo_anexo === 'alvara').length;
@@ -537,8 +547,121 @@ export class EditarDadosComponent implements OnInit{
 
   //Alvará
 
+  onAlvaraSelected(event: any): void {
+    this.alvaraSelected = event.target.files.length > 0;
+    // console.log('alvaraSelected', this.alvaraSelected);
+  }
+
+  inserirAlvara(parceiro: any){
+    const imageAlvara = this.alvaraInput.nativeElement.files[0];
+    const alvara = new FormData();
+    const user_id = this.parceiro.id;
+    alvara.append('file', imageAlvara);
+    alvara.append('id', user_id);
+    //console.log('formData', alvara)
+    //console.log('id', user_id)
+
+    this.http
+      .post(environment.url + 'anexo_alvara' + '/' + user_id, alvara).subscribe({
+        next: (response: any) => {
+          // console.log(response);
+          this.toastr.success('Alvará inserido com sucesso!');
+          window.location.reload();
+          // console.log('alvara_anexo', this.alvara_anexo);
+        },
+        error: (e: string | undefined) => {
+          this.toastr.error('Problemas ao inserir alvará:', e);
+
+
+          // console.log('alvara_anexo', this.alvara_anexo);
+        },
+      });
+
+  }
 
   //Comprovante
+
+  onComprovanteSelected(event: any): void {
+    this.comprovanteSelected = event.target.files.length > 0;
+    // console.log('comprovanteSelected', this.comprovanteSelected);
+  }
+
+  inserirComprovante(parceiro: any){
+    const imageBlob = this.comprovanteInput.nativeElement.files[0];
+    const file = new FormData();
+    const user_id = parceiro.id;
+    file.append('file', imageBlob);
+    file.append('id', user_id);
+    //console.log('formData', file)
+    //console.log('id', user_id)
+
+    this.http.post(environment.url + 'anexo' + '/' + user_id, file).subscribe({
+      next: (response: any) => {
+        // console.log(response);
+        this.toastr.success('Comprovante inserido com sucesso!');
+        window.location.reload();
+
+
+        // console.log('resposta_anexo', this.resposta_anexo);
+      },
+      error: (e: string | undefined) => {
+
+        this.toastr.error('Problemas ao inserir comprovante:', e);
+
+
+        // console.log('resposta_anexo', this.resposta_anexo);
+      },
+    });
+
+  }
+
+  ///imagens
+
+  onImageSelected(event: any): void {
+    this.imageSelected = event.target.files.length > 0;
+    // console.log('imageSelected', this.imageSelected);
+  }
+  selectMultipleFiles(event: any) {
+    if (event.target.files.length > 0) {
+      this.multipleFiles = event.target.files;
+    }
+  }
+
+  inserirImagens(parceiro: any) {
+    const files = new FormData();
+    const user_id = parceiro.id;
+    let allFilesAreJPEG = true;
+
+    for (let file of this.multipleFiles) {
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
+      allFilesAreJPEG = false;
+      break;
+    }
+      files.append('files', file);
+    }
+
+    if (!allFilesAreJPEG) {
+      this.toastr.error('Somente arquivo .jpeg, .jpg ou .png');
+      // Aqui você pode adicionar um aviso para o usuário, se desejar
+      return;
+    }
+
+    this.http.post(environment.url + 'anexo_imgs' + '/' + user_id, files).subscribe({next: (response: any) => {
+          // console.log(response);
+          this.toastr.success('Imagens inseridas com sucesso!');
+          this.formEditImgPartner.reset();
+          window.location.reload();
+
+
+        },
+
+        error: (e: string | undefined) => {
+          this.toastr.error('Problemas ao inserir imagens:', e);
+          // console.log('imgs_anexo', this.imgs_anexo);
+        },
+      });
+    }
 
 }
 

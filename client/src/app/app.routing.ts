@@ -21,7 +21,7 @@ import { CadastroComponent } from './user/cadastro/cadastro.component';
 import { ResetComponent } from './user/reset/reset.component';
 import { guardGuard } from './user/guard/guard.guard';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
-import { EditarDadosComponent } from './view/editar-dados/editar-dados.component';
+import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 
 const APP_ROUTES: Routes = [
 
