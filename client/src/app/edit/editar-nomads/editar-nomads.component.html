@@ -22,7 +22,7 @@
             </thead>
             <tbody>
               <tr>
-                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.nome }} {{nomad?.lastName}}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.name }} {{nomad?.lastName}}</td>
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.cidade }}</td>
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.regiao }}</td>
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.country }}</td>
@@ -47,11 +47,11 @@
             </thead>
             <tbody>
               <tr>
-                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa[0].nome_empresa }}</td>
-                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa[0].setor }}</td>
-                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa[0].site }}</td>
-                <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalView"><i class="bi bi-table"></i></button></td>
-                <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></button></td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa.nome_empresa }}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa.setor }}</td>
+                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa.site }}</td>
+                <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalViewCompany"><i class="bi bi-table"></i></button></td>
+                <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEditCompany"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -64,3 +64,400 @@
 
 </section>
 
+
+<!--Modal View Nomads-->
+<div class="modal fade" id="modalView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalViewLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title fs-5" id="modalViewLabel">{{ nomad?.nome }} {{nomad?.lastName}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="row">
+            <div class="col-sm-12 col-12">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Nome</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.name }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Sobre Nome:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.lastName }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Email:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.nomad_email }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Telefone de contato:</th>
+                    <td colspan="2">{{ nomad?.contato_nomad }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Cidade</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.cidade }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Região:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.regiao }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">País:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.country }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Sugestão</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.suggestion }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Compartilhar Informações:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.shared_info }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Receber Notícias:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.nomads_news }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Primeira vez no Ceará?</th>
+                    <td colspan="2">{{ nomad?.first_time_ce }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Data de Nascimento:</th>
+                    <td colspan="2">{{ nomad?.data_nascimento | date :'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Passaporte:</th>
+                    <td colspan="2">{{ nomad?.passaporte }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Motivo da Viagem:</th>
+                    <td colspan="2">{{ nomad?.motivo_viagem }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Conhecimento</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.know_how }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Profissão</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.profissao }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Possui empresa?</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.possui_empresa }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Edit Nomads-->
+<div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalEditLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title text-center text-uppercase fs-5" id="modalEditLabel">Atualizar Cadastro
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditNomad">
+          <fieldset>
+            <legend>Sobre o Nomad</legend>
+            <div class="row mt-5">
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="name" class="form-label pergunta">Nome / Name</label>
+                <input type="text" formControlName="name" class="form-control" id="name">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="lastName" class="form-label pergunta">Sobrenome / Last name</label>
+                <input type="text" formControlName="lastName" class="form-control" id="lastName">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="data_nascimento" class="form-label pergunta">Data de Nascimento / Date of Birth</label>
+                <input type="date" formControlName="data_nascimento" class="form-control" id="data_nascimento">
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="nomad_email" class="form-label pergunta">Email</label>
+                <input type="text" formControlName="nomad_email" class="form-control" id="nomad_email">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="contato_nomad" class="form-label pergunta">Contato / Phone Number</label>
+                <input type="text" formControlName="contato_nomad" class="form-control" id="contato_nomad">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="profissao" class="form-label pergunta">Profissão / Profession</label>
+                <input type="text" formControlName="profissao" class="form-control" id="profissao">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="cidade" class="form-label pergunta">Cidade City</label>
+                <input type="text" formControlName="cidade" class="form-control" id="cidade">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="regiao" class="form-label pergunta">Região ou Estado / State or Region</label>
+                <input type="text" formControlName="regiao" class="form-control" id="regiao">
+              </div>
+
+              <div class="col-sm-4 col-12 mb-3">
+                <label for="country" class="form-label pergunta">País / Country</label>
+                <input type="text" formControlName="country" class="form-control" id="country">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="passaporte" class="form-label pergunta">Númenro do Passaporte / Passport Number</label>
+                <input type="text" formControlName="passaporte" class="form-control" id="passaporte">
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="first_time_ce" class="text-center pergunta">Primeira vez no Ceará? / First time in Ceará?</label><br><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="first_time_ce" formControlName="first_time_ce" id="first_time_ce" value='sim'>
+                        <label class="form-check-label" for="first_time_ce">
+                          Sim
+                        </label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="first_time_ce" formControlName="first_time_ce" id="first_time_ce" value='nao'>
+                        <label class="form-check-label" for="first_time_ce">
+                          Não
+                        </label>
+                      </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="motivo_viagem" class="form-label pergunta">Qual o motivo de sua viagem? / What is the reason for your trip?</label>
+                <textarea formControlName="motivo_viagem" class="form-control" id="motivo_viagem"></textarea>
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="know_how" class="pergunta">Como conheceu Digital Nomads Ceará / How did you find out about Digital Nomads Ceará?</label>
+                <div class="form-check">
+                  <div *ngFor="let knowledge of _knowhowList; let i = index">
+                    <input
+                      class="form-check-input"
+                      [id]="knowledge.nome"
+                      type="checkbox"
+                      [formControl]="knowHowServiceControls[i]"
+                    />
+                    <label class="form-check-label" for="{{ knowledge.nome }}">{{ knowledge.nome }}</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Nomad Empreendedor</legend>
+            <div class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="possui_empresa" class="text-center pergunta">Tem empresa? / Have company?</label><br><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="possui_empresa" formControlName="possui_empresa" id="possui_empresa" value='sim'>
+                        <label class="form-check-label" for="possui_empresa">
+                          Sim
+                        </label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="possui_empresa" formControlName="possui_empresa" id="possui_empresa" value='nao'>
+                        <label class="form-check-label" for="possui_empresa">
+                          Não
+                        </label>
+                      </div>
+              </div>
+            </div>
+
+          </fieldset>
+          <fieldset>
+            <legend>Termos & Condições / Terms & Conditions</legend>
+            <div class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="shared_info" class="pergunta">Aceita compartilhar suas informações e dados pessoais com os estabelecimentos parceiros do Projeto Digital Nomads Ceará para receber informações sobre o turismo no Estado do Ceará? Ressaltamos que estes dados podem ser descartados a qualquer momento conforme a solicitação do titular.
+                  // Do you agree to share your information and personal data with partner establishments of the Digital Nomads Ceará Project to receive information about tourism in the State of Ceará? We emphasize that this data can be discarded at any time by the request of the holder.</label><br><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shared_info" formControlName="shared_info" id="shared_info" value='sim'>
+                        <label class="form-check-label" for="shared_info">
+                          Sim
+                        </label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="shared_info" formControlName="shared_info" id="shared_info" value='nao'>
+                        <label class="form-check-label" for="shared_info">
+                          Não
+                        </label>
+                      </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="nomads_news" class="pergunta">Deseja receber as novidades do Projeto Digital Nomads Ceará? / Would you like to receive news about the Digital Nomads Ceará Project?</label><br><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="nomads_news" formControlName="nomads_news" id="nomads_news" value='sim'>
+                        <label class="form-check-label" for="nomads_news">
+                          Sim
+                        </label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="nomads_news" formControlName="nomads_news" id="nomads_news" value='nao'>
+                        <label class="form-check-label" for="nomads_news">
+                          Não
+                        </label>
+                      </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="suggestion" class="form-label pergunta">Se tiver alguma sugestão deixe ela aqui para a gente! / If you have any suggestion, please leave it here.</label>
+                <textarea formControlName="suggestion" class="form-control" id="suggestion"></textarea>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="updateNomad()" class="btn btn-warning">Update</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal View Nomad Company-->
+<div class="modal fade" id="modalViewCompany" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalViewCompanyLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title fs-5" id="modalViewCompanyLabel">Company by {{ nomad?.nome }} {{nomad?.lastName}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="row">
+            <div class="col-sm-12 col-12">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Nome da Empresa</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.ass_nomade_empresa.nome_empresa }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">CNPJ:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.ass_nomade_empresa.cnpj }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Setor:</th>
+                    <td colspan="2" class="text-capitalize">{{ nomad?.ass_nomade_empresa.setor }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Site:</th>
+                    <td colspan="2">{{ nomad?.ass_nomade_empresa.site }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Edit Nomad Company-->
+<div class="modal fade" id="modalEditCompany" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalEditCompanyLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title text-center text-uppercase fs-5" id="modalEditCompanyLabel">Atualizar Cadastro Empresa
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditNomad">
+          <fieldset>
+            <legend>Empresa / Company</legend>
+            <div class="row mt-5">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="company_name" class="form-label pergunta">Nome da Empresa/ Company Name</label>
+                <input type="text" formControlName="company_name" class="form-control" id="company_name">
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="registro" class="form-label pergunta">CNPJ / Register Number</label>
+                <input type="text" formControlName="registro" class="form-control" id="registro">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="setor" class="form-label pergunta">Setor / Sector</label>
+                <input type="text" formControlName="setor" class="form-control" id="setor">
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="site" class="form-label pergunta">Web Site</label>
+                <input type="text" formControlName="site" class="form-control" id="site">
+              </div>
+            </div>
+          </fieldset>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="updateCompany()" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

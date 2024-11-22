@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment'
 import { Nomad } from '../models/nomad/nomad.model';
 
@@ -35,6 +35,13 @@ export class ServiceService {
 
   editar(nomad: Nomad):Observable<Nomad>{
     return this.http.put<Nomad>(environment.url + 'nomads', nomad.id)
+  }
+
+  updateNomad(data: any, id: any){
+    return this.http.put<any>(environment.url + 'nomads/' +id, data)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
   }
 
   pegar_cnpj(cnpj: string): Observable<any> {
