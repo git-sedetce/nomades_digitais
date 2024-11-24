@@ -35,6 +35,7 @@ export class HeaderComponent implements DoCheck {
 
   logout(){
     this.serviceUser.logout()
+    window.location.reload();
   }
 
 }

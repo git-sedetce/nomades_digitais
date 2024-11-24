@@ -6,7 +6,7 @@ class NomadsController {
   static async cadastraNomads(req, res) {
     var email_grupo = "admdigitalnomads@sde.ce.gov.br";
     const novoNomads = req.body;
-    console.log('novoNomads', novoNomads)
+    // console.log('novoNomads', novoNomads)
 
     try {
       const criarNomads = await database.cadastra_nomads.create({
@@ -119,7 +119,7 @@ class NomadsController {
   static async cadastraCompany(req, res) { 
     const { id } = req.params;   
     const newComapny = req.body;
-    console.log('newComapny', newComapny)
+    // console.log('newComapny', newComapny)
 
     try {
       const criarCompany = await database.empresaNomade.create(
@@ -145,7 +145,6 @@ class NomadsController {
   static async updateCompanyNomad(req, res) {
     const { id } = req.params;
     const updateInfos = req.body;
-    console.log('updateInfos', updateInfos);
     try {
       await database.empresaNomade.update({        
         nome_empresa: updateInfos.company_name,

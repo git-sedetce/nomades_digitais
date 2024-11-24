@@ -64,8 +64,8 @@ export class EditarNomadsComponent implements OnInit{
     const payload = JSON.parse(atob(token!.split('.')[1]));
     this.profile_id = payload._profile_id;
     this.user_email = payload._user_email;
-    console.log('Profile ID:', this.profile_id);
-    console.log('Email:', this.user_email);
+    // console.log('Profile ID:', this.profile_id);
+    // console.log('Email:', this.user_email);
     if(this.profile_id === 1){
       this.getNomad(this.user_email)
     }
@@ -92,7 +92,7 @@ export class EditarNomadsComponent implements OnInit{
     this.nomadService.nomadEmail(email).subscribe(
       (nd: any) => {
         this.nomad = nd;
-        console.log('nomad', this.nomad);
+        // console.log('nomad', this.nomad);
       },
       (erro: any) => console.error(erro)
     );

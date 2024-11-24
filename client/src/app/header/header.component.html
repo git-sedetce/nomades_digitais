@@ -9,7 +9,7 @@
           <li class="nav-item">
             <a class="nav-link active" routerLink="/ceara_pronto">O Ceará está pronto</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="authenticated != true">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Cadastre-se
@@ -54,7 +54,7 @@
           <li class="nav-item" *ngIf="profile === 2">
             <a class="nav-link active" routerLink="/editar">Editar</a>
           </li>
-          <li class="nav-item"><!--*ngIf="profile === 1"-->
+          <li class="nav-item" *ngIf="profile === 1"><!--*ngIf="profile === 1"-->
             <a class="nav-link active" routerLink="/editarNomad">Editar Nomad</a>
           </li>
           <li class="nav-item" *ngIf="profile === 3">

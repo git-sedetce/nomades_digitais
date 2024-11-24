@@ -55,11 +55,13 @@ export class UserService {
       return !! this.getToken(); // Verifica se o token existe
     }
 
-    public logout(){
+    public logout(): Promise<boolean> {
+      // Limpa o token do armazenamento local
       this.token = '';
       localStorage.removeItem('token');
-      window.location.reload();
-      return this.router.navigate(['login'])
+
+      // Navega para a página inicial
+      return this.router.navigate(['home']);
     }
 
     auth_user() : boolean {
