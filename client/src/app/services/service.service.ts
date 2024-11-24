@@ -25,6 +25,10 @@ export class ServiceService {
     return this.http.post(environment.url + 'nomads', data)
   }
 
+  cadastrar_company(data: any, id: any): Observable<any> {
+    return this.http.post(environment.url + 'comapny/' +id, data)
+  }
+
   listar_nomads(metodo: string): Observable<any> {
     return this.http.get(environment.url + metodo);
   }

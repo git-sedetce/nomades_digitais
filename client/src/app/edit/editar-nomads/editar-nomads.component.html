@@ -18,7 +18,7 @@
                 <th scope="col" class="text-center align-middle">País</th>
                 <th scope="col" class="text-center align-middle">Visualizar Dados</th>
                 <th scope="col" class="text-center align-middle">Editar Dados</th>
-                <th scope="col" class="text-center align-middle">Possui Empresa?</th>
+                <th scope="col" class="text-center align-middle" *ngIf="nomad?.possui_empresa == 'nao'">Possui Empresa?</th>
               </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.country }}</td>
                 <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalView"><i class="bi bi-table"></i></button></td>
                 <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></button></td>
-                <td class="text-center table align-middle"><button (click)="companyRegister(nomad?.id)" type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#registerCompany"><i class="bi bi-building"></i></button></td>
+                <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#registerCompany" *ngIf="nomad?.possui_empresa == 'nao'"><i class="bi bi-building"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -459,6 +459,55 @@
       <div class="modal-footer">
         <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" (click)="updateCompany()" class="btn btn-warning">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal Cadastra Nomad Company-->
+<div class="modal fade" id="registerCompany" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="registerCompanyLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title text-center text-uppercase fs-5" id="registerCompanyLabel">Atualizar Cadastro Empresa
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEditNomad">
+          <fieldset>
+            <legend>Empresa / Company</legend>
+            <div class="row mt-5">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="company_name" class="form-label pergunta">Nome da Empresa/ Company Name</label>
+                <input type="text" formControlName="company_name" class="form-control" id="company_name">
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="registro" class="form-label pergunta">CNPJ / Register Number</label>
+                <input type="text" formControlName="registro" class="form-control" id="registro">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="setor" class="form-label pergunta">Setor / Sector</label>
+                <input type="text" formControlName="setor" class="form-control" id="setor">
+              </div>
+
+              <div class="col-sm-6 col-12 mb-3">
+                <label for="site" class="form-label pergunta">Web Site</label>
+                <input type="text" formControlName="site" class="form-control" id="site">
+              </div>
+            </div>
+          </fieldset>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="registerCompany()" class="btn btn-warning">Cadastrar Empresa</button>
       </div>
     </div>
   </div>

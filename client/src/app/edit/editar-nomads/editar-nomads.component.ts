@@ -185,7 +185,7 @@ export class EditarNomadsComponent implements OnInit{
         this.formEditNomad.reset();
         // this.getParceiros();
         window.location.reload();
-        this.toastr.success('Empresa do Nomad atualizado com sucesso!');
+        this.toastr.success('Nomad atualizado com sucesso!');
       });
   }
 
@@ -201,7 +201,23 @@ export class EditarNomadsComponent implements OnInit{
         this.formEditNomad.reset();
         // this.getParceiros();
         window.location.reload();
-        this.toastr.success('Nomad atualizado com sucesso!');
+        this.toastr.success('Empresa do Nomad atualizado com sucesso!');
+      });
+  }
+
+  registerCompany(){
+    this.nomadObj.company_name = this.formEditNomad.value.company_name;
+    this.nomadObj.setor = this.formEditNomad.value.setor;
+    this.nomadObj.registro = this.formEditNomad.value.registro;
+    this.nomadObj.site = this.formEditNomad.value.site;
+
+
+    this.nomadService.cadastrar_company(this.nomadObj, Number(this.nomadObj.id))
+      .subscribe((res) => {
+        this.formEditNomad.reset();
+        // this.getParceiros();
+        window.location.reload();
+        this.toastr.success('Empresa do Nomad cadastrado com sucesso!');
       });
   }
 

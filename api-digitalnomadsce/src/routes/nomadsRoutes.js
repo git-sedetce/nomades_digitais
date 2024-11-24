@@ -3,7 +3,7 @@ const NomadsController = require('../controllers/NomadsController')
 
 const router = Router()
 router.post('/nomads', NomadsController.cadastraNomads)
-router.post('/comapny', NomadsController.cadastraCompany)
+router.post('/comapny/:id', NomadsController.cadastraCompany)
 router.get('/nomadsAll', NomadsController.pegaTodosNomads)
 router.get('/nomads/:id', NomadsController.pegaUmNomad)
 router.get('/nomad/:email', NomadsController.nomadByEmail)
