@@ -18,6 +18,7 @@
                 <th scope="col" class="text-center align-middle">País</th>
                 <th scope="col" class="text-center align-middle">Visualizar Dados</th>
                 <th scope="col" class="text-center align-middle">Editar Dados</th>
+                <th scope="col" class="text-center align-middle">Possui Empresa?</th>
               </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.country }}</td>
                 <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalView"><i class="bi bi-table"></i></button></td>
                 <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEdit"><i class="bi bi-pencil-square"></i></button></td>
+                <td class="text-center table align-middle"><button (click)="companyRegister(nomad?.id)" type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#registerCompany"><i class="bi bi-building"></i></button></td>
               </tr>
             </tbody>
           </table>
@@ -49,7 +51,7 @@
               <tr>
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa.nome_empresa }}</td>
                 <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa.setor }}</td>
-                <td class="table align-middle ps-5 text-capitalize">{{ nomad?.ass_nomade_empresa.site }}</td>
+                <td class="table align-middle ps-5">{{ nomad?.ass_nomade_empresa.site }}</td>
                 <td class="text-center table align-middle"><button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#modalViewCompany"><i class="bi bi-table"></i></button></td>
                 <td class="text-center table align-middle"><button (click)="onViewNomad(nomad)" type="button" class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalEditCompany"><i class="bi bi-pencil-square"></i></button></td>
               </tr>
@@ -235,12 +237,12 @@
             </div>
 
             <div class="row">
-              <div class="col-sm-6 col-12 mb-3">
+              <div class="col-sm-4 col-12 mb-3">
                 <label for="passaporte" class="form-label pergunta">Númenro do Passaporte / Passport Number</label>
                 <input type="text" formControlName="passaporte" class="form-control" id="passaporte">
               </div>
 
-              <div class="col-sm-6 col-12 mb-3">
+              <div class="col-sm-4 col-12 mb-3">
                 <label for="first_time_ce" class="text-center pergunta">Primeira vez no Ceará? / First time in Ceará?</label><br><br>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="first_time_ce" formControlName="first_time_ce" id="first_time_ce" value='sim'>
@@ -256,16 +258,8 @@
                         </label>
                       </div>
               </div>
-            </div>
 
-            <div class="row">
-
-              <div class="col-sm-6 col-12 mb-3">
-                <label for="motivo_viagem" class="form-label pergunta">Qual o motivo de sua viagem? / What is the reason for your trip?</label>
-                <textarea formControlName="motivo_viagem" class="form-control" id="motivo_viagem"></textarea>
-              </div>
-
-              <div class="col-sm-6 col-12 mb-3">
+              <div class="col-sm-4 col-12 mb-3">
                 <label for="know_how" class="pergunta">Como conheceu Digital Nomads Ceará / How did you find out about Digital Nomads Ceará?</label>
                 <div class="form-check">
                   <div *ngFor="let knowledge of _knowhowList; let i = index">
@@ -278,6 +272,14 @@
                     <label class="form-check-label" for="{{ knowledge.nome }}">{{ knowledge.nome }}</label>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-12 col-12 mb-3">
+                <label for="motivo_viagem" class="form-label pergunta">Qual o motivo de sua viagem? / What is the reason for your trip?</label>
+                <textarea formControlName="motivo_viagem" class="form-control" id="motivo_viagem" rows="4" cols="50"></textarea>
               </div>
 
             </div>
@@ -347,7 +349,7 @@
             <div class="row">
               <div class="col-sm-12 col-12 mb-3">
                 <label for="suggestion" class="form-label pergunta">Se tiver alguma sugestão deixe ela aqui para a gente! / If you have any suggestion, please leave it here.</label>
-                <textarea formControlName="suggestion" class="form-control" id="suggestion"></textarea>
+                <textarea formControlName="suggestion" class="form-control" id="suggestion" rows="4" cols="50"></textarea>
               </div>
             </div>
 

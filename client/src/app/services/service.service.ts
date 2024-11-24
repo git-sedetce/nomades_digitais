@@ -44,6 +44,13 @@ export class ServiceService {
     }))
   }
 
+  updateCompany(data: any, id: any){
+    return this.http.put<any>(environment.url + 'companynomads/' +id, data)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
   pegar_cnpj(cnpj: string): Observable<any> {
     return this.http.get(environment.url + 'buscarcnpj/' + cnpj)
   }

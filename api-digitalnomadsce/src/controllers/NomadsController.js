@@ -116,6 +116,55 @@ class NomadsController {
     }
   }
 
+  static async cadastraCompany(req, res) {    
+    const newComapny = req.body;
+    console.log('newComapny', newComapny)
+
+    try {
+      const criarCompany = await database.empresaNomade.create(
+      //   {
+      //   name: novoNomads.name,
+      //   lastName: novoNomads.lastName,
+      //   nomad_email: novoNomads.nomad_email,
+      //   contato_nomad: novoNomads.contato_nomad,
+      //   cidade: novoNomads.cidade,
+      //   regiao: novoNomads.regiao,
+      //   country: novoNomads.country,
+      //   shared_info: novoNomads.shared_info,
+      //   nomads_news: novoNomads.nomads_news,
+      //   suggestion: novoNomads.suggestion,
+      //   first_time_ce: novoNomads.first_time_ce,
+      //   data_nascimento: novoNomads.data_nascimento,
+      //   passaporte: novoNomads.passaporte,
+      //   motivo_viagem: novoNomads.motivo_viagem,
+      //   know_how: novoNomads.know_how,
+      //   profissao: novoNomads.profissao,
+      //   possui_empresa: novoNomads.possui_empresa,
+      // }
+    );         
+
+      return res.status(200).json(criarCompany);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async updateCompanyNomad(req, res) {
+    const { id } = req.params;
+    const updateInfos = req.body;
+    try {
+      await database.empresaNomade.update(updateInfos, {
+        where: { nomad_id: Number(id) },
+      });
+      const updateCompany = await database.empresaNomade.findOne({
+        where: { nomad_id: Number(id) },
+      });
+      return res.status(200).json(updateCompany);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async pegaTodosNomads(req, res) {
     try {
       const todosNomads = await database.cadastra_nomads.findAll();
