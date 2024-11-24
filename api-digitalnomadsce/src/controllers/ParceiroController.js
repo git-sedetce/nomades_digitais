@@ -219,7 +219,8 @@ class ParceiroController {
             from: "digital.nomads@sedet.ce.gov.br",
             to: novoParceiro.email_parceiro,
             subject: "Código PIN",
-            html:`<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>`
+            html:`<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>
+            <p><a href="https://www.digitalnomads.ce.gov.br/resetSenha">Clique aqui</a> para criar sua senha</p>`
             //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
           };
 
