@@ -5,6 +5,7 @@ const router = Router()
 router.get('/regiao', MunicipioController.pegaRegiao)
 router.get('/regiao/:id', MunicipioController.pegaUmaRegiao)
 router.get('/todos_municipio', MunicipioController.pegaMunicipio)
+router.get('/dados_municipio', MunicipioController.dadosMunicipio)
 router.get('/municipio/:cidade', MunicipioController.pegaUmMunicipio)
 
 module.exports = router

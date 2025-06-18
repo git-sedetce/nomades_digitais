@@ -20,6 +20,24 @@ class MunicipioController {
         }     
     }
 
+    static async dadosMunicipio(req, res){
+        try{
+            const todosMunicipios = await database.Cidades.findAll({
+                 include: [
+                          {
+                            association: "ass_municipio_regiao",
+                            where: (database.Cidades.regiao_id = database.Regiao.id),
+                            attributes: ["nome"],
+                          }
+                        ],
+            })
+            return res.status(200).json(todosMunicipios)
+        }
+        catch (error){
+            return res.status(500).json(error.message)
+        }     
+    }
+
     static async pegaUmaRegiao(req, res){
         const { id } = req.params
         try{
