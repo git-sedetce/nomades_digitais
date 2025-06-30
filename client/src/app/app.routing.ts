@@ -23,6 +23,8 @@ import { guardGuard } from './user/guard/guard.guard';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
+import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
+import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 
 const APP_ROUTES: Routes = [
 
@@ -33,8 +35,10 @@ const APP_ROUTES: Routes = [
   { path: 'cadastro_municipio', component: CadastroMunicipioComponent },
   { path: 'cadastro_parceiro', component: CadastroParceiroComponent },
   { path: 'cadastro_nomad', component: CadastroNomadComponent },
+  { path: 'cadastro_eventos', component: CadastroEventosComponent },
   { path: 'editar_nomad', component: EditarNomadComponent },
   { path: 'proxima_parada', component: ProximaParadaComponent },
+  { path: 'tipo_turismo', component: TipoTurismoComponent },
   { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
   { path: 'visto_nomade', component: VistoNomadeComponent },
   { path: 'home', component: HomeComponent },

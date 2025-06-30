@@ -31,6 +31,8 @@ import { ResetComponent } from './user/reset/reset.component';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
+import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
+import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.compon
       ResetComponent,
       ListaUserComponent,
       EditarDadosComponent,
-      EditarNomadsComponent
+      EditarNomadsComponent,
+      CadastroEventosComponent,
+      TipoTurismoComponent
    ],
   imports: [
     BrowserModule,
