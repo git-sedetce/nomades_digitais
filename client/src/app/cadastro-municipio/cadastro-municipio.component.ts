@@ -131,7 +131,7 @@ export class CadastroMunicipioComponent implements OnInit {
     //retorna região
 
     localizaregiao(cidade: any, form: any){
-      //console.log('cidade', cidade)
+      console.log('cidade', cidade)
       this.services.pegar_municipio('municipio/', cidade)
       .subscribe((regiao: any) => {
         console.log('regiao', regiao)

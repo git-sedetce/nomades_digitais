@@ -19,7 +19,7 @@
         </div>
         <div class="card card_form mb-5">
           <div *ngIf="!submitted">
-            <div class="bg-primary">
+            <div class="bg-primary titulo">
               <h3 class="pb-3 pt-3 text-center text-white">Cadastro do Municípios</h3>
             </div>
             <form class="cadastro_municipio" #municipio="ngForm" (ngSubmit)="submitCity(municipio)">
@@ -32,7 +32,7 @@
                     <label for="cidade" class="form-label pergunta">Nome da Cidade</label>
                     <input list="datalistCidade" class="form-control" id="cidade" placeholder="Digite o nome da Cidade"
                       name="cidade" ngModel required #cidade="ngModel" [(ngModel)]="cadastro_cidade.cidade"
-                      (blur)="(localizaregiao(cidade.value, municipio))">
+                      (change)="(localizaregiao(cidade.value, municipio))">
                     <datalist id="datalistCidade">
                       <!--<option value="default">----</option>-->
                       <option *ngFor="let city of lista_municipio" value="{{city.nome_municipio}}">
