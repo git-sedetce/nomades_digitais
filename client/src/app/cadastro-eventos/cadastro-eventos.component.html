@@ -1,1 +1,81 @@
-<p>cadastro-eventos works!</p>
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card card_form">
+          <div>
+            <div class="bg-primary titulo">
+              <h3 class="pb-3 pt-3 text-center text-white">Cadastro de Eventos</h3>
+            </div>
+            <form class="cadastro_evento" #formEvento="ngForm">
+              <fieldset>
+                <legend class="mt-3 mb-3">
+                  Eventos / Events
+                </legend>
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="cidade" class="form-label pergunta">Nome da Cidade</label>
+                    <input list="datalistCidade" class="form-control" id="cidade" placeholder="Digite o nome da Cidade"
+                      name="cidade" ngModel required #cidade="ngModel"
+                      (change)="(localizaregiao(cidade.value, municipio))">
+                    <datalist id="datalistCidade">
+                      <!--<option value="default">----</option>-->
+                      <option *ngFor="let city of lista_municipio" value="{{city.nome_municipio}}">
+                        {{city.nome_municipio}}</option>
+                    </datalist>
+                    <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">Cidade é
+                      obrigatório</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="regiao" class="form-label pergunta">Região de Planejamento</label>
+                    <input class="form-control" type="text" id="regiao" placeholder="Informe a sua região" name="regiao"
+                      ngModel required #regiao="ngModel" [(ngModel)]="nome_regiao" readonly>
+                    <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">Região é
+                      obrigatório</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="evento_name" class="form-label pergunta">Nome do Evento</label>
+                    <input type="text" class="form-control" id="evento_name" aria-describedby="evento_name"
+                      placeholder="Insira o nome do evento!" name="evento_name" ngModel required
+                      #evento_name="ngModel" [(ngModel)]="evento.evento_name">
+
+                    <div *ngIf="!evento_name.valid && evento_name.touched" class="alert alert-danger" role="alert">
+                      Informe o nome do Evento</div>
+                  </div>
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
+                    <input type="text" class="form-control" id="tipo_evento" placeholder="Informe o tipo de evento"
+                      name="tipo_evento" ngModel required #tipo_evento="ngModel" [(ngModel)]="evento.tipo_evento">
+                    <div *ngIf="!tipo_evento.valid && tipo_evento.touched" class="alert alert-danger" role="alert">
+                      Tipo de evento é obrigatório</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group mb-3">
+                    <label for="descricao" class="pergunta">Descrição do Evento.</label>
+                    <textarea [maxlength]="qtdeChars" class="form-control" id="descricao" rows="3" name="descricao"
+                      ngModel required #descricao="ngModel" [(ngModel)]="evento.descricao"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        evento.descricao?.length }} / {{ qtdeChars }}</strong></div>
+                    <div *ngIf="!descricao.valid && descricao.touched" class="alert alert-danger" role="alert">Descreva
+                      o Evento</div>
+                  </div>
+                </div>
+              </fieldset>
+
+
+
+
+              <button type="submit" class="btn btn-primary mb-3" [disabled]="!formEvento.valid"
+                (click)="salvarEvento()">Cadastrar Município</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

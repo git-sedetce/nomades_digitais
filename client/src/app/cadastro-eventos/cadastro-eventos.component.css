@@ -1,0 +1,64 @@
+/*#forms{
+  background-image: url("../../assets/imgs/extras/estado_ceara.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin-top: 56px;
+}*/
+
+section {
+  background: url("../../assets/midia/imgs/festa_01.jpg") no-repeat fixed center;
+}
+
+/*#forms {
+  margin-top: 50px;
+}*/
+.pergunta{
+  font-weight: bold;
+  font-family: 'AristotelicaDemiBold';
+  margin: .3rem auto .3rem auto;
+  font-size: 1.3rem;
+  padding: 0 .8rem;
+  background-color: aliceblue;
+  color: #fcc31d;
+  background-color: #7d8b8f63;
+
+}
+
+legend{
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'AristotelicaDemiBold';
+  margin: 1.2rem auto 1rem auto;
+  font-size: 1.75rem;
+  color: #008c73;
+  /* background-color: #7d8b8f7e; */
+}
+
+.titulo h3{
+  font-weight: bolder;
+  font-size: 2.75rem;
+  font-family: 'AristotelicaDemiBold';
+}
+
+.limite_caractere{
+  padding: 0.3rem 0.3rem !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.card_form{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.cadastro_evento{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.card {
+  margin-top: 8rem !important;
+  margin-bottom: 1.2rem !important;
+  box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
+}
