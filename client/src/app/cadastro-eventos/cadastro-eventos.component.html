@@ -14,7 +14,7 @@
                   Eventos / Events
                 </legend>
                 <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="cidade" class="form-label pergunta">Nome da Cidade</label>
                     <input list="datalistCidade" class="form-control" id="cidade" placeholder="Digite o nome da Cidade"
                       name="cidade" ngModel required #cidade="ngModel"
@@ -27,30 +27,77 @@
                     <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">Cidade é
                       obrigatório</div>
                   </div>
-                  <div class="col-sm-6 col-12 mb-3">
+
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="regiao" class="form-label pergunta">Região de Planejamento</label>
                     <input class="form-control" type="text" id="regiao" placeholder="Informe a sua região" name="regiao"
                       ngModel required #regiao="ngModel" [(ngModel)]="nome_regiao" readonly>
                     <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">Região é
                       obrigatório</div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+
+                  <div class="col-sm-4 col-12 mb-3">
                     <label for="evento_name" class="form-label pergunta">Nome do Evento</label>
                     <input type="text" class="form-control" id="evento_name" aria-describedby="evento_name"
-                      placeholder="Insira o nome do evento!" name="evento_name" ngModel required
-                      #evento_name="ngModel" [(ngModel)]="evento.evento_name">
+                      placeholder="Insira o nome do evento!" name="evento_name" ngModel required #evento_name="ngModel"
+                      [(ngModel)]="evento.evento_name">
 
                     <div *ngIf="!evento_name.valid && evento_name.touched" class="alert alert-danger" role="alert">
                       Informe o nome do Evento</div>
                   </div>
-                  <div class="col-sm-6 col-12 mb-3">
+                </div>
+                <div class="row">
+
+
+                  <!-- <div class="col-sm-2 col-12 mb-3">
                     <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
                     <input type="text" class="form-control" id="tipo_evento" placeholder="Informe o tipo de evento"
                       name="tipo_evento" ngModel required #tipo_evento="ngModel" [(ngModel)]="evento.tipo_evento">
                     <div *ngIf="!tipo_evento.valid && tipo_evento.touched" class="alert alert-danger" role="alert">
                       Tipo de evento é obrigatório</div>
+                  </div> -->
+
+                  <div class="col-sm-4 col-12 mb-3">
+                    <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
+                      <select name="tipo_evento" id="tipo_evento" class="form-select" #tipo_evento>
+                        <option selected disabled>Selecione o Evento</option>
+                        <option value="Ações Socioambiental">Ações Socioambiental</option>
+                        <option value="Eventos Esportivos">Eventos Esportivos</option>
+                        <option value="Eventos Gastronômicos">Eventos Gastronômicos</option>
+                        <option value="Exposição">Exposição</option>
+                        <option value="Feiras">Feiras</option>
+                        <option value="Festas">Festas</option>
+                        <option value="Festejo Religioso">Festejos Religioso</option>
+                        <option value="Integração com Comunidade">Integração com Comunidade</option>
+                        <option value="Peças de Teatro | Stand up Comedy">Peças de Teatro | Stand up Comedy</option>
+                        <option value="Shows">Shows</option>
+                      </select>
+                  </div>
+
+                  <div class="col-sm-2 col-12 mb-3">
+                    <label for="data_inicio_evento" class="form-label pergunta">Data do evento</label>
+                    <input type="date" class="form-control" id="data_inicio_evento" name="data_inicio_evento"
+                      aria-describedby="data_inicio_evento" placeholder="Data de Nascimento / Date of Birth" required
+                      #data_inicio_evento="ngModel" [(ngModel)]="evento.data_inicio_evento">
+                    <div *ngIf="!data_inicio_evento.valid && data_inicio_evento.touched" class="alert alert-danger"
+                      role="alert">Insira a data do evento</div>
+                  </div>
+
+                  <div class="col-sm-2 col-12 mb-3">
+                    <label for="data_final_evento" class="form-label pergunta">Data final</label>
+                    <input type="date" class="form-control" id="data_final_evento" name="data_final_evento"
+                      aria-describedby="data_final_evento" placeholder="Data de Nascimento / Date of Birth" required
+                      #data_final_evento="ngModel" [(ngModel)]="evento.data_final_evento">
+                    <div *ngIf="!data_final_evento.valid && data_final_evento.touched" class="alert alert-danger"
+                      role="alert">Insira a data final do evento</div>
+                  </div>
+                  <div class="col-sm-4 col-12 mb-3">
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label pergunta">Imagem do evento.</label>
+                      <input #fileInput class="form-control" type="file" id="formFile">
+
+                    </div>
+
                   </div>
                 </div>
                 <div class="row">
@@ -70,7 +117,7 @@
 
 
               <button type="submit" class="btn btn-primary mb-3" [disabled]="!formEvento.valid"
-                (click)="salvarEvento()">Cadastrar Município</button>
+                (click)="salvarEvento()">Cadastrar Evento</button>
             </form>
 
           </div>

@@ -6,6 +6,7 @@ const nomads = require('./nomadsRoutes')
 const parceiroLogo = require('./logoParceiroRoutes')
 const municipioParceiro = require('./cadastroMunicipioRoutes')
 const user = require('./userRoutes')
+const evento = require('./eventoRoutes')
 
 module.exports = app => {
   app.use(express.json(),
@@ -15,6 +16,7 @@ module.exports = app => {
           nomads,
           parceiroLogo,          
           municipioParceiro,
-          user,          
+          user,
+          evento       
           )  
 }
