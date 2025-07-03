@@ -6,6 +6,9 @@ export class Evento {
     public regiao_id?: number,
     public descricao?: string,
     public tipo_evento?: string,
+    public data_inicio_evento?: Date,
+    public data_final_evento?: Date,
+    public imagem_evento?: string
 
   ){
 
