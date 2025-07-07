@@ -4,14 +4,20 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventoServiceService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  cadastrarEvento(data: any): Observable<any> {
+    return this.http.post(environment.url + 'cadastraevento', data);
+  }
 
-    cadastrarEvento(data:any): Observable<any> {
-      return this.http.post(environment.url + 'cadastraevento', data)
-    }
+  listar_eventos(metodo: string): Observable<any> {
+    return this.http.get(environment.url + metodo);
+  }
 
+  pegar_evento(metodo: string, id: any): Observable<any> {
+    return this.http.get(environment.url + metodo + id);
+  }
 }

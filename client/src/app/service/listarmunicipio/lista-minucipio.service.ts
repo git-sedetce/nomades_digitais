@@ -27,6 +27,11 @@ export class ListaMinucipioService {
     return this.httpClient.get(environment.url + metodo + id);
   }
 
+  listar_regiao(metodo: string): Observable<any> {
+    //console.log('pegar_regiao', environment.url + metodo + id)
+    return this.httpClient.get(environment.url + metodo);
+  }
+
 
 
 }

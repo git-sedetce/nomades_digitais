@@ -25,12 +25,12 @@ class EventoController {
       const dataAtual = new Date(); // Obtém a data e hora atuais
       const mostraEventos = await database.Evento.findAll({
         where: {
-          data_evento: {
-            [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_evento maior ou igual à dataAtual
+          data_inicio_evento: {
+            [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_inicio_evento maior ou igual à dataAtual
           },
         },
-        order: [["data_evento", "ASC"]],
-        attributtes: ["evento_name", "descricao", "tipo_evento", "data_evento"],
+        order: [["data_inicio_evento", "ASC"]],
+        attributtes: ["evento_name", "descricao", "tipo_evento", "data_inicio_evento", "data_final_evento"],
         include: [
           {
             model: database.Cidades,
@@ -41,6 +41,11 @@ class EventoController {
             model: database.Regiao,
             as: "ass_evento_regiao",
             attribute: ["nome"],
+          },
+          {
+            model: database.anexo_eventos,
+            as: "ass_evento_anexo",
+            attribute: ["mimetype", "filename", "path", "evento_id"],
           },
         ],
       });
@@ -55,7 +60,7 @@ class EventoController {
     try {     
       const mostraEventos = await database.Evento.findAll({
         where: { id: Number(id) },
-        attributtes: ["evento_name", "descricao", "tipo_evento", "data_evento"],
+        attributtes: ["evento_name", "descricao", "tipo_evento", "data_inicio_evento", "data_final_evento"],
         include: [
           {
             model: database.Cidades,
@@ -76,18 +81,19 @@ class EventoController {
   }
 
   static async pegaEventosByCity(req, res) {
-    const { c_id } = req.params;
+    const { id } = req.params;
+    console.log
     try {
       const dataAtual = new Date(); // Obtém a data e hora atuais
       const mostraEventos = await database.Evento.findAll({
+        attributtes: ["evento_name", "descricao", "tipo_evento", "data_inicio_evento", "data_final_evento"],
         where: {
-            city_id: Number(c_id),
-          data_evento: {
-            [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_evento maior ou igual à dataAtual
+            city_id: Number(id),
+          data_inicio_evento: {
+            [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_inicio_evento maior ou igual à dataAtual
           },
         },
-        order: [["data_evento", "ASC"]],
-        attributtes: ["evento_name", "descricao", "tipo_evento", "data_evento"],
+        order: [["data_inicio_evento", "ASC"]],        
         include: [
           {
             model: database.Cidades,
@@ -108,18 +114,18 @@ class EventoController {
   }
 
   static async pegaEventosByRegion(req, res) {
-    const { r_id } = req.params;
+    const { id } = req.params;
     try {
       const dataAtual = new Date(); // Obtém a data e hora atuais
       const mostraEventos = await database.Evento.findAll({
         where: {
-            regiao_id: Number(r_id),
-          data_evento: {
-            [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_evento maior ou igual à dataAtual
+            regiao_id: Number(id),
+          data_inicio_evento: {
+            [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_inicio_evento maior ou igual à dataAtual
           },
         },
-        order: [["data_evento", "ASC"]],
-        attributtes: ["evento_name", "descricao", "tipo_evento", "data_evento"],
+        order: [["data_inicio_evento", "ASC"]],
+        attributtes: ["evento_name", "descricao", "tipo_evento", "data_inicio_evento", "data_final_evento"],
         include: [
           {
             model: database.Cidades,

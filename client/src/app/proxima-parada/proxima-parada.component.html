@@ -1,17 +1,55 @@
-<!--<iframe
-title="Nômades Digitais"
-width="1900"
-height="650"
-src="https://app.powerbi.com/view?r=eyJrIjoiYzViNGM5ZWEtYzdhYi00YmJmLWEwNGItOGM1NmM0ZWY4YjYzIiwidCI6ImEwMGM5YWY1LWNlYzktNDM1Zi1iYWIzLTcxNWJhNjQ3M2JiNSJ9&pageName=ReportSection25b5a40b4aab5c055413"
-frameborder="0"
-allowFullScreen="true">
-</iframe>-->
-  <iframe
-  title="Nômades Digitais"
-  width="1024"
-  height="612"
-  src="https://app.powerbi.com/view?r=eyJrIjoiNmY1NzRlMzQtMmI0Yy00ZDU0LTkzZWQtYzMyNjExM2I0N2RiIiwidCI6ImEwMGM5YWY1LWNlYzktNDM1Zi1iYWIzLTcxNWJhNjQ3M2JiNSJ9"
-  frameborder="0"
-  allowFullScreen="true">
-  </iframe>
+<div class="container-fluid nextStop">
+  <div class="row">
 
+    <!-- Menu lateral -->
+    <div class="col-md-3 sidebar">
+      <h5>Região de Planejamento</h5>
+      <div *ngFor="let regiao of lista_regiao">
+        <a (click)="pegarEventosByRegiao(regiao.id)">{{ regiao.nome }}</a>
+      </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="col-md-9 ps-4 pe-4">
+
+      <!-- Filtro -->
+      <div class="filter-bar d-flex flex-wrap align-items-center">
+        <label class="me-2">Data de:</label>
+        <input type="date" class="form-control me-3" style="max-width: 200px;">
+        <label class="me-2">Até:</label>
+        <input type="date" class="form-control me-3" style="max-width: 200px;">
+        <button class="btn btn-warning text-white fw-bold">Filtrar</button>
+
+        <div class="ms-3">
+          <select class="form-select" id="city" #city (change)="(filtrarMunicipio(city.value))">
+            <option selected disabled>Selecione o Município</option>
+            <option *ngFor="let city of lista_cidades" value="{{city.nome_municipio}}">
+              {{city.nome_municipio}}</option>
+          </select>
+        </div>
+        <button class="btn btn-warning text-white fw-bold ms-3" (click)="pegarEventos()">Limpar Filtro</button>
+      </div>
+
+      <!-- Lista de Eventos -->
+      <div *ngIf="!has_event" class="alert alert-info mt-3">
+        <strong>Informação:</strong> Não há eventos cadastrados para a cidade selecionada.
+      </div>
+      <div *ngIf="has_event">
+        <div class="event-box" *ngFor="let evento of lista_eventos">
+          <div class="event-date">
+            <div class="day">{{ evento.data_inicio_evento | date :'dd'}}</div>
+            <div class="month">{{ evento.data_inicio_evento | date :'MM'}}</div>
+          </div>
+          <div class="event-info">
+            <div class="category">{{ evento.tipo_evento }}</div>
+            <div class="title">{{ evento.evento_name }}</div>
+            <div class="saiba_mais">Saiba Mais</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

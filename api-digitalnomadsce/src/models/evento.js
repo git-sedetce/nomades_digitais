@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Evento.belongsTo(models.Cidades, { foreignKey: 'city_id', as: 'ass_evento_municipio' })
       Evento.belongsTo(models.Regiao, { foreignKey: 'regiao_id', as: 'ass_evento_regiao' })
-      Evento.hasMany(models.anexo_eventos, { foreignKey: 'evento_id', as: 'ass_evento_anexo' })
+      Evento.hasOne(models.anexo_eventos, { foreignKey: 'evento_id', as: 'ass_evento_anexo' })
     }
   }
   Evento.init({

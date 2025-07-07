@@ -3,7 +3,9 @@ const database = require('../models')
 class MunicipioController {
     static async pegaRegiao(req, res){
         try{
-            const todasAsRegiaos = await database.Regiao.findAll()
+            const todasAsRegiaos = await database.Regiao.findAll({
+                attributes: ['id', 'nome'],
+            })
             return res.status(200).json(todasAsRegiaos)
         }
         catch (error){
@@ -12,7 +14,9 @@ class MunicipioController {
     }
     static async pegaMunicipio(req, res){
         try{
-            const todosMunicipios = await database.Cidades.findAll()
+            const todosMunicipios = await database.Cidades.findAll({
+                attributes: ['id', 'nome_municipio', 'regiao_id', 'cod_ibge'],
+            })
             return res.status(200).json(todosMunicipios)
         }
         catch (error){
