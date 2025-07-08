@@ -33,6 +33,7 @@ import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
 import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
 import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
     HttpClientModule,
     GoogleMapsModule,
     NgxMaskModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
