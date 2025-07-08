@@ -32,6 +32,7 @@ const upload = multer({ storage })
 const router = Router()
 router.get('/eventos', EventoController.pegaEventos)
 router.get('/evento/:id', EventoController.pegaEventosById)
+router.get('/imagevento/:id', EventoController.pegaImagensEventosById)
 router.get('/eventocidade/:id', EventoController.pegaEventosByCity)
 router.get('/eventoregiao/:id', EventoController.pegaEventosByRegion)
 

@@ -72,6 +72,11 @@ class EventoController {
             as: "ass_evento_regiao",
             attribute: ["nome"],
           },
+          {
+            model: database.anexo_eventos,
+            as: "ass_evento_anexo",
+            attributtes: []
+          }
         ],
       });
       return res.status(200).json(mostraEventos);
@@ -175,6 +180,37 @@ class EventoController {
       }
       //res.send("Arquivo recebido!")
     }
+
+    static async pegaImagensEventosById(req, res) {
+         const { id } = req.params;
+             try {
+                 const imageEvento = await database.anexo_eventos.findOne({
+                     where: { evento_id: Number(id), tipo_anexo: 'banner' },
+                     attributes: ["path"],
+                 });
+                    if (!imageEvento) {
+                     return res.status(404).send({
+                         message: "Imagem não encontrada",
+                     });
+                 }  
+                           
+                 const acesso = path.join(baseUrl, imageEvento.path)   
+                  // console.log('acesso', acesso)         
+                    // Lendo o conteúdo do arquivo imagem
+                 fs.readFile(acesso, 'base64', function (err, data) {
+                     if (err) {
+                         console.error(err);
+                         return res.status(500).send({
+                             message: "Erro ao ler a imagem",
+                         });
+                     }
+                     return res.status(200).json(data);
+                 });
+             } catch (error) {
+                 console.error(error);
+                 return res.status(500).json(error.message);
+             }
+      }
 }
 
 module.exports = EventoController;

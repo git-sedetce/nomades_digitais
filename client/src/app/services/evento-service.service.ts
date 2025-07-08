@@ -20,4 +20,12 @@ export class EventoServiceService {
   pegar_evento(metodo: string, id: any): Observable<any> {
     return this.http.get(environment.url + metodo + id);
   }
+
+  eventoById(id: number): Observable<any> {
+    return this.http.get(environment.url + 'evento/' + id)
+  }
+
+  imagem_eventoById(id: number): Observable<any> {
+    return this.http.get(environment.url + 'imagevento/' + id)
+  }
 }

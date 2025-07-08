@@ -1,55 +1,165 @@
 <div class="container-fluid nextStop">
   <div class="row">
 
-    <!-- Menu lateral -->
-    <div class="col-md-3 sidebar">
+    <!-- Menu lateral (visível apenas em md para cima) -->
+    <div class="col-12 col-md-3 sidebar mb-4 mb-md-0 d-none d-md-block">
       <h5>Região de Planejamento</h5>
       <div *ngFor="let regiao of lista_regiao">
         <a (click)="pegarEventosByRegiao(regiao.id)">{{ regiao.nome }}</a>
       </div>
     </div>
 
+    <!-- Select visível apenas em telas pequenas (mobile) -->
+    <div class="col-12 mb-3 d-block d-md-none">
+      <label for="regiao" class="form-label">Região de Planejamento</label>
+      <select class="form-select mb-3" id="regiao" #regiao (change)="pegarEventosByRegiao(regiao.value)">
+        <option disabled selected>Selecione uma região</option>
+        <option *ngFor="let regiao of lista_regiao" [value]="regiao.id">
+          {{ regiao.nome }}
+        </option>
+      </select>
+    </div>
+
     <!-- Conteúdo principal -->
-    <div class="col-md-9 ps-4 pe-4">
+    <div class="col-12 col-md-9 ps-md-4 pe-md-4">
 
       <!-- Filtro -->
-      <div class="filter-bar d-flex flex-wrap align-items-center">
-        <label class="me-2">Data de:</label>
-        <input type="date" class="form-control me-3" style="max-width: 200px;">
-        <label class="me-2">Até:</label>
-        <input type="date" class="form-control me-3" style="max-width: 200px;">
-        <button class="btn btn-warning text-white fw-bold">Filtrar</button>
+      <div class="filter-bar row g-3 align-items-center">
 
-        <div class="ms-3">
+        <div class="col-12 col-sm-auto">
+          <label class="form-label mb-0 me-sm-2">Data de:</label>
+        </div>
+        <div class="col-12 col-sm-auto">
+          <input type="date" class="form-control" [(ngModel)]="dataInicioFiltro" />
+        </div>
+
+        <div class="col-12 col-sm-auto">
+          <label class="form-label mb-0 me-sm-2">Até:</label>
+        </div>
+        <div class="col-12 col-sm-auto">
+          <input type="date" class="form-control" [(ngModel)]="dataFimFiltro" />
+        </div>
+
+        <div class="col-12 col-sm-auto">
+          <button class="btn btn-warning text-white fw-bold w-100" (click)="filtrarPorData()">Filtrar</button>
+        </div>
+
+        <div class="col-12 col-sm-auto">
           <select class="form-select" id="city" #city (change)="(filtrarMunicipio(city.value))">
             <option selected disabled>Selecione o Município</option>
-            <option *ngFor="let city of lista_cidades" value="{{city.nome_municipio}}">
-              {{city.nome_municipio}}</option>
+            <option *ngFor="let city of lista_cidades" [value]="city.nome_municipio">
+              {{ city.nome_municipio }}
+            </option>
           </select>
         </div>
-        <button class="btn btn-warning text-white fw-bold ms-3" (click)="pegarEventos()">Limpar Filtro</button>
+
+        <div class="col-12 col-sm-auto">
+          <button class="btn btn-warning text-white fw-bold w-100" (click)="pegarEventos()">Limpar Filtro</button>
+        </div>
+
       </div>
 
       <!-- Lista de Eventos -->
       <div *ngIf="!has_event" class="alert alert-info mt-3">
         <strong>Informação:</strong> Não há eventos cadastrados para a cidade selecionada.
       </div>
+
       <div *ngIf="has_event">
-        <div class="event-box" *ngFor="let evento of lista_eventos">
+        <div class="event-box"
+          *ngFor="let evento of eventosFiltrados | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
           <div class="event-date">
-            <div class="day">{{ evento.data_inicio_evento | date :'dd'}}</div>
-            <div class="month">{{ evento.data_inicio_evento | date :'MM'}}</div>
+            <div class="day">{{ evento.data_inicio_evento | date: 'dd' }}</div>
+            <div class="month">{{ evento.data_inicio_evento | date: 'MM' }}</div>
           </div>
           <div class="event-info">
             <div class="category">{{ evento.tipo_evento }}</div>
             <div class="title">{{ evento.evento_name }}</div>
-            <div class="saiba_mais">Saiba Mais</div>
+            <div class="saiba_mais" (click)="saibaMais(evento.id)" data-bs-toggle="modal"
+              data-bs-target="#modalSaibaMais">
+              Saiba Mais
+            </div>
+          </div>
+        </div>
+        <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Saiba Mais -->
+<div class="modal fade" id="modalSaibaMais" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalSaibaMaisLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white text-center">
+        <h1 class="modal-title fs-5" id="modalSaibaMaisLabel">{{ evento.evento_name }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!isLoading" class="d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div *ngIf="isLoading">
+          <div class="row">
+            <div class="col-sm-4 col-12 imagemEvento text-center">
+              <ng-container *ngIf="has_image; else noImage">
+                <img class="mx-auto d-block align-middle" [src]="imgUrl" alt="Evento sem imagem">
+              </ng-container>
+              <ng-template #noImage>
+                <p class="text-muted">Imagem não disponível para este evento.</p>
+              </ng-template>
+            </div>
+            <div class="col-sm-8 col-12">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Nome do Evento</th>
+                    <td>{{ evento[0].evento_name }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Tipo de Evento</th>
+                    <td colspan="2">{{ evento[0].tipo_evento }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Descrição:</th>
+                    <td colspan="2">{{ evento[0].descricao }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Data de Inicio</th>
+                    <td colspan="2">{{ evento[0].data_inicio_evento | date:'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr class="table-success">
+                    <th scope="row">Encerramento</th>
+                    <td colspan="2">{{ evento[0].data_final_evento | date:'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <th scope="row">Cidade</th>
+                    <td colspan="2">{{ evento[0]['ass_evento_municipio'].nome_municipio }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Região:</th>
+                    <td colspan="2">{{ evento[0]['ass_evento_regiao'].nome }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-
+      </div>
     </div>
-
   </div>
 </div>

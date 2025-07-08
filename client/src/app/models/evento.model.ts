@@ -1,4 +1,5 @@
 export class Evento {
+[x: string]: any;
   constructor(
     public id?: number,
     public evento_name?: string,
