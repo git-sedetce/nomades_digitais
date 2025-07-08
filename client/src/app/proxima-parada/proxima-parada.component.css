@@ -7,10 +7,6 @@
   min-height: 100vh;
 }
 
-.sidebar {
-  cursor: pointer;
-}
-
 .sidebar h5 {
   background-color: #f7a93b;
   color: #fff;
@@ -23,6 +19,7 @@
   color: #000;
   border-bottom: 1px solid #eee;
   text-decoration: none;
+  cursor: pointer;
 }
 .sidebar a:hover {
   background-color: #e0ffe0;
