@@ -13,11 +13,6 @@
   margin-left: 2.8rem;
 }
 
-.logo {
-  max-height: 50px;
-  height: auto;
-}
-
 .menu li{
   font-size: clamp(1.20em, 0.4em + 1vw, 1.45em);
 }
