@@ -1,5 +1,88 @@
-path:hover {
-  fill: #33a02c; /* azul destaque */
+.terraLuz{
+  margin-top: 2rem !important;
+}
+
+.cariri:hover{
+  fill: #becf50;
   cursor: pointer;
   transition: fill 0.3s;
 }
+
+.centroSul:hover{
+  fill: #ff73df;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.grandeFortaleza:hover{
+  fill: #33a02c;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.litoralLeste:hover{
+  fill: #e7beff;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.litoralNorte:hover{
+  fill: #d3ffbe;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.valeCuru:hover{
+  fill: #776955;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.baturite:hover{
+  fill: #5d7451;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.ibiapaba:hover{
+  fill: #c43c39;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.sertaoCentral:hover{
+  fill: #ffff00;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.sertaoCaninde:hover{
+  fill: #7d8b8f;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.sertaoSobral:hover{
+  fill: #8d5a99;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.sertaoCrateus:hover{
+  fill: #72dfff;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.inhamus:hover{
+  fill: #fcc4b3;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.valeJaguaribe:hover{
+  fill: #ffaa00;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
