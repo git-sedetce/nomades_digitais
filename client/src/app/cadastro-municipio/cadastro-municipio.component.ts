@@ -51,6 +51,7 @@ export class CadastroMunicipioComponent implements OnInit {
     qual_rota: '',
   }
   submitted = false;
+  finaliza: boolean = false;
 
   maxChars = 500
   qtdeChars = 255
@@ -234,8 +235,10 @@ export class CadastroMunicipioComponent implements OnInit {
 
         if(response=='Anexo enviado com Sucesso!'){
           this.habilita_anexo = false
+          this.finaliza = true;
         }else{
           this.habilita_anexo = true
+          this.finaliza = false;
         }
       })
     }

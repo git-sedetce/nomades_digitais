@@ -75,4 +75,12 @@ export class ServiceService {
     //console.log('anexar_arquivo', environment.url + file)
     return this.http.post(environment.url + 'parceiro', file)
   }
+
+  cidades12(metodo: string): Observable<any> {
+    return this.http.get(environment.url + metodo);
+  }
+
+  cidadeporTurismo(turismo: string): Observable<any> {
+    return this.http.get(environment.url + 'cidadeTur/' + turismo);
+  }
 }

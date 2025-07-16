@@ -20,5 +20,8 @@ router.get('/parceiroMunicipio/:id', CadastroMunicipioController.municipioParcei
 router.post('/parceiroMunicipio', CadastroMunicipioController.cadastraMunicipioParceiro)
 router.post('/anexosMunicipio/:id', upload.array('files'), CadastroMunicipioController.anexosMunicipioParceiro)
 
+router.get('/pegaImageCity6', CadastroMunicipioController.pegaImgCity06)
+router.get('/cidadeTur/:turismo', CadastroMunicipioController.pegarMunicipioByTurismo)
+
 
 module.exports = router

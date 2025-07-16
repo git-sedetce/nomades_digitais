@@ -491,7 +491,7 @@
               </div>
             </fieldset>
           </div>
-          <button type="submit" class="btn btn-success mb-3" (click)="novoCadastro()">Novo Cadastro</button>
+          <button type="submit" class="btn btn-success mb-3" [disabled]="finaliza == true" (click)="novoCadastro()">Novo Cadastro</button>
         </div>
       </div>
     </div>

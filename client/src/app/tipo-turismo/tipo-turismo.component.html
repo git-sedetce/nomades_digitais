@@ -5,7 +5,7 @@
     <div class="col-12 col-md-3 sidebar mb-4 mb-md-0 d-none d-md-block">
       <h5>Turismo no Ceará</h5>
       <div *ngFor="let tipo_turismo of lista_estilo_turismo">
-        <a (click)="pegarTipoTurismo(tipo_turismo.id)">{{ tipo_turismo.nome }}</a>
+        <a (click)="pegarTipoTurismo(tipo_turismo.nome)">{{ tipo_turismo.nome }}</a>
       </div>
     </div>
 
@@ -14,7 +14,7 @@
       <label for="tipo_turismo" class="form-label">Turismo no Ceará</label>
       <select class="form-select mb-3" id="tipo_turismo" #tipo_turismo (change)="pegarTipoTurismo(tipo_turismo.value)">
         <option disabled selected>Selecione uma região</option>
-        <option *ngFor="let tipo_turismo of lista_estilo_turismo" [value]="tipo_turismo.id">
+        <option *ngFor="let tipo_turismo of lista_estilo_turismo" [value]="tipo_turismo.nome">
           {{ tipo_turismo.nome }}
         </option>
       </select>
@@ -27,7 +27,8 @@
       <div class="filter-bar row g-3 align-items-center">
 
         <div class="col-12 col-sm-auto">
-          <label class="form-label mb-0 me-sm-2">Tipo de Turismo<span *ngIf="turismo_selected">: {{ tipo_turismo }}</span></label>
+          <label class="form-label mb-0 me-sm-2">Tipo de Turismo<span *ngIf="turismo_selected">: {{ tipo_turismo
+              }}</span></label>
         </div>
 
         <div class="col-12 col-sm-auto">
@@ -40,7 +41,7 @@
         </div>
 
         <div class="col-12 col-sm-auto">
-          <button class="btn btn-warning text-white fw-bold w-100" >Limpar Filtro</button>
+          <button class="btn btn-warning text-white fw-bold w-100" (click)="limparFiltro()">Limpar Filtro</button>
         </div>
 
       </div>
@@ -51,17 +52,36 @@
       </div>
 
       <div *ngIf="has_city">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div *ngFor="let cidades of lista_cidades_cadastradas" class="col">
+            <div class="card h-100">
+              <img *ngIf="cidades.imagem; else noImage" [src]="cidades.imagem" class="card-img-top"
+                alt="{{ cidades.cidade }}">
+              <ng-template #noImage>
+                <div class="text-muted text-center">Imagem não disponível</div>
+              </ng-template>
 
-        <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
+
+              <div class="card-body">
+                <h5 class="card-title">{{ cidades.cidade }}</h5>
+                <div class="category">{{ cidades.tipo_turismo }}</div>
+                <div class="title">{{ cidades.regiao }}</div>
+                <!-- <div class="saiba_mais" (click)="saibaMais(cidades.municipio_id)" data-bs-toggle="modal"
+                  data-bs-target="#modalSaibaMais">
+                  Saiba Mais
+                </div> -->
+
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
-  </div>
-</div>
 
 
-<!-- Modal Saiba Mais -->
-<!-- <div class="modal fade" id="modalSaibaMais" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Modal Saiba Mais -->
+    <!-- <div class="modal fade" id="modalSaibaMais" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="modalSaibaMaisLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">

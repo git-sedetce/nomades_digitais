@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
-import { EventoServiceService } from '../services/evento-service.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ServiceService } from '../services/service.service';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tipo-turismo',
@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class TipoTurismoComponent implements OnInit {
   lista_regiao!: any[];
   lista_cidades!: any[];
+  lista_cidades_cadastradas!: any[];
   cidadesFiltradas: any[] = [];
   tipo_turismo!: any;
   has_city: boolean = false; // Verifica se há cidades
@@ -18,6 +19,7 @@ export class TipoTurismoComponent implements OnInit {
   itemsPerPage: number = 10; // Itens por página
   isLoading = false;
   turismo_selected: boolean = false;
+  imgUrl: SafeResourceUrl | null = null;
 
   // Lista de estilos de turismo
   lista_estilo_turismo = [
@@ -31,28 +33,91 @@ export class TipoTurismoComponent implements OnInit {
 
   constructor(
     private estadoService: ListaMinucipioService,
-    private eventoService: EventoServiceService,
+    private service: ServiceService,
     private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
+    this.apresentar06Cidades();
     this.pegarRegiao();
     this.pegarCidade();
   }
 
   // Método para obter o nome do estilo de turismo (já estava bom, apenas mantido)
-  pegarTipoTurismo(id: any): string | undefined {
-    const estiloEncontrado = this.lista_estilo_turismo.find(
-      (estilo) => estilo.id === id
-    );
+  pegarTipoTurismo(name: any) {
+    this.service.cidadeporTurismo(name).subscribe(
+      (data: any) => {
+        this.lista_cidades_cadastradas = data;
 
-    if (estiloEncontrado) {
-      this.tipo_turismo = estiloEncontrado.nome;
-      return estiloEncontrado.nome;
-    }
+      if (this.lista_cidades_cadastradas && this.lista_cidades_cadastradas.length > 0) {
+        console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
+        this.has_city = true;
 
-    return undefined;
-  }
+        for (let image of this.lista_cidades_cadastradas) {
+          if (image.base64) {
+            const binaryString = window.atob(image.base64);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+
+            for (let i = 0; i < binaryLen; i++) {
+              bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const blob = new Blob([bytes], { type: 'image/jpeg' });
+            const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+            image.imagem = imageUrl; // define imagem no objeto
+          } else {
+            image.imagem = null;
+          }
+        }
+
+      } else {
+        this.has_city = false;
+      }
+    },
+    (erro: any) => console.error(erro)
+  );
+      }
+
+      limparFiltro() {
+        this.apresentar06Cidades();
+      }
+
+
+  apresentar06Cidades() {
+  this.service.cidades12('pegaImageCity6').subscribe(
+    (data: any) => {
+      this.lista_cidades_cadastradas = data;
+
+      if (this.lista_cidades_cadastradas && this.lista_cidades_cadastradas.length > 0) {
+        console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
+        this.has_city = true;
+
+        for (let image of this.lista_cidades_cadastradas) {
+          if (image.base64) {
+            const binaryString = window.atob(image.base64);
+            const binaryLen = binaryString.length;
+            const bytes = new Uint8Array(binaryLen);
+
+            for (let i = 0; i < binaryLen; i++) {
+              bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const blob = new Blob([bytes], { type: 'image/jpeg' });
+            const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+            image.imagem = imageUrl; // define imagem no objeto
+          } else {
+            image.imagem = null;
+          }
+        }
+
+      } else {
+        this.has_city = false;
+      }
+    },
+    (erro: any) => console.error(erro)
+  );
+}
 
   pegarRegiao() {
     this.estadoService.listar_regiao('regiao').subscribe(
@@ -82,5 +147,9 @@ export class TipoTurismoComponent implements OnInit {
         console.log('city', city);
         // this.cadastro_city.cod_ibge = city.cod_ibge
       });
+  }
+
+  saibaMais(id: any) {
+    console.log('ID da cidade selecionada:', id);
   }
 }
