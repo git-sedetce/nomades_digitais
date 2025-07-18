@@ -86,3 +86,11 @@
   transition: fill 0.3s;
 }
 
+.accordion-button {
+  background-color: #f2f2f2;
+  color: #333;
+}
+.accordion-button:not(.collapsed) {
+  background-color: #ddd;
+}
+

@@ -802,9 +802,113 @@
     </div>
     <div class="col-sm-6 col-12 pt-3">
       <div *ngIf="munInfo">
-        <h2>{{ munInfo.nome_municipio }}</h2>
-        <h4>Região de Planejamento: {{ munInfo.ass_municipio_regiao.nome }}</h4>
+        <div class="container my-5">
+          <h1 class="text-center mb-4">{{ munInfo.nome_municipio }}</h1>
+          <h4>Região de Planejamento: {{ munInfo.ass_municipio_regiao.nome }}</h4>
+          <div class="accordion" id="cityAccordion">
+
+            <div class="accordion-item" *ngIf="showInfo">
+              <h2 class="accordion-header" id="headingHistory">
+                <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
+                  Informações da Cidade
+                </button>
+              </h2>
+              <div id="collapseHistory" class="accordion-collapse collapse" aria-labelledby="headingHistory"
+                data-bs-parent="#cityAccordion">
+                <div class="accordion-body">
+                  <h5>História da Cidade</h5>
+                  <p>{{ municipioCadastrado.historia_cidade }}</p>
+                  <hr>
+                  <p><span class="fw-bold">Email:</span> {{ municipioCadastrado.email_prefeitura }}</p>
+                  <p><span class="fw-bold">Telefone de Contato:</span> {{ municipioCadastrado.contato_prefeitura }}</p>
+                  <p><span class="fw-bold">Website:</span><a [href]="'//' + municipioCadastrado.link_prefeitura"
+                      target="_blank">
+                      {{ municipioCadastrado.link_prefeitura }}
+                    </a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item" *ngIf="showInfo">
+              <h2 class="accordion-header" id="headingServices">
+                <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseServices" aria-expanded="false" aria-controls="collapseServices">
+                  Serviços
+                </button>
+              </h2>
+              <div id="collapseServices" class="accordion-collapse collapse" aria-labelledby="headingServices"
+                data-bs-parent="#cityAccordion">
+                <div class="accordion-body">
+                  <h5>Serviço de Internet</h5>
+                  <p><span class="fw-bold">Possui wifi gratuito em pontos públicos do município?</span> <span
+                      class="text-capitalize"> {{ municipioCadastrado.wifi_service }}</span></p>
+                  <p *ngIf="municipioCadastrado.wifi_service == 'sim'"><span class="fw-bold">Quais locais?</span></p>
+                  <p *ngIf="municipioCadastrado.wifi_service == 'sim'">{{ municipioCadastrado.wifi_cidade }}</p>
+                  <hr>
+                  <h5>Serviço da Cidade</h5>
+                  <p><span class="fw-bold">Quais são os serviços ofertados para turistas e/ou estrangeiros?</span></p>
+                  <p>{{ municipioCadastrado.service_estrangeiro }}</p>
+                  <p *ngIf="municipioCadastrado.service_cidade"><span class="fw-bold">Onde são ofertados?</span></p>
+                  <p *ngIf="municipioCadastrado.service_cidade">{{ municipioCadastrado.service_cidade }}</p>
+                  <p><span class="fw-bold">Quais são os serviços oferecidos para empresários?</span></p>
+                  <p>{{ municipioCadastrado.service_empresario }}</p>
+                  <p><span class="fw-bold">Quais são as medidas de segurança pública do município?</span></p>
+                  <p>{{ municipioCadastrado.service_seguranca }}</p>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item" *ngIf="showInfo">
+              <h2 class="accordion-header" id="headingTourism">
+                <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseTourism" aria-expanded="false" aria-controls="collapseTourism">
+                  Pontos Turísticos
+                </button>
+              </h2>
+              <div id="collapseTourism" class="accordion-collapse collapse" aria-labelledby="headingTourism"
+                data-bs-parent="#cityAccordion">
+                <div class="accordion-body">
+                  <p><span class="fw-bold">Espaços de Lazer</span></p>
+                  <p>{{ municipioCadastrado.espacos_lazer }}</p>
+                  <p><span class="fw-bold">Tipo de Turismo</span></p>
+                  <p>{{ municipioCadastrado.tipo_turismo }}</p>
+                  <p><span class="fw-bold">A cidade faz parte de alguma rota turística ?</span><span
+                      class="text-capitalize"> {{ municipioCadastrado.rota }}</span></p>
+                  <p *ngIf="municipioCadastrado.qual_rota"><span class="fw-bold">A qual rota faz parte?</span></p>
+                  <p *ngIf="municipioCadastrado.qual_rota">{{ municipioCadastrado.qual_rota }}</p>
+                  <hr>
+                  <p *ngIf="municipioCadastrado.tourism_ecologico"><span class="fw-bold">Cite os pontos turísticos
+                      Ecológico de sua cidade</span></p>
+                  <p>{{ municipioCadastrado.tourism_ecologico }}</p>
+                  <p *ngIf="municipioCadastrado.tourism_praiano"><span class="fw-bold">Cite os pontos turísticos Praiano
+                      de sua cidade</span></p>
+                  <p>{{ municipioCadastrado.tourism_praiano }}</p>
+                  <p *ngIf="municipioCadastrado.tourism_radical"><span class="fw-bold">Cite os pontos turísticos
+                      radicais de sua cidade</span></p>
+                  <p>{{ municipioCadastrado.tourism_radical }}</p>
+                  <p *ngIf="municipioCadastrado.tourism_religioso"><span class="fw-bold">Cite os pontos turísticos
+                      Religioso de sua cidade</span></p>
+                  <p>{{ municipioCadastrado.tourism_religioso }}</p>
+                  <p *ngIf="municipioCadastrado.tourism_serrano"><span class="fw-bold">Cite os pontos turísticos Serrano
+                      de sua cidade</span></p>
+                  <p>{{ municipioCadastrado.tourism_serrano }}</p>
+                  <p *ngIf="municipioCadastrado.tourism_sertanejo"><span class="fw-bold">Cite os pontos turísticos
+                      Sertanejo de sua cidade</span></p>
+                  <p>{{ municipioCadastrado.tourism_sertanejo }}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
+
+
+
 
     </div>
   </div>

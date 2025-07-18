@@ -77,6 +77,18 @@ class CadastroMunicipioController {
     }
   }
 
+  static async municipioParceiroByName(req, res) {
+    const { cidade } = req.params;
+    try {
+      const umMunicipioParceiro = await database.cadastra_municipios.findOne({
+        where: { cidade: cidade },
+      });
+      return res.status(200).json(umMunicipioParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async anexosMunicipioParceiro(req, res) {
     //var email_grupo = "admdigitalnomads@sedet.ce.gov.br"
     var name_arquivo = [];

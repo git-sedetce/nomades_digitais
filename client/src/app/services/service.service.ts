@@ -83,4 +83,8 @@ export class ServiceService {
   cidadeporTurismo(turismo: string): Observable<any> {
     return this.http.get(environment.url + 'cidadeTur/' + turismo);
   }
+
+  getDataCity(cidade: string): Observable<any> {
+    return this.http.get(environment.url + 'cidadeDados/' + cidade);
+  }
 }

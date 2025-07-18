@@ -17,6 +17,7 @@ const upload = multer({ storage })
 const router = Router()
 router.get('/parceiroMunicipio', CadastroMunicipioController.pegarMunicipioParceiro)
 router.get('/parceiroMunicipio/:id', CadastroMunicipioController.municipioParceiroById)
+router.get('/cidadeDados/:cidade', CadastroMunicipioController.municipioParceiroByName)
 router.post('/parceiroMunicipio', CadastroMunicipioController.cadastraMunicipioParceiro)
 router.post('/anexosMunicipio/:id', upload.array('files'), CadastroMunicipioController.anexosMunicipioParceiro)
 
