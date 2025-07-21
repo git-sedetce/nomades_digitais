@@ -87,4 +87,8 @@ export class ServiceService {
   getDataCity(cidade: string): Observable<any> {
     return this.http.get(environment.url + 'cidadeDados/' + cidade);
   }
+
+  consultaIBGE(ibge: string){
+    return this.http.get(`https://servicodados.ibge.gov.br/api/v3/agregados/6579/periodos/2021/variaveis/9324?localidades=N6[${ibge}]`)
+  }
 }

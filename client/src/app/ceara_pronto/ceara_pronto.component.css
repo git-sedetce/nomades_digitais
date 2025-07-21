@@ -1,86 +1,104 @@
-.terraLuz{
-  margin-top: 2rem !important;
+.layout-container {
+  display: flex;
+  height: 90vh;
+  overflow: hidden;
 }
 
-.cariri:hover{
+.mapa {
+  flex: 1;
+  overflow: hidden;
+  position: sticky;
+  top: 3rem;
+  height: 82vh;
+  background-color: #f8f9fa;
+}
+
+.conteudo {
+  flex: 1;
+  overflow-y: auto;
+  height: 82vh;
+  background-color: #ffffff;
+}
+
+.cariri:hover {
   fill: #becf50;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.centroSul:hover{
+.centroSul:hover {
   fill: #ff73df;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.grandeFortaleza:hover{
+.grandeFortaleza:hover {
   fill: #33a02c;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.litoralLeste:hover{
+.litoralLeste:hover {
   fill: #e7beff;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.litoralNorte:hover{
+.litoralNorte:hover {
   fill: #d3ffbe;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.valeCuru:hover{
+.valeCuru:hover {
   fill: #776955;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.baturite:hover{
+.baturite:hover {
   fill: #5d7451;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.ibiapaba:hover{
+.ibiapaba:hover {
   fill: #c43c39;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.sertaoCentral:hover{
+.sertaoCentral:hover {
   fill: #ffff00;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.sertaoCaninde:hover{
+.sertaoCaninde:hover {
   fill: #7d8b8f;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.sertaoSobral:hover{
+.sertaoSobral:hover {
   fill: #8d5a99;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.sertaoCrateus:hover{
+.sertaoCrateus:hover {
   fill: #72dfff;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.inhamus:hover{
+.inhamus:hover {
   fill: #fcc4b3;
   cursor: pointer;
   transition: fill 0.3s;
 }
 
-.valeJaguaribe:hover{
+.valeJaguaribe:hover {
   fill: #ffaa00;
   cursor: pointer;
   transition: fill 0.3s;
@@ -94,3 +112,20 @@
   background-color: #ddd;
 }
 
+.informes_estado {
+  text-align: justify;
+}
+
+/* Responsivo: empilha no mobile */
+@media (max-width: 767.98px) {
+  .layout-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .mapa, .conteudo {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+}

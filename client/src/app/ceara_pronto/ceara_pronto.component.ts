@@ -9,9 +9,11 @@ import { ServiceService } from '../services/service.service';
 })
 export class Ceara_prontoComponent implements OnInit {
   lista_municipio!: any[];
+  lista_municipio_ibge!: any[];
   munInfo!: any;
   municipioCadastrado!: any;
   showInfo: boolean = false;
+  showCeara: boolean = true;
 
   constructor(
     public services: ListaMinucipioService,
@@ -33,21 +35,27 @@ export class Ceara_prontoComponent implements OnInit {
   if (id) {
     this.munInfo = this.lista_municipio.find((m) => String(m.id) === id);
     console.log('Municipio Info:', this.munInfo);
-    this.pegarCidade(this.munInfo.nome_municipio);
+    this.pegarCidade(this.munInfo.nome_municipio, this.munInfo.cod_ibge);
   }
 }
 
-pegarCidade(cidade: string) {
+pegarCidade(cidade: string, ibge: any) {
   this.cityService.getDataCity(cidade).subscribe(
       (data: any) => {
         if(data && Object.keys(data).length > 0) {
-          console.log('City Data:', data);
           this.municipioCadastrado = data;
           console.log('Municipio Data:', this.municipioCadastrado);
           this.showInfo = true;
+          this.showCeara = false;
         }else{
-          console.error('No data found for the city:', cidade);
+          this.cityService.consultaIBGE(ibge).subscribe(
+            (ibgeData: any) => {
+              this.lista_municipio_ibge = ibgeData;
+              console.log('IBGE Data:', this.lista_municipio_ibge);
+            }
+          )
           this.showInfo = false;
+          this.showCeara = false;
         }
       },
       (error: any) => console.error('Error fetching city data:', error)
