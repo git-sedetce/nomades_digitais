@@ -35,6 +35,12 @@ import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.co
 import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt, 'pt');
+
 
 @NgModule({
   declarations: [
@@ -76,7 +82,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ToastrModule.forRoot(),
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
