@@ -3,6 +3,8 @@
   background: url("../../assets/midia/imgs/praia_do_futuro_sabiaguaba.jpg") top center;
   background-size: cover;
   position: relative;
+  /* height: 100vh;
+  width: 100vw; */
 }
 
 #o_que_e:before {
