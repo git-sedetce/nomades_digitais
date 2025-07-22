@@ -1,165 +1,67 @@
-#o_que_e{
-  height: 40rem;
-  background: url("../../assets/midia/imgs/praia_do_futuro_sabiaguaba.jpg") top center;
-  background-size: cover;
-  position: relative;
-  /* height: 100vh;
-  width: 100vw; */
-}
+ body {
+      margin: 0;
+      font-family: 'AristotelicaDemiBold', sans-serif;
+    }
 
-#o_que_e:before {
-  content: "";
-  background: rgba(233, 232, 238, 0.6);
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-}
+    .hero-container {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+    }
 
-.manual p{
-  margin-left: 22px;
-  margin-right: 24px;
-  text-align: justify;
-  font-weight: bold;
-  letter-spacing: 2px;
-  line-height: 1.8;
-}
+    .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
 
-.card_manual{
-  background: rgba(251, 251, 251, 0);
-  /*height: 115px;*/
-  margin-top: 100px !important;
-  border: none;
-}
+    .btn-cadastrar {
+      position: absolute;
+      top: 80%;      /* ajuste vertical (porcentagem relativa à altura da imagem) */
+      left: 69.5%;   /* ajuste horizontal (porcentagem relativa à largura da imagem) */
+      transform: translate(-50%, -50%);
+      background-color: #fcc31d;
+      /* border: 3px solid #ff6a00; */
+      color: black;
+      font-weight: bold;
+      padding: 10px 30px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+    }
 
-.card_manual h4 {
-  font-size: clamp( 2em, 2.3em, 3.6em);
-  /*font-size: 45px;*/
-  padding: 15px 90px;
-  font-weight: bold;
-  font-family: 'AristotelicaDemiBold';
-}
+    .btn-cadastrar:hover {
+      background-color: #008c73;
+      color: #fff;
+    }
 
-.cadastro h4 {
-  font-size: clamp( 1.4em, 1.52em, 2.0em);
-  /*font-size: 45px;*/
-  padding: 15px 90px;
-  font-weight: bold;
-  font-family: 'AristotelicaDemiBold';
-}
+    @media (max-width: 992px) {
+      .btn-cadastrar {
+        top: 61%;
+        left: 56.5%;
+        padding: 9px 25px;
+        font-size: 1rem;
+      }
+    }
 
-.cadastro a {
-  /* font-size: clamp( 1.3em, 1.5em, 1.9em);
-  padding: 15px 90px;*/
-  font-size: 20px;
-  font-family: 'AristotelicaDemiBold';
-}
+    @media (max-width: 768px) {
+      .btn-cadastrar {
+        top: 63%;
+        left: 55%;
+        padding: 8px 20px;
+        font-size: 0.95rem;
+      }
+    }
 
-.card_manual p {
-  font-size: clamp(1.20em, 1.4em, 1.8em);
-  /*font-size: 45px;*/
-  padding: 15px 90px;
-  text-align: justify;
-  font-family: 'AristotelicaExtraLight';
-}
-
-.card_manual_2{
-  background: rgba(251, 251, 251, 0);
-  border: none;
-  margin-top: 100px !important;
-}
-
-.card_manual_2 p {
-  font-size: 20px;
-  text-align: justify;
-  font-family: 'AristotelicaExtraLight';
-}
-
-.vantagens {
-  list-style-type: none;
-}
-
-.fade_project{
-  -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s;
-}
-
-.fade_right_1{
-  -webkit-animation-delay: 1.7s;
-  -moz-animation-delay: 1.7s;
-  animation-delay: 1.7s;
-}
-
-.fade_right_2{
-  -webkit-animation-delay: 2.3s;
-  -moz-animation-delay: 2.3s;
-  animation-delay: 2.3s;
-}
-
-.fade_right_3{
-  -webkit-animation-delay: 2.7s;
-  -moz-animation-delay: 2.7s;
-  animation-delay: 2.7s;
-}
-
-.animate {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  -webkit-animation-fill-mode: both;
-}
-
-@-webkit-keyframes fadeIn{
-  from{
-    opacity: 0;
-  }
-  to{
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn{
-  from{
-    opacity: 0;
-  }
-  to{
-    opacity: 1;
-  }
-}
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-
-@-webkit-keyframes fadeRight{
-  from{
-    opacity: 0;
-    -webkit-transform: translate3d(100%,0,0);
-    transform: translate3d(100%,0,0);
-  }
-  to{
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeRight{
-  from{
-    opacity: 0;
-    -webkit-transform: translate3d(100%,0,0);
-    transform: translate3d(100%,0,0);
-  }
-  to{
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-.fadeRight {
-  -webkit-animation-name: fadeRight;
-  animation-name: fadeRight;
-}
-
+    @media (max-width: 576px) {
+      .btn-cadastrar {
+        top: 83%;
+        left: 53%;
+        padding: 8px 18px;
+        font-size: 0.7rem;
+        background-color: #008c73;
+        color: #fff;
+      }
+    }
