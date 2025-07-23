@@ -5,18 +5,42 @@
 .brand_nomad {
   margin-right: 10px;
   padding-right: 10px;
-  width: 30%;
+  max-width: 180px;
 }
 
 .brand_nomad img {
-  width: 55%;
-  margin-left: 2.8rem;
+  width: 100%;
+  height: auto;
+  margin-left: 0;
 }
 
+/* Fonte adaptativa */
 .menu li{
-  font-size: clamp(1.20em, 0.4em + 1vw, 1.45em);
+  font-size: clamp(1rem, 0.4rem + 1vw, 1.3rem);
 }
 
+.menu ul li{
+  transition: 0.7s all;
+}
+.menu ul li:hover{
+  background-color:#4ea091;
+}
+
+/* Espaçamento nos botões do menu */
+.menu ul li a{
+  padding: 12px 20px;
+  font-family: 'AristotelicaExtraLight', sans-serif;
+  white-space: nowrap;
+}
+
+/* Centralização do menu em telas grandes */
+.menuOpcoes {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/*Busca Responsiva */
 .busca{
   background: url(../../assets/midia/icons/lupa_white_20.png) no-repeat center right;
   padding: 5px;
@@ -36,17 +60,31 @@
   color: #1f1c1c;
 }
 
-.menu ul li{
-  transition: 0.7s all;
+/* Menu dropdown - evitar corte */
+.dropdown-menu {
+  z-index: 1000;
 }
-.menu ul li:hover{
-  background-color:#4ea091;
+
+/* Ajustes para telas pequenas */
+@media (max-width: 768px) {
+  .menu ul li a {
+    padding: 10px 16px;
+    font-size: 1rem;
+  }
+
+  .navbar-nav {
+    align-items: center;
+  }
+
+  .menuOpcoes {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 }
-.menu ul li a{
-  padding: 20px 30px;
-  font-family: 'AristotelicaExtraLight';
-}
-.menuOpcoes {
-  margin-left: auto;
-  margin-right: auto;
-}
+
+
