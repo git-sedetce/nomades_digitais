@@ -8,20 +8,19 @@
   object-fit: cover;
 }
 
-.carousel-caption {
-  background-color: rgba(0, 0, 0, 0.5); /* fundo semi-transparente */
+.carousel-caption.caption-bg {
+  background: rgba(0, 0, 0, 0.5); /* fundo escuro translúcido */
   padding: 1rem;
   border-radius: 0.5rem;
+  max-width: 90%;
+  margin: auto;
 }
 
-.carousel-caption h5 {
-  font-size: 2rem;
-  font-family: 'AristotelicaDemiBold';
-  color: #008c73;
-}
-
-.carousel-caption p {
-  font-size: 1.5rem;
-  font-family: 'AristotelicaExtraLight';
-  color: #fcc31d;
+@media (max-width: 768px) {
+  .carousel-caption.caption-bg h5 {
+    font-size: 1.2rem;
+  }
+  .carousel-caption.caption-bg p {
+    font-size: 0.9rem;
+  }
 }
