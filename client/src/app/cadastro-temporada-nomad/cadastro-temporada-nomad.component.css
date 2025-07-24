@@ -1,15 +1,27 @@
 .temporadaNomad{
   margin-top: 5.5rem;
 }
+
 .pergunta{
   font-weight: bold;
+  font-family: 'AristotelicaDemiBold';
+  margin: .3rem auto .3rem auto;
+  font-size: 1.3rem;
+  padding: 0 .8rem;
+
 }
+
 legend{
   font-weight: bold;
   text-decoration: underline;
+  font-family: 'AristotelicaDemiBold';
+  margin: 1.2rem auto 1rem auto;
+  font-size: 1.75rem;
 }
 h3{
   font-weight: bolder;
+  font-family: 'AristotelicaDemiBold';
+  font-size: 2.75rem;
 }
 textarea {
   resize: none;
@@ -19,7 +31,7 @@ textarea {
 }
 
 section {
-  background: url("../../assets/midia/imgs/litoral_fortaleza.png") no-repeat fixed center;
+  background: url("../../assets/midia/imgs/centro_eventos.png") no-repeat fixed center;
 }
 
 .manual p, a{
