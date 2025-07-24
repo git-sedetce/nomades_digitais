@@ -38,6 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { TemporadaNomadComponent } from './temporada-nomad/temporada-nomad.component';
+import { CadastroTemporadaNomadComponent } from './cadastro-temporada-nomad/cadastro-temporada-nomad.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -68,7 +70,9 @@ registerLocaleData(localePt, 'pt');
       EditarDadosComponent,
       EditarNomadsComponent,
       CadastroEventosComponent,
-      TipoTurismoComponent
+      TipoTurismoComponent,
+      TemporadaNomadComponent,
+      CadastroTemporadaNomadComponent
    ],
   imports: [
     BrowserModule,

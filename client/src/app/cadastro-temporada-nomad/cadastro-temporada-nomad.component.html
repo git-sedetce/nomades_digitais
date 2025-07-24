@@ -1,0 +1,122 @@
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 temporadaNomad">
+        <div class="card card_form mb-5">
+          <div class="bg-primary">
+            <h3 class="pb-3 pt-3 text-center text-white">Cadastro Temporada</h3>
+          </div>
+          <form class="cadastro_temporada mt-4" #formTemporada="ngForm">
+            <fieldset>
+              <div class="row">
+
+                <div class="col-12 mb-3">
+                  <label for="nome_evento" class="form-label pergunta">Nome do Evento</label>
+                  <input type="text" class="form-control" id="nome_evento" name="nome_evento"
+                    placeholder="Insira o nome do evento da temporada." required #nome_evento="ngModel"
+                    [(ngModel)]="temporadaNomad.nome_evento">
+                  <div *ngIf="!nome_evento.valid && nome_evento.touched" class="alert alert-danger" role="alert">
+                    Informe o tipo de evento</div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-sm-3 col-12 mb-3">
+                  <label for="data_evento" class="form-label pergunta">Data do Evento</label>
+                  <input type="date" class="form-control" id="data_evento" name="data_evento"
+                    aria-describedby="data_evento" required #data_evento="ngModel"
+                    [(ngModel)]="temporadaNomad.data_evento">
+                  <div *ngIf="!data_evento.valid && data_evento.touched" class="alert alert-danger" role="alert">Insira
+                    a data do evento</div>
+                </div>
+
+                <div class="col-sm-3 col-12 mb-3">
+                  <label for="horario" class="form-label pergunta">Horário do Evento</label>
+                  <input type="time" class="form-control" id="horario" name="horario" aria-describedby="horario"
+                    placeholder="Informe o horário" required #horario="ngModel" [(ngModel)]="temporadaNomad.horario">
+                  <div *ngIf="!horario.valid && horario.touched" class="alert alert-danger" role="alert">Email inválido
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm-3 col-12 mb-3">
+                  <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
+                  <input type="text" class="form-control" id="tipo_evento" name="tipo_evento"
+                    placeholder="Insira o número do telefone. / Enter the phone number." required #tipo_evento="ngModel"
+                    [(ngModel)]="temporadaNomad.tipo_evento">
+                  <div *ngIf="!tipo_evento.valid && tipo_evento.touched" class="alert alert-danger" role="alert">
+                    Informe o tipo de evento</div>
+                </div> -->
+
+                <div class="col-sm-3 col-12 mb-3">
+                    <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
+                      <select name="tipo_evento" id="tipo_evento" class="form-select" #tipo_evento [(ngModel)]="temporadaNomad.tipo_evento">
+                        <option selected disabled>Selecione o Evento</option>
+                        <option value="Ações Socioambiental">Ações Socioambiental</option>
+                        <option value="Eventos Esportivos">Eventos Esportivos</option>
+                        <option value="Eventos Gastronômicos">Eventos Gastronômicos</option>
+                        <option value="Exposição">Exposição</option>
+                        <option value="Feiras">Feiras</option>
+                        <option value="Festas">Festas</option>
+                        <option value="Festejo Religioso">Festejos Religioso</option>
+                        <option value="Integração com Comunidade">Integração com Comunidade</option>
+                        <option value="Peças de Teatro | Stand up Comedy">Peças de Teatro | Stand up Comedy</option>
+                        <option value="Shows">Shows</option>
+                      </select>
+                  </div>
+
+                <div class="col-sm-3 col-12 mb-3">
+                  <label for="cidade_id" class="form-label pergunta">Nome da Cidade</label>
+                  <select name="cidade_id" id="cidade_id" class="form-select" #cidade_id [(ngModel)]="temporadaNomad.cidade_id">
+                    <option *ngFor="let city of lista_municipio" [value]="city.id">{{ city.nome_municipio }}</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="form-group mb-3">
+                  <label for="descricao" class="form-label pergunta">Descrição do evento.</label>
+                  <textarea [maxlength]="maxChars" class="form-control" id="descricao" rows="7" name="descricao" ngModel required #descricao="ngModel" [(ngModel)]="temporadaNomad.descricao" placeholder="Descreva o evento em 5000 caracteres!"></textarea>
+                  <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{ temporadaNomad.descricao?.length }} / {{ maxChars }}</strong></div>
+                  <div *ngIf="!descricao.valid && descricao.touched" class="alert alert-danger" role="alert">Faça a Descrição do Evento</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4 col-12 mb-3">
+                  <label for="local" class="form-label pergunta">Local</label>
+                  <input type="text" class="form-control" id="local" name="local" placeholder="Digite o local do evento"
+                    required #local="ngModel" [(ngModel)]="temporadaNomad.local">
+                  <div *ngIf="!local.valid && local.touched" class="alert alert-danger" role="alert">
+                    Informe o nome do local do evento</div>
+                </div>
+
+                <div class="col-sm-4 col-12 mb-3">
+                  <label for="endereco" class="form-label pergunta">Endereço</label>
+                  <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Digite o endereço"
+                    required #endereco="ngModel" [(ngModel)]="temporadaNomad.endereco">
+                  <div *ngIf="!endereco.valid && endereco.touched" class="alert alert-danger" role="alert">
+                    Informe o endereço</div>
+                </div>
+
+                <div class="col-sm-4 col-12 mb-3">
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label pergunta">Imagem do evento.</label>
+                      <input #imageTemporada class="form-control" type="file" id="formFile">
+
+                    </div>
+
+                  </div>
+              </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn-success mb-3" [disabled]="!formTemporada.valid"
+              (click)="saveSeasson()">Cadastrar Temporada</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

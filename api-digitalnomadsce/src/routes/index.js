@@ -7,6 +7,7 @@ const parceiroLogo = require('./logoParceiroRoutes')
 const municipioParceiro = require('./cadastroMunicipioRoutes')
 const user = require('./userRoutes')
 const evento = require('./eventoRoutes')
+const temporada = require('./temporadaRoutes')
 
 module.exports = app => {
   app.use(express.json(),
@@ -17,6 +18,7 @@ module.exports = app => {
           parceiroLogo,          
           municipioParceiro,
           user,
-          evento       
+          evento,
+          temporada       
           )  
 }
