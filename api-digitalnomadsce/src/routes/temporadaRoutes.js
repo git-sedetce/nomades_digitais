@@ -34,6 +34,7 @@ router.post('/cadastratemporada', TemporadaController.cadastraTemporada)
 router.get('/alltemporada', TemporadaController.pegaTemporadas)
 router.get('/temporada/:id', TemporadaController.pegaTemporadaById)
 router.get('/imagetemporada/:id', TemporadaController.pegaImagensTemporadaById)
+router.get('/temporadabyCity/:cidade', TemporadaController.pegaTemporadasbyCity)
 
 router.post('/imagemTemporada/:id', upload.single('file'), TemporadaController.anexoImagem)
 
