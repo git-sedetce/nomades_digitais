@@ -26,6 +26,7 @@ import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.compon
 import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
 import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 import { CadastroTemporadaNomadComponent } from './cadastro-temporada-nomad/cadastro-temporada-nomad.component';
+import { TemporadaNomadComponent } from './temporada-nomad/temporada-nomad.component';
 
 const APP_ROUTES: Routes = [
 
@@ -52,6 +53,7 @@ const APP_ROUTES: Routes = [
   { path: 'resetSenha', component: ResetComponent },
   { path: 'editar', component: EditarDadosComponent },
   { path: 'editarNomad', component: EditarNomadsComponent },
+  { path: 'temporadaNomad', component: TemporadaNomadComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 ];
