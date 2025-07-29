@@ -3,3 +3,4 @@ api-digitalnomadsce/node_modules/*
 api-digitalnomadsce/uploads/*
 client/node_modules/*
  git-history.md
+api-digitalnomadsce/.env
