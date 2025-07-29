@@ -8,6 +8,11 @@ body {
   color: rgb(var(--bs-tertiary-color-rgb));
 }
 
+.alertEvents {
+  margin-top: 3rem !important;
+  padding-top: 2rem;
+}
+
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */

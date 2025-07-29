@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+// import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TemporadaNomadService } from '../services/temporada-nomad.service';
 import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -68,29 +68,29 @@ export class TemporadaNomadComponent implements OnInit {
         );
     }
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 1
-      }
-    },
-    nav: true
-  }
+  // customOptions: OwlOptions = {
+  //   loop: true,
+  //   mouseDrag: true,
+  //   touchDrag: true,
+  //   pullDrag: true,
+  //   dots: true,
+  //   navSpeed: 700,
+  //   navText: ['', ''],
+  //   responsive: {
+  //     0: {
+  //       items: 1
+  //     },
+  //     400: {
+  //       items: 2
+  //     },
+  //     740: {
+  //       items: 3
+  //     },
+  //     940: {
+  //       items: 1
+  //     }
+  //   },
+  //   nav: true
+  // }
 
 }
