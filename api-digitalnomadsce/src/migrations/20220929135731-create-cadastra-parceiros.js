@@ -51,7 +51,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       essential_service: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       internet_speed: {
         type: Sequelize.STRING
@@ -60,13 +60,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       outro_servico: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       trabalho_reunioes: {
         type: Sequelize.STRING
       },
       tarifa_especial: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       internet_service_alimentacao: {
         type: Sequelize.STRING
@@ -81,10 +81,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       beneficios: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       espacos_culturais: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       idioma: {
         type: Sequelize.STRING

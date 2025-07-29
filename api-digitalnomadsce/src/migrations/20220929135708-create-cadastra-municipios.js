@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       historia_cidade: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       wifi_service: {
         type: Sequelize.STRING
@@ -36,22 +36,22 @@ module.exports = {
         type: Sequelize.STRING
       },
       service_cidade: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       service_empresario: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       service_seguranca: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       pontos_turisticos: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       espacos_culturais: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       espacos_lazer: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(500)
       },
       tipo_turismo: {
         type: Sequelize.STRING
@@ -66,19 +66,19 @@ module.exports = {
         type: Sequelize.STRING
       },
       tourism_praiano: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       tourism_radical: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       tourism_religioso: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       tourism_serrano: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       tourism_sertanejo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200)
       },
       createdAt: {
         allowNull: false,
