@@ -38,7 +38,13 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
+
+.menuOpcoes li a {
+    font-weight: bold;
+  }
 
 /*Busca Responsiva */
 .busca{
@@ -74,11 +80,6 @@
 
   .navbar-nav {
     align-items: center;
-  }
-
-  .menuOpcoes {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
   }
 
   .btn {
