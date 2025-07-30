@@ -2,23 +2,17 @@
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { ManualComponent } from './manual/manual.component';
-
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router'
-
-import { AppComponent } from './app.component';
-import { SeloComponent } from './selo/selo.component';
-import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
+import { Routes, RouterModule } from '@angular/router';
 
 const APP_ROUTES: Routes = [
 
   { path: 'manual', component: ManualComponent },
-  { path: 'selo', component: SeloComponent },
   { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
   { path: 'visto_nomade', component: VistoNomadeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'editar', component: EditarDadosComponent },
+
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   //Módulo Municipio

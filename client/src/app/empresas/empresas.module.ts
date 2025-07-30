@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxMaskModule } from 'ngx-mask';
+import { EditarDadosComponent } from './editar-dados/editar-dados.component';
 
 @NgModule({
   declarations: [
     CadastroParceiroComponent,
     EmpresasParceirasComponent,
     EditarParceiroComponent,
+    EditarDadosComponent
   ],
   imports: [
     CommonModule,

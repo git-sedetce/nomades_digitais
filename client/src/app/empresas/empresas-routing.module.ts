@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EmpresasParceirasComponent } from './empresas-parceiras/empresas-parceiras.component';
 import { EditarParceiroComponent } from './editar-parceiro/editar-parceiro.component';
 import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
+import { EditarDadosComponent } from './editar-dados/editar-dados.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,11 @@ const routes: Routes = [
     {
       path: 'parceria',
       component: EmpresasParceirasComponent
-    }
+    },
+    {
+      path: 'editar',
+      component: EditarDadosComponent
+    },
 ];
 
 @NgModule({

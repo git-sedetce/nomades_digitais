@@ -10,13 +10,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ManualComponent } from './manual/manual.component';
-import { SeloComponent } from './selo/selo.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastrModule } from 'ngx-toastr';
-import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { LOCALE_ID } from '@angular/core';
@@ -33,10 +31,8 @@ registerLocaleData(localePt, 'pt');
       FooterComponent,
       HomeComponent,
       ManualComponent,
-      SeloComponent,
       CpfEstrangeiroComponent,
-      VistoNomadeComponent,
-      EditarDadosComponent
+      VistoNomadeComponent
    ],
   imports: [
     BrowserModule,
