@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
-import { ServiceService } from '../services/service.service';
+
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-tipo-turismo',

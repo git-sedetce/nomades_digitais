@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroMunicipioComponent } from './cadastro-municipio/cadastro-municipio.component';
 import { Ceara_prontoComponent } from './ceara_pronto/ceara_pronto.component';
-import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
+import { ProximaParadaComponent } from '../eventos/proxima-parada/proxima-parada.component';
+import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,8 @@ const routes: Routes = [
     component: Ceara_prontoComponent
   },
   {
-    path: 'proxima_parada',
-    component: ProximaParadaComponent
+    path: 'tipo_turismo',
+    component: TipoTurismoComponent
   }
 ];
 

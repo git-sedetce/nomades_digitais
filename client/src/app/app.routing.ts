@@ -16,17 +16,13 @@ import { guardGuard } from './user/guard/guard.guard';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
-import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 
 const APP_ROUTES: Routes = [
 
   { path: 'manual', component: ManualComponent },
   { path: 'selo', component: SeloComponent },
   { path: 'cadastro_nomad', component: CadastroNomadComponent },
-  // { path: 'cadastro_eventos', component: CadastroEventosComponent },
-  // { path: 'cadastro_temporada', component: CadastroTemporadaNomadComponent },
   { path: 'editar_nomad', component: EditarNomadComponent },
-  { path: 'tipo_turismo', component: TipoTurismoComponent },
   { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
   { path: 'visto_nomade', component: VistoNomadeComponent },
   { path: 'home', component: HomeComponent },
@@ -36,7 +32,6 @@ const APP_ROUTES: Routes = [
   { path: 'resetSenha', component: ResetComponent },
   { path: 'editar', component: EditarDadosComponent },
   { path: 'editarNomad', component: EditarNomadsComponent },
-  // { path: 'temporadaNomad', component: TemporadaNomadComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   //Módulo Municipio

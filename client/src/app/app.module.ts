@@ -24,7 +24,6 @@ import { ResetComponent } from './user/reset/reset.component';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
-import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { LOCALE_ID } from '@angular/core';
@@ -51,8 +50,7 @@ registerLocaleData(localePt, 'pt');
       ResetComponent,
       ListaUserComponent,
       EditarDadosComponent,
-      EditarNomadsComponent,
-      TipoTurismoComponent
+      EditarNomadsComponent
    ],
   imports: [
     BrowserModule,
