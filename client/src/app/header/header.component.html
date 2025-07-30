@@ -56,7 +56,7 @@
                 <hr class="dropdown-divider">
               </li>
               <li *ngIf="profile === 3">
-                <a class="dropdown-item" routerLink="/cadastro">Admin</a>
+                <a class="dropdown-item" routerLink="/admin/cadastro">Admin</a>
               </li>
 
             </ul>
@@ -116,7 +116,7 @@
             <a class="nav-link active" routerLink="/editarNomad">Editar Nomad</a>
           </li>
           <li class="nav-item" *ngIf="profile === 3">
-            <a class="nav-link active" routerLink="/user">Usuários</a>
+            <a class="nav-link active" routerLink="/admin/user">Usuários</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -134,7 +134,7 @@
             </ul>
           </li>
           <li *ngIf="!authenticated" class=" pt-3">
-            <button type="button" routerLink="/login" class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
+            <button type="button" routerLink="/admin/login" class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
           </li>
           <!-- <li *ngIf="!authenticated" class=" pt-3">
             <button type="button" routerLink="/cadastro" class="btn btn-warning fw-bold ms-2">Sign-up</button>

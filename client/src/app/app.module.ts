@@ -18,10 +18,6 @@ import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.componen
 import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastrModule } from 'ngx-toastr';
-import { CadastroComponent } from './user/cadastro/cadastro.component';
-import { LoginComponent } from './user/login/login.component';
-import { ResetComponent } from './user/reset/reset.component';
-import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -45,10 +41,6 @@ registerLocaleData(localePt, 'pt');
       CpfEstrangeiroComponent,
       VistoNomadeComponent,
       EditarNomadComponent,
-      CadastroComponent,
-      LoginComponent,
-      ResetComponent,
-      ListaUserComponent,
       EditarDadosComponent,
       EditarNomadsComponent
    ],

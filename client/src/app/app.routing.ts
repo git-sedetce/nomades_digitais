@@ -9,11 +9,6 @@ import { Routes, RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
 import { SeloComponent } from './selo/selo.component';
-import { LoginComponent } from './user/login/login.component';
-import { CadastroComponent } from './user/cadastro/cadastro.component';
-import { ResetComponent } from './user/reset/reset.component';
-import { guardGuard } from './user/guard/guard.guard';
-import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
 
@@ -26,10 +21,6 @@ const APP_ROUTES: Routes = [
   { path: 'cpf_estrangeiro', component: CpfEstrangeiroComponent },
   { path: 'visto_nomade', component: VistoNomadeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'cadastro', component: CadastroComponent, canActivate: [guardGuard], data: { roles: ['admin'] } },
-  { path: 'user', component: ListaUserComponent, canActivate: [guardGuard], data: { roles: ['admin'] } },
-  { path: 'resetSenha', component: ResetComponent },
   { path: 'editar', component: EditarDadosComponent },
   { path: 'editarNomad', component: EditarNomadsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -42,6 +33,9 @@ const APP_ROUTES: Routes = [
 
   //Módulo Eventos
   { path: 'eventos', loadChildren:() => import('./eventos/eventos.module').then(ev => ev.EventosModule) },
+
+  //Módulo Users
+  { path: 'admin', loadChildren:() => import('./users/users.module').then(usr => usr.UsersModule) },
 
 ];
 
