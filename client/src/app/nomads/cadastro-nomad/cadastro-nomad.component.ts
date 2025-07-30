@@ -1,9 +1,9 @@
-import { Nomad } from './../models/nomad/nomad.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ServiceService } from '../services/service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Nomad } from 'src/app/models/nomad/nomad.model';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-cadastro-nomad',

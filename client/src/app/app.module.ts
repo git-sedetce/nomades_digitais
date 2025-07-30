@@ -9,17 +9,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
 import { ManualComponent } from './manual/manual.component';
 import { SeloComponent } from './selo/selo.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
-import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastrModule } from 'ngx-toastr';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
-import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { LOCALE_ID } from '@angular/core';
@@ -35,14 +32,11 @@ registerLocaleData(localePt, 'pt');
       HeaderComponent,
       FooterComponent,
       HomeComponent,
-      CadastroNomadComponent,
       ManualComponent,
       SeloComponent,
       CpfEstrangeiroComponent,
       VistoNomadeComponent,
-      EditarNomadComponent,
-      EditarDadosComponent,
-      EditarNomadsComponent
+      EditarDadosComponent
    ],
   imports: [
     BrowserModule,
