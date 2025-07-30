@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
 import { HttpClient } from '@angular/common/http'
-import { ServiceService } from '../services/service.service';
+import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-cadastro-municipio',

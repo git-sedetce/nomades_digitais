@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
-import { EventoServiceService } from '../services/evento-service.service';
-import { Evento } from '../models/evento.model';
+import { ListaMinucipioService } from '../../service/listarmunicipio/lista-minucipio.service';
+import { EventoServiceService } from '../../services/evento-service.service';
+import { Evento } from '../../models/evento.model';
 import {
   DomSanitizer,
   SafeResourceUrl,

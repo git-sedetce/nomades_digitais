@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
-import { ServiceService } from '../services/service.service';
+import { ListaMinucipioService } from '../../service/listarmunicipio/lista-minucipio.service';
+import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-ceara_pronto',
