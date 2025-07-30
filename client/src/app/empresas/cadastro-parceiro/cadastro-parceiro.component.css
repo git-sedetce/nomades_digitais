@@ -3,23 +3,35 @@
 }*/
 .pergunta{
   font-weight: bold;
+  font-family: 'AristotelicaDemiBold';
+  margin: .3rem auto .3rem auto;
+  font-size: 1.3rem;
 }
+
 legend{
   font-weight: bold;
   text-decoration: underline;
+  font-family: 'AristotelicaDemiBold';
+  margin: 1.2rem auto 1rem auto;
+  font-size: 1.75rem;
 }
-h3{
+
+.titulo h3{
   font-weight: bolder;
+  font-size: 2.75rem;
+  font-family: 'AristotelicaDemiBold';
 }
+
 textarea {
   resize: none;
 }
+
 .limite_caractere{
   padding: 0.3rem 0.3rem !important;
 }
 
 section {
-  background: url("../../../assets/imgs/LiTORIAL-Fortaleza-2.png") no-repeat fixed center;
+  background: url("/assets/imgs/LiTORIAL-Fortaleza.png") no-repeat fixed center;
 }
 
 .manual p, a{
@@ -29,24 +41,12 @@ section {
   font-weight: bold;
 }
 
-.manual h3 {
-  font-size: 3.75rem;
-  color: #4ea091;
-  font-family: 'AristotelicaDemiBold';
-}
-
-.cabecalho th {
-  font-size: 1.5rem;
-  color: #4ea091;
-  font-family: 'AristotelicaDemiBold';
-}
-
 .card_manual{
-  margin-top: 300px !important;
+  margin-top: 90px !important;
   background: rgba(255, 255, 255, 0.8);
 }
 
-.card_table{
+.card_form{
   background: rgba(255, 255, 255, 0.8);
 }
 
@@ -57,21 +57,4 @@ section {
 
 .card {
   box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
-}
-
-.logo img{
-  width: 100%;
-  margin: 4rem auto;
-}
-
-.carrossel img{
-  width: 100% !important;
-  height: 75vh;
-  object-fit: cover;
-}
-
-.locate {
-  background: rgba(255, 255, 255, 0.8);
-  font-weight: bolder;
-  text-transform: uppercase;
 }

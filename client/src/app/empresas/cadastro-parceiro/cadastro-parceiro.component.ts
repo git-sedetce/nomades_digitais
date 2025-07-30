@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ConsultaCepService }from '../service/consulta-cep.service';
-import { ServiceService } from '../services/service.service';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ConsultaCepService } from 'src/app/service/consulta-cep.service';
+import { ServiceService } from 'src/app/services/service.service';
 
 @Component({
   selector: 'app-cadastro-parceiro',

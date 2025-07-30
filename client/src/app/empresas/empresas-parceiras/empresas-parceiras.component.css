@@ -19,8 +19,7 @@ textarea {
 }
 
 section {
-  background: url("../../../assets/imgs/Foto de jaime dantas unsplash.jpg") no-repeat fixed center;
-  min-height: 70vh;
+  background: url("/assets/imgs/LiTORIAL-Fortaleza-2.png") no-repeat fixed center;
 }
 
 .manual p, a{
@@ -43,7 +42,7 @@ section {
 }
 
 .card_manual{
-  margin-top: 100px !important;
+  margin-top: 300px !important;
   background: rgba(255, 255, 255, 0.8);
 }
 
@@ -59,11 +58,6 @@ section {
 .card {
   box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
 }
-
-.transparent-card {
-  background: rgba(255, 255, 255, 0.5);
-}
-
 
 .logo img{
   width: 100%;

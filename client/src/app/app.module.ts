@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
 import { CadastroNomadComponent } from './cadastro-nomad/cadastro-nomad.component';
 import { ManualComponent } from './manual/manual.component';
 import { SeloComponent } from './selo/selo.component';
@@ -17,10 +16,8 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { CpfEstrangeiroComponent } from './dicas/cpf-estrangeiro/cpf-estrangeiro.component';
 import { VistoNomadeComponent } from './dicas/visto-nomade/visto-nomade.component';
 import { EditarNomadComponent } from './cadastro-nomad/editar-nomad/editar-nomad.component';
-import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component'
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ToastrModule } from 'ngx-toastr';
-import { EditarParceiroComponent } from './edit/editar-parceiro/editar-parceiro.component';
 import { CadastroComponent } from './user/cadastro/cadastro.component';
 import { LoginComponent } from './user/login/login.component';
 import { ResetComponent } from './user/reset/reset.component';
@@ -46,15 +43,12 @@ registerLocaleData(localePt, 'pt');
       HeaderComponent,
       FooterComponent,
       HomeComponent,
-      CadastroParceiroComponent,
       CadastroNomadComponent,
       ManualComponent,
       SeloComponent,
       CpfEstrangeiroComponent,
       VistoNomadeComponent,
       EditarNomadComponent,
-      EmpresasParceirasComponent,
-      EditarParceiroComponent,
       CadastroComponent,
       LoginComponent,
       ResetComponent,
