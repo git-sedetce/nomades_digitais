@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'
 
 import { AppComponent } from './app.component';
-import { O_que_eComponent } from './o_que_e/o_que_e.component';
 import { SeloComponent } from './selo/selo.component';
 import { EmpresasParceirasComponent } from './view/empresas-parceiras/empresas-parceiras.component';
 import { EditarParceiroComponent } from './edit/editar-parceiro/editar-parceiro.component';
@@ -27,7 +26,6 @@ import { TemporadaNomadComponent } from './temporada-nomad/temporada-nomad.compo
 
 const APP_ROUTES: Routes = [
 
-  { path: 'o_que_e', component: O_que_eComponent },
   { path: 'manual', component: ManualComponent },
   { path: 'selo', component: SeloComponent },
   { path: 'cadastro_parceiro', component: CadastroParceiroComponent },

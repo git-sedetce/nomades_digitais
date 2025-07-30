@@ -16,7 +16,61 @@
   margin: auto;
 }
 
+body {
+  margin: 0;
+  font-family: "AristotelicaDemiBold", sans-serif;
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.btn-cadastrar {
+  position: absolute;
+  top: 80%; /* ajuste vertical (porcentagem relativa à altura da imagem) */
+  left: 69.5%; /* ajuste horizontal (porcentagem relativa à largura da imagem) */
+  transform: translate(-50%, -50%);
+  background-color: #fcc31d;
+  /* border: 3px solid #ff6a00; */
+  color: black;
+  font-weight: bold;
+  padding: 10px 30px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-cadastrar:hover {
+  background-color: #008c73;
+  color: #fff;
+}
+
+@media (max-width: 992px) {
+  .btn-cadastrar {
+    top: 61%;
+    left: 56.5%;
+    padding: 9px 25px;
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .btn-cadastrar {
+    top: 63%;
+    left: 55%;
+    padding: 8px 20px;
+    font-size: 0.95rem;
+  }
   .carousel-caption.caption-bg h5 {
     font-size: 1.2rem;
   }
@@ -24,3 +78,15 @@
     font-size: 0.9rem;
   }
 }
+
+@media (max-width: 576px) {
+  .btn-cadastrar {
+    top: 83%;
+    left: 53%;
+    padding: 8px 18px;
+    font-size: 0.7rem;
+    background-color: #008c73;
+    color: #fff;
+  }
+}
+
