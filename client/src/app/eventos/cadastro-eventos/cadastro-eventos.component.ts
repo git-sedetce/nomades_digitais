@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
 import { NgForm } from '@angular/forms';
-import { Evento } from '../models/evento.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { EventoServiceService } from '../services/evento-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { Evento } from 'src/app/models/evento.model';
+import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
+import { EventoServiceService } from 'src/app/services/evento-service.service';
 
 @Component({
   selector: 'app-cadastro-eventos',

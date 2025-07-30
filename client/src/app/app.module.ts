@@ -24,15 +24,12 @@ import { ResetComponent } from './user/reset/reset.component';
 import { ListaUserComponent } from './user/lista-user/lista-user.component';
 import { EditarDadosComponent } from './edit/editar-dados/editar-dados.component';
 import { EditarNomadsComponent } from './edit/editar-nomads/editar-nomads.component';
-import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
 import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { TemporadaNomadComponent } from './temporada-nomad/temporada-nomad.component';
-import { CadastroTemporadaNomadComponent } from './cadastro-temporada-nomad/cadastro-temporada-nomad.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -55,10 +52,7 @@ registerLocaleData(localePt, 'pt');
       ListaUserComponent,
       EditarDadosComponent,
       EditarNomadsComponent,
-      CadastroEventosComponent,
-      TipoTurismoComponent,
-      TemporadaNomadComponent,
-      CadastroTemporadaNomadComponent
+      TipoTurismoComponent
    ],
   imports: [
     BrowserModule,

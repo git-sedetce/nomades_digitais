@@ -31,7 +31,7 @@ textarea {
 }
 
 section {
-  background: url("../../assets/midia/imgs/centro_eventos.png") no-repeat fixed center;
+  background: url("/assets/midia/imgs/centro_eventos.png") no-repeat fixed center;
 }
 
 .manual p, a{

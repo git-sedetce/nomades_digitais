@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { OwlOptions } from 'ngx-owl-carousel-o';
-import { TemporadaNomadService } from '../services/temporada-nomad.service';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
+import { TemporadaNomadService } from '../../services/temporada-nomad.service';
+import { ListaMinucipioService } from '../../service/listarmunicipio/lista-minucipio.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({

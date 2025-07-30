@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { TemporadaNomad } from '../models/nomad/temporada-nomad.model';
-import { ListaMinucipioService } from '../service/listarmunicipio/lista-minucipio.service';
-import { TemporadaNomadService } from '../services/temporada-nomad.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { TemporadaNomad } from 'src/app/models/nomad/temporada-nomad.model';
+import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
+import { TemporadaNomadService } from 'src/app/services/temporada-nomad.service';
 
 @Component({
   selector: 'app-cadastro-temporada-nomad',
