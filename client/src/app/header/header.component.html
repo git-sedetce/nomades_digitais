@@ -2,82 +2,68 @@
   <nav class="navbar navbar-expand-lg navbar-dark shadow-5-strong navBar fixed-top">
     <div class="container-fluid">
 
-        <!-- Logo -->
+      <!-- Logo -->
       <a class="navbar-brand brand_nomad" routerLink="">
         <img src="../../assets/midia/imgs/logos/digital-nomads-1.png" alt="Logo Digital Nomads CE">
       </a>
 
-       <!-- Botão hamburguer para dispositivos móveis -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <!-- Botão hamburguer para dispositivos móveis -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
         <ul class="menuOpcoes navbar-nav me-auto ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/municipio/ceara_pronto">Ceará Atrativo</a>
-          </li>
-          <li class="nav-item dropdown" > <!--*ngIf="authenticated != true"-->
+          <li class="nav-item dropdown"> <!--*ngIf="authenticated != true"-->
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              Cadastre-se
+              Ceará Atrativos
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/municipio/cadastro_municipio">Municípios</a></li>
+              <li><a class="dropdown-item" routerLink="#">Informações Gerais</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" routerLink="/parceria/cadastro_parceiro">Empresas</a></li>
+              <li><a class="dropdown-item" routerLink="#">Perfil do Estado</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/nomad/cadastro_nomad">Nômades</a>
+                <a class="dropdown-item" routerLink="#">Hub de Inovação</a>
               </li>
-               <li *ngIf="profile === 3">
+              <li>
                 <hr class="dropdown-divider">
               </li>
-              <li *ngIf="profile === 3">
-            <a class="dropdown-item" routerLink="/eventos/cadastro_eventos">Cadastro de Eventos</a>
-          </li>
-          <hr class="dropdown-divider">
-          <li *ngIf="profile === 3">
-            <a class="dropdown-item" routerLink="/eventos/cadastro_temporada">Cadastro Temporada Nômades</a>
-          </li>
-              <li *ngIf="profile === 3">
-                <hr class="dropdown-divider">
-              </li>
-              <li *ngIf="profile === 3">
-                <a class="dropdown-item" routerLink="/admin/cadastro">Admin</a>
+              <li>
+                <a class="dropdown-item" routerLink="#">Aeroportos</a>
               </li>
 
             </ul>
           </li>
-          <li class="nav-item" *ngIf="profile != 3">
-            <a class="nav-link active" routerLink="/parceria/parceria">Parceiros</a>
-          </li>
-          <li *ngIf="profile === 3" class="nav-item dropdown">
+
+          <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              Parceiros
+              Onde ficar
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
               <li class="nav-item">
-                <a class="dropdown-item" routerLink="/parceria/parceria">Visualizar</a>
+                <a class="dropdown-item" routerLink="#">Hospedagem</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/parceria/editarparceria">Editar
+                <a class="dropdown-item" routerLink="#">Ambientes de Trabalho
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/parceria/cadastro_parceiro">Cadastre sua empresa
                 </a>
               </li>
             </ul>
@@ -86,13 +72,79 @@
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
+              O que fazer?
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/temporadaNomad">Temporada Nomads
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/municipio/tipo_turismo">Atrativos
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/temporadaNomad">Alimentação
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Comunidades
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+              <li class="nav-item">
+                <a class="dropdown-item" routerLink="#">Locais/Cidades</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="#">Perfil da Comunidade
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="#">Eventos
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="#">Pontos de encontros</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="#">Conecte-se</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
               Próxima Parada
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
               <li class="nav-item">
-            <a class="dropdown-item" routerLink="/eventos/proxima_parada">O melhor da Cidade</a>
-          </li>
+                <a class="dropdown-item" routerLink="/municipio/ceara_pronto">Mapa</a>
+              </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -104,19 +156,37 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/eventos/temporadaNomad">Temporada Nômade
+                <a class="dropdown-item" routerLink="/eventos/proxima_parada">Municípios
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="#">Eventos
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item" *ngIf="profile === 2">
-            <a class="nav-link active" routerLink="/parceria/editar">Editar</a>
-          </li>
-          <li class="nav-item" *ngIf="profile === 1"><!--*ngIf="profile === 1"-->
-            <a class="nav-link active" routerLink="/nomad/editarNomad">Editar Nomad</a>
-          </li>
-          <li class="nav-item" *ngIf="profile === 3">
-            <a class="nav-link active" routerLink="/admin/user">Usuários</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Oportunidades de Trabalho
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+              <li class="nav-item">
+                <a class="dropdown-item" routerLink="#">Profissionais se Oferecem</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="#">Empresas procuram
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -133,13 +203,58 @@
               </li>
             </ul>
           </li>
-          <li *ngIf="!authenticated" class=" pt-3">
-            <button type="button" routerLink="/admin/login" class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Admin
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+              <li>
+                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio">Cadastro de Municípios</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/cadastro_eventos">Cadastro de Eventos</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada">Cadastro Temporada Nômades</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/admin/cadastro">Cadastro de Admin</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item" *ngIf="profile === 2">
+            <a class="nav-link active" routerLink="/parceria/editar">Editar</a>
+          </li>
+          <li class="nav-item" *ngIf="profile === 1"><!--*ngIf="profile === 1"-->
+            <a class="nav-link active" routerLink="/nomad/editarNomad">Editar Nomad</a>
+          </li>
+          <li class="nav-item" *ngIf="profile === 3">
+            <a class="nav-link active" routerLink="/admin/user">Usuários</a>
+          </li>
+
+          <li *ngIf="!authenticated">
+            <button type="button" routerLink="/admin/login"
+              class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
+          </li>
+          <li *ngIf="!authenticated">
+            <button type="button" routerLink="/nomad/cadastro_nomad" class="btn btn-primary text-dark fw-bold text-white">Cadastre-se</button>
           </li>
           <!-- <li *ngIf="!authenticated" class=" pt-3">
             <button type="button" routerLink="/cadastro" class="btn btn-warning fw-bold ms-2">Sign-up</button>
           </li> -->
-          <li *ngIf="authenticated" class=" pt-3">
+          <li *ngIf="authenticated" class=" pt-2">
             <button type="button" routerLink="/login" class="btn btn-danger text-dark fw-bold text-white ms-3 me-2"
               (click)="logout()">Logout</button>
             <!--<a routerLink="/login" class="nav-link" (click)="logout()">Logout</a>-->
