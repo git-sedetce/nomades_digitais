@@ -26,6 +26,12 @@ module.exports = {
       is_master: false,
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      perfil: 'user_municipio',
+      is_master: false,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   ], {});
   },
