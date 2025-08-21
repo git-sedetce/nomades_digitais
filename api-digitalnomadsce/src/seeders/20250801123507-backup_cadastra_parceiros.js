@@ -40,8 +40,6 @@ module.exports = {
           createdAt: "2022-11-02 13:17:33.337+00",
           updatedAt: "2022-11-02 13:17:33.337+00",
           instagram_parceiro: "@oka.coworking",
-          tipo_estabelecimento: NULL,
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -79,8 +77,6 @@ module.exports = {
           createdAt: "2022-11-04 13:59:00.642+00",
           updatedAt: "2022-11-04 13:59:00.642+00",
           instagram_parceiro: "@israelcoworking",
-          tipo_estabelecimento: NULL,
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -118,8 +114,6 @@ module.exports = {
           createdAt: "2022-11-04 14:34:14.532+00",
           updatedAt: "2022-11-04 14:34:14.532+00",
           instagram_parceiro: "@goofficescoworking",
-          tipo_estabelecimento: NULL,
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -157,8 +151,6 @@ module.exports = {
           createdAt: "2022-11-10 18:26:04.218+00",
           updatedAt: "2022-11-10 18:26:04.218+00",
           instagram_parceiro: "@planetcoworkingfortaleza",
-          tipo_estabelecimento: NULL,
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -196,8 +188,6 @@ module.exports = {
           createdAt: "2023-01-13 14:42:02.944+00",
           updatedAt: "2023-01-13 14:42:02.944+00",
           instagram_parceiro: "https://www.instagram.com/paradisekiteclub/",
-          tipo_estabelecimento: NULL,
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -236,7 +226,6 @@ module.exports = {
           updatedAt: "2023-06-30 14:07:37.716+00",
           instagram_parceiro: "transformecoworking",
           tipo_estabelecimento: "cooworking",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -276,7 +265,6 @@ module.exports = {
           updatedAt: "2024-06-10 17:49:50.643+00",
           instagram_parceiro: "@up2hostel",
           tipo_estabelecimento: "hostel",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -316,7 +304,6 @@ module.exports = {
           updatedAt: "2024-06-11 13:35:45.917+00",
           instagram_parceiro: "@tangosuitescumbuco",
           tipo_estabelecimento: "hotel",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -355,7 +342,6 @@ module.exports = {
           updatedAt: "2024-06-17 14:37:09.321+00",
           instagram_parceiro: "campingcumbuco",
           tipo_estabelecimento: "Pousada",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -394,7 +380,6 @@ module.exports = {
           updatedAt: "2024-06-17 17:13:05.646+00",
           instagram_parceiro: "Tucano.pousada.cumbuco",
           tipo_estabelecimento: "Pousada",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -432,7 +417,6 @@ module.exports = {
           updatedAt: "2024-06-18 18:59:45.077+00",
           instagram_parceiro: "@durobeach",
           tipo_estabelecimento: "hotel",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -471,7 +455,6 @@ module.exports = {
           updatedAt: "2024-06-19 14:22:51.956+00",
           instagram_parceiro: "@hubcumbuco",
           tipo_estabelecimento: "cooworking",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -511,7 +494,6 @@ module.exports = {
           updatedAt: "2024-06-22 21:44:20.438+00",
           instagram_parceiro: "@indiana_kite",
           tipo_estabelecimento: "hostel",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -549,7 +531,6 @@ module.exports = {
           updatedAt: "2024-07-03 18:58:58.103+00",
           instagram_parceiro: "@durobeach",
           tipo_estabelecimento: "hotel",
-          tipo_estabelecimento_outros: NULL,
         },
 
         {
@@ -589,7 +570,6 @@ module.exports = {
           updatedAt: "2024-10-28 16:49:31.39+00",
           instagram_parceiro: "windtownbrazil",
           tipo_estabelecimento: "hotel",
-          tipo_estabelecimento_outros: NULL,
         },
       ],
       {}

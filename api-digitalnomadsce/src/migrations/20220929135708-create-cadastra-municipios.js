@@ -9,10 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cidade: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Cidades', key: 'id' }
       },
       regiao: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Regiaos', key: 'id' }
       },
       email_prefeitura: {
         type: Sequelize.STRING

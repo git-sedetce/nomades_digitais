@@ -11,12 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       cadastra_municipios.hasMany(models.anexo_municipio, { foreignKey: 'municipio_id', as:'ass_city_anexo'})
+      cadastra_municipios.belongsTo(models.Cidades, { foreignKey: 'cidade', as: 'ass_cadastra_municipios_cidade' })
+      cadastra_municipios.belongsTo(models.Regiao, { foreignKey: 'regiao', as: 'ass_cadastra_municipios_regiao' })
     }
   }
   cadastra_municipios.init({
     cidade: DataTypes.STRING,
     regiao: DataTypes.STRING,
-    cod_ibge: DataTypes.STRING,
     email_prefeitura: DataTypes.STRING,
     contato_prefeitura: DataTypes.STRING,
     link_prefeitura: DataTypes.STRING,

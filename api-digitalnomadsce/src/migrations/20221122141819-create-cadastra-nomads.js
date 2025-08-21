@@ -41,6 +41,34 @@ module.exports = {
       suggestion: {
         type: Sequelize.STRING
       },
+      first_time_ce: {
+        type: Sequelize.STRING(15),
+        allowNull: true
+      },
+      data_nascimento: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
+      passaporte: {
+        type: Sequelize.STRING(50),
+        allowNull: true
+      },
+      motivo_viagem: {
+        type: Sequelize.STRING(500),
+        allowNull: true
+      },
+      know_how: {
+        type: Sequelize.STRING(100),
+        allowNull: true
+      },
+      profissao: {
+        type: Sequelize.STRING(15),
+        allowNull: true
+      },
+      possui_empresa: {
+        type: Sequelize.STRING(5),
+        allowNull: true
+      },      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -48,6 +76,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },      
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.STRING
       }
     });
   },

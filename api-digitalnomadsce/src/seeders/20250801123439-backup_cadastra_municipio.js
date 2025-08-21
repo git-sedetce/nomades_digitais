@@ -6,8 +6,8 @@ module.exports = {
       "cadastra_municipios",
       [
         {
-          cidade: "Trairi",
-          regiao: "Grande Fortaleza",
+          cidade: 175,
+          regiao: 3,
           email_prefeitura: "setur.trairi@hotmail.com",
           contato_prefeitura: "85991018517",
           link_prefeitura: "https://www.trairi.ce.gov.br/",
@@ -32,12 +32,11 @@ module.exports = {
           tourism_sertanejo: "",
           createdAt: "2022-11-29 19:05:54.509+00",
           updatedAt: "2022-11-29 19:05:54.509+00",
-          cod_ibg: "2313500",
         },
 
         {
-          cidade: "Fortaleza",
-          regiao: "Grande Fortaleza",
+          cidade: 59,
+          regiao: 3,
           email_prefeitura: "promocao@setfor.fortaleza.ce.gov.br",
           contato_prefeitura: "8531051513",
           link_prefeitura: "https://www.fortaleza.ce.gov.br/",
@@ -62,7 +61,6 @@ module.exports = {
           tourism_sertanejo: "",
           createdAt: "2023-01-20 18:18:47.492+00",
           updatedAt: "2023-01-20 18:18:47.492+00",
-          cod_ibg: "2304400",
         },
       ],
       {}

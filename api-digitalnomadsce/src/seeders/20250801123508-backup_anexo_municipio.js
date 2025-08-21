@@ -10,9 +10,9 @@ module.exports = {
           filename:
             "1669750500024_digital_nomads_municipios_coral_location_guajiru_03@2x.jpg",
           path: "uploads/municipios/1669750500024_digital_nomads_municipios_coral_location_guajiru_03@2x.jpg",
-          municipio_id: 13,
+          municipio_id: 1,
           createdAt: "2022-11-29 19:35:00.171+00",
-          updatedA: "2022-11-29 19:35:00.171+00",
+          updatedAt: "2022-11-29 19:35:00.171+00",
         },
       ],
       {}

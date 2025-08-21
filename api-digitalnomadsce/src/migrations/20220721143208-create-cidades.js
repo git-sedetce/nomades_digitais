@@ -16,6 +16,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Regiaos', key: 'id' }
       },
+      cod_ibge: {
+        allowNull: true, 
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

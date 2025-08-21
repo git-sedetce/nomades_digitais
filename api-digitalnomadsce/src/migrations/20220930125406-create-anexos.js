@@ -17,10 +17,14 @@ module.exports = {
       path: {
         type: Sequelize.STRING
       },
-      user_id: {
+      parceiro_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'cadastra_parceiros', key: 'id'}
+      },
+      tipo_anexo: {
+        type: Sequelize.STRING(15),
+        allowNull: true        
       },
       createdAt: {
         allowNull: false,

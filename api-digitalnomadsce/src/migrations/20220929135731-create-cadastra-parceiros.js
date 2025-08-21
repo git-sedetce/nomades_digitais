@@ -44,6 +44,10 @@ module.exports = {
       email_parceiro: {
         type: Sequelize.STRING
       },
+      instagram_parceiro: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       midia_social: {
         type: Sequelize.STRING
       },
@@ -58,6 +62,14 @@ module.exports = {
       },
       internet_service: {
         type: Sequelize.STRING
+      },
+      tipo_estabelecimento: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      tipo_estabelecimento_outros: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       outro_servico: {
         type: Sequelize.STRING(500)
@@ -91,7 +103,7 @@ module.exports = {
       },
       qual_idioma: {
         type: Sequelize.STRING
-      },
+      },      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
