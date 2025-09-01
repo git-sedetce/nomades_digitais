@@ -44,10 +44,13 @@ body {
 }
 
 .home-container h2{
-  font-weight: bold;
+  font-weight: bolder;
   font-family: 'AristotelicaDemiBold';
   margin: .3rem auto .3rem auto;
   font-size: 5rem;
+  color: #008c73;
+  background-color: #fcc41d2d;
+  padding-top: 2rem;
 }
 
 .home-container p{
