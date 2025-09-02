@@ -15,32 +15,35 @@
 
       <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
         <ul class="menuOpcoes navbar-nav me-auto ms-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown"> <!--*ngIf="authenticated != true"-->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/atrativo/home">Ceará Atrativos</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Ceará Atrativos
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="#">Informações Gerais</a></li>
+              <li><a class="dropdown-item" routerLink="/atrativo/informacoes">Informações Gerais</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" routerLink="#">Perfil do Estado</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="#">Hub de Inovação</a>
-              </li>
+              <li><a class="dropdown-item" routerLink="/atrativo/perfil">Perfil do Estado</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="#">Aeroportos</a>
+                <a class="dropdown-item" routerLink="/atrativo/hub">Hub de Inovação</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/atrativo/aeroportos">Aeroportos</a>
               </li>
 
             </ul>
-          </li>
+          </li> -->
 
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -249,7 +252,8 @@
               class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
           </li>
           <li *ngIf="!authenticated">
-            <button type="button" routerLink="/nomad/cadastro_nomad" class="btn btn-primary text-dark fw-bold text-white">Cadastre-se</button>
+            <button type="button" routerLink="/nomad/cadastro_nomad"
+              class="btn btn-primary text-dark fw-bold text-white">Cadastre-se</button>
           </li>
           <!-- <li *ngIf="!authenticated" class=" pt-3">
             <button type="button" routerLink="/cadastro" class="btn btn-warning fw-bold ms-2">Sign-up</button>
