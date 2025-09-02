@@ -1,0 +1,70 @@
+section {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* evita scroll lateral */
+  overflow-y: auto;   /* permite só o scroll vertical quando necessário */
+}
+
+.bg-container {
+  background: url("../../../assets/midia/imgs/praia.png") no-repeat center center;
+  background-size: cover;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;    /* centraliza horizontal */
+  padding: 5%;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 900px; /* opcional, limita largura total dos cards */
+}
+
+.card-link {
+  border-radius: 12px;
+  padding: 12px; /* era 30px */
+  margin: 8px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem; /* era 2rem */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60px; /* era 120px */
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-link:hover {
+  transform: scale(1.05);
+}
+
+.card-uber {
+  background-color: #fbc02d; /* laranja */
+  color: #009688;
+}
+
+.card-bus {
+  background-color: #fbc02d; /* rosa forte */
+  color: #009688;
+}
+
+.card-taxi {
+  background-color: #009688; /* cinza claro */
+  color: #fbc02d;
+}
+
+.card-aeroporto {
+  background-color: #009688; /* cinza claro */
+  color: #fbc02d;
+}
+
+@media (max-width: 576px) {
+  .card-link {
+    padding: 8px;
+    font-size: 0.9rem;
+    min-height: 50px;
+  }
+}

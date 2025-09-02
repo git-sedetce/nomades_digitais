@@ -23,17 +23,16 @@ import localePt from '@angular/common/locales/pt';
 
 registerLocaleData(localePt, 'pt');
 
-
 @NgModule({
   declarations: [
     AppComponent,
-      HeaderComponent,
-      FooterComponent,
-      HomeComponent,
-      ManualComponent,
-      CpfEstrangeiroComponent,
-      VistoNomadeComponent
-   ],
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    ManualComponent,
+    CpfEstrangeiroComponent,
+    VistoNomadeComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -44,11 +43,9 @@ registerLocaleData(localePt, 'pt');
     GoogleMapsModule,
     NgxMaskModule.forRoot(),
     ToastrModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
