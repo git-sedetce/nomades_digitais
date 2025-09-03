@@ -1,21 +1,25 @@
 .hub-section {
   background: url("../../../assets/midia/imgs/background_03.jpg") no-repeat center center;
-  padding: 4rem 2rem;
+  padding: 8rem 2rem;
   height: 100vh; /* garante altura da tela */
+  margin: 0 auto;
 }
 
 .hub-title {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: #009688;
   margin-bottom: 15px;
   position: relative;
   padding-top: 2.5rem;
+  font-weight: bold;
+  font-family: 'AristotelicaDemiBold', 'Poppins', 'Montserrat';
 }
+
 .hub-title::after {
   content: "";
   position: absolute;
-  bottom: -8px;
-  left: 22.8rem;
+  bottom: -2px;
+  left: 26.4rem;
   width: 120px;
   height: 4px;
   background: #fbc02d;
@@ -54,6 +58,17 @@
   height: auto;
 }
 
+.hub-icon-return img {
+  width: 40px;
+  height: auto;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hub-icon-return img:hover {
+  transform: translateY(-5px);
+}
+
 .hub-card h3 {
   font-size: 1.3rem;
   font-weight: bold;
@@ -70,11 +85,56 @@
   border-radius: 30px;
   text-decoration: none;
   transition: background 0.3s ease;
+  cursor: pointer;
 }
 
 .hub-btn:hover {
   background: #e01135;
 }
+
+.hub-section-inc {
+  background: url("../../../assets/midia/imgs/background_03.jpg") no-repeat center center;
+  padding: 8rem 2rem;
+  height: 100vh; /* garante altura da tela */
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* evita scroll desnecessário */
+}
+
+.hub-section-inc p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.hub-title-inc {
+  font-size: 3.5rem;
+  color: #009688;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 0.5rem;
+  font-weight: bold;
+  font-family: 'AristotelicaDemiBold', 'Poppins', 'Montserrat';
+  text-decoration: underline;
+  text-decoration-thickness: 8px;
+  text-decoration-color: #fbc02d;
+}
+
+.carousel-inner {
+  padding: 2rem 0;
+}
+
+.carousel-item .row {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 2rem 2rem;
+  filter: invert(46%) sepia(92%) saturate(344%) hue-rotate(135deg);
+}
+
 
 /* Responsividade extra */
 @media (max-width: 768px) {

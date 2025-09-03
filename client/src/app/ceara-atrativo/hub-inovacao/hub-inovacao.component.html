@@ -1,4 +1,4 @@
-<section class="hub-section">
+<section class="hub-section" *ngIf="viewHome">
   <div class="container text-center">
     <h1 class="hub-title">HUB DE INOVAÇÃO</h1>
 
@@ -10,7 +10,7 @@
             <img src="../../../assets/midia/imgs/arte_incubadora.png" alt="Incubadoras">
           </div>
           <h3>Incubadoras</h3>
-          <a href="#" class="hub-btn">Saiba mais</a>
+          <a (click)="verIncubadora()" class="hub-btn">Saiba mais</a>
         </div>
       </div>
 
@@ -21,7 +21,7 @@
             <img src="../../../assets/midia/imgs/arte_aceleradora.png" alt="Aceleradoras">
           </div>
           <h3>Aceleradoras</h3>
-          <a href="#" class="hub-btn">Saiba mais</a>
+          <a (click)="verAceleradora()" class="hub-btn">Saiba mais</a>
         </div>
       </div>
 
@@ -32,9 +32,126 @@
             <img src="../../../assets/midia/imgs/arte_parques_tecnologicos.png" alt="Parques Tecnológicos">
           </div>
           <h3>Parques Tecnológicos</h3>
-          <a href="#" class="hub-btn">Saiba mais</a>
+          <a (click)="verParque()" class="hub-btn">Saiba mais</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<section class="hub-section-inc">
+  <div class="container">
+    <h1 class="hub-title-inc text-uppercase text-center" *ngIf="viewIncubadoras">Incubadoras</h1>
+    <h1 class="hub-title-inc text-uppercase text-center" *ngIf="viewAceleradoras">Aceleradoras</h1>
+    <h1 class="hub-title-inc text-uppercase text-center" *ngIf="viewParquesTecnologicos">Parques Tecnológicos</h1>
+
+    <p class="pt-3" *ngIf="viewIncubadoras">
+      As incubadoras são ambientes pensados para apoiar ideias e startups em estágio inicial.
+      No <span class="text-uppercase fw-bolder">Ceará</span>, elas oferecem infraestrutura compartilhada,
+      mentorias especializadas e uma rede colaborativa que ajuda a transformar sua ideia em negócio.
+    </p>
+
+    <h5 class="fw-bolder" *ngIf="viewIncubadoras">Principais incubadoras Cearenses:</h5>
+
+    <p class="pt-3" *ngIf="viewAceleradoras">
+      Para startups que já têm um produto e querem crescer rápido, as aceleradoras do <span class="text-uppercase fw-bolder">Ceará</span>, oferecem programas intensivos com mentorias, workshops e conexão com investidores nacionais e internacionais.
+    </p>
+
+    <h5 class="fw-bolder" *ngIf="viewAceleradoras">Destaques ds Aceleradoras Cearenses:</h5>
+
+    <p class="pt-3" *ngIf="viewParquesTecnologicos">
+      Os parques tecnológicos do <span class="text-uppercase fw-bolder">Ceará</span>, reúnem empresas, laboratórios, universidades e centros de pesquisa em um só lugar, promovendo um ambiente ideal para desenvolvimento tecnológico e inovação constante.
+    </p>
+
+    <h5 class="fw-bolder" *ngIf="viewParquesTecnologicos">Principais Parques Tecnológicos Cearenses:</h5>
+
+    <!-- Carousel -->
+    <div id="hubCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon">
+                  <img src="../../../assets/midia/imgs/arte_incubadora.png" alt="Incubadoras">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon">
+                  <img src="../../../assets/midia/imgs/arte_aceleradora.png" alt="Aceleradoras">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon">
+                  <img src="../../../assets/midia/imgs/arte_parques_tecnologicos.png" alt="Parques Tecnológicos">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 (exemplo de mais cards) -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon">
+                  <img src="../../../assets/midia/imgs/arte_incubadora.png" alt="Outra">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon">
+                  <img src="../../../assets/midia/imgs/arte_aceleradora.png" alt="Outra">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon">
+                  <img src="../../../assets/midia/imgs/arte_parques_tecnologicos.png" alt="Outro">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#hubCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#hubCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <p class="pt-5" *ngIf="viewIncubadoras">
+      Aqui, nômades digitais encontram suporte para desenvolver seus projetos com orientação e recursos locais,
+      além de oportunidades para trocar experiências com empreendedores de diversas partes do mundo.
+    </p>
+    <p class="pt-5" *ngIf="viewAceleradoras">
+      Nômades Digitais podem aproveitar essas oportunidades para escalar seus negócios, participar de eventos exclusivos e conectar-se a uma comunidade que entende as demandas do trabalho remoto e da inovação.
+    </p>
+    <p class="pt-5" *ngIf="viewParquesTecnologicos">
+      Aqui, nômades digitais encontram espaços modernos para trabalhar, networking qualificado e acesso a eventos que conectam ciência, tecnologia e mercado. A proximidade com universidades também estimula o surgimento de projetos inovadores que podem inspirar e impulsionar seu trabalho.
+    </p>
+    <div class="hub-icon-return text-start">
+      <img src="../../../assets/midia/icons/volte.png" alt="Incubadoras" (click)="return()">
+    </div>
+  </div>
+</section>
+
