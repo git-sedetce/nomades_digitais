@@ -4,28 +4,33 @@ import { EmpresasParceirasComponent } from './empresas-parceiras/empresas-parcei
 import { EditarParceiroComponent } from './editar-parceiro/editar-parceiro.component';
 import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
 import { EditarDadosComponent } from './editar-dados/editar-dados.component';
+import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
 
 const routes: Routes = [
   {
-      path: 'cadastro_parceiro',
-      component: CadastroParceiroComponent
-    },
-    {
-      path: 'editarparceria',
-      component: EditarParceiroComponent
-    },
-    {
-      path: 'parceria',
-      component: EmpresasParceirasComponent
-    },
-    {
-      path: 'editar',
-      component: EditarDadosComponent
-    },
+    path: 'cadastro_parceiro',
+    component: CadastroParceiroComponent,
+  },
+  {
+    path: 'editarparceria',
+    component: EditarParceiroComponent,
+  },
+  {
+    path: 'parceria',
+    component: EmpresasParceirasComponent,
+  },
+  {
+    path: 'editar',
+    component: EditarDadosComponent,
+  },
+  {
+    path: 'home',
+    component: OndeFicarComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EmpresasRoutingModule { }
+export class EmpresasRoutingModule {}

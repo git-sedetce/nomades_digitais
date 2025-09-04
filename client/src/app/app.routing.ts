@@ -19,7 +19,7 @@ const APP_ROUTES: Routes = [
   { path: 'municipio', loadChildren:() => import('./municipio/municipio.module').then(m => m.MunicipioModule) },
 
   //Módulo Empresas
-  { path: 'parceria', loadChildren:() => import('./empresas/empresas.module').then(p => p.EmpresasModule) },
+  { path: 'ondeficar', loadChildren:() => import('./empresas/empresas.module').then(p => p.EmpresasModule) },
 
   //Módulo Nomads
   { path: 'nomad', loadChildren:() => import('./nomads/nomads.module').then(nms => nms.NomadsModule) },

@@ -1,0 +1,109 @@
+.ondeFicar-section {
+  background: url("../../../assets/midia/imgs/background_04.jpg") no-repeat center center;
+  padding: 6rem 2rem 4rem 2rem;
+  height: 80vh; /* garante altura da tela */
+  margin: 0 auto;
+}
+
+.ondeFicar-title {
+  font-size: 3.5rem;
+  color: #009688;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 2.5rem;
+  font-weight: bold;
+  font-family: 'AristotelicaDemiBold', 'Poppins', 'Montserrat';
+}
+
+.ondeFicar-title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 30rem;
+  width: 120px;
+  height: 4px;
+  background: #fbc02d;
+}
+
+.ondeFicar-card {
+  background: #fff;
+  padding: 2rem 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  height: 100%; /* garante altura uniforme */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ondeFicar-card:hover {
+  transform: translateY(-5px);
+}
+
+.ondeFicar-icon {
+  background: #ff1744; /* vermelho do círculo */
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ondeFicar-icon img {
+  width: 15rem;
+  height: auto;
+  border-radius: 2rem;
+}
+
+.ondeFicar-icon-return img {
+  width: 40px;
+  height: auto;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ondeFicar-icon-return img:hover {
+  transform: translateY(-5px);
+}
+
+.ondeFicar-card h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: #000;
+}
+
+.ondeFicar-btn {
+  display: inline-block;
+  background: #009688;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.ondeFicar-btn:hover {
+  background: #FBC02D;
+}
+
+
+/* Responsividade extra */
+@media (max-width: 768px) {
+  .ondeFicar-title {
+    font-size: 2rem;
+  }
+  .ondeFicar-icon {
+    width: 120px;
+    height: 120px;
+  }
+  .ondeFicar-icon img {
+    width: 65px;
+  }
+}

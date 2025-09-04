@@ -11,13 +11,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxMaskModule } from 'ngx-mask';
 import { EditarDadosComponent } from './editar-dados/editar-dados.component';
+import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
 
 @NgModule({
   declarations: [
     CadastroParceiroComponent,
     EmpresasParceirasComponent,
     EditarParceiroComponent,
-    EditarDadosComponent
+    EditarDadosComponent,
+    OndeFicarComponent
   ],
   imports: [
     CommonModule,
