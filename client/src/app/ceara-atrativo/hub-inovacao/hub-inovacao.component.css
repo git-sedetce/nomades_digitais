@@ -1,7 +1,7 @@
 .hub-section {
   background: url("../../../assets/midia/imgs/background_03.jpg") no-repeat center center;
-  padding: 8rem 2rem;
-  height: 100vh; /* garante altura da tela */
+  padding: 6rem 2rem 4rem 2rem;
+  height: 80vh; /* garante altura da tela */
   margin: 0 auto;
 }
 
