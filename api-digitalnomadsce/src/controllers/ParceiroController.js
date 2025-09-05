@@ -1,6 +1,6 @@
 const database = require("../models");
 const nodemailer = require("nodemailer")
-const { Sequelize, QueryTypes } = require('sequelize');
+const { Sequelize, QueryTypes, where } = require('sequelize');
 const path = require("path");
 const fs = require("fs");
 const baseUrl = process.cwd() //+ "/src"; __dirname + '.
@@ -10,6 +10,18 @@ class ParceiroController {
   static async pegarParceiro(req, res) {
     try {
       const mostraParceiro = await database.cadastra_parceiros.findAll({
+        order: ["nome_fantasia"]
+      });
+      return res.status(200).json(mostraParceiro);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async pegarHospedagem(req, res) {
+    try {
+      const mostraParceiro = await database.cadastra_parceiros.findAll({
+        where: { tipo_service: 'hospedagem' },
         order: ["nome_fantasia"]
       });
       return res.status(200).json(mostraParceiro);

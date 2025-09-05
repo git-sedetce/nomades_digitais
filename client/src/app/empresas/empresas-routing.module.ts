@@ -5,6 +5,7 @@ import { EditarParceiroComponent } from './editar-parceiro/editar-parceiro.compo
 import { CadastroParceiroComponent } from './cadastro-parceiro/cadastro-parceiro.component';
 import { EditarDadosComponent } from './editar-dados/editar-dados.component';
 import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
+import { HospedagemComponent } from './hospedagem/hospedagem.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
     path: 'home',
     component: OndeFicarComponent,
   },
+  {
+    path: 'hospedagem',
+    component: HospedagemComponent,
+  }
 ];
 
 @NgModule({

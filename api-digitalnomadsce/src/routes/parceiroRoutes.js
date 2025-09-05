@@ -31,6 +31,7 @@ const upload = multer({ storage })
 
 const router = Router()
 router.get('/parceiro', ParceiroController.pegarParceiro)
+router.get('/hospedagem', ParceiroController.pegarHospedagem)
 router.get('/listaBairros', ParceiroController.listarBairros)
 router.get('/listaParceiros', ParceiroController.listarParceiros)
 router.get('/listaCidades', ParceiroController.listarCidades)

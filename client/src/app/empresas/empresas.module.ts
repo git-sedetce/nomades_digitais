@@ -12,6 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxMaskModule } from 'ngx-mask';
 import { EditarDadosComponent } from './editar-dados/editar-dados.component';
 import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
+import { HospedagemComponent } from './hospedagem/hospedagem.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
     EmpresasParceirasComponent,
     EditarParceiroComponent,
     EditarDadosComponent,
-    OndeFicarComponent
+    OndeFicarComponent,
+    HospedagemComponent
   ],
   imports: [
     CommonModule,

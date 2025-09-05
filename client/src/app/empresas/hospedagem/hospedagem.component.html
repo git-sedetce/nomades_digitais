@@ -1,0 +1,52 @@
+<section class="hospd-section">
+  <div class="container">
+    <h1 class="hospd-title text-uppercase text-center">Hospedagem</h1>
+
+    <div class="d-flex gap-5 justify-content-center py-4">
+      <button class="btn btn-primary text-uppercase rounded-pill px-4" type="button"
+        routerLink="/commitment/reuniao">Hotel</button>
+      <button class="btn btn-warning text-uppercase rounded-pill px-4" routerLink="/commitment/acompanhamento"
+        type="button">Pousada</button>
+      <button class="btn btn-success text-uppercase rounded-pill px-4" routerLink="/commitment/acompanhamento"
+        type="button">Hostel</button>
+    </div>
+
+    <!-- Carousel -->
+    <div id="hospdCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <div class="carousel-item" *ngFor="let grupo of lista_parcerias; let i = index"
+          [ngClass]="{ 'active': i === 0 }">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4" *ngFor="let hospedagem of grupo">
+              <div class="hospd-card">
+                <div class="hospd-icon">
+                  <img src="../../../assets/midia/imgs/arte_incubadora.png" alt="Incubadoras">
+                </div>
+                <h6 class="fw-bold">{{ hospedagem.nome_fantasia }}</h6>
+                <p class="description">{{ hospedagem.espacos_culturais }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#hospdCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#hospdCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <div class="hospd-icon-return text-start pt-4">
+      <a routerLink="/ondeficar/home">
+        <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
+      </a>
+    </div>
+  </div>
+</section>
