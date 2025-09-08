@@ -47,6 +47,7 @@
 }
 
 .hospd-card {
+  flex: 1;
   background: #fff;
   padding: 2rem 1rem;
   margin: 1rem;
@@ -56,7 +57,7 @@
   height: 100%; /* garante altura uniforme */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .hospd-card:hover {
@@ -71,7 +72,7 @@
 }
 
 .hospd-icon {
-  background: #ff1744; /* vermelho do círculo */
+  /* background: #ff1744; */
   width: 140px;
   height: 140px;
   margin: 0 auto 1rem;
@@ -82,7 +83,7 @@
 }
 
 .hospd-icon img {
-  width: 80px;
+  width: 130px;
   height: auto;
 }
 
@@ -126,7 +127,11 @@
 
 .carousel-item .row {
   display: flex;
-  justify-content: center;
+  align-items: stretch; /* todos os cards com a mesma altura */
+}
+
+.carousel-item .col-12 {
+  display: flex; /* força a coluna esticar */
 }
 
 .carousel-control-prev-icon,

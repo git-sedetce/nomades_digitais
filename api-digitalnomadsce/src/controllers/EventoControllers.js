@@ -65,12 +65,12 @@ class EventoController {
           {
             model: database.Cidades,
             as: "ass_evento_municipio",
-            attribute: ["nome_municipio"],
+            attributes: ["nome_municipio"],
           },
           {
             model: database.Regiao,
             as: "ass_evento_regiao",
-            attribute: ["nome"],
+            attributes: ["nome"],
           },
           {
             model: database.anexo_eventos,

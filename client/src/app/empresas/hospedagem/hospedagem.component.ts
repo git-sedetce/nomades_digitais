@@ -26,8 +26,21 @@ export class HospedagemComponent implements OnInit {
 
   getParceiros() {
     this.service.pegarHospedagem('hospedagem').subscribe(
-      (partner: any[]) => {
-        this.allPartners = partner;
+      (partners: any[]) => {
+        console.log('Parceiros', partners);
+
+        // 🔹 se tiver logo em base64, monta uma URL segura
+        this.allPartners = partners.map((p) => {
+          if (p.logo) {
+            p.logoUrl = this.sanitizer.bypassSecurityTrustUrl(
+              `data:image/jpeg;base64,${p.logo}`
+            );
+          } else {
+            p.logoUrl = '../../../assets/midia/imgs/logos/placeholder.png'
+          }
+          return p;
+        });
+
         this.updateSlides();
       },
       (erro: any) => console.log(erro)

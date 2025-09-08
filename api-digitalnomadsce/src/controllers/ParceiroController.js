@@ -1,16 +1,16 @@
 const database = require("../models");
-const nodemailer = require("nodemailer")
-const { Sequelize, QueryTypes, where } = require('sequelize');
+const nodemailer = require("nodemailer");
+const { Sequelize, QueryTypes, where } = require("sequelize");
 const path = require("path");
 const fs = require("fs");
-const baseUrl = process.cwd() //+ "/src"; __dirname + '.
-const bcrypt = require('bcryptjs')
+const baseUrl = process.cwd(); //+ "/src"; __dirname + '.
+const bcrypt = require("bcryptjs");
 
 class ParceiroController {
   static async pegarParceiro(req, res) {
     try {
       const mostraParceiro = await database.cadastra_parceiros.findAll({
-        order: ["nome_fantasia"]
+        order: ["nome_fantasia"],
       });
       return res.status(200).json(mostraParceiro);
     } catch (error) {
@@ -20,12 +20,50 @@ class ParceiroController {
 
   static async pegarHospedagem(req, res) {
     try {
-      const mostraParceiro = await database.cadastra_parceiros.findAll({
-        where: { tipo_service: 'hospedagem' },
-        order: ["nome_fantasia"]
+      const parceiros = await database.cadastra_parceiros.findAll({
+        where: { tipo_service: "hospedagem" },
+        order: ["nome_fantasia"],
+        include: [
+          {
+            model: database.anexos,
+            as: "ass_imgsParceiros",
+            attributes: ["mimetype", "path", "tipo_anexo"],
+            where: { tipo_anexo: "logo" },
+            required: false, // se quiser trazer mesmo que não tenha logo
+          },
+        ],
       });
-      return res.status(200).json(mostraParceiro);
+      // Montar o retorno com os dados + logo em base64
+      const resultado = await Promise.all(
+        parceiros.map(async (parceiro) => {
+          let logoBase64 = null;
+
+          if (
+            parceiro.ass_imgsParceiros &&
+            parceiro.ass_imgsParceiros.length > 0
+          ) {
+            const logoPath = path.join(
+              baseUrl,
+              parceiro.ass_imgsParceiros[0].path
+            );
+            try {
+              const buffer = await fs.promises.readFile(logoPath);
+              logoBase64 = buffer.toString("base64");
+            } catch (err) {
+              console.error("Erro ao ler imagem:", err);
+            }
+          }
+
+          return {
+            ...parceiro.toJSON(),
+            logo: logoBase64, // adiciona a logo convertida
+          };
+        })
+      );
+
+      return res.status(200).json(resultado);
     } catch (error) {
+      console.error(error);
       return res.status(500).json(error.message);
     }
   }
@@ -39,7 +77,7 @@ class ParceiroController {
           {
             association: "ass_imgsParceiros",
             where: (database.cadastra_parceiros.id = database.anexos.user_id),
-            attributes: ["mimetype", "path"]
+            attributes: ["mimetype", "path"],
           },
         ],
         //raw: true,
@@ -60,7 +98,7 @@ class ParceiroController {
           {
             association: "ass_imgsParceiros",
             where: (database.cadastra_parceiros.id = database.anexos.user_id),
-            attributes: ["mimetype", "path"]
+            attributes: ["mimetype", "path"],
           },
         ],
         //raw: true,
@@ -76,7 +114,7 @@ class ParceiroController {
     const { service } = req.params;
     try {
       const parceiroByService = await database.cadastra_parceiros.findAll({
-        where: { tipo_service: service },        
+        where: { tipo_service: service },
         //raw: true,
       });
       // console.log('Parceiro', parceiroByService)
@@ -92,7 +130,10 @@ class ParceiroController {
       const parceiros = await database.cadastra_parceiros.findAll({
         // where: { bairro: bairro },
         attributes: [
-          [Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")), "cadastra_parceiros.id"],
+          [
+            Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")),
+            "cadastra_parceiros.id",
+          ],
           "bairro",
         ],
         group: ["bairro"],
@@ -110,10 +151,11 @@ class ParceiroController {
         // where: { bairro: bairro },
         attributes: [
           [Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")), "id"],
-          "cnpj", "nome_fantasia"
+          "cnpj",
+          "nome_fantasia",
         ],
         group: ["cnpj", "nome_fantasia"],
-        order: ["nome_fantasia"]
+        order: ["nome_fantasia"],
       });
       return res.status(200).json(parceiros);
     } catch (error) {
@@ -127,7 +169,10 @@ class ParceiroController {
       const parceiros = await database.cadastra_parceiros.findAll({
         // where: { bairro: bairro },
         attributes: [
-          [Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")), "cadastra_parceiros.id"],
+          [
+            Sequelize.fn("MAX", Sequelize.col("cadastra_parceiros.id")),
+            "cadastra_parceiros.id",
+          ],
           "cidade",
         ],
         group: ["cidade"],
@@ -181,19 +226,22 @@ class ParceiroController {
     }
   }
 
-  static async cadastraParceiro(req, res) {    
-    var email_grupo = "admdigitalnomads@sedet.ce.gov.br"
+  static async cadastraParceiro(req, res) {
+    var email_grupo = "admdigitalnomads@sedet.ce.gov.br";
     const novoParceiro = req.body;
     // console.log('novoParceiro', novoParceiro)
     try {
       const criarParceiro = await database.cadastra_parceiros.create(
         novoParceiro
-      )
+      );
 
       const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(novoParceiro.email_parceiro, salt);
+      const hashedPassword = await bcrypt.hash(
+        novoParceiro.email_parceiro,
+        salt
+      );
       const pin = Math.floor(1000 + Math.random() * 9000);
-      const nome_usuario = novoParceiro.email_parceiro.split("@")
+      const nome_usuario = novoParceiro.email_parceiro.split("@");
 
       await database.User.create({
         nome_completo: novoParceiro.nome_fantasia,
@@ -204,66 +252,66 @@ class ParceiroController {
         user_pin: pin,
         profile_id: 2,
       });
-      
-        var transporter = nodemailer.createTransport({
-          host: "172.26.2.26",//"relay.etice.ce.gov.br",
-          port: 25,
-          secure : false,
-          /*auth: {
+
+      var transporter = nodemailer.createTransport({
+        host: "172.26.2.26", //"relay.etice.ce.gov.br",
+        port: 25,
+        secure: false,
+        /*auth: {
             user: "digital.nomads@sedet.ce.gov.br",
             pass: "@Sedet2022",
           },*/
-          tls: {            
-            rejectUnauthorized: false
+        tls: {
+          rejectUnauthorized: false,
         },
-        });
-        var email = novoParceiro.email_parceiro
-        var enviarEmail = [email, email_grupo]
-        var mailOptions = {
-          from: "digital.nomads@sedet.ce.gov.br",
-          to: enviarEmail ,
-          subject: "Cadastro Parceiro",
-          html:`<h2>Parabéns!</h2><p>Parabéns! O cadastro da sua empresa foi realizado com sucesso. Os dados enviados pela sua empresa serão analisados e em breve você receberá o retorno da sua inscrição e poderá fazer parte do Projeto Digital Nomads CE, atraindo um novo público para o seu estabelecimento.</p><p>Abaixo você pode ver os dados informados durante o cadastro:</p><ul><li>CNPJ: ${novoParceiro.cnpj}</li><li>Nome fantasia: ${novoParceiro.nome_fantasia}</li><li>Razão Social: ${novoParceiro.razao_social}</li><li>Contato: ${novoParceiro.telefone}</li><li>CEP: ${novoParceiro.cep}</li><li>Logradouro: ${novoParceiro.logradouro}</li><li>Número: ${novoParceiro.numero}</li><li>Complemento: ${novoParceiro.complemento}</li><li>Bairro: ${novoParceiro.bairro}</li><li>Cidade: ${novoParceiro.cidade}</li><li>Estado: ${novoParceiro.estado}</li><li>Email: ${novoParceiro.email_parceiro}</li><li>Mídia Social: ${novoParceiro.midia_social}</li><li>Tipo de Serviço: ${novoParceiro.tipo_service}</li><li>Serviços essenciais: ${novoParceiro.essential_service}</li><li>Serviço de internet: ${novoParceiro.internet_service}</li><li>Outro serviço: ${novoParceiro.outro_servico}</li><li>Reuniões: ${novoParceiro.trabalho_reunioes}</li><li>Orientação: ${novoParceiro.orienta_equipe}</li><li>Localização: ${novoParceiro.localizacao}</li><li>Ramo: ${novoParceiro.ramo}</li><li>Benefícios: ${novoParceiro.beneficios}</li><li>Espaços Culturais: ${novoParceiro.espacos_culturais}</li><li>Idioma: ${novoParceiro.idioma}</li><li>Qual Idioma: ${novoParceiro.qual_idioma}</li></ul><p>Caso a sua inscrição seja deferida, os dados acima informados poderão ser conferidos no site do projeto, na aba <strong>Escolha sua nova parada</strong> ou <strong>Parceiros</strong>.</p><p>Agradecemos a participação da sua empresa nesse mais novo projeto e contamos com a sua colaboração para tornar o Ceará um polo para os Nômades Digitais.</p><p>Para maiores duvidas ou esclarecimentos entre em contato conosco pelo e-mail: <a>admdigitalnomads@sedet.ce.gov.br</a> ou pelo telefone (85) 3108.1039.</p><p>Atenciosamente,</p><p>Equipe Digital Nomads CE.</p>`
-          //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
-        };
+      });
+      var email = novoParceiro.email_parceiro;
+      var enviarEmail = [email, email_grupo];
+      var mailOptions = {
+        from: "digital.nomads@sedet.ce.gov.br",
+        to: enviarEmail,
+        subject: "Cadastro Parceiro",
+        html: `<h2>Parabéns!</h2><p>Parabéns! O cadastro da sua empresa foi realizado com sucesso. Os dados enviados pela sua empresa serão analisados e em breve você receberá o retorno da sua inscrição e poderá fazer parte do Projeto Digital Nomads CE, atraindo um novo público para o seu estabelecimento.</p><p>Abaixo você pode ver os dados informados durante o cadastro:</p><ul><li>CNPJ: ${novoParceiro.cnpj}</li><li>Nome fantasia: ${novoParceiro.nome_fantasia}</li><li>Razão Social: ${novoParceiro.razao_social}</li><li>Contato: ${novoParceiro.telefone}</li><li>CEP: ${novoParceiro.cep}</li><li>Logradouro: ${novoParceiro.logradouro}</li><li>Número: ${novoParceiro.numero}</li><li>Complemento: ${novoParceiro.complemento}</li><li>Bairro: ${novoParceiro.bairro}</li><li>Cidade: ${novoParceiro.cidade}</li><li>Estado: ${novoParceiro.estado}</li><li>Email: ${novoParceiro.email_parceiro}</li><li>Mídia Social: ${novoParceiro.midia_social}</li><li>Tipo de Serviço: ${novoParceiro.tipo_service}</li><li>Serviços essenciais: ${novoParceiro.essential_service}</li><li>Serviço de internet: ${novoParceiro.internet_service}</li><li>Outro serviço: ${novoParceiro.outro_servico}</li><li>Reuniões: ${novoParceiro.trabalho_reunioes}</li><li>Orientação: ${novoParceiro.orienta_equipe}</li><li>Localização: ${novoParceiro.localizacao}</li><li>Ramo: ${novoParceiro.ramo}</li><li>Benefícios: ${novoParceiro.beneficios}</li><li>Espaços Culturais: ${novoParceiro.espacos_culturais}</li><li>Idioma: ${novoParceiro.idioma}</li><li>Qual Idioma: ${novoParceiro.qual_idioma}</li></ul><p>Caso a sua inscrição seja deferida, os dados acima informados poderão ser conferidos no site do projeto, na aba <strong>Escolha sua nova parada</strong> ou <strong>Parceiros</strong>.</p><p>Agradecemos a participação da sua empresa nesse mais novo projeto e contamos com a sua colaboração para tornar o Ceará um polo para os Nômades Digitais.</p><p>Para maiores duvidas ou esclarecimentos entre em contato conosco pelo e-mail: <a>admdigitalnomads@sedet.ce.gov.br</a> ou pelo telefone (85) 3108.1039.</p><p>Atenciosamente,</p><p>Equipe Digital Nomads CE.</p>`,
+        //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+      };
 
-        var mailOptionsPin = {
-            from: "digital.nomads@sedet.ce.gov.br",
-            to: novoParceiro.email_parceiro,
-            subject: "Código PIN",
-            html:`<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>
-            <p><a href="https://www.digitalnomads.ce.gov.br/resetSenha">Clique aqui</a> para criar sua senha</p>`
-            //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+      var mailOptionsPin = {
+        from: "digital.nomads@sedet.ce.gov.br",
+        to: novoParceiro.email_parceiro,
+        subject: "Código PIN",
+        html: `<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>
+            <p><a href="https://www.digitalnomads.ce.gov.br/resetSenha">Clique aqui</a> para criar sua senha</p>`,
+        //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+      };
+
+      // console.log("mailOptions", mailOptions);
+      var emailRetorno = null;
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          emailRetorno = error;
+        } else {
+          // console.log("Email sent: " + info.response);
+          emailRetorno = {
+            messagem: "Email enviado com sucesso!",
+            info: info.response,
           };
+        }
+      });
 
-        // console.log("mailOptions", mailOptions);
-        var emailRetorno = null;
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-            emailRetorno = error;
-          } else {
-            // console.log("Email sent: " + info.response);
-            emailRetorno = {
-              messagem: "Email enviado com sucesso!",
-              info: info.response,
-            };
-          }
-        });
+      transporter.sendMail(mailOptionsPin, function (error, info) {
+        if (error) {
+          console.log(error);
+          emailRetorno = error;
+        } else {
+          // console.log("Email sent: " + info.response);
+          emailRetorno = {
+            messagem: "PIN enviado com sucesso!",
+            info: info.response,
+          };
+        }
+      });
 
-        transporter.sendMail(mailOptionsPin, function (error, info) {
-            if (error) {
-              console.log(error);
-              emailRetorno = error;
-            } else {
-              // console.log("Email sent: " + info.response);
-              emailRetorno = {
-                messagem: "PIN enviado com sucesso!",
-                info: info.response,
-              };
-            }
-          });
-      
       return res.status(200).json(criarParceiro);
     } catch (error) {
       return res.status(500).json(error.message);
@@ -280,27 +328,29 @@ class ParceiroController {
     }
       //res.send("Arquivo recebido!")
   }*/
-  
+
   static async anexoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1]
+    const caminho = file.path.split("api-digitalnomadsce")[1];
     const nome_arquivo = file.filename;
-    const type = file.mimetype;    
+    const type = file.mimetype;
     // console.log(file);
     // console.log(id);
-    if(type == "application/pdf"){
-      try {      
+    if (type == "application/pdf") {
+      try {
         const anexarParceiro = await database.anexos.create({
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
           user_id: id,
-          tipo_anexo: 'comprovante',
-          raw: true
+          tipo_anexo: "comprovante",
+          raw: true,
         });
         // console.log('anexarParceiro', anexarParceiro)
-        return res.status(200).json({message: 'Comprovante anexado com sucesso!'});
+        return res
+          .status(200)
+          .json({ message: "Comprovante anexado com sucesso!" });
       } catch (error) {
         return res.status(500).json(error.message);
       }
@@ -315,26 +365,26 @@ class ParceiroController {
   static async alvaraParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1]
+    const caminho = file.path.split("api-digitalnomadsce")[1];
     const nome_arquivo = file.filename;
-    const type = file.mimetype;    
+    const type = file.mimetype;
     // console.log(file);
     // console.log(id);
-    if(type =="application/pdf"){
-      try {     
+    if (type == "application/pdf") {
+      try {
         const anexarParceiro = await database.anexos.create({
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
           user_id: id,
-          tipo_anexo: 'alvara',
-          raw: true
+          tipo_anexo: "alvara",
+          raw: true,
         });
         // console.log('anexarParceiro', anexarParceiro)
-        return res.status(200).json({message: 'Alvará anexado com Sucesso!'});
+        return res.status(200).json({ message: "Alvará anexado com Sucesso!" });
       } catch (error) {
         return res.status(500).json(error.message);
-      }  
+      }
     } else {
       return res.status(500).json({
         message: "Somente arquivo .pdf",
@@ -343,26 +393,25 @@ class ParceiroController {
     //res.send("Arquivo recebido!")
   }
 
-
   static async logoParceiro(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1]
+    const caminho = file.path.split("api-digitalnomadsce")[1];
     const nome_arquivo = file.filename;
-    const type = file.mimetype;    
+    const type = file.mimetype;
     // console.log(file);
     // console.log(id);
-    if(type == "image/jpeg" || type == "image/png" || type == "image/jpg"){
-      try {      
+    if (type == "image/jpeg" || type == "image/png" || type == "image/jpg") {
+      try {
         const anexarParceiro = await database.anexos.create({
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
           user_id: id,
-          tipo_anexo: 'logo'
+          tipo_anexo: "logo",
         });
         // console.log('anexarParceiro', anexarParceiro)
-        return res.status(200).json({message: 'Logo enviado com Sucesso!'});
+        return res.status(200).json({ message: "Logo enviado com Sucesso!" });
       } catch (error) {
         return res.status(500).json(error.message);
       }
@@ -375,156 +424,154 @@ class ParceiroController {
   }
 
   static async imgsParceiro(req, res) {
-    var name_arquivo =[]
-        const file = req.files
-        const { id } = req.params;      
-        // console.log('file', file)        
-        if(file.length>0){
-          for(let img = 0; img < file.length; img++){
-            const caminho = file[img].path.split("api-digitalnomadsce")[1];
-            const nome_arquivo = file[img].filename;
-            const type = file[img].mimetype; 
-            name_arquivo.push(nome_arquivo)
-            // console.log('name', file[img].originalname)
-                const anexarParceiro = await database.anexos.create({
-                  mimetype: type,
-                  filename: nome_arquivo,
-                  path: caminho,
-                  user_id: id,
-                  tipo_anexo: 'image'
-                });                              
-              
-            // console.log(res.status(200).json(anexarParceiro));
-            // console.log('imagens', anexarParceiro)
-            }
-            return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
-            //console.log('name_arquivo', name_arquivo)
-            return res.status(200).json({message: 'Imagens enviadas com Sucesso!'})
-        }else{
-          return res.status(500).json(error.message);
-        }
+    var name_arquivo = [];
+    const file = req.files;
+    const { id } = req.params;
+    // console.log('file', file)
+    if (file.length > 0) {
+      for (let img = 0; img < file.length; img++) {
+        const caminho = file[img].path.split("api-digitalnomadsce")[1];
+        const nome_arquivo = file[img].filename;
+        const type = file[img].mimetype;
+        name_arquivo.push(nome_arquivo);
+        // console.log('name', file[img].originalname)
+        const anexarParceiro = await database.anexos.create({
+          mimetype: type,
+          filename: nome_arquivo,
+          path: caminho,
+          user_id: id,
+          tipo_anexo: "image",
+        });
+
+        // console.log(res.status(200).json(anexarParceiro));
+        // console.log('imagens', anexarParceiro)
+      }
+      return res.status(200).json({ message: "Imagens enviadas com Sucesso!" });
+      //console.log('name_arquivo', name_arquivo)
+      return res.status(200).json({ message: "Imagens enviadas com Sucesso!" });
+    } else {
+      return res.status(500).json(error.message);
+    }
 
     //res.send("Arquivo recebido!")
-  }  
+  }
 
   static async anexosParceiro(req, res) {
-    const file = req.files
-    if(file){
-      res.json(file)
-    }else{
-      throw new Error("File upload unseccessful")
+    const file = req.files;
+    if (file) {
+      res.json(file);
+    } else {
+      throw new Error("File upload unseccessful");
     }
-      //res.send("Arquivo recebido!")
-  }  
+    //res.send("Arquivo recebido!")
+  }
 
   static async pegaLogoByID(req, res) {
-     const { id } = req.params;
-         try {
-             const logoParceiro = await database.anexos.findOne({
-                 where: { user_id: Number(id), tipo_anexo: 'logo' },
-                 attributes: ["path"],
-             });
-                if (!logoParceiro) {
-                 return res.status(404).send({
-                     message: "Imagem não encontrada",
-                 });
-             }  
-                       
-             const acesso = path.join(baseUrl, logoParceiro.path)   
-              // console.log('acesso', acesso)         
-                // Lendo o conteúdo do arquivo imagem
-             fs.readFile(acesso, 'base64', function (err, data) {
-                 if (err) {
-                     console.error(err);
-                     return res.status(500).send({
-                         message: "Erro ao ler a imagem",
-                     });
-                 }
-                 return res.status(200).json(data);
-             });
-         } catch (error) {
-             console.error(error);
-             return res.status(500).json(error.message);
-         }
+    const { id } = req.params;
+    try {
+      const logoParceiro = await database.anexos.findOne({
+        where: { parceiro_id: Number(id), tipo_anexo: "logo" },
+        attributes: ["path"],
+      });
+      if (!logoParceiro) {
+        return res.status(404).send({
+          message: "Imagem não encontrada",
+        });
+      }
+
+      const acesso = path.join(baseUrl, logoParceiro.path);
+      // console.log('acesso', acesso)
+      // Lendo o conteúdo do arquivo imagem
+      fs.readFile(acesso, "base64", function (err, data) {
+        if (err) {
+          console.error(err);
+          return res.status(500).send({
+            message: "Erro ao ler a imagem",
+          });
+        }
+        return res.status(200).json(data);
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json(error.message);
+    }
   }
 
   static async pegaAlvaraByID(req, res) {
     const { id } = req.params;
-        try {
-            const alvara = await database.anexos.findOne({
-                where: { id: Number(id) }, //, tipo_anexo: 'alvara'
-                attributes: ["path"],
-            });
-               if (!alvara) {
-                return res.status(404).send({
-                    message: "Alvará não encontrado",
-                });
-            }  
-                      
-            const acesso = path.join(baseUrl, alvara.path)   
-             // console.log('acesso', acesso)         
-               // Lendo o conteúdo do arquivo imagem
-            fs.readFile(acesso, 'base64', function (err, data) {
-                if (err) {
-                    console.error(err);
-                    return res.status(500).send({
-                        message: "Erro ao ler alvará",
-                    });
-                }
-                return res.status(200).json(data);
-            });
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json(error.message);
-        }
- }
-
-  static async pegaImgPartner(req, res){
-    const { id } = req.params;
-    try{
-      const imagens = await database.anexos.findAll({
-        where: { user_id: Number(id) }, //, tipo_anexo: 'image'
-        attributes: ['id', 'tipo_anexo', 'path']
+    try {
+      const alvara = await database.anexos.findOne({
+        where: { id: Number(id) }, //, tipo_anexo: 'alvara'
+        attributes: ["path"],
       });
-      if(!imagens || imagens.length === 0){
+      if (!alvara) {
         return res.status(404).send({
-          message: "Imagens não encontradas"
-        })
+          message: "Alvará não encontrado",
+        });
+      }
+
+      const acesso = path.join(baseUrl, alvara.path);
+      // console.log('acesso', acesso)
+      // Lendo o conteúdo do arquivo imagem
+      fs.readFile(acesso, "base64", function (err, data) {
+        if (err) {
+          console.error(err);
+          return res.status(500).send({
+            message: "Erro ao ler alvará",
+          });
+        }
+        return res.status(200).json(data);
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async pegaImgPartner(req, res) {
+    const { id } = req.params;
+    try {
+      const imagens = await database.anexos.findAll({
+        where: { parceiro_id: Number(id) }, //, tipo_anexo: 'image'
+        attributes: ["id", "tipo_anexo", "path"],
+      });
+      if (!imagens || imagens.length === 0) {
+        return res.status(404).send({
+          message: "Imagens não encontradas",
+        });
       }
 
       const imagensData = [];
-      for(const imagem of imagens){
-        const acesso = path.join(baseUrl, imagem.path)
+      for (const imagem of imagens) {
+        const acesso = path.join(baseUrl, imagem.path);
 
-        const data = fs.readFileSync(acesso, 'base64');
+        const data = fs.readFileSync(acesso, "base64");
         imagensData.push({
           id: imagem.id,
           tipo_anexo: imagem.tipo_anexo,
-          base64: data
-        })
+          base64: data,
+        });
       }
 
-      return res.status(200).json(imagensData)
-
-    } catch (error){
+      return res.status(200).json(imagensData);
+    } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: 'Erro ao buscar as imagens'})
+      return res.status(500).json({ message: "Erro ao buscar as imagens" });
     }
-
   }
 
-  static async atualizaParceiro(req, res){
+  static async atualizaParceiro(req, res) {
     const { id } = req.params;
     const updateParceiro = req.body;
     try {
       await database.cadastra_parceiros.update(updateParceiro, {
-        where: {id: Number(id) },
+        where: { id: Number(id) },
       });
       const parceiroAtualizado = await database.cadastra_parceiros.findOne({
-        where: { id: Number(id) }
+        where: { id: Number(id) },
       });
       return res.status(200).json(parceiroAtualizado);
-    }catch (error) {
+    } catch (error) {
       return res.status(500).json(error.message);
     }
   }
@@ -534,7 +581,7 @@ class ParceiroController {
     const updateImage = req.body;
     // console.log('updateImage', updateImage)
     const file = req.file;
-    updateImage.path = file.path.split("api-digitalnomadsce")[1] //file.path
+    updateImage.path = file.path.split("api-digitalnomadsce")[1]; //file.path
     // console.log('path', updateImage.path)
     try {
       await database.anexos.update(updateImage, {
@@ -554,7 +601,7 @@ class ParceiroController {
     const updateImage = req.body;
     // console.log('updateImage', updateImage)
     const file = req.file;
-    updateImage.path = file.path.split("api-digitalnomadsce")[1] //file.path
+    updateImage.path = file.path.split("api-digitalnomadsce")[1]; //file.path
     // console.log('path', updateImage.path)
     try {
       await database.anexos.update(updateImage, {
@@ -579,22 +626,26 @@ class ParceiroController {
 
       // console.log('localização', imagem.path)
 
-      const imagemPath = path.join(baseUrl, imagem.path)
+      const imagemPath = path.join(baseUrl, imagem.path);
       // console.log('arquivo', imagemPath)
 
       fs.access(imagemPath, fs.constants.F_OK, (err) => {
         if (err) {
-            console.error(`O arquivo ${imagem.filename} não existe.`);
+          console.error(`O arquivo ${imagem.filename} não existe.`);
         } else {
-            console.log(`O arquivo ${imagem.filename} existe. Vou deletá-lo.`);
-            // Deletar o arquivo
-            fs.unlink(imagemPath, (err) => {
-                if (err) {
-                    console.error(`Erro ao deletar o arquivo ${imagem.filename}: ${err}`);
-                } else {
-                    console.log(`O arquivo ${imagem.filename} foi deletado com sucesso.`);
-                }
-            });
+          console.log(`O arquivo ${imagem.filename} existe. Vou deletá-lo.`);
+          // Deletar o arquivo
+          fs.unlink(imagemPath, (err) => {
+            if (err) {
+              console.error(
+                `Erro ao deletar o arquivo ${imagem.filename}: ${err}`
+              );
+            } else {
+              console.log(
+                `O arquivo ${imagem.filename} foi deletado com sucesso.`
+              );
+            }
+          });
         }
       });
 
@@ -617,22 +668,26 @@ class ParceiroController {
 
       // console.log('localização', logo.path)
 
-      const logoPath = path.join(baseUrl, logo.path)
+      const logoPath = path.join(baseUrl, logo.path);
       // console.log('arquivo', logoPath)
 
       fs.access(logoPath, fs.constants.F_OK, (err) => {
         if (err) {
-            console.error(`O arquivo ${logo.filename} não existe.`);
+          console.error(`O arquivo ${logo.filename} não existe.`);
         } else {
-            console.log(`O arquivo ${logo.filename} existe. Vou deletá-lo.`);
-            // Deletar o arquivo
-            fs.unlink(logoPath, (err) => {
-                if (err) {
-                    console.error(`Erro ao deletar o arquivo ${logo.filename}: ${err}`);
-                } else {
-                    console.log(`O arquivo ${logo.filename} foi deletado com sucesso.`);
-                }
-            });
+          console.log(`O arquivo ${logo.filename} existe. Vou deletá-lo.`);
+          // Deletar o arquivo
+          fs.unlink(logoPath, (err) => {
+            if (err) {
+              console.error(
+                `Erro ao deletar o arquivo ${logo.filename}: ${err}`
+              );
+            } else {
+              console.log(
+                `O arquivo ${logo.filename} foi deletado com sucesso.`
+              );
+            }
+          });
         }
       });
 
