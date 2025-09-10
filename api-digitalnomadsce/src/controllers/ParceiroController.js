@@ -68,6 +68,56 @@ class ParceiroController {
     }
   }
 
+  static async pegarCoworking(req, res) {
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        where: { tipo_service: "local_trabalho" },
+        order: ["nome_fantasia"],
+        include: [
+          {
+            model: database.anexos,
+            as: "ass_imgsParceiros",
+            attributes: ["mimetype", "path", "tipo_anexo"],
+            where: { tipo_anexo: "logo" },
+            required: false, // se quiser trazer mesmo que não tenha logo
+          },
+        ],
+      });
+      // Montar o retorno com os dados + logo em base64
+      const resultado = await Promise.all(
+        parceiros.map(async (parceiro) => {
+          let logoBase64 = null;
+
+          if (
+            parceiro.ass_imgsParceiros &&
+            parceiro.ass_imgsParceiros.length > 0
+          ) {
+            const logoPath = path.join(
+              baseUrl,
+              parceiro.ass_imgsParceiros[0].path
+            );
+            try {
+              const buffer = await fs.promises.readFile(logoPath);
+              logoBase64 = buffer.toString("base64");
+            } catch (err) {
+              console.error("Erro ao ler imagem:", err);
+            }
+          }
+
+          return {
+            ...parceiro.toJSON(),
+            logo: logoBase64, // adiciona a logo convertida
+          };
+        })
+      );
+
+      return res.status(200).json(resultado);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async parceiroById(req, res) {
     const { id } = req.params;
     try {

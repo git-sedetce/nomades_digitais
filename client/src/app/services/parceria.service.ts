@@ -18,6 +18,10 @@ export class ParceriaService {
     return this.http.get(environment.url + metodo)
   }
 
+  pegarCoworking(metodo: string): Observable<any> {
+    return this.http.get(environment.url + metodo)
+  }
+
   parceirosById(id: number): Observable<any> {
     return this.http.get(environment.url + 'parceiro/' + id)
   }

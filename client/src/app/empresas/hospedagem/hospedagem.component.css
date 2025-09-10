@@ -1,7 +1,7 @@
 .hospd-section {
   background: url("../../../assets/midia/imgs/background_04.jpg") no-repeat center center;
   padding: 6rem 2rem 4rem 2rem;
-  height: 150vh; /* garante altura da tela */
+  height: auto; /* garante altura da tela */
   margin: 0 auto;
   font-family: Arial, sans-serif;
   overflow: hidden; /* evita scroll desnecessário */

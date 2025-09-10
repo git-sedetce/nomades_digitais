@@ -1,88 +1,56 @@
-<section id="forms">
+<section class="hospd-section">
   <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card card_manual mb-5 mt-5 manual text-center fw-bold">
-          <div class="card-body">
-            <h3 class="mb-2 mt-2">Grandes Parcerias</h3>
-          </div>
-        </div>
+    <h1 class="hospd-title text-uppercase text-center">Coworking Parceiros</h1>
 
-        <div class="row mt-2 mb-2 mx-auto">
+    <!-- Carousel -->
+    <div id="hospdCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
+      <div class="carousel-inner">
 
-          <div class="form-floating col-sm-3 col-12 mt-2 mx-auto">
-            <select class="form-select" #service id="service" aria-label="Bairros de Parceiros"
-              (change)="(filtroByService(service.value))">
-              <option  value="hospedagem">Hospedagem</option>
-              <option  value="alimentacao">Alimentação</option>
-              <option  value="local_trabalho">Local de trabalho</option>
-              <option  value="outro">Outro</option>
-            </select>
-            <label class="form-label ms-3" for="bairro">Selecione o serviço</label>
-          </div>
+        <div class="carousel-item" *ngFor="let grupo of lista_coworking; let i = index"
+          [ngClass]="{ 'active': i === 0 }">
+          <div class="row justify-content-center align-items-stretch">
+            <div class="col-12 col-md-6 col-lg-4 d-flex" *ngFor="let hospedagem of grupo">
+              <div class="hospd-card flex-fill d-flex flex-column">
 
-          <!-- <div class="form-floating col-sm-3 col-12 mt-2 mx-auto">
-            <select class="form-select" #bairro id="bairro" aria-label="Bairros de Parceiros"
-              (change)="(filtroBairro(bairro.value))">
-              <option *ngFor="let bairro of lista_bairro" value="{{ bairro.bairro }}">{{ bairro.bairro }}
-              </option>
-            </select>
-            <label class="form-label ms-3" for="bairro">Selecione o bairro</label>
-          </div> -->
+                <!-- Círculo da logo -->
+                <div class="hospd-icon">
+                  <img *ngIf="hospedagem.logoUrl" [src]="hospedagem.logoUrl" alt="logo {{ hospedagem.nome_fantasia }}" />
+                  <!-- <span *ngIf="!hospedagem.logoUrl" class="text-center">Logo não adicionada</span> -->
+                </div>
 
-          <div class="form-floating col-sm-3 col-12 mt-2 mx-auto">
-            <select class="form-select" #municipio id="municipio" aria-label="Cidade de Parceiros"
-              (change)="(filtroCidade(municipio.value))">
-              <option *ngFor="let cidade of lista_cidade" value="{{ cidade.cidade }}">{{
-                cidade.cidade }}</option>
-            </select>
-            <label class="form-label ms-3" for="municipio">Selecione o Municipio</label>
-          </div>
-          <div class="col-sm-3 col-12 mx-auto">
-            <div class="filter-nav d-flex flex-center mt-2 mb-3">
-              <button class="mx-2 btn btn-success text-center" (click)="getEmpresa()">Todas
-                Empresas<br>Parceiras</button>
+                <!-- Nome e descrição -->
+                <h6 class="fw-bold">{{ hospedagem.nome_fantasia }}</h6>
+                <p class="description">{{ hospedagem.espacos_culturais }}</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="card card_table mb-5">
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr class="cabecalho">
-                <th scope="col" class="text-center align-middle">Parceria</th>
-                <th scope="col" class="text-center align-middle">Tipo de Serviço</th>
-                <!-- <th scope="col" class="text-center align-middle">Bairro</th> -->
-                <th scope="col" class="text-center align-middle">Cidade</th>
-                <th scope="col" class="text-center align-middle">Saiba Mais</th>
-                <th scope="col" class="text-center align-middle">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let parcerias of lista_parcerias">
-                <td class="table align-middle ps-5">{{ parcerias.nome_fantasia }}</td>
-                <td class="table align-middle text-capitalize text-center">{{ parcerias.tipo_service }}</td>
-                <!-- <td class="table align-middle">{{ parcerias.bairro }}</td> -->
-                <td class="table align-middle text-center">{{ parcerias.cidade }}</td>
-                <td class="table align-middle">{{ parcerias.email_parceiro }}</td>
-                <td class="table align-middle"><button (click)="onView(parcerias.id)" type="button"
-                    class="btn btn-warning mx-3" data-bs-toggle="modal" data-bs-target="#modalParceria"><i
-                      class="bi bi-pencil-square"></i></button></td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
       </div>
 
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#hospdCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#hospdCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <div class="hospd-icon-return text-start pt-4">
+      <a routerLink="/ondeficar/home">
+        <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
+      </a>
     </div>
   </div>
-
 </section>
 
 
+
 <!--Modal Parceria-->
-<div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!-- <div class="modal fade" id="modalParceria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="modalParceriaLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
@@ -332,26 +300,8 @@
               <div *ngIf="lista_imagens.length == 0" class="alert alert-danger" role="alert">
                 {{ showMessage }}
               </div>
-              <!-- <div class="card">
-                  <div class="card-body">
-                    <img [src]="image.imagem" class="card-img-top" alt="Imagens do estabelecimento">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div> -->
             </div>
           </div>
-          <!-- <div class="row">
-            <div class="card locate mb-3 mt-3 manual text-center fw-bold">
-              <div class="card-body">
-                <h3 class="mb-3 mt-3">Localização</h3>
-              </div>
-            </div>
-            <google-map height="500px" width="100%" [center]="center" [zoom]="zoom">
-              <map-marker [position]="center"></map-marker>
-            </google-map>
-          </div> -->
         </div>
       </div>
       <div class="modal-footer">
@@ -360,4 +310,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

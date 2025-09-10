@@ -1,77 +1,184 @@
-/*#forms {
-  margin-top: 50px;
-}*/
-.pergunta{
-  font-weight: bold;
+.hospd-section {
+  background: url("../../../assets/midia/imgs/background_04.jpg") no-repeat center center;
+  padding: 6rem 2rem 4rem 2rem;
+  height: auto; /* garante altura da tela */
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* evita scroll desnecessário */
 }
-legend{
+
+.hospd-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 5px 0;
+}
+
+.hospd-title {
+  font-size: 3.5rem;
+  color: #009688;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 2.5rem;
   font-weight: bold;
+  font-family: 'AristotelicaDemiBold', 'Poppins', 'Montserrat';
+}
+
+.hospd-title::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 30rem;
+  width: 120px;
+  height: 4px;
+  background: #fbc02d;
+}
+
+.hospd-subtitle {
+  font-size: 3.5rem;
+  color: #009688;
+  margin-bottom: 15px;
+  position: relative;
+  padding-top: 0.5rem;
+  font-weight: bold;
+  font-family: 'AristotelicaDemiBold', 'Poppins', 'Montserrat';
   text-decoration: underline;
-}
-h3{
-  font-weight: bolder;
-}
-textarea {
-  resize: none;
-}
-.limite_caractere{
-  padding: 0.3rem 0.3rem !important;
+  text-decoration-thickness: 8px;
+  text-decoration-color: #fbc02d;
 }
 
-section {
-  background: url("/assets/imgs/LiTORIAL-Fortaleza-2.png") no-repeat fixed center;
+.hospd-card {
+  flex: 1;
+  background: #fff;
+  padding: 2rem 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  height: 100%; /* garante altura uniforme */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.manual p, a{
-  margin-left: 25px;
-  margin-right: 25px;
+.hospd-card:hover {
+  transform: translateY(-5px);
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 15px 0;
   text-align: justify;
+}
+
+.hospd-icon {
+  /* background: #ff1744; */
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hospd-icon img {
+  width: 130px;
+  height: auto;
+}
+
+.hospd-icon-return img {
+  width: 40px;
+  height: auto;
+  text-align: left;
+  cursor: pointer;
+}
+
+.hospd-icon-return img:hover {
+  transform: translateY(-5px);
+}
+
+.hospd-card h3 {
+  font-size: 1.3rem;
   font-weight: bold;
+  margin: 1rem 0;
+  color: #000;
 }
 
-.manual h3 {
-  font-size: 3.75rem;
-  color: #4ea091;
-  font-family: 'AristotelicaDemiBold';
+.hospd-btn {
+  display: inline-block;
+  background: #ff1744;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
 }
 
-.cabecalho th {
-  font-size: 1.5rem;
-  color: #4ea091;
-  font-family: 'AristotelicaDemiBold';
+.hospd-btn:hover {
+  background: #e01135;
 }
 
-.card_manual{
-  margin-top: 300px !important;
-  background: rgba(255, 255, 255, 0.8);
+.carousel-inner {
+  padding: 0.5rem 0;
 }
 
-.card_table{
-  background: rgba(255, 255, 255, 0.8);
+.carousel-item .row {
+  display: flex;
+  align-items: stretch; /* todos os cards com a mesma altura */
 }
 
-.cadastro_parceiro{
-  margin-left: 25px;
-  margin-right: 25px;
+.carousel-item .col-12 {
+  display: flex; /* força a coluna esticar */
 }
 
-.card {
-  box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 2rem 2rem;
+  filter: invert(46%) sepia(92%) saturate(344%) hue-rotate(135deg);
 }
 
-.logo img{
-  width: 100%;
-  margin: 4rem auto;
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto; /* remove largura default */
 }
 
-.carrossel img{
-  width: 100% !important;
-  height: 75vh;
-  object-fit: cover;
+.carousel-control-prev {
+  left: -70px;
 }
 
-.locate {
-  background: rgba(255, 255, 255, 0.8);
-  font-weight: bolder;
-  text-transform: uppercase;
+.carousel-control-next {
+  right: -70px;
+}
+
+
+/* Responsividade extra */
+@media (max-width: 768px) {
+  .hospd-title {
+    font-size: 2rem;
+  }
+  .hospd-icon {
+    width: 120px;
+    height: 120px;
+  }
+  .hospd-icon img {
+    width: 65px;
+  }
+  .carousel-control-prev {
+    left: -30px; /* mais próximo no mobile */
+  }
+
+  .carousel-control-next {
+    right: -30px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 1.8rem;
+    height: 1.8rem; /* um pouco menores no mobile */
+  }
 }
