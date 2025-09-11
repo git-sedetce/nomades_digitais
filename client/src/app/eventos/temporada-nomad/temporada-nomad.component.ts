@@ -7,66 +7,82 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-temporada-nomad',
   templateUrl: './temporada-nomad.component.html',
-  styleUrls: ['./temporada-nomad.component.css']
+  styleUrls: ['./temporada-nomad.component.css'],
 })
 export class TemporadaNomadComponent implements OnInit {
-
   lista_municipio!: any[];
   lista_temporada!: any[];
+  listaPaginada: any[][] = []; // 🔹 armazenar páginas com 4 eventos cada
   has_season: boolean = false;
 
   constructor(
-      private cityService: ListaMinucipioService,
-      private temporadaService: TemporadaNomadService,
-      private sanitizer: DomSanitizer
-    ) { }
+    private cityService: ListaMinucipioService,
+    private temporadaService: TemporadaNomadService,
+    private sanitizer: DomSanitizer
+  ) {}
 
-    ngOnInit(): void {
-      this.allTemporadas();
-      this.listarCidade();
-    }
+  ngOnInit(): void {
+    this.allTemporadas();
+    this.listarCidade();
+  }
 
-    allTemporadas():void{
-      this.temporadaService.listar_temporada('alltemporada').subscribe((season: any[]) =>{
+  allTemporadas(): void {
+    this.temporadaService.listar_temporada('alltemporada').subscribe(
+      (season: any[]) => {
         this.lista_temporada = season;
-        console.log('lista_temporada', this.lista_temporada)
+
         if (this.lista_temporada && this.lista_temporada.length > 0) {
-                console.log('Cidades cadastradas:', this.lista_temporada);
-                this.has_season = true;
+          this.has_season = true;
 
-                for (let image of this.lista_temporada) {
-                  if (image.base64) {
-                    const binaryString = window.atob(image.base64);
-                    const binaryLen = binaryString.length;
-                    const bytes = new Uint8Array(binaryLen);
+          // 🔹 Converte imagens
+          for (let image of this.lista_temporada) {
+            if (image.base64) {
+              const binaryString = window.atob(image.base64);
+              const binaryLen = binaryString.length;
+              const bytes = new Uint8Array(binaryLen);
 
-                    for (let i = 0; i < binaryLen; i++) {
-                      bytes[i] = binaryString.charCodeAt(i);
-                    }
-
-                    const blob = new Blob([bytes], { type: 'image/jpeg' });
-                    const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
-                    image.imagem = imageUrl; // define imagem no objeto
-                  } else {
-                    image.imagem = null;
-                  }
-                }
-
-              } else {
-                this.has_season = false;
+              for (let i = 0; i < binaryLen; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
               }
-      }, (erro: any) => console.error(erro)
-    );
-    }
 
-    listarCidade():void{
-      this.cityService.listar_municipio('todos_municipio')
-        .subscribe((m: any[]) => {
-          // console.log('lista_municipio', m);
-          this.lista_municipio = m;
-        }, (erro: any) => console.error(erro)
-        );
+              const blob = new Blob([bytes], { type: 'image/jpeg' });
+              const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(
+                URL.createObjectURL(blob)
+              );
+              image.imagem = imageUrl;
+            } else {
+              image.imagem = null;
+            }
+          }
+
+          // 🔹 Pagina lista em grupos de 4
+          this.listaPaginada = this.chunkArray(this.lista_temporada, 4);
+        } else {
+          this.has_season = false;
+        }
+      },
+      (erro: any) => console.error(erro)
+    );
+  }
+
+  // 🔹 Função para dividir em páginas de N itens
+  private chunkArray(arr: any[], size: number): any[][] {
+    const result = [];
+    for (let i = 0; i < arr.length; i += size) {
+      result.push(arr.slice(i, i + size));
     }
+    return result;
+  }
+
+  listarCidade(): void {
+    this.cityService.listar_municipio('todos_municipio').subscribe(
+      (m: any[]) => {
+        // console.log('lista_municipio', m);
+        this.lista_municipio = m;
+      },
+      (erro: any) => console.error(erro)
+    );
+  }
 
   // customOptions: OwlOptions = {
   //   loop: true,
@@ -92,5 +108,4 @@ export class TemporadaNomadComponent implements OnInit {
   //   },
   //   nav: true
   // }
-
 }

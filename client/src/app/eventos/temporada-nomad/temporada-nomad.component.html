@@ -1,62 +1,84 @@
-<section>
-<div class="alertEvents">
-    <!-- Lista de Eventos -->
-<div *ngIf="!has_season" class="alert alert-info mt-5">
-  <strong>Informação:</strong> Não há eventos cadastrados para esta temporada.
-</div>
-</div>
+<div class="body">
+  <!-- Hero -->
+  <section class="tempnomad container-fluid">
+    <div class="row align-items-stretch">
+      <!-- Texto -->
+      <div
+        class="col-lg-6 col-md-12 d-flex flex-column justify-content-center p-5 text-center text-lg-start tempnomad-text">
+        <h1 class="text-uppercase">Temporada Nomads</h1>
+        <h2>O que fazer:</h2>
 
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-      aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active" *ngFor="let temporada of lista_temporada">
-      <img [src]="temporada.imagem" [alt]="temporada.nome_evento" [title]="temporada.nome_evento">
-      <div class="container">
-        <div class="carousel-caption text-start">
-          <h1>{{temporada.nome_evento}}</h1>
-          <p class="opacity-75">{{ temporada.local }}</p>
-          <p class="badge text-bg-primary">{{ temporada.cidade }}</p>
+        <div class="filter-buttons btn-group d-flex flex-wrap justify-content-center justify-content-lg-start"
+          role="group" aria-label="Filtros de eventos">
+          <input type="radio" class="btn-check" name="filtro" id="btn1" autocomplete="off" checked>
+          <label class="btn" for="btn1">Hoje</label>
+
+          <input type="radio" class="btn-check" name="filtro" id="btn2" autocomplete="off">
+          <label class="btn" for="btn2">Amanhã</label>
+
+          <input type="radio" class="btn-check" name="filtro" id="btn3" autocomplete="off">
+          <label class="btn" for="btn3">Nesta semana</label>
+
+          <input type="radio" class="btn-check" name="filtro" id="btn4" autocomplete="off">
+          <label class="btn" for="btn4">Neste final de semana</label>
+
+          <input type="radio" class="btn-check" name="filtro" id="btn5" autocomplete="off">
+          <label class="btn" for="btn5">Na próxima semana</label>
+
+          <input type="radio" class="btn-check" name="filtro" id="btn6" autocomplete="off">
+          <label class="btn" for="btn6">Neste mês</label>
         </div>
+
+      </div>
+
+      <!-- Imagem lado direito ocupando toda a área -->
+      <div class="col-lg-6 col-md-12 p-0 img-sideright">
+        <img src="../../../assets/midia/imgs/temporada_nomad02.jpg" class="img-fluid w-100 h-100"
+          style="object-fit: cover;" alt="Praia ao pôr do sol">
       </div>
     </div>
+  </section>
 
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
-<div class="album py-5 bg-body-tertiary">
-  <div class="container">
+  <!-- Eventos -->
+  <section class="events-section">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      <h3>O que fazer <span class="text-primary">hoje</span></h3>
+      <a href="#" class="text-decoration-none">Ver tudo</a>
+    </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col" *ngFor="let temporada of lista_temporada">
-        <div class="card shadow-sm">
-          <img class="card-img-top img-fixa" [src]="temporada.imagem" [alt]="temporada.nome_evento"
-            [title]="temporada.nome_evento">
-          <div class="card-body">
-            <p class="card-text">{{ temporada.descricao }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+    <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- loop nas páginas -->
+        <div class="carousel-item" *ngFor="let pagina of listaPaginada; let i = index" [class.active]="i === 0">
+          <div class="row g-3 justify-content-center">
+            <!-- loop nos eventos -->
+            <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let temporada of pagina">
+              <div class="card card-event h-100">
+                <img [src]="temporada.imagem" class="card-img-top" [alt]="temporada.nome_evento">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ temporada.nome_evento }}</h5>
+                  <p class="card-text">
+                    {{ temporada.data_evento | date:'dd/MM/yyyy' }}<br>
+                    {{ temporada.cidade }}
+                  </p>
+                  <p class="card-text">{{ temporada.local }}</p>
+                </div>
               </div>
-              <small class="text-body-secondary">{{ temporada.data_evento | date:'dd/MM/yyyy' }}</small>
             </div>
           </div>
         </div>
+
       </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
     </div>
-  </div>
+  </section>
 </div>
-</section>
