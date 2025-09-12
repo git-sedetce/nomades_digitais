@@ -11,13 +11,15 @@ import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.co
 import { CadastroTemporadaNomadComponent } from './cadastro-temporada-nomad/cadastro-temporada-nomad.component';
 import { TemporadaNomadComponent } from './temporada-nomad/temporada-nomad.component';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
+import { GastronomiaComponent } from './gastronomia/gastronomia.component';
 
 @NgModule({
   declarations: [
     CadastroEventosComponent,
     CadastroTemporadaNomadComponent,
     TemporadaNomadComponent,
-    ProximaParadaComponent
+    ProximaParadaComponent,
+    GastronomiaComponent
   ],
   imports: [
     CommonModule,

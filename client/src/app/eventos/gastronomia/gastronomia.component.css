@@ -1,0 +1,126 @@
+.gastronomia-section {
+  background: url("../../../assets/midia/imgs/background_02.jpg") no-repeat center center;
+  font-family: Arial, sans-serif;
+  padding: 6rem 2rem 4rem 2rem;
+  height: 100vh; /* garante altura da tela */
+  /* padding-top: 3rem; */
+}
+
+/* .title {
+  font-weight: bold;
+  font-size: 2.5rem;
+} */
+
+.title {
+  font-size: 2.5rem;
+  color: #009688;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 100px;
+  width: 120px;
+  height: 4px;
+  background: #fbc02d;
+}
+
+.left-image img {
+  width:70%;
+  border-radius: 10px;
+}
+
+.custom-card {
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: translateY(-5px);
+}
+
+.custom-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid #e85c0d;
+  margin-bottom: 10px;
+}
+
+.custom-card .plus {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.arrow-btn {
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* cores específicas dos cards */
+.restaurantes {
+  background-color: #fcd9d9;
+}
+
+.cafeterias {
+  background-color: #d2a84e;
+}
+
+.shoppings {
+  background-color: #f16321;
+  color: #fff;
+}
+
+.lanchonetes {
+  background-color: #f16321;
+  color: #fff;
+}
+
+.bares {
+  background-color: #cfe7fa;
+}
+
+.foodtruck {
+  background-color: #eedfa8;
+}
+
+/* responsividade extra */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  .custom-card img {
+    height: 120px;
+  }
+}

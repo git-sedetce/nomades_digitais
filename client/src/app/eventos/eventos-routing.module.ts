@@ -4,6 +4,7 @@ import { TemporadaNomadComponent } from './temporada-nomad/temporada-nomad.compo
 import { CadastroTemporadaNomadComponent } from './cadastro-temporada-nomad/cadastro-temporada-nomad.component';
 import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
+import { GastronomiaComponent } from './gastronomia/gastronomia.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'proxima_parada',
     component: ProximaParadaComponent,
+  },
+  {
+    path: 'gastronomia',
+    component: GastronomiaComponent,
   },
 ];
 
