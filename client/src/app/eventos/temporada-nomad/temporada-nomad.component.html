@@ -10,25 +10,24 @@
 
         <div class="filter-buttons btn-group d-flex flex-wrap justify-content-center justify-content-lg-start"
           role="group" aria-label="Filtros de eventos">
-          <input type="radio" class="btn-check" name="filtro" id="btn1" autocomplete="off" checked>
+          <input type="radio" class="btn-check" name="filtro" id="btn1" autocomplete="off" (click)="eventoHoje()" checked>
           <label class="btn" for="btn1">Hoje</label>
 
-          <input type="radio" class="btn-check" name="filtro" id="btn2" autocomplete="off">
+          <input type="radio" class="btn-check" name="filtro" id="btn2" autocomplete="off" (click)="eventoAmanha()">
           <label class="btn" for="btn2">Amanhã</label>
 
-          <input type="radio" class="btn-check" name="filtro" id="btn3" autocomplete="off">
+          <input type="radio" class="btn-check" name="filtro" id="btn3" autocomplete="off" (click)="eventoNaSemana()">
           <label class="btn" for="btn3">Nesta semana</label>
 
-          <input type="radio" class="btn-check" name="filtro" id="btn4" autocomplete="off">
+          <input type="radio" class="btn-check" name="filtro" id="btn4" autocomplete="off" (click)="eventoWeekend()">
           <label class="btn" for="btn4">Neste final de semana</label>
 
-          <input type="radio" class="btn-check" name="filtro" id="btn5" autocomplete="off">
+          <input type="radio" class="btn-check" name="filtro" id="btn5" autocomplete="off" (click)="eventoNextWeek()">
           <label class="btn" for="btn5">Na próxima semana</label>
 
-          <input type="radio" class="btn-check" name="filtro" id="btn6" autocomplete="off">
+          <input type="radio" class="btn-check" name="filtro" id="btn6" autocomplete="off" (click)="eventoMonth()">
           <label class="btn" for="btn6">Neste mês</label>
         </div>
-
       </div>
 
       <!-- Imagem lado direito ocupando toda a área -->
@@ -39,19 +38,25 @@
     </div>
   </section>
 
-
   <!-- Eventos -->
-  <section class="events-section">
-    <div class="d-flex justify-content-between align-items-center flex-wrap">
-      <h3>O que fazer <span class="text-primary">hoje</span></h3>
+  <section class="events-section" *ngIf="has_season">
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+      <h3>O que fazer <span class="text-primary">{{ texto }}</span></h3>
       <a href="#" class="text-decoration-none">Ver tudo</a>
     </div>
 
-    <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+    <!-- Nenhum evento -->
+    <div *ngIf="mensagem" class="alert alert-warning text-center">
+      {{ mensagem }}
+    </div>
+
+    <!-- Carousel só aparece se houver eventos -->
+    <div *ngIf="eventosFiltrados.length > 0" id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
 
         <!-- loop nas páginas -->
-        <div class="carousel-item" *ngFor="let pagina of listaPaginada; let i = index" [class.active]="i === 0">
+        <div class="carousel-item" *ngFor="let pagina of chunkArray(eventosFiltrados, itensPorPagina); let i = index"
+          [class.active]="i === 0">
           <div class="row g-3 justify-content-center">
             <!-- loop nos eventos -->
             <div class="col-lg-3 col-md-6 col-sm-12" *ngFor="let temporada of pagina">
