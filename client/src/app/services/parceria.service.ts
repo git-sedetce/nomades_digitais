@@ -22,6 +22,10 @@ export class ParceriaService {
     return this.http.get(environment.url + metodo)
   }
 
+  pegarGastronomia(place: any): Observable<any> {
+    return this.http.get(environment.url + 'gastronomia/' + place)
+  }
+
   parceirosById(id: number): Observable<any> {
     return this.http.get(environment.url + 'parceiro/' + id)
   }

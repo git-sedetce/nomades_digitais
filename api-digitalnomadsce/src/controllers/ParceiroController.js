@@ -118,6 +118,57 @@ class ParceiroController {
     }
   }
 
+  static async pegarGstronomia(req, res) {
+    const { place } = req.params;
+    try {
+      const parceiros = await database.cadastra_parceiros.findAll({
+        where: { tipo_estabelecimento: place },
+        order: ["nome_fantasia"],
+        include: [
+          {
+            model: database.anexos,
+            as: "ass_imgsParceiros",
+            attributes: ["mimetype", "path", "tipo_anexo"],
+            where: { tipo_anexo: "logo" },
+            required: false, // se quiser trazer mesmo que não tenha logo
+          },
+        ],
+      });
+      // Montar o retorno com os dados + logo em base64
+      const resultado = await Promise.all(
+        parceiros.map(async (parceiro) => {
+          let logoBase64 = null;
+
+          if (
+            parceiro.ass_imgsParceiros &&
+            parceiro.ass_imgsParceiros.length > 0
+          ) {
+            const logoPath = path.join(
+              baseUrl,
+              parceiro.ass_imgsParceiros[0].path
+            );
+            try {
+              const buffer = await fs.promises.readFile(logoPath);
+              logoBase64 = buffer.toString("base64");
+            } catch (err) {
+              console.error("Erro ao ler imagem:", err);
+            }
+          }
+
+          return {
+            ...parceiro.toJSON(),
+            logo: logoBase64, // adiciona a logo convertida
+          };
+        })
+      );
+
+      return res.status(200).json(resultado);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json(error.message);
+    }
+  }
+
   static async parceiroById(req, res) {
     const { id } = req.params;
     try {
@@ -126,7 +177,7 @@ class ParceiroController {
         include: [
           {
             association: "ass_imgsParceiros",
-            where: (database.cadastra_parceiros.id = database.anexos.user_id),
+            where: (database.cadastra_parceiros.id = database.anexos.parceiro_id),
             attributes: ["mimetype", "path"],
           },
         ],
@@ -147,7 +198,7 @@ class ParceiroController {
         include: [
           {
             association: "ass_imgsParceiros",
-            where: (database.cadastra_parceiros.id = database.anexos.user_id),
+            where: (database.cadastra_parceiros.id = database.anexos.parceiro_id),
             attributes: ["mimetype", "path"],
           },
         ],
@@ -393,7 +444,7 @@ class ParceiroController {
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
-          user_id: id,
+          parceiro_id: id,
           tipo_anexo: "comprovante",
           raw: true,
         });
@@ -426,7 +477,7 @@ class ParceiroController {
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
-          user_id: id,
+          parceiro_id: id,
           tipo_anexo: "alvara",
           raw: true,
         });
@@ -457,7 +508,7 @@ class ParceiroController {
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
-          user_id: id,
+          parceiro_id: id,
           tipo_anexo: "logo",
         });
         // console.log('anexarParceiro', anexarParceiro)
@@ -489,7 +540,7 @@ class ParceiroController {
           mimetype: type,
           filename: nome_arquivo,
           path: caminho,
-          user_id: id,
+          parceiro_id: id,
           tipo_anexo: "image",
         });
 
