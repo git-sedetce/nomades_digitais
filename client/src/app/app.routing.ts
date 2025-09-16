@@ -30,8 +30,11 @@ const APP_ROUTES: Routes = [
   //Módulo Users
   { path: 'admin', loadChildren:() => import('./users/users.module').then(usr => usr.UsersModule) },
 
-   //Módulo Users
+   //Módulo ceara-atrativo
   { path: 'atrativo', loadChildren:() => import('./ceara-atrativo/ceara-atrativo.module').then(ce_atrat => ce_atrat.CearaAtrativoModule) },
+
+   //Módulo trabalho
+  { path: 'trabalho', loadChildren:() => import('./trabalho/trabalho.module').then(trab => trab.TrabalhoModule) },
 
 ];
 

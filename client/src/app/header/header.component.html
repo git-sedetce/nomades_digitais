@@ -160,7 +160,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
               <li class="nav-item">
-                <a class="dropdown-item" routerLink="/municipio/ceara_pronto">Mapa</a>
+                <a class="dropdown-item" routerLink="/municipio/ceara_pronto">Melhor de cada cidade</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
@@ -173,20 +173,25 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/eventos/proxima_parada">Municípios
+                <a class="dropdown-item" routerLink="/eventos/proxima_parada">Eventos
                 </a>
               </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="#">Eventos
-                </a>
+                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio">Cadastro de Municípios</a>
               </li>
+
+
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/trabalho/home">Oportunidades de Trabalho</a>
+          </li>
+
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Oportunidades de Trabalho
@@ -204,7 +209,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
@@ -227,28 +232,12 @@
               Admin
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-              <li>
-                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio">Cadastro de Municípios</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_eventos">Cadastro de Eventos</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada">Cadastro Temporada Nômades</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
               <li>
                 <a class="dropdown-item" routerLink="/admin/cadastro">Cadastro de Admin</a>
               </li>
+              <!-- <li>
+                <hr class="dropdown-divider">
+              </li> -->
             </ul>
           </li>
           <li class="nav-item" *ngIf="profile === 2">
