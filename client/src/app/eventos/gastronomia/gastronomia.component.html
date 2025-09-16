@@ -1,80 +1,96 @@
 <section class="gastronomia-section container-fluid" *ngIf="view_type === 'gastronomia'">
-    <div class="row align-items-center">
-      <!-- Texto + Imagem à esquerda -->
-      <div class="col-md-4 text-center mb-4 mb-md-0">
-        <h1 class="title mb-4">GASTRONOMIA</h1>
-        <div class="left-image">
-          <img src="../../../assets/midia/imgs/imagem_gastronomia.png" alt="Prato de comida">
-        </div>
-        <!-- <div class="arrow-btn mt-3">
+  <div class="row align-items-center">
+    <!-- Texto + Imagem à esquerda -->
+    <div class="col-md-4 text-center mb-4 mb-md-0">
+      <h1 class="title mb-4 text-uppercase">{{ gastro_title }}</h1>
+      <div class="left-image">
+        <img src="../../../assets/midia/imgs/imagem_gastronomia.png" alt="Prato de comida">
+      </div>
+      <!-- <div class="arrow-btn mt-3">
           ➜
         </div> -->
-      </div>
+    </div>
 
-      <!-- Cards à direita -->
-      <div class="col-md-8">
-        <div class="row g-4">
-          <div class="col-6 col-md-4">
-            <span class="text-decoration-none text-dark">
-              <div class="custom-card restaurantes">
-                <img src="../../../assets/midia/imgs/imagem_restaurante.png" alt="Restaurantes" (click)="getParceiros('restaurantes')">
-                Restaurantes
-              </div>
-            </span>
-          </div>
+    <!-- Cards à direita -->
+    <div class="col-md-8">
+      <div class="row g-4">
+        <div class="col-6 col-md-4">
+          <span class="text-decoration-none text-dark">
+            <div class="custom-card restaurantes">
+              <img src="../../../assets/midia/imgs/imagem_restaurante.png" alt="Restaurantes"
+                (click)="getParceiros('restaurante')">
+              Restaurantes
+            </div>
+          </span>
+        </div>
 
-          <div class="col-6 col-md-4">
-            <span class="text-decoration-none text-dark">
-              <div class="custom-card cafeterias">
-                <img src="../../../assets/midia/imgs/imagem_cafeteria.png" alt="Cafeterias" (click)="getParceiros('cafeteria')">
-                Cafeterias
-              </div>
-            </span>
-          </div>
+        <div class="col-6 col-md-4">
+          <span class="text-decoration-none text-dark">
+            <div class="custom-card cafeterias">
+              <img src="../../../assets/midia/imgs/imagem_cafeteria.png" alt="Cafeterias"
+                (click)="getParceiros('cafeteria')">
+              Cafeterias
+            </div>
+          </span>
+        </div>
 
-          <div class="col-6 col-md-4">
-            <span class="text-decoration-none text-white">
-              <div class="custom-card shoppings">
-                <img src="../../../assets/midia/imgs/imagem_shopping.png" alt="Shoppings" (click)="getParceiros('shoppings')">
-                Shoppings
-              </div>
-            </span>
-          </div>
+        <div class="col-6 col-md-4">
+          <span class="text-decoration-none text-white">
+            <div class="custom-card shoppings">
+              <img src="../../../assets/midia/imgs/imagem_shopping.png" alt="Shoppings"
+                (click)="getParceiros('shoppings')">
+              Shoppings
+            </div>
+          </span>
+        </div>
 
-          <div class="col-6 col-md-4">
-            <span class="text-decoration-none text-white">
-              <div class="custom-card lanchonetes">
-                <img src="../../../assets/midia/imgs/imagem_lanchonetes.png" alt="Lanchonetes" (click)="getParceiros('lanchonetes')">
-                Lanchonetes
-              </div>
-            </span>
-          </div>
+        <div class="col-6 col-md-4">
+          <span class="text-decoration-none text-white">
+            <div class="custom-card lanchonetes">
+              <img src="../../../assets/midia/imgs/imagem_lanchonetes.png" alt="Lanchonetes"
+                (click)="getParceiros('lanchonete')">
+              Lanchonetes
+            </div>
+          </span>
+        </div>
 
-          <div class="col-6 col-md-4">
-            <span class="text-decoration-none text-dark">
-              <div class="custom-card bares">
-                <img src="../../../assets/midia/imgs/imagem_bares.png" alt="Bares" (click)="getParceiros('bares')">
-                Bares
-              </div>
-            </span>
-          </div>
+        <div class="col-6 col-md-4">
+          <span class="text-decoration-none text-dark">
+            <div class="custom-card bares">
+              <img src="../../../assets/midia/imgs/imagem_bares.png" alt="Bares" (click)="getParceiros('bares')">
+              Bares
+            </div>
+          </span>
+        </div>
 
-          <div class="col-6 col-md-4">
-            <span class="text-decoration-none text-dark">
-              <div class="custom-card foodtruck">
-                <img src="../../../assets/midia/imgs/imagem_food_truck.png" alt="Food Truck" (click)="getParceiros('food_truck')">
-                FoodTruck
-              </div>
-            </span>
-          </div>
+        <div class="col-6 col-md-4">
+          <span class="text-decoration-none text-dark">
+            <div class="custom-card foodtruck">
+              <img src="../../../assets/midia/imgs/imagem_food_truck.png" alt="Food Truck"
+                (click)="getParceiros('food_truck')">
+              FoodTruck
+            </div>
+          </span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="hospd-section" *ngIf="view_type != 'gastronomia'">
-  <div class="container">
-    <h1 class="hospd-title text-uppercase text-center">Coworking Parceiros</h1>
+<section class="hospd-section" *ngIf="view_type != 'gastronomia'">
+  <div class="container empty-state text-center" *ngIf="lista_gastronomica.length === 0">
+    <div class="empty-card">
+      <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
+      <h3>Nenhum estabelecimento encontrado</h3>
+      <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
+      <button class="btn btn-primary mt-3" (click)="return('gastronomia')">
+        Voltar
+      </button>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="lista_gastronomica.length > 0">
+    <h1 class="hospd-title text-uppercase text-center">{{ gastro_title }}</h1>
 
     <!-- Carousel -->
     <div id="hospdCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
@@ -88,7 +104,8 @@
 
                 <!-- Círculo da logo -->
                 <div class="hospd-icon">
-                  <img *ngIf="gastronomia.logoUrl" [src]="gastronomia.logoUrl" alt="logo {{ gastronomia.nome_fantasia }}" />
+                  <img *ngIf="gastronomia.logoUrl" [src]="gastronomia.logoUrl"
+                    alt="logo {{ gastronomia.nome_fantasia }}" />
                   <!-- <span *ngIf="!gastronomia.logoUrl" class="text-center">Logo não adicionada</span> -->
                 </div>
 

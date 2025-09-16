@@ -15,6 +15,7 @@ export class GastronomiaComponent implements OnInit {
   allPartners: any[] = []; // mantém os dados originais
   arquivoUrl: SafeResourceUrl | null = null;
   imgUrl: SafeResourceUrl | null = null;
+  gastro_title: string = 'Gastronomia';
 
   constructor(
     private service: ParceriaService,
@@ -31,6 +32,7 @@ export class GastronomiaComponent implements OnInit {
 
   getParceiros(tipo: string) {
     this.view_type = tipo;
+    this.gastro_title = tipo.charAt(0).toUpperCase() + tipo.slice(1);
     console.log('Tipo selecionado:', tipo);
         this.service.pegarGastronomia(tipo).subscribe(
           (partners: any[]) => {
