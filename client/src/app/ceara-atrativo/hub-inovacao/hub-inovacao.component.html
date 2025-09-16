@@ -54,19 +54,261 @@
     <h5 class="fw-bolder" *ngIf="viewIncubadoras">Principais incubadoras Cearenses:</h5>
 
     <p class="pt-3" *ngIf="viewAceleradoras">
-      Para startups que já têm um produto e querem crescer rápido, as aceleradoras do <span class="text-uppercase fw-bolder">Ceará</span>, oferecem programas intensivos com mentorias, workshops e conexão com investidores nacionais e internacionais.
+      Para startups que já têm um produto e querem crescer rápido, as aceleradoras do <span
+        class="text-uppercase fw-bolder">Ceará</span>, oferecem programas intensivos com mentorias, workshops e conexão
+      com investidores nacionais e internacionais.
     </p>
 
     <h5 class="fw-bolder" *ngIf="viewAceleradoras">Destaques ds Aceleradoras Cearenses:</h5>
 
     <p class="pt-3" *ngIf="viewParquesTecnologicos">
-      Os parques tecnológicos do <span class="text-uppercase fw-bolder">Ceará</span>, reúnem empresas, laboratórios, universidades e centros de pesquisa em um só lugar, promovendo um ambiente ideal para desenvolvimento tecnológico e inovação constante.
+      Os parques tecnológicos do <span class="text-uppercase fw-bolder">Ceará</span>, reúnem empresas, laboratórios,
+      universidades e centros de pesquisa em um só lugar, promovendo um ambiente ideal para desenvolvimento tecnológico
+      e inovação constante.
     </p>
 
     <h5 class="fw-bolder" *ngIf="viewParquesTecnologicos">Principais Parques Tecnológicos Cearenses:</h5>
 
     <!-- Carousel -->
-    <div id="hubCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div id="hubCarouselInc" class="carousel slide mt-4" data-bs-ride="carousel" *ngIf="viewIncubadoras">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+
+            <div class="col-12 col-md-4" *ngIf="viewIncubadoras">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/INCUBAUECE.png" alt="Incubadora UECE">
+                </div>
+                <h6 class="fw-bold">INCUBAUECE</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Dr. Silas Munguba, 1700 - Itaperi,
+                  Fortaleza - CE, 60714-903</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3101 9973</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4" *ngIf="viewIncubadoras">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/marca-partec-oficial-site.jpg" alt="Incubadora NUTEC">
+                </div>
+                <h6 class="fw-bold">INCUBADORA NUTEC</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Rua Prof. Rômulo Proença, s/n - Pici,
+                  Fortaleza - CE, 60440-552</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 9 8105 7481</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4" *ngIf="viewIncubadoras">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_Incubadora_ifce.jpg" alt="Incubadora IFCE">
+                </div>
+                <h6 class="fw-bold">INCUBADORA DE EMPRESAS DO IFCE</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Treze de Maio, 2081 - Fátima,
+                  Fortaleza - CE, 60040-531</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3307 3745</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 2 (exemplo de mais cards) -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+
+            <div class="col-12 col-md-4" *ngIf="viewIncubadoras">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_padetec.jpeg" alt="Incubadora PADETEC">
+                </div>
+                <h6 class="fw-bold">PADETEC - UFC</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Humberto Monte, 2977 - Campus do
+                  Pici - Bloco 310, Fortaleza - CE, 60714-903</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3366 9983 | +55 (85) 3366 9967
+                  | +55 (85) 3287 2721</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/unifor hub.png" alt="Incubadora UNIFOR">
+                </div>
+                <h6 class="fw-bold">UNIFOR HUB</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Washington Soares, 1321 - Edson
+                  Queiroz, Fortaleza - CE, 60811-905</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3477 3890</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#hubCarouselInc" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#hubCarouselInc" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <!-- Carousel -->
+    <div id="hubCarouselAcel" class="carousel slide mt-4" data-bs-ride="carousel" *ngIf="viewAceleradoras">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo-nina.png" alt="Aceleradora NiNNA HUB">
+                </div>
+                <h6 class="fw-bold">NINNA HUB</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Dom Manoel, 1020 - Centro, Fortaleza
+                  - CE, 60060-090</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3211 4201</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/casa_azul_ventures_logo.jpeg"
+                    alt="Aceleradora Casa Azul Venture">
+                </div>
+                <h6 class="fw-bold">CASA AZUL VENTURE</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Aguanambi, 282 - José Bonifácio,
+                  Fortaleza - CE, 60055-402</p>
+                <p class="description"><i class="fa-solid fa-at"></i> contato@casaazul.vc</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_icc_biolabs.png" alt="Aceleradora ICC BIOLABS">
+                </div>
+                <h6 class="fw-bold">ICC BIOLABS</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Rua Papi Júnior, 1222 (Prédio Anexo, 5º
+                  Andar) - Rodolfo Teófilo, Fortaleza - CE, 60430-230</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3031 4766</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 2 (exemplo de mais cards) -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/unifor hub.png" alt="Aceleradora UNIFOR">
+                </div>
+                <h6 class="fw-bold">UNIFOR HUB</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Washington Soares, 1321 - Edson
+                  Queiroz, Fortaleza - CE, 60811-905</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3477 3890</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/criarcehard_logo.jpg" alt="Aceleradora Criarce">
+                </div>
+                <h6 class="fw-bold">CRIARCE</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Rua Major Facundo, 500 - 10º Andar -
+                  Centro, Fortaleza - CE, 60025-100</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 9 9401 8319</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_praia.jpg" alt="Aceleradora Praia">
+                </div>
+                <h6 class="fw-bold">PRAIA</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Washington Soares, 909 - Lojas 42 e
+                  43 - Edson Queiroz, Fortaleza - CE, 60811-341</p>
+                <p class="description"><i class="fa-solid fa-at"></i> contato@vemsepraia.com.br</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 3 (exemplo de mais cards) -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_sebraelab.png" alt="Aceleradora SEBRAE">
+                </div>
+                <h6 class="fw-bold">SEBRAE LAB</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Rua Antônio Augusto, 290 - Meireles,
+                  Fortaleza - CE, 60110-370</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3255 6600</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/Somos_Educação_logo.png" alt="Aceleradora SOMOS UM">
+                </div>
+                <h6 class="fw-bold">SOMOS UM</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Pontes Vieira, 2340 - Joaquim
+                  Távora, Fortaleza - CE, 60135-238</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 9 9198 5825</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <div class="hub-card">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_cordel_hub.png" alt="Aceleradora CORDEL HUB">
+                </div>
+                <h6 class="fw-bold">CORDEL HUB</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Desembargador Moreira, 1300 - 1º
+                  Andar - Aldeota, Fortaleza - CE, 60170-002</p>
+                <p class="description"><i class="fa-solid fa-at"></i> contato@cordelventures.com.br</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#hubCarouselAcel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#hubCarouselAcel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <!-- Carousel -->
+    <div id="hubCarouselParq" class="carousel slide mt-4" data-bs-ride="carousel" *ngIf="viewParquesTecnologicos">
       <div class="carousel-inner">
 
         <!-- Slide 1 -->
@@ -74,84 +316,62 @@
           <div class="row justify-content-center">
             <div class="col-12 col-md-4">
               <div class="hub-card">
-                <div class="hub-icon">
-                  <img src="../../../assets/midia/imgs/arte_incubadora.png" alt="Incubadoras">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo partec.png" alt="Parque Tecnologico UFC">
                 </div>
+                <h6 class="fw-bold">PARTEC - UFC</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Rua Dr. Abdenago Rocha Lima, 436 -
+                  Parquelândia, Fortaleza - CE, 60455-320</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 9 8824 6068</p>
               </div>
             </div>
 
             <div class="col-12 col-md-4">
               <div class="hub-card">
-                <div class="hub-icon">
-                  <img src="../../../assets/midia/imgs/arte_aceleradora.png" alt="Aceleradoras">
+                <div class="hub-icon-car">
+                  <img src="../../../assets/midia/imgs/logos/logo_tec_unifor.png" alt="Parque Tecnologico UNIFOR">
                 </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-              <div class="hub-card">
-                <div class="hub-icon">
-                  <img src="../../../assets/midia/imgs/arte_parques_tecnologicos.png" alt="Parques Tecnológicos">
-                </div>
+                <h6 class="fw-bold">TEC UNIFOR</h6>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> Av. Washington Soares, 1321 - Edson
+                  Queiroz, Fortaleza - CE, 60811-905</p>
+                <p class="description"><i class="fa-solid fa-location-dot"></i> +55 (85) 3477 3000 | +55 (85) 3477 3400
+                  | +55(85) 9 9246 6625</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Slide 2 (exemplo de mais cards) -->
-        <div class="carousel-item">
-          <div class="row justify-content-center">
-            <div class="col-12 col-md-4">
-              <div class="hub-card">
-                <div class="hub-icon">
-                  <img src="../../../assets/midia/imgs/arte_incubadora.png" alt="Outra">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-              <div class="hub-card">
-                <div class="hub-icon">
-                  <img src="../../../assets/midia/imgs/arte_aceleradora.png" alt="Outra">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-              <div class="hub-card">
-                <div class="hub-icon">
-                  <img src="../../../assets/midia/imgs/arte_parques_tecnologicos.png" alt="Outro">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Controles -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#hubCarousel" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#hubCarouselParq" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
         <span class="visually-hidden">Anterior</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#hubCarousel" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#hubCarouselParq" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
         <span class="visually-hidden">Próximo</span>
       </button>
     </div>
+  </div>
 
-    <p class="pt-5" *ngIf="viewIncubadoras">
-      Aqui, nômades digitais encontram suporte para desenvolver seus projetos com orientação e recursos locais,
-      além de oportunidades para trocar experiências com empreendedores de diversas partes do mundo.
-    </p>
-    <p class="pt-5" *ngIf="viewAceleradoras">
-      Nômades Digitais podem aproveitar essas oportunidades para escalar seus negócios, participar de eventos exclusivos e conectar-se a uma comunidade que entende as demandas do trabalho remoto e da inovação.
-    </p>
-    <p class="pt-5" *ngIf="viewParquesTecnologicos">
-      Aqui, nômades digitais encontram espaços modernos para trabalhar, networking qualificado e acesso a eventos que conectam ciência, tecnologia e mercado. A proximidade com universidades também estimula o surgimento de projetos inovadores que podem inspirar e impulsionar seu trabalho.
-    </p>
-    <div class="hub-icon-return text-start">
-      <img src="../../../assets/midia/icons/volte.png" alt="Retorno" (click)="return()">
-    </div>
+
+
+
+  <p class="pt-5" *ngIf="viewIncubadoras">
+    Aqui, nômades digitais encontram suporte para desenvolver seus projetos com orientação e recursos locais,
+    além de oportunidades para trocar experiências com empreendedores de diversas partes do mundo.
+  </p>
+  <p class="pt-5" *ngIf="viewAceleradoras">
+    Nômades Digitais podem aproveitar essas oportunidades para escalar seus negócios, participar de eventos exclusivos e
+    conectar-se a uma comunidade que entende as demandas do trabalho remoto e da inovação.
+  </p>
+  <p class="pt-5" *ngIf="viewParquesTecnologicos">
+    Aqui, nômades digitais encontram espaços modernos para trabalhar, networking qualificado e acesso a eventos que
+    conectam ciência, tecnologia e mercado. A proximidade com universidades também estimula o surgimento de projetos
+    inovadores que podem inspirar e impulsionar seu trabalho.
+  </p>
+  <div class="hub-icon-return text-start">
+    <img src="../../../assets/midia/icons/volte.png" alt="Retorno" (click)="return()">
   </div>
 </section>
-

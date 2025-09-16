@@ -93,8 +93,7 @@ section {
 /* Coluna direita */
 .info-img {
   flex: 1;
-  background: url("../../../assets/midia/imgs/planetario.png") no-repeat center
-    center;
+  background: url("../../../assets/midia/imgs/planetario.png") no-repeat center center;
   background-size: cover;
 }
 
