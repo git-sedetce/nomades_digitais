@@ -51,6 +51,8 @@
   background: #fff;
   padding: 2rem 1rem;
   margin: 1rem;
+  border: 1px solid #ddd;
+  padding: 15px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
@@ -146,6 +148,23 @@
 .empty-state p {
   color: #666;
   font-size: 1rem;
+}
+
+.hospd-card .detalhes {
+  display: flex;               /* ícones lado a lado */
+  justify-content: flex-end;   /* alinhados à direita */
+  gap: 12px;                   /* espaçamento entre ícones */
+  font-size: 1.3rem;           /* tamanho maior dos ícones */
+  color: #555;                 /* cor neutra */
+}
+
+.hospd-card .detalhes i {
+  cursor: pointer;             /* cursor de clique */
+  transition: color 0.2s ease;
+}
+
+.hospd-card .detalhes i:hover {
+  color: #007bff;              /* cor azul ao passar o mouse */
 }
 
 .carousel-inner {
