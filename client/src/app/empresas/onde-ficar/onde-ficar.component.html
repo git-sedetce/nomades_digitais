@@ -4,42 +4,50 @@
 
     <div class="row justify-content-center mt-5">
       <!-- Card 1 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="ondeFicar-card">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="ondeFicar-card animate-card">
           <div class="ondeFicar-icon">
             <img src="../../../assets/midia/imgs/hotel.png" alt="Hotel">
           </div>
           <h3 class="text-uppercase">Hotéis</h3>
-          <a routerLink="/ondeficar/hospedagem" class="ondeFicar-btn">Saiba mais</a>
+          <a [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: 'hotel' }" class="ondeFicar-btn">Saiba mais</a>
         </div>
       </div>
 
       <!-- Card 2 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="ondeFicar-card">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="ondeFicar-card animate-card">
           <div class="ondeFicar-icon">
             <img src="../../../assets/midia/imgs/pousada.png" alt="Pousada">
           </div>
           <h3 class="text-uppercase">Pousadas</h3>
-          <a routerLink="/ondeficar/hospedagem" class="ondeFicar-btn">Saiba mais</a>
+          <a [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: 'pousada' }" class="ondeFicar-btn">Saiba mais</a>
         </div>
       </div>
 
       <!-- Card 3 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="ondeFicar-card">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="ondeFicar-card animate-card">
           <div class="ondeFicar-icon">
             <img src="../../../assets/midia/imgs/hostel.png" alt="Hostel">
           </div>
           <h3 class="text-uppercase">Hostels</h3>
-          <a routerLink="/ondeficar/hospedagem" class="ondeFicar-btn">Saiba mais</a>
+          <a [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: 'hostel' }" class="ondeFicar-btn">Saiba mais</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="ondeFicar-card animate-card">
+          <div class="ondeFicar-icon">
+            <img src="../../../assets/midia/imgs/beach_park_resort.jpeg" alt="Resort">
+          </div>
+          <h3 class="text-uppercase">Resort</h3>
+          <a [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: 'resort' }" class="ondeFicar-btn">Saiba mais</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="ondeFicar-section-inc">
-
-</section>
-
+<section class="ondeFicar-section-inc"></section>

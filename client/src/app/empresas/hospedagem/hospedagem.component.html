@@ -3,13 +3,28 @@
     <h1 class="hospd-title text-uppercase text-center">Hospedagem</h1>
 
     <div class="d-flex gap-5 justify-content-center py-4">
-      <button class="btn btn-primary text-uppercase rounded-pill px-4" type="button"
-        routerLink="/commitment/reuniao">Hotel</button>
-      <button class="btn btn-warning text-uppercase rounded-pill px-4" routerLink="/commitment/acompanhamento"
+      <button class="btn btn-primary text-uppercase fw-bold rounded-pill px-4" type="button"
+        (click)="tipoHospegadem('hotel')">Hotel</button>
+      <button class="btn btn-warning text-uppercase fw-bold rounded-pill px-4" (click)="tipoHospegadem('pousada')"
         type="button">Pousada</button>
-      <button class="btn btn-success text-uppercase rounded-pill px-4" routerLink="/commitment/acompanhamento"
+      <button class="btn btn-success text-uppercase fw-bold rounded-pill px-4" (click)="tipoHospegadem('hostel')"
         type="button">Hostel</button>
+      <button class="btn btn-info text-uppercase fw-bold rounded-pill px-4" (click)="tipoHospegadem('resort')"
+        type="button">Resort</button>
+      <button class="btn btn-dark text-uppercase fw-bold rounded-pill px-4" (click)="getParceiros()"
+        type="button">Todas Hospedagem</button>
     </div>
+
+    <div class="container empty-state text-center" *ngIf="lista_parcerias.length === 0">
+    <div class="empty-card">
+      <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
+      <h3>Nenhum estabelecimento encontrado</h3>
+      <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
+      <button class="btn btn-primary mt-3" (click)="getParceiros()">
+        Voltar
+      </button>
+    </div>
+  </div>
 
     <!-- Carousel -->
     <div id="hospdCarousel" class="carousel slide mt-3" data-bs-ride="carousel">

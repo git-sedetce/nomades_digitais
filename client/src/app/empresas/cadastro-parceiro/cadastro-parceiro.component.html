@@ -396,10 +396,10 @@
                 <select name="tipo_estabelecimento" class="form-select" id="tipo_estabelecimento" required ngModel [(ngModel)]="tipo_estabelecimento_outros" #tipo="ngModel"
                 [(ngModel)]="empresa.tipo_estabelecimento">
                   <option value="" class="text-center">----------------------Selecione----------------------</option>
-                  <option value="albergue"  *ngIf="radio_service == 'hospedagem'">Albergue</option>
+                  <!-- <option value="albergue"  *ngIf="radio_service == 'hospedagem'">Albergue</option> -->
                   <option value="hotel"  *ngIf="radio_service == 'hospedagem'">Hotel</option>
                   <option value="hostel"  *ngIf="radio_service == 'hospedagem'">Hostel</option>
-                  <option value="Pousada"  *ngIf="radio_service == 'hospedagem'">Pousada</option>
+                  <option value="pousada"  *ngIf="radio_service == 'hospedagem'">Pousada</option>
                   <option value="resort"  *ngIf="radio_service == 'hospedagem'">Resort</option>
                   <option value="cafeteria"  *ngIf="radio_service == 'alimentacao'">Cafeteria</option>
                   <option value="food_truck"  *ngIf="radio_service == 'alimentacao'">Food Truck</option>

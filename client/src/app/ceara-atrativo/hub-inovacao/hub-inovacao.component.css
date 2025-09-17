@@ -54,6 +54,7 @@
 }
 
 .hub-icon-car {
+  background: #0096876c; /* vermelho do círculo */
   width: 140px;
   height: 140px;
   margin: 0 auto 1rem;
@@ -119,7 +120,13 @@
 .hub-section-inc p {
   font-size: 1.2rem;
   line-height: 1.6;
-  margin: 15px 0;
+  margin: 15px 0 3px 0;
+}
+
+.contact {
+  font-size: 1rem !important;
+  line-height: 1.3 !important;
+  margin: 0px !important;
 }
 
 .hub-title-inc {

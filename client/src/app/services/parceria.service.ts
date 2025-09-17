@@ -26,6 +26,10 @@ export class ParceriaService {
     return this.http.get(environment.url + 'gastronomia/' + place)
   }
 
+  tipoHospedagem(tipo: any): Observable<any> {
+    return this.http.get(environment.url + 'tipohospedagem/' + tipo)
+  }
+
   parceirosById(id: number): Observable<any> {
     return this.http.get(environment.url + 'parceiro/' + id)
   }
