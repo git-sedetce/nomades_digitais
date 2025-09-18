@@ -2,29 +2,29 @@
   <div class="container">
     <h1 class="hospd-title text-uppercase text-center">Hospedagem</h1>
 
+    <!-- Botões de filtro -->
     <div class="d-flex gap-5 justify-content-center py-4">
       <button class="btn btn-primary text-uppercase fw-bold rounded-pill px-4" type="button"
         (click)="tipoHospegadem('hotel')">Hotel</button>
-      <button class="btn btn-warning text-uppercase fw-bold rounded-pill px-4" (click)="tipoHospegadem('pousada')"
-        type="button">Pousada</button>
-      <button class="btn btn-success text-uppercase fw-bold rounded-pill px-4" (click)="tipoHospegadem('hostel')"
-        type="button">Hostel</button>
-      <button class="btn btn-info text-uppercase fw-bold rounded-pill px-4" (click)="tipoHospegadem('resort')"
-        type="button">Resort</button>
-      <button class="btn btn-dark text-uppercase fw-bold rounded-pill px-4" (click)="getParceiros()"
-        type="button">Todas Hospedagem</button>
+      <button class="btn btn-warning text-uppercase fw-bold rounded-pill px-4" type="button"
+        (click)="tipoHospegadem('pousada')">Pousada</button>
+      <button class="btn btn-success text-uppercase fw-bold rounded-pill px-4" type="button"
+        (click)="tipoHospegadem('hostel')">Hostel</button>
+      <button class="btn btn-info text-uppercase fw-bold rounded-pill px-4" type="button"
+        (click)="tipoHospegadem('resort')">Resort</button>
+      <button class="btn btn-dark text-uppercase fw-bold rounded-pill px-4" type="button" (click)="getParceiros()">Todas
+        Hospedagem</button>
     </div>
 
+    <!-- Estado vazio -->
     <div class="container empty-state text-center" *ngIf="lista_parcerias.length === 0">
-    <div class="empty-card">
-      <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
-      <h3>Nenhum estabelecimento encontrado</h3>
-      <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
-      <button class="btn btn-primary mt-3" (click)="getParceiros()">
-        Voltar
-      </button>
+      <div class="empty-card">
+        <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
+        <h3>Nenhum estabelecimento encontrado</h3>
+        <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
+        <button class="btn btn-primary mt-3" (click)="getParceiros()">Voltar</button>
+      </div>
     </div>
-  </div>
 
     <!-- Carousel -->
     <div id="hospdCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
@@ -33,32 +33,93 @@
         <div class="carousel-item" *ngFor="let grupo of lista_parcerias; let i = index"
           [ngClass]="{ 'active': i === 0 }">
           <div class="row justify-content-center align-items-stretch">
-            <div class="col-12 col-md-6 col-lg-4 d-flex" *ngFor="let hospedagem of grupo">
+
+            <!-- Card -->
+            <div class="col-12 col-md-6 col-lg-5 d-flex" *ngFor="let hospedagem of grupo">
               <div class="hospd-card flex-fill d-flex flex-column">
 
                 <!-- Círculo da logo -->
                 <div class="hospd-icon">
-                  <img *ngIf="hospedagem.logoUrl" [src]="hospedagem.logoUrl" alt="logo {{ hospedagem.nome_fantasia }}" />
-                  <!-- <span *ngIf="!hospedagem.logoUrl" class="text-center">Logo não adicionada</span> -->
+                  <img *ngIf="hospedagem.logoUrl" [src]="hospedagem.logoUrl"
+                    alt="logo {{ hospedagem.nome_fantasia }}" />
                 </div>
 
                 <!-- Nome e descrição -->
                 <h6 class="fw-bold">{{ hospedagem.nome_fantasia }}</h6>
                 <p class="description">{{ hospedagem.espacos_culturais }}</p>
+
+                <!-- Ícones -->
                 <div class="text-end detalhes mt-auto">
                   <i class="fa-solid fa-location-dot"></i>
-                  <i class="fa-solid fa-images"></i>
+                  <i class="fa-solid fa-images" data-bs-toggle="modal"
+                    [attr.data-bs-target]="'#carouselModal' + hospedagem.id" (click)="getImagens(hospedagem.id)"></i>
+                  <i class="fa-solid fa-file-lines"></i>
                   <i class="fa-solid fa-circle-info"></i>
                 </div>
               </div>
 
+              <!-- Modal com Carousel (um para cada hospedagem) -->
+              <div class="modal fade" [id]="'carouselModal' + hospedagem.id" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                  <div class="modal-content">
+
+                    <div class="modal-header">
+                      <h5 class="modal-title">{{ hospedagem.nome_fantasia }} - Galeria</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                      <!-- Spinner -->
+                      <div class="text-center py-5" *ngIf="loadingImagens">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-3">Carregando imagens...</p>
+                      </div>
+
+                      <!-- Mensagem de erro/sem imagens -->
+                      <div class="text-center py-5" *ngIf="!loadingImagens && mensagemImagens">
+                        <img src="../../../assets/midia/icons/box_empty.png" alt="Sem imagens" width="80"
+                          class="mb-3 opacity-75">
+                        <p>{{ mensagemImagens }}</p>
+                      </div>
+
+                      <!--Carousel-->
+                      <div *ngIf="!loadingImagens && lista_imagens && lista_imagens.length > 0">
+                        <div [id]="'carousel' + hospedagem.id" class="carousel slide" data-bs-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="carousel-item" *ngFor="let img of lista_imagens; let j = index"
+                              [class.active]="j === 0">
+                              <img [src]="img.imagem" class="d-block w-100" alt="Imagens do estabelecimento">
+                            </div>
+                          </div>
+                          <!-- Controles -->
+                          <button class="carousel-control-prev" type="button"
+                            [attr.data-bs-target]="'#carousel' + hospedagem.id" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                          </button>
+                          <button class="carousel-control-next" type="button"
+                            [attr.data-bs-target]="'#carousel' + hospedagem.id" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- Fim Modal -->
+
             </div>
+            <!-- Fim Card -->
+
           </div>
         </div>
 
       </div>
 
-      <!-- Controles -->
+      <!-- Controles do carrossel principal -->
       <button class="carousel-control-prev" type="button" data-bs-target="#hospdCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
         <span class="visually-hidden">Anterior</span>
@@ -69,6 +130,7 @@
       </button>
     </div>
 
+    <!-- Botão de retorno -->
     <div class="hospd-icon-return text-start pt-4">
       <a routerLink="/ondeficar/home">
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
