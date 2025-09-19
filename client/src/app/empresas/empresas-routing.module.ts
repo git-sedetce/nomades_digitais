@@ -7,6 +7,7 @@ import { EditarDadosComponent } from './editar-dados/editar-dados.component';
 import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
 import { HospedagemComponent } from './hospedagem/hospedagem.component';
 import { WorkEnvironmentComponent } from './work-environment/work-environment.component';
+import { InfoCompanyComponent } from './info-company/info-company.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'ambiente',
     component: WorkEnvironmentComponent,
+  },
+  {
+    path: 'info',
+    component: InfoCompanyComponent,
   }
 ];
 

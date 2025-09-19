@@ -161,6 +161,12 @@
 .hospd-card .detalhes i {
   cursor: pointer;             /* cursor de clique */
   transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.hospd-card .detalhes i a {
+  text-decoration: none;
+  color: #000000
 }
 
 .hospd-card .detalhes i:hover {

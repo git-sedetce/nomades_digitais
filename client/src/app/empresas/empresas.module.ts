@@ -14,6 +14,7 @@ import { EditarDadosComponent } from './editar-dados/editar-dados.component';
 import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
 import { HospedagemComponent } from './hospedagem/hospedagem.component';
 import { WorkEnvironmentComponent } from './work-environment/work-environment.component';
+import { InfoCompanyComponent } from './info-company/info-company.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { WorkEnvironmentComponent } from './work-environment/work-environment.co
     EditarDadosComponent,
     OndeFicarComponent,
     HospedagemComponent,
-    WorkEnvironmentComponent
+    WorkEnvironmentComponent,
+    InfoCompanyComponent
   ],
   imports: [
     CommonModule,
