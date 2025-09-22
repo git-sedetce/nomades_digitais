@@ -40,6 +40,7 @@ module.exports = {
           createdAt: "2022-11-02 13:17:33.337+00",
           updatedAt: "2022-11-02 13:17:33.337+00",
           instagram_parceiro: "@oka.coworking",
+          tipo_estabelecimento: "coworking",
         },
 
         {
@@ -77,6 +78,7 @@ module.exports = {
           createdAt: "2022-11-04 13:59:00.642+00",
           updatedAt: "2022-11-04 13:59:00.642+00",
           instagram_parceiro: "@israelcoworking",
+          tipo_estabelecimento: "coworking",
         },
 
         {
@@ -114,6 +116,7 @@ module.exports = {
           createdAt: "2022-11-04 14:34:14.532+00",
           updatedAt: "2022-11-04 14:34:14.532+00",
           instagram_parceiro: "@goofficescoworking",
+          tipo_estabelecimento: "coworking",
         },
 
         {
@@ -151,6 +154,7 @@ module.exports = {
           createdAt: "2022-11-10 18:26:04.218+00",
           updatedAt: "2022-11-10 18:26:04.218+00",
           instagram_parceiro: "@planetcoworkingfortaleza",
+          tipo_estabelecimento: "coworking",
         },
 
         {
@@ -188,6 +192,7 @@ module.exports = {
           createdAt: "2023-01-13 14:42:02.944+00",
           updatedAt: "2023-01-13 14:42:02.944+00",
           instagram_parceiro: "https://www.instagram.com/paradisekiteclub/",
+          tipo_estabelecimento: "pousada",
         },
 
         {
@@ -225,7 +230,7 @@ module.exports = {
           createdAt: "2023-06-30 14:07:37.716+00",
           updatedAt: "2023-06-30 14:07:37.716+00",
           instagram_parceiro: "transformecoworking",
-          tipo_estabelecimento: "cooworking",
+          tipo_estabelecimento: "coworking",
         },
 
         {
@@ -454,7 +459,7 @@ module.exports = {
           createdAt: "2024-06-19 14:22:51.956+00",
           updatedAt: "2024-06-19 14:22:51.956+00",
           instagram_parceiro: "@hubcumbuco",
-          tipo_estabelecimento: "cooworking",
+          tipo_estabelecimento: "coworking",
         },
 
         {
