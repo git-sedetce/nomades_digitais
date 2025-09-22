@@ -7,7 +7,7 @@
       <button class="btn btn-warning text-uppercase fw-bold rounded-pill px-4" type="button"
         (click)="viewGalery()">Galeria</button>
       <button class="btn btn-success text-uppercase fw-bold rounded-pill px-4" type="button"
-        (click)="viewInfo('hostel')">Informações</button>
+        (click)="viewInfo()">Informações</button>
       <button class="btn btn-primary text-uppercase fw-bold rounded-pill px-4" type="button"
         (click)="viewMap()">Mapa</button>
     </div>
@@ -21,15 +21,17 @@
     </div>
 
     <!-- Estado vazio -->
-    <div class="container empty-state text-center" *ngIf="noInfo">
-      <div class="empty-card">
+    <div class="container py-5" *ngIf="noInfo">
+      <div class="empty-card text-center">
         <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
-        <h3>Não há infomações deste estabelecimento</h3>
+        <h3>Não há informações deste estabelecimento</h3>
         <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
       </div>
     </div>
 
-    <div class="container py-5" *ngIf="!noInfo && showInfo && !showImg">
+    <!--Informações-->
+
+    <div class="container py-5" *ngIf="!noInfo && showInfo">
       <div class="row justify-content-center">
 
         <!-- Card Contato -->
@@ -38,7 +40,7 @@
             <div class="card-header">Contato</div>
             <div class="card-body">
               <p><span class="info-label">E-mail:</span> {{ parceiro.email_parceiro }}</p>
-              <p><span class="info-label">Site:</span> <a [href]="parceiro.midia_social" target="_blank"> {{
+              <p><span class="info-label">Site:</span> <a [href]="parceiro?.midia_social" target="_blank"> {{
                   parceiro.midia_social }}</a></p>
               <p><span class="info-label">Instagram:</span> {{ parceiro.instagran_parceiro }}</p>
               <p><span class="info-label">Telefone:</span> {{ parceiro.telefone }}</p>
@@ -61,29 +63,11 @@
             </div>
           </div>
         </div>
-
-
-
-        <!-- Card Serviços -->
-        <!-- <div class="col-12 col-md-6 col-lg-6">
-          <div class="card info-card">
-            <div class="card-header">Serviços</div>
-            <div class="card-body">
-              <p class="text-capitalize"><span class="info-label">Tipo de Hospedagem:</span> {{
-                parceiro.tipo_estabelecimento }}</p>
-              <p><span class="info-label">Serviços Essenciais:</span> {{ parceiro.essential_service }}</p>
-              <p><span class="info-label">Possui serviço de internet:</span> {{ parceiro.internet_service }}</p>
-              <p><span class="info-label">Internet:</span> acima de 30 Mbps - disponível</p>
-              <p><span class="info-label">Possui espaço para reuniões:</span> {{ parceiro.trabalho_reunioes }}</p>
-            </div>
-          </div>
-        </div> -->
-
       </div>
     </div>
 
     <!-- Mapa -->
-    <div class="container py-5" *ngIf="showMap">
+    <div class="container py-5" *ngIf="!noInfo && showMap">
       <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
           <div class="map-container">
@@ -95,10 +79,19 @@
     </div>
 
     <!-- Galeria de imagens -->
-    <div class="container py-5" *ngIf="!noInfo && showImg && !showInfo" (window:keydown)="handleKey($event)">
+    <div class="container py-5" *ngIf="!noInfo && showImg" (window:keydown)="handleKey($event)">
+
+      <!-- Estado vazio -->
+  <div class="container empty-state text-center" *ngIf="noInfo">
+    <div class="empty-card">
+      <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
+      <h3>Não há imagens deste estabelecimento</h3>
+      <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
+    </div>
+  </div>
 
       <!-- Lista de imagens (só aparece quando terminar o loading) -->
-      <div class="row g-4" *ngIf="!loadingImagens">
+      <div class="row g-4" *ngIf="!noInfo && !loadingImagens">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let img of lista_imagens; let i = index">
           <img [src]="img.imagem" [alt]="img.alt" class="gallery-img" (click)="openModal(i)">
         </div>

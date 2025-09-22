@@ -55,40 +55,48 @@ export class InfoCompanyComponent implements OnInit {
   }
 
   getImagens(id: any) {
-    this.loadingImagens = true; // inicia o loading
-    this.mensagemImagens = null; // reseta mensagens
-    this.lista_imagens = []; // limpa imagens anteriores
-    this.service.imagensById(id).subscribe(
-      (imagensData: any[]) => {
-        this.loadingImagens = false;
-        if (imagensData && imagensData.length > 0) {
-          this.lista_imagens = imagensData.map((imagem) => {
-            const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
-            const safeImageUrl: SafeUrl =
-              this.sanitizer.bypassSecurityTrustUrl(decodedImage);
-            return {
-              id: imagem.id,
-              tipo_anexo: imagem.tipo_anexo,
-              imagem: safeImageUrl,
-            };
-          });
-          console.log('imagens', this.lista_imagens);
-          this.noInfo = false;
-          this.showImg = true;
-        } else {
-          this.mensagemImagens = 'Nenhuma imagem encontrada.';
-          this.noInfo = true;
-        }
-      },
+  this.loadingImagens = true;
+  this.mensagemImagens = null;
+  this.lista_imagens = [];
 
-      (erro: any) => {
-        this.loadingImagens = false;
-        this.mensagemImagens =
-          'Erro ao buscar imagens. Tente novamente mais tarde.';
-        console.error('Erro ao buscar imagens:', erro);
+  this.service.imagensById(id).subscribe(
+    (imagensData: any[]) => {
+      this.loadingImagens = false;
+
+      if (imagensData && imagensData.length > 0) {
+        this.lista_imagens = imagensData.map((imagem) => {
+          const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
+          const safeImageUrl: SafeUrl =
+            this.sanitizer.bypassSecurityTrustUrl(decodedImage);
+          return {
+            id: imagem.id,
+            tipo_anexo: imagem.tipo_anexo,
+            imagem: safeImageUrl,
+          };
+        });
+
+        this.noInfo = false;
+        this.showImg = true;   // 👈 já abre galeria por padrão
+        this.showInfo = false;
+        this.showMap = false;
+
+      } else {
+        this.noInfo = true;
+        this.showImg = true;   // 👈 força abrir a seção galeria, mas mostra card vazio
+        this.showInfo = false;
+        this.showMap = false;
       }
-    );
-  }
+    },
+    (erro: any) => {
+      this.loadingImagens = false;
+      this.noInfo = true;
+      this.showImg = true;     // 👈 mesmo em erro, mostra card vazio
+      this.showInfo = false;
+      this.showMap = false;
+      console.error('Erro ao buscar imagens:', erro);
+    }
+  );
+}
 
   currentIndex = 0;
   showModal = false;
@@ -121,33 +129,41 @@ export class InfoCompanyComponent implements OnInit {
   }
 
   viewGalery() {
+    this.showImg = true;
+    this.showInfo = false;
+    this.showMap = false;
+
     if (this.lista_imagens.length > 0) {
       this.noInfo = false;
-      this.showImg = true;
-      this.showInfo = false;
-      this.showMap = false;
     } else {
       this.noInfo = true;
     }
   }
 
-  viewInfo(tipo: string) {
-    this.noInfo = false;
+  viewInfo() {
     this.showInfo = true;
     this.showImg = false;
     this.showMap = false;
+
+    if (this.parceiro) {
+      this.noInfo = false;
+    } else {
+      this.noInfo = true;
+    }
   }
 
   viewMap() {
-  if (this.parceiro) {
-    const endereco = `${this.parceiro.logradouro} ${this.parceiro.numero}, ${this.parceiro.bairro}, ${this.parceiro.cidade} - ${this.parceiro.estado}`;
-    const url = `https://www.google.com/maps?q=${encodeURIComponent(endereco)}&output=embed`;
-
-    this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    this.noInfo = false;
+    this.showMap = true;
     this.showInfo = false;
     this.showImg = false;
-    this.showMap = true; // cria esse novo estado
+    this.noInfo = false;
+
+    if (this.parceiro) {
+      const endereco = `${this.parceiro.logradouro} ${this.parceiro.numero}, ${this.parceiro.bairro}, ${this.parceiro.cidade} - ${this.parceiro.estado}`;
+      const url = `https://www.google.com/maps?q=${encodeURIComponent(
+        endereco
+      )}&output=embed`;
+      this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
   }
-}
 }
