@@ -114,7 +114,10 @@
 
     <!-- Botão de retorno -->
     <div class="info-icon-return text-start pt-4">
-      <a [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
+      <a *ngIf="returnHosp" [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
+        <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
+      </a>
+      <a *ngIf="returnCoworking" [routerLink]="['/ondeficar/parceria']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
       </a>
     </div>

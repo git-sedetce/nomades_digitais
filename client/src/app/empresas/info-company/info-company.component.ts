@@ -26,6 +26,8 @@ export class InfoCompanyComponent implements OnInit {
   company_name!: string;
   type_establishment!: string;
   mapUrl!: SafeResourceUrl;
+  returnHosp: boolean = false;
+  returnCoworking: boolean = false;
 
   constructor(
     private service: ParceriaService,
@@ -49,6 +51,13 @@ export class InfoCompanyComponent implements OnInit {
         console.log('Parceiro', this.parceiro);
         this.company_name = this.parceiro.nome_fantasia;
         this.type_establishment = this.parceiro.tipo_estabelecimento;
+        if(this.parceiro.tipo_estabelecimento != 'coworking'){
+          this.returnHosp = true;
+          this.returnCoworking = false;
+        } else if(this.parceiro.tipo_estabelecimento === 'coworking'){
+          this.returnCoworking = true;
+          this.returnHosp = false;
+        }
       },
       (erro: any) => console.error(erro)
     );
