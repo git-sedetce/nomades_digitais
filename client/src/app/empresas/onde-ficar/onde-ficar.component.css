@@ -8,14 +8,20 @@
 .ondeFicar-title {
   font-size: 3.5rem;
   color: #009688;
-  margin-bottom: 2rem;
+  margin-bottom: 15px;
   position: relative;
   padding-top: 2.5rem;
   font-weight: bold;
-  font-family: 'AristotelicaDemiBold', 'Poppins', 'Montserrat';
+  font-family: "AristotelicaDemiBold", "Poppins", "Montserrat";
+  text-shadow: -3px 3px 5px #00000056;
+  letter-spacing: 8px;
+  text-decoration: underline;
+  text-decoration-color: #fbc02d;
+  text-decoration-thickness: 5px;
+  text-underline-offset: 15px;
 }
 
-.ondeFicar-title::after {
+/* .ondeFicar-title::after {
   content: "";
   position: absolute;
   bottom: -8px;
@@ -24,7 +30,7 @@
   width: 120px;
   height: 4px;
   background: #fbc02d;
-}
+} */
 
 /* CARD */
 .ondeFicar-card {

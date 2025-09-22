@@ -279,6 +279,10 @@
   font-size: 1rem;
 }
 
+a.btn .texto {
+  font-size: 14px; /* controla o tamanho da fonte */
+  font-weight: bold; /* deixa o texto mais forte */
+}
 
 .carousel-inner {
   padding: 0.5rem 0;

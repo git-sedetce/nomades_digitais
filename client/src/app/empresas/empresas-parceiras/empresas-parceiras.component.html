@@ -24,7 +24,12 @@
 
                 <!-- Ícones -->
                 <div class="text-end detalhes mt-auto">
-                  <a [routerLink]="['/ondeficar/info']" title="SAIBA MAIS" [queryParams]="{ id: hospedagem.id }"><i class="fa-solid fa-circle-info" ></i></a>
+                  <!-- <a [routerLink]="['/ondeficar/info']" title="SAIBA MAIS" [queryParams]="{ id: hospedagem.id }"><i class="fa-solid fa-circle-info" ></i></a> -->
+                  <a [routerLink]="['/ondeficar/info']" [queryParams]="{ id: hospedagem.id }"
+                    class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span class="texto">SAIBA MAIS</span>
+                  </a>
                 </div>
               </div>
             </div>
