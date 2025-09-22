@@ -1,6 +1,6 @@
 <section class="info-section">
   <div class="container">
-    <h1 class="info-title text-uppercase text-center">{{ company_name}}</h1>
+    <h1 class="info-title text-uppercase text-center">{{ company_name }}</h1>
 
     <!-- Botões de filtro -->
     <div class="d-flex gap-5 justify-content-center py-4">
@@ -34,6 +34,19 @@
     <div class="container py-5" *ngIf="!noInfo && showInfo">
       <div class="row justify-content-center">
 
+        <!-- Card Descrição -->
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="card info-card">
+              <div class="card-header">Descrição</div>
+              <div class="card-body">
+                <p>{{ parceiro.espacos_culturais }}</p>
+                <p><span class="info-label">Trabalha com outro idioma:</span> {{ parceiro.idioma }}</p>
+                <p><span class="info-label" *ngIf="parceiro.idioma =='sim'">Idiomas:</span> {{ parceiro.qual_idioma }}
+                </p>
+              </div>
+            </div>
+          </div>
+
         <!-- Card Contato -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card info-card">
@@ -48,21 +61,6 @@
           </div>
         </div>
 
-        <div class="row justify-content-center">
-
-          <!-- Card Descrição -->
-          <div class="col-12 col-md-6 col-lg-6">
-            <div class="card info-card">
-              <div class="card-header">Descrição</div>
-              <div class="card-body">
-                <p>{{ parceiro.espacos_culturais }}</p>
-                <p><span class="info-label">Trabalha com outro idioma:</span> {{ parceiro.idioma }}</p>
-                <p><span class="info-label" *ngIf="parceiro.idioma =='sim'">Idiomas:</span> {{ parceiro.qual_idioma }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -118,6 +116,9 @@
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
       </a>
       <a *ngIf="returnCoworking" [routerLink]="['/ondeficar/parceria']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
+        <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
+      </a>
+      <a *ngIf="returnFood" [routerLink]="['/eventos/gastronomia']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
       </a>
     </div>

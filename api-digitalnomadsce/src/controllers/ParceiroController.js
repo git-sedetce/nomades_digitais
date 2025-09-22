@@ -684,7 +684,7 @@ class ParceiroController {
     const { id } = req.params;
     try {
       const imagens = await database.anexos.findAll({
-        where: { parceiro_id: Number(id) }, //, tipo_anexo: 'image'
+        where: { parceiro_id: Number(id), tipo_anexo: 'image' }, //, tipo_anexo: 'image'
         attributes: ["id", "tipo_anexo", "path"],
       });
       if (!imagens || imagens.length === 0) {

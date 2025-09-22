@@ -64,7 +64,7 @@ export class GastronomiaComponent implements OnInit {
 
       private updateSlides() {
         const width = window.innerWidth;
-        let chunkSize = 3; // padrão desktop
+        let chunkSize = 2; // padrão desktop
 
         if (width < 768) {
           chunkSize = 1; // mobile

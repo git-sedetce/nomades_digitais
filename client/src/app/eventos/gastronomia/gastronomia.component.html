@@ -99,7 +99,7 @@
         <div class="carousel-item" *ngFor="let grupo of lista_gastronomica; let i = index"
           [ngClass]="{ 'active': i === 0 }">
           <div class="row justify-content-center align-items-stretch">
-            <div class="col-12 col-md-6 col-lg-4 d-flex" *ngFor="let gastronomia of grupo">
+            <div class="col-12 col-md-6 col-lg-5 d-flex" *ngFor="let gastronomia of grupo">
               <div class="hospd-card flex-fill d-flex flex-column">
 
                 <!-- Círculo da logo -->
@@ -112,6 +112,11 @@
                 <!-- Nome e descrição -->
                 <h6 class="fw-bold">{{ gastronomia.nome_fantasia }}</h6>
                 <p class="description">{{ gastronomia.espacos_culturais }}</p>
+
+                <!-- Ícones -->
+                <div class="text-end detalhes mt-auto">
+                  <a [routerLink]="['/ondeficar/info']" title="SAIBA MAIS" [queryParams]="{ id: gastronomia.id }"><i class="fa-solid fa-circle-info" ></i></a>
+                </div>
               </div>
             </div>
           </div>
