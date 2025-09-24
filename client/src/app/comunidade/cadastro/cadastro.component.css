@@ -1,0 +1,87 @@
+/*#forms {
+  margin-top: 50px;
+}*/
+.pergunta{
+  font-weight: bold;
+}
+legend{
+  font-weight: bold;
+  text-decoration: underline;
+  letter-spacing: 0.2rem;
+  font-family: "AristotelicaDemiBold", "Poppins", "Montserrat";
+}
+h3{
+  font-weight: bolder;
+  letter-spacing: 0.2rem;
+  font-family: "AristotelicaDemiBold", "Poppins", "Montserrat";
+  font-size: 2.75rem;
+}
+textarea {
+  resize: none;
+}
+.limite_caractere{
+  padding: 0.3rem 0.3rem !important;
+}
+
+section {
+  background: url("/assets/midia/imgs/background_comunidade.jpg") no-repeat center center;
+  background-size: cover; /* ajusta a imagem para cobrir toda a área */
+  background-attachment: fixed; /* efeito parallax (opcional, pode remover em mobile) */
+  min-height: 100vh; /* ocupa a tela inteira */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+} */
+
+section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.manual p, a{
+  margin-left: 25px;
+  margin-right: 25px;
+  text-align: justify;
+  font-weight: bold;
+}
+
+.card_manual{
+  margin-top: 90px !important;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.card_form{
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cadastro_nomads{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.card {
+  box-shadow: 3px 6px 8px 3px rgba(100, 100, 100, 0.3);
+}
+
+table thead tr th{
+  vertical-align: middle;
+}
+
+table tbody tr td{
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  section {
+    background: url("/assets/midia/imgs/background_comunidade_mobile.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll; /* evita bug no mobile */
+  }
+}

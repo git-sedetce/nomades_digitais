@@ -1,1 +1,142 @@
-<p>cadastro works!</p>
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual">
+          <div class="card-body">
+            <p class="mb-3 mt-3 text-center">A comunidade desempenha um papel essencial na vida das pessoas, pois é por
+              meio dela que se constrói um senso de pertencimento, apoio mútuo e cooperação. É no convívio comunitário
+              que valores como solidariedade, respeito e responsabilidade coletiva são fortalecidos, contribuindo para o
+              bem-estar social e emocional de seus membros. Além disso, a comunidade possibilita a troca de
+              conhecimentos, experiências e recursos, favorecendo o crescimento individual e coletivo. Ao unir esforços
+              em prol de objetivos comuns, ela se torna um espaço de fortalecimento social capaz de enfrentar desafios,
+              promover a inclusão e gerar transformações positivas na vida de todos.</p>
+            <!-- <h5 class="mb-3 mt-3 text-center">Venha fazer parte dessa comunidade você também!!<br>Come be part of this community you too!!</h5> -->
+          </div>
+        </div>
+        <div class="card card_form mb-5">
+          <div>
+            <div class="bg-primary">
+              <h3 class="pb-3 pt-3 text-center text-uppercase text-white">Cadastro da Comunidade</h3>
+            </div>
+            <form class="cadastro_nomads" #formNomad="ngForm">
+              <fieldset>
+                <legend class="text-uppercase">
+                  Perfil Comunidade
+                </legend>
+                <div class="row">
+                  <div class="col-sm-124 col-12 mb-3">
+                    <label for="name" class="form-label pergunta">Nome</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                      placeholder="Digite o nome da comunidade" required #name="ngModel"
+                      [(ngModel)]="comunity.name">
+                    <div *ngIf="!name.valid && name.touched" class="alert alert-danger" role="alert">
+                      Informe o nome da Comunidade</div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="missao">Missão</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" required maxlength="500" class="form-control"
+                      id="missao" rows="5" name="missao" ngModel #missao="ngModel"
+                      [(ngModel)]="comunity.missao"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        comunity.missao?.length }} / {{ maxChars }}</strong></div>
+
+                  </div>
+
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="proposito">Propósito</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" required maxlength="500" class="form-control"
+                      id="proposito" rows="5" name="proposito" ngModel #proposito="ngModel"
+                      [(ngModel)]="comunity.proposito"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        comunity.proposito?.length }} / {{ maxChars }}</strong></div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="historia">História da Comunidade</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" required maxlength="500" class="form-control"
+                      id="historia" rows="5" name="historia" ngModel #historia="ngModel"
+                      [(ngModel)]="comunity.historia"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        comunity.historia?.length }} / {{ maxChars }}</strong></div>
+                  </div>
+
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="perfil">Perfil da Comunidade</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" required maxlength="500" class="form-control"
+                      id="perfil" rows="5" name="perfil" ngModel #perfil="ngModel"
+                      [(ngModel)]="comunity.perfil"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        comunity.perfil?.length }} / {{ maxChars }}</strong></div>
+                  </div>
+                </div>
+
+
+
+                <div class="row">
+
+                  <div class="form-group col-sm-6 col-12 mb-3">
+                    <label for="nivel_experiencia" class="form-label pergunta">Nível de Experiência</label>
+                    <input type="text" class="form-control" id="nivel_experiencia"
+                      placeholder="Informe o nivel_experiencia" name="nivel_experiencia" ngModel required
+                      #nivel_experiencia="ngModel" [(ngModel)]="comunity.nivel_experiencia">
+                    <div *ngIf="!nivel_experiencia.valid && nivel_experiencia.touched" class="alert alert-danger"
+                      role="alert">Informe o Nível da Experiência</div>
+                  </div>
+
+                  <div class="form-group col-sm-6 col-12 mb-5">
+                    <label for="idioma" class="pergunta mb-2">Idioma?</label>
+                    <select name="idioma" class="form-select" id="idioma" required ngModel #tipo="ngModel"
+                      [(ngModel)]="comunity.idioma">
+                      <option value="" class="text-center">----------------------Selecione----------------------
+                      </option>
+                      <option value="alemao">Alemão</option>
+                      <option value="chines">Chinês</option>
+                      <option value="espanhol">Espanhol</option>
+                      <option value="frances">Francês</option>
+                      <option value="ingles">Inglês</option>
+                      <option value="italiano">Italiano</option>
+                      <option value="japones">Japonês</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="regras_convivencia">Regras de Convivência</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" required maxlength="500" class="form-control"
+                      id="regras_convivencia" rows="5" name="regras_convivencia" ngModel #regras_convivencia="ngModel"
+                      [(ngModel)]="comunity.regras_convivencia"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        comunity.regras_convivencia?.length }} / {{ maxChars }}</strong></div>
+
+                  </div>
+
+                  <div class="col-sm-6 col-12 mb-3">
+                    <label class="pergunta" for="nivel_participacao">Nível de Participação</label>
+                    <textarea [maxLength]="maxChars" data-ls-module="charCounter" required maxlength="500" class="form-control"
+                      id="nivel_participacao" rows="5" name="nivel_participacao" ngModel #nivel_participacao="ngModel"
+                      [(ngModel)]="comunity.nivel_participacao"></textarea>
+                    <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
+                        comunity.nivel_participacao?.length }} / {{ maxChars }}</strong></div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <button type="submit" class="btn btn-success mb-3" [disabled]="!formNomad.valid"
+                (click)="saveComunity()">Cadastrar Comunidade</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
