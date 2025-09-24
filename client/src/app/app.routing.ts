@@ -36,6 +36,9 @@ const APP_ROUTES: Routes = [
    //Módulo trabalho
   { path: 'trabalho', loadChildren:() => import('./trabalho/trabalho.module').then(trab => trab.TrabalhoModule) },
 
+  //Módulo comunidade
+  { path: 'comunidade', loadChildren:() => import('./comunidade/comunidade.module').then(comt => comt.ComunidadeModule) },
+
 ];
 
 @NgModule({
