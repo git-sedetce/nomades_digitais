@@ -17,6 +17,23 @@ module.exports = {
       tipo_evento: {
         type: Sequelize.STRING
       },
+      comunidade_id: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+        references: { model: 'Comunidades', key: 'id' }
+      },
+      is_comunity: {
+        type: Sequelize.BOOLEAN
+      },
+      is_frequency: {
+        type: Sequelize.BOOLEAN
+      },
+      dia_frequente: {
+        type: Sequelize.STRING
+      },
+      horario: {
+        type: Sequelize.STRING
+      },
       data_inicio_evento: {
         type: Sequelize.DATEONLY
       },

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Evento.belongsTo(models.Cidades, { foreignKey: 'city_id', as: 'ass_evento_municipio' })
       Evento.belongsTo(models.Regiao, { foreignKey: 'regiao_id', as: 'ass_evento_regiao' })
       Evento.hasOne(models.anexo_eventos, { foreignKey: 'evento_id', as: 'ass_evento_anexo' })
+      Evento.belongsTo(models.Comunidade, { foreignKey: 'comunidade_id', as: 'ass_evento_comunity' })
     }
   }
   Evento.init({
@@ -20,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     descricao: DataTypes.STRING,
     tipo_evento: DataTypes.STRING,
     data_inicio_evento: DataTypes.DATEONLY,
-    data_final_evento: DataTypes.DATEONLY
+    data_final_evento: DataTypes.DATEONLY,
+    is_comunity: DataTypes.BOOLEAN,
+    is_frequency: DataTypes.BOOLEAN,
+    dia_frequente: DataTypes.STRING,
+    horario: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Evento',
