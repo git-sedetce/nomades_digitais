@@ -1,0 +1,99 @@
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+
+        <!-- Texto introdutório -->
+        <div class="card card_manual mb-5 mt-5">
+          <div class="card-body">
+            <p class="mb-3 mt-3 text-center">
+              A comunidade desempenha um papel essencial na vida das pessoas,
+              pois é por meio dela que se constrói um senso de pertencimento,
+              apoio mútuo e cooperação. É no convívio comunitário que valores
+              como solidariedade, respeito e responsabilidade coletiva são
+              fortalecidos, contribuindo para o bem-estar social e emocional
+              de seus membros. Além disso, a comunidade possibilita a troca de
+              conhecimentos, experiências e recursos, favorecendo o
+              crescimento individual e coletivo. Ao unir esforços em prol de
+              objetivos comuns, ela se torna um espaço de fortalecimento
+              social capaz de enfrentar desafios, promover a inclusão e gerar
+              transformações positivas na vida de todos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Formulário Redes Sociais -->
+        <div class="card card_form mb-5">
+          <div class="bg-primary text-center py-3 rounded-top">
+            <h3 class="text-uppercase text-white">Redes Sociais</h3>
+          </div>
+
+          <form class="cadastro_nomads p-4" #formConect="ngForm" (ngSubmit)="saveConect(formConect)">
+            <fieldset>
+              <legend class="text-uppercase">Social Midia</legend>
+
+              <div class="row g-4">
+                <!-- Comunidade -->
+                <div class="col-sm-4 col-12">
+                  <div class="form-floating">
+                    <select name="comunidade_id" id="comunidade_id" class="form-select" required ngModel
+                      [(ngModel)]="conect.comunidade_id" aria-label="Selecione a comunidade">
+                      <option value="" disabled selected>Selecione...</option>
+                      <option value="1">Cumbuco</option>
+                      <option value="2">Jeri</option>
+                      <option value="3">Paracuru</option>
+                      <option value="4">Flecheiras</option>
+                      <option value="5">Icaraizinho de Amontada</option>
+                      <option value="6">Ilha do Guajiru</option>
+                      <option value="7">Preá</option>
+                      <option value="8">Fortim</option>
+                      <option value="9">Canoa Quebrada</option>
+                    </select>
+                    <label for="comunidade_id">Comunidade</label>
+                  </div>
+                </div>
+
+                <!-- Plataforma -->
+                <div class="col-sm-4 col-12">
+                  <div class="form-floating">
+                    <select name="plataforma" id="plataforma" class="form-select" required ngModel
+                      [(ngModel)]="conect.plataforma" aria-label="Selecione a plataforma">
+                      <option value="" disabled selected>Selecione...</option>
+                      <option value="discord">💬 Discord</option>
+                      <option value="whatsapp">📱 Whatsapp</option>
+                      <option value="telegram">📢 Telegram</option>
+                      <option value="slack">💼 Slack</option>
+                    </select>
+                    <label for="plataforma">Plataforma</label>
+                  </div>
+                </div>
+
+                <!-- Acesso -->
+                <div class="col-sm-4 col-12">
+                  <div class="form-floating">
+                    <input type="text" id="acesso_midia" name="acesso_midia" class="form-control"
+                      placeholder="Digite o acesso" required [(ngModel)]="conect.acesso_midia" #acesso_midia="ngModel"
+                      aria-label="Digite o acesso da mídia" />
+                    <label for="acesso_midia">Acesso</label>
+                  </div>
+                  <div *ngIf="!acesso_midia.valid && acesso_midia.touched" class="alert alert-danger mt-2" role="alert">
+                    Informe o acesso corretamente
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Botão -->
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-success" [disabled]="!formConect.valid">
+                <i class="bi bi-plus-circle me-2"></i>
+                Cadastrar Redes Sociais
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
