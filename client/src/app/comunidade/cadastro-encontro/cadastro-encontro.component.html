@@ -1,0 +1,161 @@
+<section id="forms">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card_manual mb-5 mt-5 manual">
+          <div class="card-body">
+            <p class="mb-3 mt-3 text-center">
+              A comunidade desempenha um papel essencial na vida das pessoas,
+              pois é por meio dela que se constrói um senso de pertencimento,
+              apoio mútuo e cooperação. É no convívio comunitário que valores
+              como solidariedade, respeito e responsabilidade coletiva são
+              fortalecidos, contribuindo para o bem-estar social e emocional
+              de seus membros. Além disso, a comunidade possibilita a troca de
+              conhecimentos, experiências e recursos, favorecendo o
+              crescimento individual e coletivo. Ao unir esforços em prol de
+              objetivos comuns, ela se torna um espaço de fortalecimento
+              social capaz de enfrentar desafios, promover a inclusão e gerar
+              transformações positivas na vida de todos.
+            </p>
+          </div>
+        </div>
+
+        <div class="card card_form mb-5">
+          <div>
+            <div class="bg-primary">
+              <h3 class="pb-3 pt-3 text-center text-uppercase text-white">
+                Ponto de encontro
+              </h3>
+            </div>
+
+            <!-- Formulário -->
+            <form class="cadastro_nomads" #formMetting="ngForm" (ngSubmit)="saveMeeting(formMetting)">
+              <fieldset>
+                <legend class="text-uppercase">Perfil Comunidade</legend>
+
+                <div class="row">
+                  <div class="form-group col-sm-4 col-12 mb-5">
+                    <label for="comunidade_id" class="pergunta mb-2">Comunidade</label>
+                    <select name="comunidade_id" class="form-select" id="comunidade_id" required ngModel
+                      [(ngModel)]="meeting.comunidade_id">
+                      <option value="" class="text-center">
+                        ----------------------Selecione----------------------
+                      </option>
+                      <option value="1">Cumbuco</option>
+                      <option value="2">Jeri</option>
+                      <option value="3">Paracuru</option>
+                      <option value="4">Flecheiras</option>
+                      <option value="5">Icaraizinho de Amontada</option>
+                      <option value="6">Ilha do Guajiru</option>
+                      <option value="7">Preá</option>
+                      <option value="8">Fortim</option>
+                      <option value="9">Canoa Quebrada</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-4 col-12 mb-3">
+                    <label for="lugar" class="form-label pergunta">Local</label>
+                    <input type="text" class="form-control" id="lugar" name="lugar" placeholder="Digite o nome do lugar"
+                      required [(ngModel)]="meeting.lugar" #lugar="ngModel" />
+                    <div *ngIf="!lugar.valid && lugar.touched" class="alert alert-danger" role="alert">
+                      Informe o Local
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 col-12 mb-3">
+                    <label for="formato" class="form-label pergunta">Formato</label>
+                    <input type="text" class="form-control" id="formato" name="formato" placeholder="Digite o formato"
+                      required [(ngModel)]="meeting.formato" #formato="ngModel" />
+                    <div *ngIf="!formato.valid && formato.touched" class="alert alert-danger" role="alert">
+                      Informe o Formato
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-2 col-12 mb-3">
+                    <label for="data_encontro" class="form-label pergunta">Data do Encontro</label>
+                    <input type="date" class="form-control" id="data_encontro" name="data_encontro" required
+                      [(ngModel)]="meeting.data_encontro" #data_encontro="ngModel" />
+                  </div>
+
+                  <div class="col-sm-2 col-12 mb-3">
+                    <label for="hora" class="form-label pergunta">Hora do Encontro</label>
+                    <input type="time" class="form-control" id="hora" name="hora" required [(ngModel)]="meeting.hora"
+                      #hora="ngModel" />
+                  </div>
+
+                  <div class="form-group col-sm-2 col-12 mb-3 position-relative">
+                    <label for="cep" class="form-label pergunta">CEP</label>
+                    <input type="text" class="form-control" id="cep" placeholder="Informe o cep" name="cep" ngModel
+                      required #cep="ngModel" [(ngModel)]="meeting.cep" (blur)="consultaCEP(cep.value, formMetting)"
+                      mask="00000-000">
+
+                    <!-- Spinner dentro do input -->
+                    <div *ngIf="loadingCep" class="spinner-border text-primary spinner-border-sm position-absolute"
+                      style="top: 38px; right: 10px;" role="status">
+                      <span class="visually-hidden">Carregando...</span>
+                    </div>
+
+                    <div *ngIf="!cep.valid && cep.touched" class="alert alert-danger mt-1" role="alert">
+                      Informe o CEP
+                    </div>
+
+                    <div *ngIf="cepError" class="alert alert-warning mt-1" role="alert">
+                      {{ cepError }}
+                    </div>
+                  </div>
+
+                  <div class="form-group col-sm-6 col-12 mb-3">
+                    <label for="logradouro" class="form-label pergunta">Endereço</label>
+                    <input type="text" class="form-control" id="logradouro" name="logradouro"
+                      placeholder="Digite o endereço" required [(ngModel)]="meeting.logradouro" #logradouro="ngModel" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-sm-4 col-12 mb-3">
+                    <label for="numero" class="form-label pergunta">Número</label>
+                    <input type="text" class="form-control" id="numero" name="numero" placeholder="Insira o número"
+                      required [(ngModel)]="meeting.numero" #numero="ngModel" />
+                  </div>
+
+                  <div class="form-group col-sm-8 col-12 mb-3">
+                    <label for="complemento" class="form-label pergunta">Complemento</label>
+                    <input type="text" class="form-control" id="complemento" name="complemento"
+                      placeholder="Complemento" [(ngModel)]="meeting.complemento" #complemento="ngModel" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-sm-3 col-12 mb-3">
+                    <label for="bairro" class="form-label pergunta">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro"
+                      required [(ngModel)]="meeting.bairro" #bairro="ngModel" />
+                  </div>
+
+                  <div class="form-group col-sm-4 col-12 mb-3">
+                    <label for="cidade" class="form-label pergunta">Cidade</label>
+                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Informe a Cidade"
+                      required [(ngModel)]="meeting.cidade" #cidade="ngModel" readonly />
+                  </div>
+
+                  <div class="form-group col-sm-4 col-12 mb-3">
+                    <label for="estado" class="form-label pergunta">Estado</label>
+                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Informe o Estado"
+                      required [(ngModel)]="meeting.estado" #estado="ngModel" readonly />
+                  </div>
+                </div>
+
+              </fieldset>
+
+              <button type="submit" class="btn btn-success mb-3" [disabled]="!formMetting.valid">
+                Cadastrar Comunidade
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

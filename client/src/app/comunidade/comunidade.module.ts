@@ -7,12 +7,19 @@ import { CadastroComponent } from './cadastro/cadastro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { HomeCadastroComponent } from './home-cadastro/home-cadastro.component';
+import { CadastroEncontroComponent } from './cadastro-encontro/cadastro-encontro.component';
+import { CadastroMidiaComponent } from './cadastro-midia/cadastro-midia.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    CadastroComponent
+    CadastroComponent,
+    HomeCadastroComponent,
+    CadastroEncontroComponent,
+    CadastroMidiaComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
+    NgxMaskModule.forChild(),
   ]
 })
 export class ComunidadeModule { }
