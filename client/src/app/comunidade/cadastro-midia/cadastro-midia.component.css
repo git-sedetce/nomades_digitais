@@ -22,7 +22,7 @@ section {
   background: url("/assets/midia/imgs/social_midia_02.jpg") no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
-  min-height: 100vh;
+  min-height: auto;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -30,6 +30,7 @@ section {
 section .container {
   position: relative;
   z-index: 2;
+  padding-top: 3.5rem;
 }
 
 .manual p,
