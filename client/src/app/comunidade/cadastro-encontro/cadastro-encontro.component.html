@@ -38,9 +38,10 @@
                     <label for="comunidade_id" class="pergunta mb-2">Comunidade</label>
                     <select name="comunidade_id" class="form-select" id="comunidade_id" required ngModel
                       [(ngModel)]="meeting.comunidade_id">
-                      <option value="" class="text-center">
+                      <!-- <option value="" class="text-center">
                         ----------------------Selecione----------------------
-                      </option>
+                      </option> -->
+                      <option selected disabled>Selecione a comunidade</option>
                       <option value="1">Cumbuco</option>
                       <option value="2">Jeri</option>
                       <option value="3">Paracuru</option>

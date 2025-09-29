@@ -39,13 +39,73 @@
                   <div class="col-sm-4 col-12 mb-3">
                     <label for="evento_name" class="form-label pergunta">Nome do Evento</label>
                     <input type="text" class="form-control" id="evento_name" aria-describedby="evento_name"
-                      placeholder="Insira o nome do evento!" name="evento_name" ngModel required #evento_name="ngModel"
-                      [(ngModel)]="evento.evento_name">
+                      placeholder="Insira o nome do evento!" name="evento_name" ngModel required #evento_name="ngModel" [(ngModel)]="evento.evento_name">
 
                     <div *ngIf="!evento_name.valid && evento_name.touched" class="alert alert-danger" role="alert">
                       Informe o nome do Evento</div>
                   </div>
                 </div>
+
+                <!-- <div class="row pt-3 pb-4">
+                  <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    <input type="checkbox" class="btn-check" id="is_comunity" autocomplete="off" name="is_comunity" ngModel required #is_comunity="ngModel" [(ngModel)]="evento.is_comunity">
+                    <label class="btn btn-outline-warning fw-bold" for="is_comunity">Evento Comunitário?</label>
+
+                    <input type="checkbox" class="btn-check" id="is_frequency" autocomplete="off" name="is_frequency" ngModel required #is_frequency="ngModel" [(ngModel)]="evento.is_frequency">
+                    <label class="btn btn-outline-success fw-bold" for="is_frequency">Este evento se repete?</label>
+                  </div>
+                </div> -->
+
+                <div class="row ms-2 pt-3 pb-4">
+                  <div class="form-check form-check-inline col-sm-2 col-12">
+                    <input class="form-check-input" type="checkbox" id="is_comunity" name="is_comunity"
+                      #is_comunity="ngModel" [(ngModel)]="evento.is_comunity" value=true>
+                    <label class="form-check-label pergunta" for="is_comunity">Evento da Comunidade?</label>
+                  </div>
+                  <div class="form-check form-check-inline col-sm-2 col-12">
+                    <input class="form-check-input" type="checkbox" id="is_frequency" name="is_frequency"
+                      #is_frequency="ngModel" [(ngModel)]="evento.is_frequency" value=true>
+                    <label class="form-check-label pergunta" for="is_frequency">Este evento se repete?</label>
+                  </div>
+
+                  <div class="col-sm-3 col-12 mb-3" *ngIf="evento.is_comunity">
+                    <label for="comunidade_id" class="form-label pergunta">Comunidade</label>
+                    <select name="comunidade_id" id="comunidade_id" class="form-select" #comunidade_id>
+                      <option selected disabled>Selecione a Comunidade</option>
+                      <option value="1">Cumbuco</option>
+                      <option value="2">Jeri</option>
+                      <option value="3">Paracuru</option>
+                      <option value="4">Flecheiras</option>
+                      <option value="5">Icaraizinho de Amontada</option>
+                      <option value="6">Ilha do Guajiru</option>
+                      <option value="7">Preá</option>
+                      <option value="8">Fortim</option>
+                      <option value="9">Canoa Quebrada</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-2 col-12 mb-3" *ngIf="evento.is_frequency">
+                    <label for="dia_frequente" class="form-label pergunta">Dia Fequente</label>
+                    <select name="dia_frequente" id="dia_frequente" class="form-select" #dia_frequente>
+                      <option selected disabled>Selecione o Evento</option>
+                      <option value="1">Domingo</option>
+                      <option value="2">Segunda-Feira</option>
+                      <option value="3">Terça-Feira</option>
+                      <option value="4">Quarta-Feira</option>
+                      <option value="5">Quinta-Feira</option>
+                      <option value="6">Sexta-Feira</option>
+                      <option value="7">Sábado</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-2 col-12 mb-3" *ngIf="evento.is_frequency">
+                    <label for="horario" class="form-label pergunta">horario</label>
+                    <input type="time" class="form-control" id="horario" name="horario" required [(ngModel)]="evento.horario"
+                      #horario="ngModel" />
+                  </div>
+                </div>
+
+
                 <div class="row">
 
 
@@ -59,22 +119,22 @@
 
                   <div class="col-sm-4 col-12 mb-3">
                     <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
-                      <select name="tipo_evento" id="tipo_evento" class="form-select" #tipo_evento>
-                        <option selected disabled>Selecione o Evento</option>
-                        <option value="Ações Socioambiental">Ações Socioambiental</option>
-                        <option value="Eventos Esportivos">Eventos Esportivos</option>
-                        <option value="Eventos Gastronômicos">Eventos Gastronômicos</option>
-                        <option value="Exposição">Exposição</option>
-                        <option value="Feiras">Feiras</option>
-                        <option value="Festas">Festas</option>
-                        <option value="Festejo Religioso">Festejos Religioso</option>
-                        <option value="Integração com Comunidade">Integração com Comunidade</option>
-                        <option value="Peças de Teatro | Stand up Comedy">Peças de Teatro | Stand up Comedy</option>
-                        <option value="Shows">Shows</option>
-                      </select>
+                    <select name="tipo_evento" id="tipo_evento" class="form-select" #tipo_evento>
+                      <option selected disabled>Selecione o Evento</option>
+                      <option value="Ações Socioambiental">Ações Socioambiental</option>
+                      <option value="Eventos Esportivos">Eventos Esportivos</option>
+                      <option value="Eventos Gastronômicos">Eventos Gastronômicos</option>
+                      <option value="Exposição">Exposição</option>
+                      <option value="Feiras">Feiras</option>
+                      <option value="Festas">Festas</option>
+                      <option value="Festejo Religioso">Festejos Religioso</option>
+                      <option value="Integração com Comunidade">Integração com Comunidade</option>
+                      <option value="Peças de Teatro | Stand up Comedy">Peças de Teatro | Stand up Comedy</option>
+                      <option value="Shows">Shows</option>
+                    </select>
                   </div>
 
-                  <div class="col-sm-2 col-12 mb-3">
+                  <div class="col-sm-2 col-12 mb-3" *ngIf="!evento.is_frequency">
                     <label for="data_inicio_evento" class="form-label pergunta">Data do evento</label>
                     <input type="date" class="form-control" id="data_inicio_evento" name="data_inicio_evento"
                       aria-describedby="data_inicio_evento" placeholder="Data de Nascimento / Date of Birth" required
@@ -83,7 +143,7 @@
                       role="alert">Insira a data do evento</div>
                   </div>
 
-                  <div class="col-sm-2 col-12 mb-3">
+                  <div class="col-sm-2 col-12 mb-3" *ngIf="!evento.is_frequency">
                     <label for="data_final_evento" class="form-label pergunta">Data final</label>
                     <input type="date" class="form-control" id="data_final_evento" name="data_final_evento"
                       aria-describedby="data_final_evento" placeholder="Data de Nascimento / Date of Birth" required
