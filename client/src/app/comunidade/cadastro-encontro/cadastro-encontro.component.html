@@ -29,7 +29,7 @@
             </div>
 
             <!-- Formulário -->
-            <form class="cadastro_nomads" #formMetting="ngForm" (ngSubmit)="saveMeeting(formMetting)">
+            <form class="cadastro_nomads" #formMetting="ngForm">
               <fieldset>
                 <legend class="text-uppercase">Perfil Comunidade</legend>
 
@@ -42,15 +42,16 @@
                         ----------------------Selecione----------------------
                       </option> -->
                       <option selected disabled>Selecione a comunidade</option>
-                      <option value="1">Cumbuco</option>
-                      <option value="2">Jeri</option>
+                      <option *ngFor="let comunidade of lista_comunidades"
+                    value="{{ comunidade.id }}">{{ comunidade.name }}</option>
+                      <!-- <option value="2">Jeri</option>
                       <option value="3">Paracuru</option>
                       <option value="4">Flecheiras</option>
                       <option value="5">Icaraizinho de Amontada</option>
                       <option value="6">Ilha do Guajiru</option>
                       <option value="7">Preá</option>
                       <option value="8">Fortim</option>
-                      <option value="9">Canoa Quebrada</option>
+                      <option value="9">Canoa Quebrada</option> -->
                     </select>
                   </div>
 
@@ -150,7 +151,7 @@
 
               </fieldset>
 
-              <button type="submit" class="btn btn-success mb-3" [disabled]="!formMetting.valid">
+              <button type="submit" class="btn btn-success mb-3" [disabled]="!formMetting.valid" (click)="saveMeeting()">
                 Cadastrar Comunidade
               </button>
             </form>

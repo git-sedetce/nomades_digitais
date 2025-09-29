@@ -20,4 +20,8 @@ export class ComunidadeService {
   cadastrarEncontro(data: any): Observable<any> {
     return this.http.post(environment.url + 'meetcomunity', data);
   }
+
+  getCommunity(metodo: string): Observable<any> {
+    return this.http.get(environment.url + metodo);
+  }
 }

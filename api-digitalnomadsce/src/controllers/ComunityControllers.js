@@ -33,7 +33,7 @@ class ComunityController {
 
   static async cadastraEncontrosComunidade(req, res) {
     const meetComunidade = req.body;
-    console.log("meetComunidade", meetComunidade);
+    // console.log("meetComunidade", meetComunidade);
 
     try {
       const newMeetComunidade = await database.EncontrosComunidade.create(
@@ -49,6 +49,21 @@ class ComunityController {
   static async pegaComunidade(req, res) {
     try {
       const comunidades = await database.Comunidade.findAll();
+      return res.status(200).json(comunidades);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+
+  static async pegaOnlyComunidade(req, res) {
+    try {
+      const comunidades = await database.Comunidade.findAll({
+        attributtes: [
+          "id",
+          "name"
+        ],
+      });
       return res.status(200).json(comunidades);
     } catch (error) {
       return res.status(500).json(error.message);

@@ -1,17 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EncontrosComunidade } from 'src/app/models/comunidade/encontros-comunidade.model';
 import { ConsultaCepService } from 'src/app/service/consulta-cep.service';
+import { ComunidadeService } from 'src/app/services/comunidade.service';
 
 @Component({
   selector: 'app-cadastro-encontro',
   templateUrl: './cadastro-encontro.component.html',
-  styleUrls: ['./cadastro-encontro.component.css']
+  styleUrls: ['./cadastro-encontro.component.css'],
 })
 export class CadastroEncontroComponent implements OnInit {
-
-  @ViewChild("formMetting") formMetting!: NgForm
+  @ViewChild('formMetting') formMetting!: NgForm;
 
   meeting!: EncontrosComunidade;
   maxChars = 500;
@@ -19,16 +20,28 @@ export class CadastroEncontroComponent implements OnInit {
   maxChars_link = 150;
   cepError: string | null = null; // guarda a mensagem de erro
   loadingCep = false; // mostra spinner enquanto consulta
+  lista_comunidades!: any[];
 
   constructor(
     private toastr: ToastrService,
     private cepsService: ConsultaCepService,
-  ) { }
+    private community: ComunidadeService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.meeting = new EncontrosComunidade();
+    this.pegarComunidades();
   }
 
+  pegarComunidades() {
+    this.community.getCommunity('getonlycomunity').subscribe(
+      (comn: any[]) => {
+        this.lista_comunidades = comn;
+      },
+      (erro: any) => console.log(erro)
+    );
+  }
 
   //preencher o endereço usando o cep
 
@@ -37,7 +50,7 @@ export class CadastroEncontroComponent implements OnInit {
     this.loadingCep = true;
 
     this.cepsService.buscar(cep).subscribe({
-      next: dados => {
+      next: (dados) => {
         if (!dados.erro) {
           this.populaForm(dados);
         } else {
@@ -48,7 +61,7 @@ export class CadastroEncontroComponent implements OnInit {
       error: () => {
         this.cepError = 'Erro ao consultar o CEP. Tente novamente mais tarde.';
         this.loadingCep = false;
-      }
+      },
     });
   }
 
@@ -61,10 +74,19 @@ export class CadastroEncontroComponent implements OnInit {
 
   //fim do metodo cep
 
-  saveMeeting(form?: NgForm){
-    console.log(this.meeting)
-    this.toastr.success('Ponto de Encontro cadastrado com sucesso!')
-    this.formMetting.reset()
-  }
+  // saveMeeting(form?: NgForm) {
+  //   console.log(this.meeting);
+  //   this.toastr.success('Ponto de Encontro cadastrado com sucesso!');
+  //   this.formMetting.reset();
+  // }
 
+  saveMeeting() {
+      this.community.cadastrarEncontro(this.meeting).subscribe({
+        next: (res: any) => {
+          this.toastr.success('Ponto de encontro da comunidade cadastrado com sucesso!');
+          this.router.navigate(['comunidade/homecadastro']);
+        },
+        error: (e) => this.toastr.error('Erro ao cadastrar ponto de encontro: ' + e),
+      });
+    }
 }
