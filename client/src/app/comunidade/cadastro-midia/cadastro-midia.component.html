@@ -28,7 +28,7 @@
             <h3 class="text-uppercase text-white">Redes Sociais</h3>
           </div>
 
-          <form class="cadastro_nomads p-4" #formConect="ngForm" (ngSubmit)="saveConect(formConect)">
+          <form class="cadastro_nomads p-4" #formConect="ngForm">
             <fieldset>
               <legend class="text-uppercase">Social Midia</legend>
 
@@ -38,16 +38,9 @@
                   <div class="form-floating">
                     <select name="comunidade_id" id="comunidade_id" class="form-select" required ngModel
                       [(ngModel)]="conect.comunidade_id" aria-label="Selecione a comunidade">
-                      <option value="" disabled selected>Selecione...</option>
-                      <option value="1">Cumbuco</option>
-                      <option value="2">Jeri</option>
-                      <option value="3">Paracuru</option>
-                      <option value="4">Flecheiras</option>
-                      <option value="5">Icaraizinho de Amontada</option>
-                      <option value="6">Ilha do Guajiru</option>
-                      <option value="7">Preá</option>
-                      <option value="8">Fortim</option>
-                      <option value="9">Canoa Quebrada</option>
+                      <option selected disabled>Selecione a comunidade</option>
+                      <option *ngFor="let comunidade of lista_comunidades" value="{{ comunidade.id }}">{{
+                        comunidade.name }}</option>
                     </select>
                     <label for="comunidade_id">Comunidade</label>
                   </div>
@@ -63,6 +56,8 @@
                       <option value="whatsapp">📱 Whatsapp</option>
                       <option value="telegram">📢 Telegram</option>
                       <option value="slack">💼 Slack</option>
+                      <option value="instagram">📸 Instagram</option>
+                      <option value="facebook">📘 Facebook</option>
                     </select>
                     <label for="plataforma">Plataforma</label>
                   </div>
@@ -85,7 +80,7 @@
 
             <!-- Botão -->
             <div class="text-center mt-4">
-              <button type="submit" class="btn btn-success" [disabled]="!formConect.valid">
+              <button type="submit" class="btn btn-success" [disabled]="!formConect.valid" (click)="saveConect()">
                 <i class="bi bi-plus-circle me-2"></i>
                 Cadastrar Redes Sociais
               </button>

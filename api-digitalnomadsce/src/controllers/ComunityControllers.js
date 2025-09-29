@@ -18,7 +18,7 @@ class ComunityController {
 
   static async cadastraMidiaComunidade(req, res) {
     const midiaComunidade = req.body;
-    console.log("midiaComunidade", midiaComunidade);
+    // console.log("midiaComunidade", midiaComunidade);
 
     try {
       const novaMidiaComunidade = await database.ConectComunidade.create(
