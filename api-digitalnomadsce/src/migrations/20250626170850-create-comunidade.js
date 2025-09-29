@@ -12,16 +12,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       missao: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500)
       },
       proposito: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500)
       },
       historia: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500)
       },
       perfil: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500)
       },
       nivel_experiencia: {
         type: Sequelize.STRING
@@ -30,10 +30,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       regras_convivencia: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500)
       },
       nivel_participacao: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500)
       },
       createdAt: {
         allowNull: false,

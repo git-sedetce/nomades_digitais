@@ -5,7 +5,7 @@ const { Sequelize, QueryTypes, literal } = require("sequelize");
 class ComunityController {
   static async cadastraComunidade(req, res) {
     const novaComunidade = req.body;
-    console.log("novaComunidade", novaComunidade);
+    // console.log("novaComunidade", novaComunidade);
 
     try {
       const criarComunidade = await database.Comunidade.create(novaComunidade);
