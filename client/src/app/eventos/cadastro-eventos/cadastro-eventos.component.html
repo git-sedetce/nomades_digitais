@@ -70,31 +70,24 @@
 
                   <div class="col-sm-3 col-12 mb-3" *ngIf="evento.is_comunity">
                     <label for="comunidade_id" class="form-label pergunta">Comunidade</label>
-                    <select name="comunidade_id" id="comunidade_id" class="form-select" #comunidade_id>
-                      <option selected disabled>Selecione a Comunidade</option>
-                      <option value="1">Cumbuco</option>
-                      <option value="2">Jeri</option>
-                      <option value="3">Paracuru</option>
-                      <option value="4">Flecheiras</option>
-                      <option value="5">Icaraizinho de Amontada</option>
-                      <option value="6">Ilha do Guajiru</option>
-                      <option value="7">Preá</option>
-                      <option value="8">Fortim</option>
-                      <option value="9">Canoa Quebrada</option>
+                    <select name="comunidade_id" id="comunidade_id" class="form-select" #comunidade_id [(ngModel)]="evento.comunidade_id">
+                      <option selected disabled>Selecione a comunidade</option>
+                      <option *ngFor="let comunidade of lista_comunidades"
+                    value="{{ comunidade.id }}">{{ comunidade.name }}</option>
                     </select>
                   </div>
 
                   <div class="col-sm-2 col-12 mb-3" *ngIf="evento.is_frequency">
                     <label for="dia_frequente" class="form-label pergunta">Dia Fequente</label>
-                    <select name="dia_frequente" id="dia_frequente" class="form-select" #dia_frequente>
+                    <select name="dia_frequente" id="dia_frequente" class="form-select" #dia_frequente [(ngModel)]="evento.dia_frequente">
                       <option selected disabled>Selecione o Evento</option>
-                      <option value="1">Domingo</option>
-                      <option value="2">Segunda-Feira</option>
-                      <option value="3">Terça-Feira</option>
-                      <option value="4">Quarta-Feira</option>
-                      <option value="5">Quinta-Feira</option>
-                      <option value="6">Sexta-Feira</option>
-                      <option value="7">Sábado</option>
+                      <option value="domingo">Domingo</option>
+                      <option value="segunda-feira">Segunda-Feira</option>
+                      <option value="terça-feira">Terça-Feira</option>
+                      <option value="quarta-feira">Quarta-Feira</option>
+                      <option value="quinta-feira">Quinta-Feira</option>
+                      <option value="sexta-feira">Sexta-Feira</option>
+                      <option value="sábado">Sábado</option>
                     </select>
                   </div>
 
@@ -119,7 +112,7 @@
 
                   <div class="col-sm-4 col-12 mb-3">
                     <label for="tipo_evento" class="form-label pergunta">Tipo de Evento</label>
-                    <select name="tipo_evento" id="tipo_evento" class="form-select" #tipo_evento>
+                    <select name="tipo_evento" id="tipo_evento" class="form-select" #tipo_evento [(ngModel)]="evento.tipo_evento">
                       <option selected disabled>Selecione o Evento</option>
                       <option value="Ações Socioambiental">Ações Socioambiental</option>
                       <option value="Eventos Esportivos">Eventos Esportivos</option>

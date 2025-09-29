@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/models/evento.model';
 import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
 import { EventoServiceService } from 'src/app/services/evento-service.service';
+import { ComunidadeService } from 'src/app/services/comunidade.service';
 
 @Component({
   selector: 'app-cadastro-eventos',
@@ -23,11 +24,13 @@ export class CadastroEventosComponent {
   qtdeChars = 255;
   nome_regiao!: any;
   nome_cidade!: any;
+  lista_comunidades!: any[];
 
   constructor(
     public services: ListaMinucipioService,
     private http: HttpClient,
     public eventoService: EventoServiceService,
+    private community: ComunidadeService,
     private toastr: ToastrService
   ) {}
 
@@ -39,6 +42,17 @@ export class CadastroEventosComponent {
         this.lista_municipio = m;
       },
       (erro: any) => console.error(erro)
+    );
+
+    this.pegarComunidades();
+  }
+
+  pegarComunidades() {
+    this.community.getCommunity('getonlycomunity').subscribe(
+      (comn: any[]) => {
+        this.lista_comunidades = comn;
+      },
+      (erro: any) => console.log(erro)
     );
   }
 
@@ -67,7 +81,7 @@ export class CadastroEventosComponent {
   }
 
   salvarEvento(): void {
-    // console.log('evento', this.evento);
+    console.log('evento', this.evento);
     this.eventoService.cadastrarEvento(this.evento).subscribe({
       next: (res: any) => {
         const evento_id = res.id;
