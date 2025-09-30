@@ -59,7 +59,7 @@ class ComunityController {
   static async pegaOnlyComunidade(req, res) {
     try {
       const comunidades = await database.Comunidade.findAll({
-        attributtes: [
+        attributes: [
           "id",
           "name"
         ],
@@ -93,7 +93,7 @@ class ComunityController {
     try {
       const mostraComunidade = await database.Comunidade.findOne({
         where: { id: Number(id) },
-        attributtes: [
+        attributes: [
           "id",
           "name",
           "missao",

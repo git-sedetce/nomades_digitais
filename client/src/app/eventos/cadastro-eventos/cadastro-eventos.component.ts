@@ -81,7 +81,7 @@ export class CadastroEventosComponent {
   }
 
   salvarEvento(): void {
-    console.log('evento', this.evento);
+    // console.log('evento', this.evento);
     this.eventoService.cadastrarEvento(this.evento).subscribe({
       next: (res: any) => {
         const evento_id = res.id;

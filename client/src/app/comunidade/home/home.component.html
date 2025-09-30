@@ -1,1 +1,35 @@
-<p>home works!</p>
+<section class="home-community" *ngIf="!show_info">
+  <div class="container-fluid py-5">
+    <div class="row align-items-center">
+      <!-- Coluna da esquerda -->
+      <div class="col-md-4 text-center mb-4">
+        <h2 class="title">COMUNIDADES</h2>
+        <img src="../../../assets/midia/imgs/comunidade_praia.png" alt="Celular"
+          class="phone-img img-fluid animate-float">
+      </div>
+
+      <!-- Coluna da direita -->
+      <div class="col-md-8">
+        <div class="row text-center">
+          <div class="col-2" *ngFor="let comunidade of lista_comunidades">
+            <div class="circle" [ngStyle]="{'background-color': comunidade.color}" (click)="verComunidade(comunidade.id, comunidade.name)">
+              {{ comunidade.name | uppercase }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero-section" *ngIf="show_info">
+  <h1 class="hero-title">COMUNIDADE</h1>
+  <div class="circle_02">{{ comunidade_name }}</div>
+  <div class="buttons-container">
+    <button class="btn btn-custom">Perfil da Comunidade</button>
+    <button class="btn btn-custom">Eventos</button>
+    <button class="btn btn-custom">Ponto de Encontro</button>
+    <button class="btn btn-custom">Conecte-se</button>
+    <button class="btn btn-custom" (click)="return()">Ver Comunidades</button>
+  </div>
+</section>
