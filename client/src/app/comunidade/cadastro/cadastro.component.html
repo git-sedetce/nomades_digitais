@@ -45,30 +45,19 @@
 
                 <!-- Missão e Propósito -->
                 <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
-                    <label class="pergunta" for="missao">Missão</label>
-                    <textarea id="missao" class="form-control" name="missao" rows="5" maxlength="{{ maxChars }}"
-                      required [(ngModel)]="comunity.missao" #missao="ngModel"></textarea>
+                  <div class="col-sm-12 col-12 mb-3">
+                    <label class="pergunta" for="descricao">Missão</label>
+                    <textarea id="descricao" class="form-control" name="descricao" rows="5" maxlength="{{ maxChars }}"
+                      required [(ngModel)]="comunity.descricao" #descricao="ngModel"></textarea>
                     <div class="limite_caractere alert alert-warning mt-1">
                       Caracteres digitados:
-                      <strong>{{ comunity.missao?.length || 0 }} / {{ maxChars }}</strong>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6 col-12 mb-3">
-                    <label class="pergunta" for="proposito">Propósito</label>
-                    <textarea id="proposito" class="form-control" name="proposito" rows="5" maxlength="{{ maxChars }}"
-                      required [(ngModel)]="comunity.proposito" #proposito="ngModel"></textarea>
-                    <div class="limite_caractere alert alert-warning mt-1">
-                      Caracteres digitados:
-                      <strong>{{ comunity.proposito?.length || 0 }} / {{ maxChars }}</strong>
+                      <strong>{{ comunity.descricao?.length || 0 }} / {{ maxChars }}</strong>
                     </div>
                   </div>
                 </div>
 
-                <!-- História e Perfil -->
                 <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-12 col-12 mb-3">
                     <label class="pergunta" for="historia">História da Comunidade</label>
                     <textarea id="historia" class="form-control" name="historia" rows="5" maxlength="{{ maxChars }}"
                       required [(ngModel)]="comunity.historia" #historia="ngModel"></textarea>
@@ -77,43 +66,28 @@
                       <strong>{{ comunity.historia?.length || 0 }} / {{ maxChars }}</strong>
                     </div>
                   </div>
-
-                  <div class="col-sm-6 col-12 mb-3">
-                    <label class="pergunta" for="perfil">Perfil da Comunidade</label>
-                    <textarea id="perfil" class="form-control" name="perfil" rows="5" maxlength="{{ maxChars }}"
-                      required [(ngModel)]="comunity.perfil" #perfil="ngModel"></textarea>
-                    <div class="limite_caractere alert alert-warning mt-1">
-                      Caracteres digitados:
-                      <strong>{{ comunity.perfil?.length || 0 }} / {{ maxChars }}</strong>
-                    </div>
-                  </div>
                 </div>
+
 
                 <!-- Nível + Idioma -->
                 <div class="row">
                   <div class="form-group col-sm-6 col-12 mb-3">
-                    <label for="nivel_experiencia" class="form-label pergunta">Nível de Experiência</label>
-                    <input type="text" class="form-control" id="nivel_experiencia" name="nivel_experiencia"
-                      placeholder="Informe o nível de experiência" required [(ngModel)]="comunity.nivel_experiencia"
-                      #nivel_experiencia="ngModel" />
-                    <div *ngIf="nivel_experiencia.invalid && nivel_experiencia.touched" class="alert alert-danger mt-1">
+                    <label for="data_criacao" class="form-label pergunta">Data da Criação da Comunidade</label>
+                    <input type="date" class="form-control" id="data_criacao" name="data_criacao" required
+                      [(ngModel)]="comunity.data_criacao" #data_criacao="ngModel" />
+                    <div *ngIf="data_criacao.invalid && data_criacao.touched" class="alert alert-danger mt-1">
                       Informe o Nível da Experiência
                     </div>
                   </div>
 
                   <div class="form-group col-sm-6 col-12 mb-3">
-                    <label for="idioma" class="pergunta">Idioma</label>
-                    <select id="idioma" name="idioma" class="form-select" required [(ngModel)]="comunity.idioma"
-                      #idioma="ngModel">
-                      <option value="">Selecione um idioma</option>
-                      <option value="alemao">Alemão</option>
-                      <option value="chines">Chinês</option>
-                      <option value="espanhol">Espanhol</option>
-                      <option value="frances">Francês</option>
-                      <option value="ingles">Inglês</option>
-                      <option value="italiano">Italiano</option>
-                      <option value="japones">Japonês</option>
-                    </select>
+                    <label for="gestor_comunidade" class="form-label pergunta">Gestor da Comunidade</label>
+                    <input type="date" class="form-control" id="gestor_comunidade" name="gestor_comunidade"
+                      placeholder="Informe o nível de experiência" required [(ngModel)]="comunity.gestor_comunidade"
+                      #gestor_comunidade="ngModel" />
+                    <div *ngIf="gestor_comunidade.invalid && gestor_comunidade.touched" class="alert alert-danger mt-1">
+                      Informe o Nível da Experiência
+                    </div>
                   </div>
                 </div>
 
@@ -130,20 +104,23 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-6 col-12 mb-3">
-                    <label class="pergunta" for="nivel_participacao">Nível de Participação</label>
-                    <textarea id="nivel_participacao" class="form-control" name="nivel_participacao" rows="5"
-                      maxlength="{{ maxChars }}" required [(ngModel)]="comunity.nivel_participacao"
-                      #nivel_participacao="ngModel"></textarea>
-                    <div class="limite_caractere alert alert-warning mt-1">
-                      Caracteres digitados:
-                      <strong>{{ comunity.nivel_participacao?.length || 0 }} / {{ maxChars }}</strong>
+                  <div class="form-group col-sm-4 col-12 ms-2 ps-2 mb-3">
+                    <label for="idioma" class="form-label pergunta">Informe o idioma.</label>
+                    <div class="form-check">
+                      <div *ngFor="let idiomas of _languageList">
+                        <input type="checkbox" class="form-check-input" value="{{ idiomas.nome }}"
+                          id="{{ idiomas.nome }}" name="{{ idiomas.nome }}" [(ngModel)]="idiomas.isselected">
+                        <label class="form-check-label" for="{{ idiomas.nome }}">{{ idiomas.nome }}</label>
+                      </div>
                     </div>
                   </div>
+
+
                 </div>
               </fieldset>
 
-              <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="formNomad.invalid" (click)="saveComunity()">
+              <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="formNomad.invalid"
+                (click)="saveComunity()">
                 Cadastrar Comunidade
               </button>
             </form>

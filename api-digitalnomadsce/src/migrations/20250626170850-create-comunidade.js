@@ -11,20 +11,14 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      missao: {
-        type: Sequelize.STRING.STRING(500)
-      },
-      proposito: {
+      descricao: {
         type: Sequelize.STRING.STRING(500)
       },
       historia: {
         type: Sequelize.STRING.STRING(500)
       },
-      perfil: {
-        type: Sequelize.STRING.STRING(500)
-      },
-      nivel_experiencia: {
-        type: Sequelize.STRING
+      data_criacao: {
+        type: Sequelize.DATE
       },
       idioma: {
         type: Sequelize.STRING
@@ -32,8 +26,8 @@ module.exports = {
       regras_convivencia: {
         type: Sequelize.STRING.STRING(500)
       },
-      nivel_participacao: {
-        type: Sequelize.STRING.STRING(500)
+      gestor_comunidade: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

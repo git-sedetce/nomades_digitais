@@ -17,14 +17,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Comunidade.init({
     name: DataTypes.STRING,
-    missao: DataTypes.STRING,
-    proposito: DataTypes.STRING,
+    descricao: DataTypes.STRING,
     historia: DataTypes.STRING,
-    perfil: DataTypes.STRING,
-    nivel_experiencia: DataTypes.STRING,
+    data_criacao: DataTypes.DATE,
     idioma: DataTypes.STRING,
     regras_convivencia: DataTypes.STRING,
-    nivel_participacao: DataTypes.STRING
+    gestor_comunidade: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Comunidade',

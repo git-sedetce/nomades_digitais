@@ -18,6 +18,8 @@ export class CadastroComponent implements OnInit {
   qtdeChars = 255;
   maxChars_link = 150;
 
+  _languageList!: typeLanguage[];
+
   constructor(
     private toastr: ToastrService,
     private community: ComunidadeService,
@@ -26,9 +28,27 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit(): void {
     this.comunity = new Comunidade();
+    this.getLanguage();
+  }
+
+  getLanguage() {
+    this._languageList = [
+      { nome: 'Alemão', isselected: false },
+      { nome: 'Chinês', isselected: false },
+      { nome: 'Espanhol', isselected: false },
+      { nome: 'Francês', isselected: false },
+      { nome: 'Inglês', isselected: false },
+      { nome: 'Italiano', isselected: false },
+      { nome: 'Japonês', isselected: false },
+    ];
   }
 
   saveComunity() {
+    this.comunity.idioma = this._languageList
+      .filter((x) => x.isselected == true)
+      .map((x) => x.nome)
+      .join(',')
+      .toString();
 
     this.community.cadastrarComunidade(this.comunity).subscribe({
       next: (res: Comunidade) => {
@@ -38,4 +58,9 @@ export class CadastroComponent implements OnInit {
       error: (e) => this.toastr.error('Erro ao cadastrar comunidade: ' + e),
     });
   }
+}
+
+class typeLanguage {
+  nome: string | undefined;
+  isselected: boolean | undefined;
 }
