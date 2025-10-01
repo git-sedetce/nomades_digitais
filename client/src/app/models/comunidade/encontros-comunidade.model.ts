@@ -12,7 +12,9 @@ export class EncontrosComunidade {
     public complemento?: string,
     public bairro?: string,
     public cidade?: string,
-    public estado?: string
+    public estado?: string,
+    public plataforma?: string,
+    public link?: string
   ){
   }
 }

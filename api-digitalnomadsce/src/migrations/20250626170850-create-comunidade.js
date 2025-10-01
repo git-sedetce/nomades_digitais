@@ -12,10 +12,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       descricao: {
-        type: Sequelize.STRING.STRING(500)
+        type: Sequelize.STRING(500)
       },
       historia: {
-        type: Sequelize.STRING.STRING(500)
+        type: Sequelize.STRING(500)
       },
       data_criacao: {
         type: Sequelize.DATE
@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       regras_convivencia: {
-        type: Sequelize.STRING.STRING(500)
+        type: Sequelize.STRING(500)
       },
       gestor_comunidade: {
         type: Sequelize.STRING

@@ -45,6 +45,12 @@ module.exports = {
       },
       estado: {
         type: Sequelize.STRING
+      },      
+      plataforma: {
+        type: Sequelize.STRING
+      },
+      link: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

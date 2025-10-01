@@ -24,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
     complemento: DataTypes.STRING,
     bairro: DataTypes.STRING,
     cidade: DataTypes.STRING,
-    estado: DataTypes.STRING
+    estado: DataTypes.STRING,
+    plataforma: DataTypes.STRING,
+    link: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'EncontrosComunidade',
