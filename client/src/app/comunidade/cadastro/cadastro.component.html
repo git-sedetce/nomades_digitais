@@ -82,7 +82,7 @@
 
                   <div class="form-group col-sm-6 col-12 mb-3">
                     <label for="gestor_comunidade" class="form-label pergunta">Gestor da Comunidade</label>
-                    <input type="date" class="form-control" id="gestor_comunidade" name="gestor_comunidade"
+                    <input type="text" class="form-control" id="gestor_comunidade" name="gestor_comunidade"
                       placeholder="Informe o nível de experiência" required [(ngModel)]="comunity.gestor_comunidade"
                       #gestor_comunidade="ngModel" />
                     <div *ngIf="gestor_comunidade.invalid && gestor_comunidade.touched" class="alert alert-danger mt-1">

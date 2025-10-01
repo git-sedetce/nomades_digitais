@@ -14,7 +14,7 @@ export class CadastroComponent implements OnInit {
   @ViewChild('formComunity') formNomad!: NgForm;
 
   comunity!: Comunidade;
-  maxChars = 255;
+  maxChars = 500;
   qtdeChars = 255;
   maxChars_link = 150;
 
@@ -40,6 +40,7 @@ export class CadastroComponent implements OnInit {
       { nome: 'Inglês', isselected: false },
       { nome: 'Italiano', isselected: false },
       { nome: 'Japonês', isselected: false },
+      { nome: 'Português', isselected: false },
     ];
   }
 
