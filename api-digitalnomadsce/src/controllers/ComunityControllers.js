@@ -96,14 +96,12 @@ class ComunityController {
         attributes: [
           "id",
           "name",
-          "missao",
-          "proposito",
+          "descricao",
           "historia",
-          "perfil",
-          "nivel_experiencia",
+          "data_criacao",
           "idioma",
           "regras_convivencia",
-          "nivel_participacao",
+          "gestor_comunidade",
         ],
       });
       return res.status(200).json(mostraComunidade);

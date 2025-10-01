@@ -24,4 +24,16 @@ export class ComunidadeService {
   getCommunity(metodo: string): Observable<any> {
     return this.http.get(environment.url + metodo);
   }
+
+  getCommunityById(id: any): Observable<any> {
+    return this.http.get(environment.url + 'comunity/' +id);
+  }
+
+  getConectCommunityById(id: any): Observable<any> {
+    return this.http.get(environment.url + 'midiacomunity/' +id);
+  }
+
+  getMeetCommunityById(id: any): Observable<any> {
+    return this.http.get(environment.url + 'meetcomunidade/' +id);
+  }
 }

@@ -1,4 +1,15 @@
 <section class="home-community" *ngIf="!show_info">
+
+  <div class="container empty-state text-center" *ngIf="lista_comunidades.length === 0">
+    <div class="empty-card">
+      <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
+      <h3>Nenhuma Comunidade encontrado</h3>
+      <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
+      <button class="btn btn-primary mt-3" (click)="retorno()">
+        Voltar
+      </button>
+    </div>
+  </div>
   <div class="container-fluid py-5">
     <div class="row align-items-center">
       <!-- Coluna da esquerda -->
@@ -12,7 +23,8 @@
       <div class="col-md-8">
         <div class="row text-center">
           <div class="col-2" *ngFor="let comunidade of lista_comunidades">
-            <div class="circle" [ngStyle]="{'background-color': comunidade.color}" (click)="verComunidade(comunidade.id, comunidade.name)">
+            <div class="circle" [ngStyle]="{'background-color': comunidade.color}"
+              (click)="verComunidade(comunidade.id, comunidade.name)">
               {{ comunidade.name | uppercase }}
             </div>
           </div>
@@ -26,10 +38,60 @@
   <h1 class="hero-title">COMUNIDADE</h1>
   <div class="circle_02">{{ comunidade_name }}</div>
   <div class="buttons-container">
-    <button class="btn btn-custom">Perfil da Comunidade</button>
-    <button class="btn btn-custom">Eventos</button>
-    <button class="btn btn-custom">Ponto de Encontro</button>
-    <button class="btn btn-custom">Conecte-se</button>
-    <button class="btn btn-custom" (click)="return()">Ver Comunidades</button>
+
+    <!-- Item 1 -->
+    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse1" role="button"
+      aria-expanded="false" aria-controls="collapse1">
+      Perfil da Comunidade <i class="bi"></i>
+    </div>
+    <div class="collapse" id="collapse1">
+      <div class="collapse-content">
+        <p>Comunidade criada  em {{ comunidade.data_criacao }}. </p>
+        <p>{{ comunidade.descricao }}</p>
+        <p>{{ comunidade.historia }}</p>
+        <p>Consiguimos nos comunicar com os seguintes idiomas: {{ comunidade.idioma }}</p>
+        <p>Regras de convivência: {{ comunidade.regras_convivencia }}</p>
+        <p>Gestor da comunidade: {{ comunidade.gestor_comunidade }}</p>
+
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse2" role="button"
+      aria-expanded="false" aria-controls="collapse2">
+      Eventos <i class="bi"></i>
+    </div>
+    <div class="collapse" id="collapse2">
+      <div class="collapse-content">
+        <p>Confira a agenda de eventos, festivais e atividades programadas na região.</p>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse3" role="button"
+      aria-expanded="false" aria-controls="collapse3">
+      Points de Encontro <i class="bi"></i>
+    </div>
+    <div class="collapse" id="collapse3">
+      <div class="collapse-content">
+        <p>Locais populares para encontros, lazer e prática de esportes.</p>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse4" role="button"
+      aria-expanded="false" aria-controls="collapse4">
+      Conecte-se <i class="bi"></i>
+    </div>
+    <div class="collapse" id="collapse4">
+      <div class="collapse-content">
+        <p>Faça parte da comunidade, troque contatos e participe dos grupos de interesse.</p>
+      </div>
+    </div>
+
+    <div class="collapse-item collapse-toggle" (click)="return()" role="button" aria-expanded="false">
+      Ver Comunidades <i class="fa-solid fa-rotate-left"></i>
+    </div>
+
   </div>
 </section>

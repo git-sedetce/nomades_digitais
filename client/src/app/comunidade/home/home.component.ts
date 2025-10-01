@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ComunidadeService } from 'src/app/services/comunidade.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ComunidadeService } from 'src/app/services/comunidade.service';
 export class HomeComponent implements OnInit {
   show_info: boolean = false;
   comunidade_name: string = '';
+  comunidade!: any;
   lista_comunidades: any[] = [];
   private coresBase: string[] = [
     '#f70d54', // rosa
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
     '#935a2c', // marrom claro
   ];
 
-  constructor(private community: ComunidadeService) {}
+  constructor(private community: ComunidadeService, private router: Router) {}
 
   ngOnInit(): void {
     this.pegarComunidades();
@@ -77,9 +79,20 @@ export class HomeComponent implements OnInit {
     console.log('ver comunidade', id);
     this.show_info = true;
     this.comunidade_name = comunidade;
+    this.community.getCommunityById(id).subscribe(
+      (resp: any) => {
+        this.comunidade = resp;
+        console.log("resp", this.comunidade);
+      },
+      (erro: any) => console.log(erro)
+    );
   }
 
-  return(){
+  return() {
     this.show_info = false;
+  }
+
+  retorno() {
+    this.router.navigate(['home']);
   }
 }
