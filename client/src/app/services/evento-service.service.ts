@@ -28,4 +28,12 @@ export class EventoServiceService {
   imagem_eventoById(id: number): Observable<any> {
     return this.http.get(environment.url + 'imagevento/' + id)
   }
+
+  pegar_evento_community(metodo: string, id: any): Observable<any> {
+    return this.http.get(environment.url + metodo + id);
+  }
+
+  pegar_evento_community_frequency(metodo: string, id: any): Observable<any> {
+    return this.http.get(environment.url + metodo + id);
+  }
 }

@@ -35,63 +35,116 @@
 </section>
 
 <section class="hero-section" *ngIf="show_info">
-  <h1 class="hero-title">COMUNIDADE</h1>
-  <div class="circle_02">{{ comunidade_name }}</div>
-  <div class="buttons-container">
+  <div class="overlay">
+    <div class="container-fluid">
+      <div class="row align-items-center flex-column flex-md-row">
 
-    <!-- Item 1 -->
-    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse1" role="button"
-      aria-expanded="false" aria-controls="collapse1">
-      Perfil da Comunidade <i class="bi"></i>
-    </div>
-    <div class="collapse" id="collapse1">
-      <div class="collapse-content">
-        <p>Comunidade criada  em {{ comunidade.data_criacao }}. </p>
-        <p>{{ comunidade.descricao }}</p>
-        <p>{{ comunidade.historia }}</p>
-        <p>Consiguimos nos comunicar com os seguintes idiomas: {{ comunidade.idioma }}</p>
-        <p>Regras de convivência: {{ comunidade.regras_convivencia }}</p>
-        <p>Gestor da comunidade: {{ comunidade.gestor_comunidade }}</p>
+        <!-- Coluna esquerda -->
+        <div class="col-12 col-md-6 text-center left-section">
+          <h1 class="hero-title">COMUNIDADE</h1>
+          <div class="circle_02">{{ comunidade_name }}</div>
+        </div>
+
+        <!-- Coluna direita (accordion) -->
+        <div class="col-12 col-md-6 right-section mt-4 mt-md-0">
+          <div class="accordion" id="accordionComunidade">
+
+            <!-- Item 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                  Perfil da Comunidade
+                </button>
+              </h2>
+              <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1"
+                data-bs-parent="#accordionComunidade">
+                <div class="accordion-body">
+                  <p>Comunidade criada em <b>{{ comunidade.data_criacao | date :'dd/MM/yyyy'}}</b>.</p>
+                  <p>{{ comunidade.descricao }}</p>
+                  <p>{{ comunidade.historia }}</p>
+                  <p><b>Idiomas:</b> {{ comunidade.idioma }}</p>
+                  <p><b>Regras de convivência:</b> {{ comunidade.regras_convivencia }}</p>
+                  <p><b>Gestor:</b> {{ comunidade.gestor_comunidade }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                  Evento
+                </button>
+              </h2>
+              <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+                data-bs-parent="#accordionComunidade">
+                <div class="accordion-body">
+                  <div class="evento" *ngFor="let evento of lista_eventos_community; let i = index">
+                    <p><b>Nome do evento: </b>{{ evento.evento_name }}.</p>
+                    <p><b>Descrição:</b> {{ evento.descricao }}</p>
+                    <p><b>Tipo de Evento:</b> {{ evento.tipo_evento }}</p>
+                    <p><b>Data de Início:</b> {{ evento.data_inicio_evento | date :'dd/MM/yyyy' }}</p>
+                    <p><b>Data final do Evento:</b> {{ evento.data_final_evento | date :'dd/MM/yyyy' }}</p>
+                    <p><b>Cidade:</b> {{ evento.ass_evento_municipio.nome_municipio }}</p>
+                  </div>
+                  <div class="evento_freq" *ngFor="let event of lista_eventos_community_freq; let i = index">
+                    <p><b>Nome do evento: </b>{{ event.evento_name }}.</p>
+                    <p><b>Descrição:</b> {{ event.descricao }}</p>
+                    <p><b>Horario:</b> {{ event.horario }}</p>
+                    <p><b>Dia do evento: </b> <span class="text-capitalize">{{ event.dia_frequente }}</span></p>
+                    <p><b>Cidade:</b> {{ event.ass_evento_municipio.nome_municipio }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                  Points de Encontro
+                </button>
+              </h2>
+              <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+                data-bs-parent="#accordionComunidade">
+                <div class="accordion-body">
+                  <p>Locais populares para encontros, lazer e prática de esportes.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                  Conecte-se
+                </button>
+              </h2>
+              <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+                data-bs-parent="#accordionComunidade">
+                <div class="accordion-body">
+                  <p>Faça parte da comunidade, troque contatos e participe dos grupos de interesse.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Voltar -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button text-danger" type="button" (click)="return()">
+                  <i class="fa-solid fa-rotate-left me-2"></i> Ver Comunidades
+                </button>
+              </h2>
+            </div>
+
+          </div>
+        </div>
 
       </div>
     </div>
-
-    <!-- Item 2 -->
-    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse2" role="button"
-      aria-expanded="false" aria-controls="collapse2">
-      Eventos <i class="bi"></i>
-    </div>
-    <div class="collapse" id="collapse2">
-      <div class="collapse-content">
-        <p>Confira a agenda de eventos, festivais e atividades programadas na região.</p>
-      </div>
-    </div>
-
-    <!-- Item 3 -->
-    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse3" role="button"
-      aria-expanded="false" aria-controls="collapse3">
-      Points de Encontro <i class="bi"></i>
-    </div>
-    <div class="collapse" id="collapse3">
-      <div class="collapse-content">
-        <p>Locais populares para encontros, lazer e prática de esportes.</p>
-      </div>
-    </div>
-
-    <!-- Item 4 -->
-    <div class="collapse-item collapse-toggle" data-bs-toggle="collapse" href="#collapse4" role="button"
-      aria-expanded="false" aria-controls="collapse4">
-      Conecte-se <i class="bi"></i>
-    </div>
-    <div class="collapse" id="collapse4">
-      <div class="collapse-content">
-        <p>Faça parte da comunidade, troque contatos e participe dos grupos de interesse.</p>
-      </div>
-    </div>
-
-    <div class="collapse-item collapse-toggle" (click)="return()" role="button" aria-expanded="false">
-      Ver Comunidades <i class="fa-solid fa-rotate-left"></i>
-    </div>
-
   </div>
 </section>

@@ -39,6 +39,9 @@ router.get('/eventoregiao/:id', EventoController.pegaEventosByRegion)
 router.post('/cadastraevento', EventoController.cadastraEvento)
 router.post('/anexoevento/:id', upload.single('file'), EventoController.anexoEvento)
 
+router.get('/eventocommunity/:id', EventoController.pegaEventosByCommunity)
+router.get('/eventcommunity/:id', EventoController.pegaEventosByCommunityWithFreq)
+
 
 
 module.exports = router

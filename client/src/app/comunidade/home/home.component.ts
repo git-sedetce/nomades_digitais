@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ComunidadeService } from 'src/app/services/comunidade.service';
+import { EventoServiceService } from 'src/app/services/evento-service.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,8 @@ export class HomeComponent implements OnInit {
   comunidade_name: string = '';
   comunidade!: any;
   lista_comunidades: any[] = [];
+  lista_eventos_community: any[] = [];
+  lista_eventos_community_freq: any[] = [];
   private coresBase: string[] = [
     '#f70d54', // rosa
     '#009bb7', // azul
@@ -24,7 +27,10 @@ export class HomeComponent implements OnInit {
     '#935a2c', // marrom claro
   ];
 
-  constructor(private community: ComunidadeService, private router: Router) {}
+  constructor(
+    private community: ComunidadeService,
+    private eventoService: EventoServiceService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.pegarComunidades();
@@ -82,7 +88,27 @@ export class HomeComponent implements OnInit {
     this.community.getCommunityById(id).subscribe(
       (resp: any) => {
         this.comunidade = resp;
+        this.pegarEventosComunity(id);
         console.log("resp", this.comunidade);
+      },
+      (erro: any) => console.log(erro)
+    );
+  }
+
+  pegarEventosComunity(id: any) {
+    //id = this.id_regiao
+    this.eventoService.pegar_evento_community('eventocommunity/', id).subscribe(
+      (evento: any) => {
+          this.lista_eventos_community = evento;
+          console.log('Eventos por cidade:', this.lista_eventos_community);
+      },
+      (erro: any) => console.log(erro)
+    );
+
+    this.eventoService.pegar_evento_community_frequency('eventcommunity/', id).subscribe(
+      (evento: any) => {
+          this.lista_eventos_community_freq = evento;
+          console.log('Eventos por cidade com frequência:', this.lista_eventos_community_freq);
       },
       (erro: any) => console.log(erro)
     );
