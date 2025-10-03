@@ -89,6 +89,7 @@
   padding: 2rem;
 }
 
+/* lado direito */
 .hero-title {
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -115,20 +116,104 @@
   color: #000;
   max-height: 80vh;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #009cb7 #f0f0f0;
+}
+
+.right-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.right-section::-webkit-scrollbar-thumb {
+  background: #009cb7;
+  border-radius: 10px;
+}
+
+.right-section::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.accordion-button {
+  background: #f8f9fa;
+  color: #333;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.accordion-button:not(.collapsed) {
+  background: #009cb7;
+  color: #fff;
+}
+
+.accordion-body {
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  padding: 1.2rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.evento, .evento_freq, .point, .midia {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .evento {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
-  background-color: #009cb748;
+  background: rgba(0,156,183,0.15);
 }
 
 .evento_freq {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
-  background-color: #04887648;
+  background: rgba(4,136,118,0.15);
+}
+
+.point {
+  background: rgba(233,30,99,0.1);
+}
+
+.midia {
+  background: rgba(233, 203, 30, 0.1);
+}
+
+.midia p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.midia i {
+  font-size: 1.3rem;
+  color: #009cb7;
+}
+
+.accordion-button:hover {
+  background: #009cb720;
+}
+
+.evento:hover, .evento_freq:hover, .point:hover, .midia:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.no-data {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #777;
+  font-style: italic;
+}
+
+.no-data i {
+  font-size: 3rem;
+  color: #009cb7;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.no-data p {
+  font-size: 1rem;
 }
 
 /* Quando não tem Comunidade CAdastrada */

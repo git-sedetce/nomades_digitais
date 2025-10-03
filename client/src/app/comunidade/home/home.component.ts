@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   comunidade_name: string = '';
   comunidade!: any;
   lista_comunidades: any[] = [];
+  lista_pontosEncontros: any[] = [];
+  lista_midia: any[] = [];
   lista_eventos_community: any[] = [];
   lista_eventos_community_freq: any[] = [];
   private coresBase: string[] = [
@@ -89,6 +91,8 @@ export class HomeComponent implements OnInit {
       (resp: any) => {
         this.comunidade = resp;
         this.pegarEventosComunity(id);
+        this.pontosEncontrosComunity(id);
+        this.midiaComunity(id);
         console.log("resp", this.comunidade);
       },
       (erro: any) => console.log(erro)
@@ -109,6 +113,28 @@ export class HomeComponent implements OnInit {
       (evento: any) => {
           this.lista_eventos_community_freq = evento;
           console.log('Eventos por cidade com frequência:', this.lista_eventos_community_freq);
+      },
+      (erro: any) => console.log(erro)
+    );
+  }
+
+  pontosEncontrosComunity(id: any) {
+    //id = this.id_regiao
+    this.community.getMeetCommunityById(id).subscribe(
+      (point: any) => {
+          this.lista_pontosEncontros = point;
+          console.log('Pontos de encontro:', this.lista_eventos_community);
+      },
+      (erro: any) => console.log(erro)
+    );
+  }
+
+  midiaComunity(id: any) {
+    //id = this.id_regiao
+    this.community.getConectCommunityById(id).subscribe(
+      (midia: any) => {
+          this.lista_midia = midia;
+          console.log('Midia:', this.lista_eventos_community);
       },
       (erro: any) => console.log(erro)
     );

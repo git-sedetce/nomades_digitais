@@ -113,14 +113,14 @@ class ComunityController {
   static async pegaMidiaById(req, res) {
     const { id } = req.params;
     try {
-      const mostraMidia = await database.ConectComunidade.findOne({
-        where: { id: Number(id) },
-        attributtes: ["id", "plataforma", "acesso_midia"],
+      const mostraMidia = await database.ConectComunidade.findAll({
+        where: { comunidade_id: Number(id) },
+        attributes: ["id", "plataforma", "acesso_midia"],
         include: [
           {
             model: database.Comunidade,
             as: "ass_conect_comunity",
-            attribute: ["name"],
+            attributes: ["name"],
           },
         ],
       });
@@ -133,9 +133,9 @@ class ComunityController {
   static async pegaEncontrosByCity(req, res) {
     const { id } = req.params;
     try {
-      const mostraEncontros = await database.EncontrosComunidade.findOne({
-        where: { id: Number(id) },
-        attributtes: [
+      const mostraEncontros = await database.EncontrosComunidade.findAll({
+        where: { comunidade_id: Number(id) },
+        attributes: [
           "id",
           "lugar",
           "formato",
@@ -147,13 +147,15 @@ class ComunityController {
           "complemento",
           "bairro",
           "cidade",
-          "estado"
+          "estado",
+          "plataforma",
+          "link"
         ],
         include: [
           {
             model: database.Comunidade,
             as: "ass_meet_comunity",
-            attribute: ["name"],
+            attributes: ["name"],
           },
         ],
       });
