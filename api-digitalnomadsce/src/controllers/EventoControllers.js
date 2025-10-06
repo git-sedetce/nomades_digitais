@@ -25,15 +25,17 @@ class EventoController {
       const dataAtual = new Date(); // Obtém a data e hora atuais
       const mostraEventos = await database.Evento.findAll({
         where: {
+          is_comunity: false,
           data_inicio_evento: {
             [database.Sequelize.Op.gte]: dataAtual, // Filtra eventos com data_inicio_evento maior ou igual à dataAtual
           },
         },
         order: [["data_inicio_evento", "ASC"]],
         attributes: [
+          "id",
           "evento_name",
           "descricao",
-          "tipo_evento",
+          "tipo_evento",          
           "data_inicio_evento",
           "data_final_evento",
         ],

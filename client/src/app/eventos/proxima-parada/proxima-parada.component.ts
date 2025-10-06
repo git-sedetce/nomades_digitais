@@ -47,7 +47,7 @@ export class ProximaParadaComponent implements OnInit {
     this.estadoService.listar_regiao('regiao').subscribe(
       (data: any) => {
         this.lista_regiao = data;
-        console.log('Regiões:', this.lista_regiao);
+        // console.log('Regiões:', this.lista_regiao);
       },
       (erro: any) => console.error(erro)
     );
@@ -57,7 +57,7 @@ export class ProximaParadaComponent implements OnInit {
     this.estadoService.listar_municipio('todos_municipio').subscribe(
       (data: any) => {
         this.lista_cidades = data;
-        console.log('Cidades:', this.lista_cidades);
+        // console.log('Cidades:', this.lista_cidades);
       },
       (erro: any) => console.error(erro)
     );
@@ -69,13 +69,13 @@ export class ProximaParadaComponent implements OnInit {
         if (data.length > 0) {
           this.has_event = true; // Define que há eventos
           this.lista_eventos = data;
-          console.log('Eventos:', this.lista_eventos);
+          // console.log('Eventos:', this.lista_eventos);
           this.eventosFiltrados = [...this.lista_eventos];
           this.dataInicioFiltro = ''
           this.dataFimFiltro = ''
         } else {
           this.has_event = false; // Define que não há eventos
-          console.log('Nenhum evento encontrado');
+          // console.log('Nenhum evento encontrado');
         }
       },
       (erro: any) => console.error(erro)
@@ -83,11 +83,10 @@ export class ProximaParadaComponent implements OnInit {
   }
 
   filtrarMunicipio(cidade: any) {
-    console.log('cidade', cidade);
     this.estadoService
       .pegar_municipio('municipio/', cidade)
       .subscribe((city: any) => {
-        console.log('city', city);
+        // console.log('city', city);
         // this.cadastro_city.cod_ibge = city.cod_ibge
         this.pegarEventosByCity(city.id);
       });
@@ -100,29 +99,28 @@ export class ProximaParadaComponent implements OnInit {
         if (evento.length > 0) {
           this.eventosFiltrados = evento;
           this.has_event = true; // Define que há eventos
-          console.log('Eventos por cidade:', this.eventosFiltrados);
+          // console.log('Eventos por cidade:', this.eventosFiltrados);
         } else {
           this.has_event = false; // Define que não há eventos
         }
       },
-      (erro: any) => console.log(erro)
+      (erro: any) => console.error(erro)
     );
   }
 
   pegarEventosByRegiao(id: any) {
     //id = this.id_regiao
-    console.log('id', id);
     this.eventoService.pegar_evento('eventoregiao/', id).subscribe(
       (evento: any) => {
         if (evento.length > 0) {
           this.eventosFiltrados = evento;
           this.has_event = true; // Define que há eventos
-          console.log('Eventos por cidade:', this.eventosFiltrados);
+          // console.log('Eventos por cidade:', this.eventosFiltrados);
         } else {
           this.has_event = false; // Define que não há eventos
         }
       },
-      (erro: any) => console.log(erro)
+      (erro: any) => console.error(erro)
     );
   }
 
@@ -132,7 +130,7 @@ export class ProximaParadaComponent implements OnInit {
         setTimeout(() => {
           this.getImagem(id);
           this.evento = evento;
-          console.log('Evento selecionado:', this.evento);
+          // console.log('Evento selecionado:', this.evento);
         }, 2000);
 
         setTimeout(() => {
