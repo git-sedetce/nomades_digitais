@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       cadastra_parceiros.hasMany(models.anexos, { foreignKey: 'parceiro_id', as: 'ass_imgsParceiros'})
+      cadastra_parceiros.hasMany(models.Vagas_Emprego, { foreignKey: 'parceiro_id', as: 'ass_parceiros_vagas'})
     }
   }
   cadastra_parceiros.init({
