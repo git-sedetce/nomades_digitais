@@ -60,7 +60,7 @@
               <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1"
                 data-bs-parent="#accordionComunidade">
                 <div class="accordion-body">
-                  <ng-container *ngIf="comunidade.length > 0; else noDataPerfil">
+                  <ng-container *ngIf="show_info; else noDataPerfil">
                     <div class="perfil">
                       <p>Comunidade criada em <b>{{ comunidade.data_criacao | date :'dd/MM/yyyy'}}</b>.</p>
                       <p>{{ comunidade.descricao }}</p>

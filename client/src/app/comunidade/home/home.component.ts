@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
   }
 
   verComunidade(id: any, comunidade: string) {
-    console.log('ver comunidade', id);
+    // console.log('ver comunidade', id);
     this.show_info = true;
     this.comunidade_name = comunidade;
     this.community.getCommunityById(id).subscribe(
