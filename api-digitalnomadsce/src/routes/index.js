@@ -9,6 +9,7 @@ const user = require('./userRoutes')
 const evento = require('./eventoRoutes')
 const temporada = require('./temporadaRoutes')
 const comunity = require('./comunityRoutes')
+const vaga = require('./vagasEmpregoRoutes')
 
 module.exports = app => {
   app.use(express.json(),
@@ -21,6 +22,7 @@ module.exports = app => {
           user,
           evento,
           temporada,
-          comunity
+          comunity,
+          vaga
           )  
 }

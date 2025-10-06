@@ -15,9 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Emprego_Nomad.init({
-    nome_vaga: DataTypes.STRING,
-    descricao: DataTypes.STRING,
-    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Emprego_Nomad',
