@@ -167,7 +167,11 @@ class NomadsController {
 
   static async pegaTodosNomads(req, res) {
     try {
-      const todosNomads = await database.cadastra_nomads.findAll();
+      const todosNomads = await database.cadastra_nomads.findAll({
+        attributes: ["id", "name", "lastName", "nomad_email", "contato_nomad", "cidade", "regiao", "country", "shared_info", "nomads_news", "possui_empresa", "suggestion", "first_time_ce", "data_nascimento", "passaporte", "motivo_viagem", "know_how", "profissao", "possui_empresa"],
+        order: [["name", "ASC"]],
+        
+      });
       return res.status(200).json(todosNomads);
     } catch (error) {
       return res.status(500).json(error.message);

@@ -1,1 +1,95 @@
-<p>ver-talentos works!</p>
+<section class="ver-talentos d-flex align-items-center">
+  <div class="container my-3">
+    <h1 class="text-center mb-4 text-uppercase">Talento Nomads</h1>
+
+    <div class="row justify-content-center g-4">
+
+      <!-- Lista centralizada -->
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="table-container text-center">
+          <h4 class="mb-3 text-success fw-bold">
+            Veja os talentos que podem agregar para o seu negócio
+          </h4>
+
+          <div *ngIf="has_nomads; else semNomads" class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                  <th class="text-center">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let nomad of lista_nomad">
+                  <td>{{ nomad.name }} {{ nomad.lastName }}</td>
+                  <td>{{ nomad.nomad_email }}</td>
+                  <td>{{ nomad.contato_nomad }}</td>
+                  <td class="text-center">
+                    <!-- Exemplo de botão -->
+                    <button class="btn btn-light" title="Ver mais">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ng-template #semNomads>
+            <div class="text-center text-muted py-4">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/4076/4076500.png"
+                width="80"
+                class="mb-3 opacity-75"
+                alt="Sem dados"
+              />
+              <p>Nenhum Nomad cadastrado.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Modal Contato -->
+<!-- <div class="modal fade" id="modalContato" tabindex="-1" aria-labelledby="modalContatoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="modalContatoLabel">Entrar em Contato</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form #contatoForm="ngForm" (ngSubmit)="enviarContato()">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="mensagem" class="form-label">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" class="form-control" rows="3" required
+              [(ngModel)]="contato.mensagem"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" id="telefone" name="telefone" class="form-control" placeholder="(00) 00000-0000" required
+              [(ngModel)]="contato.telefone">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="exemplo@email.com" required
+              [(ngModel)]="contato.email">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

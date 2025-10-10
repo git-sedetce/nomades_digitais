@@ -1,0 +1,114 @@
+.ver-talentos {
+  background: url("../../../assets/midia/imgs/background_09.jpg") no-repeat center center;
+  background-size: cover;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: auto;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.ver-talentos h1 {
+  font-size: 3rem;
+  color: #009688;
+  margin-bottom: 25px;
+  font-weight: bold;
+  font-family: "AristotelicaDemiBold", "Poppins", "Montserrat";
+  text-shadow: -3px 3px 5px #00000056;
+  letter-spacing: 6px;
+  text-decoration: underline;
+  text-decoration-color: #fbc02d;
+  text-decoration-thickness: 5px;
+  text-underline-offset: 12px;
+}
+
+.table-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  transition: transform 0.3s ease;
+}
+
+.table-container:hover {
+  transform: translateY(-4px);
+}
+
+.table thead {
+  background-color: #009688;
+  color: white;
+}
+
+/* Células e botões */
+.table td.text-center {
+  vertical-align: middle !important;
+  white-space: nowrap;
+}
+
+.table .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  margin: 0 3px;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.table .btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.table .btn-light {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.table-responsive {
+  max-height: 60vh;
+  overflow-y: auto;
+  border-radius: 6px;
+}
+
+/* Modal */
+.modal-header {
+  border-bottom: 2px solid #198754;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .ver-talentos h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .ver-talentos h1 {
+    font-size: 2rem;
+  }
+
+  .table thead {
+    font-size: 0.9rem;
+  }
+
+  .table td {
+    font-size: 0.85rem;
+  }
+
+  .table .btn i {
+    font-size: 0.85rem;
+  }
+}
