@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { VagaEmprego } from 'src/app/models/trabalho/vaga-emprego.model';
 import { TrabalhoService } from 'src/app/services/trabalho.service';
+declare var bootstrap: any; // importante para usar o modal
 
 @Component({
   selector: 'app-cadastra-vaga',
@@ -11,11 +12,17 @@ import { TrabalhoService } from 'src/app/services/trabalho.service';
 })
 export class CadastraVagaComponent implements OnInit {
   @ViewChild('vagaForm') vagaForm!: NgForm;
+  @ViewChild('contatoForm') contatoForm!: NgForm;
+
   vaga!: VagaEmprego;
   listaVagas!: any[];
   has_opportunity: boolean = false;
   editando = false;
   vagaEditandoId: number | null = null;
+
+  contato = { mensagem: '', telefone: '', email: '' };
+  modalContato: any;
+  vagaSelecionada: any;
 
   constructor(
     private serviceJobs: TrabalhoService,
@@ -107,6 +114,21 @@ export class CadastraVagaComponent implements OnInit {
       case 'Encerrado': return 'bg-danger';
       default: return 'bg-light text-dark';
     }
+  }
+
+  abrirModalContato(vaga: any) {
+    this.vagaSelecionada = vaga;
+    const modalEl = document.getElementById('modalContato');
+    this.modalContato = new bootstrap.Modal(modalEl);
+    this.modalContato.show();
+  }
+
+  enviarContato() {
+    console.log('Contato enviado para:', this.vagaSelecionada.nome_vaga);
+    console.log('Dados do formulário:', this.contato);
+    this.toastr.success('Contato enviado com sucesso!');
+    this.contatoForm.resetForm();
+    this.modalContato.hide();
   }
 
 
