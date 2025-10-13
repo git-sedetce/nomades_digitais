@@ -30,7 +30,7 @@ export class ResetComponent implements OnInit{
     this.serviceUser.reset_password(this.resetSenha).subscribe({
       next:(res:any) => {
         this.toastr.success('Senha alterada com sucesso!!!')
-        this.router.navigate(['/login'])
+        this.router.navigate(['/admin/login'])
       },error: (e) => {
         console.error(e)
         this.toastr.error(e.error.message)

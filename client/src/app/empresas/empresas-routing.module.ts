@@ -8,6 +8,7 @@ import { OndeFicarComponent } from './onde-ficar/onde-ficar.component';
 import { HospedagemComponent } from './hospedagem/hospedagem.component';
 import { WorkEnvironmentComponent } from './work-environment/work-environment.component';
 import { InfoCompanyComponent } from './info-company/info-company.component';
+import { guardGuard } from '../users/guard/guard.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,8 @@ const routes: Routes = [
   },
   {
     path: 'editarparceria',
+    canActivate: [guardGuard],
+    data: { roles: ['admin', 'user_partner'] },
     component: EditarParceiroComponent,
   },
   {
@@ -24,6 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'editar',
+    canActivate: [guardGuard],
+    data: { roles: ['user_partner'] },
     component: EditarDadosComponent,
   },
   {
@@ -41,7 +46,7 @@ const routes: Routes = [
   {
     path: 'info',
     component: InfoCompanyComponent,
-  }
+  },
 ];
 
 @NgModule({

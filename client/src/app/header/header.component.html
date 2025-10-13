@@ -18,32 +18,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/atrativo/home">Ceará Atrativos</a>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Ceará Atrativos
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/atrativo/informacoes">Informações Gerais</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" routerLink="/atrativo/perfil">Perfil do Estado</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/atrativo/hub">Hub de Inovação</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/atrativo/aeroportos">Aeroportos</a>
-              </li>
-
-            </ul>
-          </li> -->
 
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -62,11 +36,11 @@
                 <a class="dropdown-item" routerLink="/ondeficar/ambiente">Ambientes de Trabalho
                 </a>
               </li>
-              <li>
+              <li *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/ondeficar/cadastro_parceiro">Cadastre sua empresa
+                <a class="dropdown-item" routerLink="/ondeficar/cadastro_parceiro" *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">Cadastre sua empresa
                 </a>
               </li>
             </ul>
@@ -97,18 +71,18 @@
                 <a class="dropdown-item" routerLink="/eventos/gastronomia">Gastronomia
                 </a>
               </li>
-              <li>
+              <li *ngIf="profile === 3">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_eventos">Cadastrar Eventos
+                <a class="dropdown-item" routerLink="/eventos/cadastro_eventos" *ngIf="profile === 3">Cadastrar Eventos
                 </a>
               </li>
-              <li>
+              <li *ngIf="profile === 3">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada">Cadastrar Temporada Nomads
+                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada" *ngIf="profile === 3">Cadastrar Temporada Nomads
                 </a>
               </li>
             </ul>
@@ -117,45 +91,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/comunidade/home">Comunidades</a>
           </li>
-
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Comunidades
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-              <li class="nav-item">
-                <a class="dropdown-item" routerLink="#">Locais/Cidades</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="#">Perfil da Comunidade
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="#">Eventos
-                </a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="#">Pontos de encontros</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="#">Conecte-se</a>
-              </li>
-            </ul>
-          </li> -->
 
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -181,11 +116,11 @@
                 <a class="dropdown-item" routerLink="/eventos/proxima_parada">Eventos
                 </a>
               </li>
-              <li>
+              <li *ngIf="profile === 3">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio">Cadastro de Municípios</a>
+                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio" *ngIf="profile === 3">Cadastro de Municípios</a>
               </li>
 
 
@@ -196,25 +131,7 @@
             <a class="nav-link active" aria-current="page" routerLink="/trabalho/home">Oportunidades de Trabalho</a>
           </li>
 
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Oportunidades de Trabalho
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-              <li class="nav-item">
-                <a class="dropdown-item" routerLink="#">Profissionais se Oferecem</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="#">Empresas procuram
-                </a>
-              </li>
-            </ul>
-          </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
@@ -247,11 +164,11 @@
                 <a class="dropdown-item" routerLink="/ondeficar/editarparceria">Editar empresas cadastradas
                 </a>
               </li>
-              <li>
+              <li *ngIf="profile === 3">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/comunidade/homecadastro">Cadastro Comunidades
+                <a class="dropdown-item" routerLink="/comunidade/homecadastro" *ngIf="profile === 3">Cadastro Comunidades
                 </a>
               </li>
               <!-- <li>
@@ -260,7 +177,7 @@
             </ul>
           </li>
           <li class="nav-item" *ngIf="profile === 2">
-            <a class="nav-link active" routerLink="/parceria/editar">Editar</a>
+            <a class="nav-link active" routerLink="/ondeficar/editar">Editar</a>
           </li>
           <li class="nav-item" *ngIf="profile === 1"><!--*ngIf="profile === 1"-->
             <a class="nav-link active" routerLink="/nomad/editarNomad">Editar Nomad</a>

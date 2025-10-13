@@ -5,14 +5,19 @@ import { CadastroTemporadaNomadComponent } from './cadastro-temporada-nomad/cada
 import { CadastroEventosComponent } from './cadastro-eventos/cadastro-eventos.component';
 import { ProximaParadaComponent } from './proxima-parada/proxima-parada.component';
 import { GastronomiaComponent } from './gastronomia/gastronomia.component';
+import { guardGuard } from '../users/guard/guard.guard';
 
 const routes: Routes = [
   {
     path: 'cadastro_eventos',
+    canActivate: [guardGuard],
+    data: { roles: ['admin', 'user_comunity', 'user_municipio'] },
     component: CadastroEventosComponent,
   },
   {
     path: 'cadastro_temporada',
+    canActivate: [guardGuard],
+    data: { roles: ['admin'] },
     component: CadastroTemporadaNomadComponent,
   },
   {

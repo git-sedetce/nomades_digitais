@@ -42,6 +42,6 @@ export class CadastroComponent implements OnInit {
       },
       error: (e) => console.error(e)
     })
-    this.router.navigate(['/login'])
+    this.router.navigate(['/admin/login'])
   }
 }

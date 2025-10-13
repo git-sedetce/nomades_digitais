@@ -44,12 +44,12 @@ export const guardGuard: CanActivateFn = (route, state) => {
       }
     }else {
       // Perfil desconhecido
-      router.navigate(['/login']);
+      router.navigate(['/admin/login']);
       return false;
     }
   } else {
     // Se o token não existir, redireciona para a página de login
-    router.navigate(['/login']);
+    router.navigate(['/admin/login']);
     return false;
   }
 };
