@@ -8,7 +8,7 @@ declare var bootstrap: any; // importante para usar o modal
 @Component({
   selector: 'app-cadastra-vaga',
   templateUrl: './cadastra-vaga.component.html',
-  styleUrls: ['./cadastra-vaga.component.css']
+  styleUrls: ['./cadastra-vaga.component.css'],
 })
 export class CadastraVagaComponent implements OnInit {
   @ViewChild('vagaForm') vagaForm!: NgForm;
@@ -17,8 +17,14 @@ export class CadastraVagaComponent implements OnInit {
   vaga!: VagaEmprego;
   listaVagas!: any[];
   has_opportunity: boolean = false;
+  has_logon: boolean = false;
   editando = false;
   vagaEditandoId: number | null = null;
+
+  authenticated = false;
+  user_name: any;
+  profile: any;
+  company_id: any;
 
   contato = { mensagem: '', telefone: '', email: '' };
   modalContato: any;
@@ -26,12 +32,28 @@ export class CadastraVagaComponent implements OnInit {
 
   constructor(
     private serviceJobs: TrabalhoService,
-    private toastr: ToastrService,
-  ) { }
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.vaga = new VagaEmprego();
-    this.oportunidades();
+    this.getPerfil();
+    this.oportunidades(this.has_logon);
+  }
+
+  getPerfil() {
+    const token = localStorage.getItem('token');
+    // console.log('token', token)
+    if (token) {
+      this.authenticated = true;
+      // console.log('authenticated', this.authenticated)
+      const loginUsers: any = JSON.parse(atob(token!.split('.')[1]));
+      this.user_name = loginUsers._user_name;
+      this.profile = loginUsers._profile_id;
+      this.company_id = loginUsers._id;
+      this.has_logon = true;
+      console.log('loginUsers', loginUsers);
+    }
   }
 
   cadastrarOuAtualizarVaga() {
@@ -40,7 +62,7 @@ export class CadastraVagaComponent implements OnInit {
       return;
     }
 
-    this.vaga.parceiro_id = 3; // ID fixo (futuramente virá do login)
+    this.vaga.parceiro_id = this.company_id; // ID fixo (futuramente virá do login)
 
     // Se está editando, atualizar a vaga
     if (this.editando && this.vagaEditandoId) {
@@ -48,18 +70,19 @@ export class CadastraVagaComponent implements OnInit {
         next: () => {
           this.toastr.success('Vaga atualizada com sucesso!');
           this.cancelarEdicao();
-          this.oportunidades();
+          this.oportunidades(this.has_logon);
         },
-        error: (e) => this.toastr.error('Erro ao atualizar vaga: ' + e)
+        error: (e) => this.toastr.error('Erro ao atualizar vaga: ' + e),
       });
     } else {
       // Novo cadastro
       this.serviceJobs.cadastrarvaga(this.vaga).subscribe({
         next: () => {
+          console.log('vaga',this.vaga);
           this.toastr.success('Oportunidade cadastrada com sucesso!');
           this.vagaForm.resetForm();
           this.vaga = new VagaEmprego();
-          this.oportunidades();
+          this.oportunidades(this.has_logon);
         },
         error: (e) => this.toastr.error('Erro ao cadastrar vaga: ' + e),
       });
@@ -78,7 +101,7 @@ export class CadastraVagaComponent implements OnInit {
       this.serviceJobs.deleteVaga(id).subscribe({
         next: () => {
           this.toastr.success('Vaga excluída com sucesso!');
-          this.oportunidades();
+          this.oportunidades(this.has_logon);
         },
         error: (e) => this.toastr.error('Erro ao excluir vaga: ' + e),
       });
@@ -92,27 +115,47 @@ export class CadastraVagaComponent implements OnInit {
     this.vagaForm.resetForm();
   }
 
-  oportunidades(){
-    this.serviceJobs.getVaga('pegarvagas').subscribe(
-      (vagas: any[]) => {
-        this.listaVagas = vagas;
-        if(this.listaVagas.length > 0){
-          this.has_opportunity = true;
-        }
-        // console.log(this.listaVagas);
-      },
-      (erro: any) => console.error(erro)
-    );
+  oportunidades(verVagas: boolean) {
+    if (verVagas) {
+      this.serviceJobs.getVagaByCompanyId(this.company_id).subscribe(
+        (vagas: any[]) => {
+          this.listaVagas = vagas;
+          if (this.listaVagas.length > 0) {
+            this.has_opportunity = true;
+          }
+          console.log(this.listaVagas);
+        },
+        (erro: any) => console.error(erro)
+      );
+    } else {
+      console.log('verVagas', verVagas);
+      this.serviceJobs.getVaga('pegarvagas').subscribe(
+        (vagas: any[]) => {
+          this.listaVagas = vagas;
+          if (this.listaVagas.length > 0) {
+            this.has_opportunity = true;
+          }
+          console.log(this.listaVagas);
+        },
+        (erro: any) => console.error(erro)
+      );
+    }
   }
 
   getBadgeClass(status: string): string {
     switch (status) {
-      case 'Vaga Aplicada': return 'bg-secondary';
-      case 'Análise de Currículo': return 'bg-info';
-      case 'Entrevista': return 'bg-warning text-dark';
-      case 'Proposta': return 'bg-success';
-      case 'Encerrado': return 'bg-danger';
-      default: return 'bg-light text-dark';
+      case 'Vaga Aplicada':
+        return 'bg-secondary';
+      case 'Análise de Currículo':
+        return 'bg-info';
+      case 'Entrevista':
+        return 'bg-warning text-dark';
+      case 'Proposta':
+        return 'bg-success';
+      case 'Encerrado':
+        return 'bg-danger';
+      default:
+        return 'bg-light text-dark';
     }
   }
 
@@ -130,6 +173,4 @@ export class CadastraVagaComponent implements OnInit {
     this.contatoForm.resetForm();
     this.modalContato.hide();
   }
-
-
 }

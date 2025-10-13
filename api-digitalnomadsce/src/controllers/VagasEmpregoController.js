@@ -18,7 +18,7 @@ class VagasEmpregoController {
 
   static async cadastraVagaNomad(req, res) {
     const newJobNomad = req.body;
-    // console.log("newJobNomad", newJobNomad);
+    console.log("newJobNomad", newJobNomad);
 
     try {
       const criarVaga = await database.Emprego_Nomad.create(newJobNomad);
@@ -70,14 +70,14 @@ class VagasEmpregoController {
   static async vagaPorEmpresa(req, res) {
     const { id } = req.params;
     try {
-      const mostraComunidade = await database.Vagas_Emprego.findOne({
+      const mostraComunidade = await database.Vagas_Emprego.findAll({
         where: { parceiro_id: Number(id) },
         attributes: ["id", "nome_vaga", "descricao", "status"],
         order: [["updatedAt", "ASC"]],
         include: [
           {
             model: database.cadastra_parceiros,
-            as: "ass_parceiros_vagas",
+            as: "ass_vagas_parceiro",
             attributes: ["cnpj", "nome_fantasia"],
           },
         ],

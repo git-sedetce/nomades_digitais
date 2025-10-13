@@ -8,7 +8,7 @@
         <div class="card-form">
           <h4 class="mb-3 text-success fw-bold">{{ editando ? 'Editar Vaga' : 'Nova Vaga' }}</h4>
 
-          <form #vagaForm="ngForm" (ngSubmit)="cadastrarOuAtualizarVaga()">
+          <form #vagaForm="ngForm" (ngSubmit)="cadastrarOuAtualizarVaga()" *ngIf="profile === 3 || profile === 2">
             <div class="mb-3">
               <label for="nome_vaga" class="form-label">Nome da Vaga</label>
               <input type="text" id="nome_vaga" name="nome_vaga" class="form-control" required
@@ -57,7 +57,7 @@
                   <th>Nome da Vaga</th>
                   <th>Descrição</th>
                   <th>Status</th>
-                  <th class="text-center">Ações</th>
+                  <th class="text-center" *ngIf="has_logon">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,14 +66,14 @@
                   <td>{{ vaga.descricao }}</td>
                   <td><span class="badge" [ngClass]="getBadgeClass(vaga.status)">{{ vaga.status }}</span></td>
                   <td class="text-center">
-                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="editarVaga(vaga)">
+                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="editarVaga(vaga)" *ngIf="profile === 3 || profile === 2">
                       <i class="bi bi-pencil text-primary"></i>
                     </button>
 
-                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="abrirModalContato(vaga)">
+                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="abrirModalContato(vaga)" *ngIf="has_logon">
                       <i class="bi bi-envelope text-success"></i>
                     </button>
-                    <button class="btn btn-sm btn-light shadow-sm" (click)="excluirVaga(vaga.id)">
+                    <button class="btn btn-sm btn-light shadow-sm" (click)="excluirVaga(vaga.id)" *ngIf="profile === 3 || profile === 2">
                       <i class="bi bi-trash text-danger"></i>
                     </button>
                   </td>
