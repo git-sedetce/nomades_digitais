@@ -13,6 +13,10 @@ export class TrabalhoService {
     return this.http.post(environment.url + 'cadastrovaga', data);
   }
 
+  interessevaga(data: any): Observable<any> {
+    return this.http.post(environment.url + 'nomadvaga', data);
+  }
+
   getVaga(metodo: string): Observable<any> {
     return this.http.get(environment.url + metodo);
   }

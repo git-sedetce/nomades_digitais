@@ -3,46 +3,61 @@
     <h1 class="text-center mb-4 text-uppercase">Cadastro de Vaga de Emprego</h1>
 
     <div class="row g-4">
-      <!-- Formulário -->
+      <!-- Formulário ou mensagem de login -->
+      <!-- Coluna do formulário ou do aviso de login -->
       <div class="col-12 col-lg-4">
-        <div class="card-form">
-          <h4 class="mb-3 text-success fw-bold">{{ editando ? 'Editar Vaga' : 'Nova Vaga' }}</h4>
+        <ng-container *ngIf="profile === 3 || profile === 2; else makeLogin">
+          <div class="card-form">
+            <h4 class="mb-3 text-success fw-bold">{{ editando ? 'Editar Vaga' : 'Nova Vaga' }}</h4>
 
-          <form #vagaForm="ngForm" (ngSubmit)="cadastrarOuAtualizarVaga()" *ngIf="profile === 3 || profile === 2">
-            <div class="mb-3">
-              <label for="nome_vaga" class="form-label">Nome da Vaga</label>
-              <input type="text" id="nome_vaga" name="nome_vaga" class="form-control" required
-                [(ngModel)]="vaga.nome_vaga" #nome_vaga="ngModel" placeholder="Ex: Desenvolvedor Front-End">
-            </div>
+            <form #vagaForm="ngForm" (ngSubmit)="cadastrarOuAtualizarVaga()">
+              <div class="mb-3">
+                <label for="nome_vaga" class="form-label">Nome da Vaga</label>
+                <input type="text" id="nome_vaga" name="nome_vaga" class="form-control" required
+                  [(ngModel)]="vaga.nome_vaga" #nome_vaga="ngModel" placeholder="Ex: Desenvolvedor Front-End">
+              </div>
 
-            <div class="mb-3">
-              <label for="descricao" class="form-label">Descrição</label>
-              <textarea id="descricao" name="descricao" class="form-control" required [(ngModel)]="vaga.descricao"
-                #descricao="ngModel" rows="3" placeholder="Breve descrição da vaga"></textarea>
-            </div>
+              <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea id="descricao" name="descricao" class="form-control" required [(ngModel)]="vaga.descricao"
+                  #descricao="ngModel" rows="3" placeholder="Breve descrição da vaga"></textarea>
+              </div>
 
-            <div class="mb-3">
-              <label for="status" class="form-label">Status</label>
-              <select id="status" name="status" class="form-select" required [(ngModel)]="vaga.status"
-                #status="ngModel">
-                <option value="" disabled selected>Selecione...</option>
-                <option value="vaga_aplicada">Vaga Aplicada</option>
-                <option value="analise_currículo">Análise de Currículo</option>
-                <option value="entrevista">Entrevista</option>
-                <option value="proposta">Proposta</option>
-                <option value="encerrado">Encerrado</option>
-              </select>
-            </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-select" required [(ngModel)]="vaga.status"
+                  #status="ngModel">
+                  <option value="" disabled selected>Selecione...</option>
+                  <option value="vaga_aplicada">Vaga Aplicada</option>
+                  <option value="analise_currículo">Análise de Currículo</option>
+                  <option value="entrevista">Entrevista</option>
+                  <option value="proposta">Proposta</option>
+                  <option value="encerrado">Encerrado</option>
+                </select>
+              </div>
 
-            <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-primary w-100" [disabled]="vagaForm.invalid">
-                {{ editando ? 'Atualizar' : 'Cadastrar' }}
-              </button>
-              <button *ngIf="editando" type="button" class="btn btn-outline-secondary w-50"
-                (click)="cancelarEdicao()">Cancelar</button>
-            </div>
-          </form>
-        </div>
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary w-100" [disabled]="vagaForm.invalid">
+                  {{ editando ? 'Atualizar' : 'Cadastrar' }}
+                </button>
+                <button *ngIf="editando" type="button" class="btn btn-outline-secondary w-50"
+                  (click)="cancelarEdicao()">
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </ng-container>
+
+        <ng-template #makeLogin>
+          <div class="h-100 w-100 overflow-hidden d-flex align-items-center justify-content-center">
+            <img src="../../../assets/midia/imgs/vagas_nomads.jpg" alt="Pessoa trabalhando"
+              class="img-fluid w-100 h-100 rounded shadow-sm"
+              style="object-fit: cover; filter: brightness(0.95); transition: all 0.5s ease; transform: scale(1);"
+              (mouseover)="onHover($event)" (mouseleave)="onLeave($event)">
+          </div>
+        </ng-template>
+
       </div>
 
       <!-- Lista -->
@@ -57,29 +72,38 @@
                   <th>Nome da Vaga</th>
                   <th>Descrição</th>
                   <th>Status</th>
-                  <th class="text-center" *ngIf="has_logon">Ações</th>
+                  <th class="text-center" *ngIf="profile === 1 || profile === 2 || profile === 3">Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let vaga of listaVagas">
+                <tr *ngFor="let vaga of listaVagas | paginate: { itemsPerPage: itemsPerPage, currentPage: page }">
                   <td>{{ vaga.nome_vaga }}</td>
                   <td>{{ vaga.descricao }}</td>
-                  <td><span class="badge" [ngClass]="getBadgeClass(vaga.status)">{{ vaga.status }}</span></td>
+                  <td>
+                    <span class="badge" [ngClass]="getBadgeClass(vaga.status)">
+                      {{ vaga.status }}
+                    </span>
+                  </td>
                   <td class="text-center">
-                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="editarVaga(vaga)" *ngIf="profile === 3 || profile === 2">
+                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="editarVaga(vaga)"
+                      *ngIf="profile === 3 || profile === 2">
                       <i class="bi bi-pencil text-primary"></i>
                     </button>
 
-                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="abrirModalContato(vaga)" *ngIf="has_logon">
+                    <button class="btn btn-sm btn-light shadow-sm me-2" (click)="abrirModalContato(vaga)"
+                      *ngIf="profile === 1">
                       <i class="bi bi-envelope text-success"></i>
                     </button>
-                    <button class="btn btn-sm btn-light shadow-sm" (click)="excluirVaga(vaga.id)" *ngIf="profile === 3 || profile === 2">
+
+                    <button class="btn btn-sm btn-light shadow-sm" (click)="excluirVaga(vaga.id)"
+                      *ngIf="profile === 3 || profile === 2">
                       <i class="bi bi-trash text-danger"></i>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <pagination-controls class="text-center" (pageChange)="page = $event"></pagination-controls>
           </div>
 
           <ng-template #semVagas>
@@ -93,9 +117,7 @@
       </div>
     </div>
   </div>
-
 </section>
-
 
 <!-- Modal Contato -->
 <div class="modal fade" id="modalContato" tabindex="-1" aria-labelledby="modalContatoLabel" aria-hidden="true">
@@ -116,7 +138,7 @@
           <div class="mb-3">
             <label for="telefone" class="form-label">Telefone</label>
             <input type="text" id="telefone" name="telefone" class="form-control" placeholder="(00) 00000-0000" required
-              [(ngModel)]="contato.telefone">
+              [(ngModel)]="contato.telefone" prefix="+55 " mask="(00) 0 0000-0000||(00) 0000-0000">
           </div>
 
           <div class="mb-3">

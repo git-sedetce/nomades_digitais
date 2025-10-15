@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Nomad } from 'src/app/models/nomad/nomad.model';
 import { VagaEmprego } from 'src/app/models/trabalho/vaga-emprego.model';
 import { TrabalhoService } from 'src/app/services/trabalho.service';
 declare var bootstrap: any; // importante para usar o modal
@@ -22,13 +23,15 @@ export class CadastraVagaComponent implements OnInit {
   vagaEditandoId: number | null = null;
 
   authenticated = false;
-  user_name: any;
   profile: any;
   company_id: any;
 
-  contato = { mensagem: '', telefone: '', email: '' };
+  contato = { mensagem: '', telefone: '', email: '', vaga_id: '', nomeVaga: '', nomad_id: '', mail_company: '', nomad_name: '' };
   modalContato: any;
   vagaSelecionada: any;
+
+  page: number = 1; // Página atual
+  itemsPerPage: number = 10; // Itens por página
 
   constructor(
     private serviceJobs: TrabalhoService,
@@ -43,16 +46,20 @@ export class CadastraVagaComponent implements OnInit {
 
   getPerfil() {
     const token = localStorage.getItem('token');
-    // console.log('token', token)
     if (token) {
       this.authenticated = true;
-      // console.log('authenticated', this.authenticated)
       const loginUsers: any = JSON.parse(atob(token!.split('.')[1]));
-      this.user_name = loginUsers._user_name;
       this.profile = loginUsers._profile_id;
       this.company_id = loginUsers._id;
-      this.has_logon = true;
-      console.log('loginUsers', loginUsers);
+      if (this.profile === 2) {
+        this.has_logon = true;
+      } else {
+        this.has_logon = false;
+      }
+      if (this.profile === 1) {
+        this.contato.nomad_id = loginUsers._id;
+        this.contato.nomad_name = loginUsers._user_name;
+      }
     }
   }
 
@@ -78,7 +85,6 @@ export class CadastraVagaComponent implements OnInit {
       // Novo cadastro
       this.serviceJobs.cadastrarvaga(this.vaga).subscribe({
         next: () => {
-          console.log('vaga',this.vaga);
           this.toastr.success('Oportunidade cadastrada com sucesso!');
           this.vagaForm.resetForm();
           this.vaga = new VagaEmprego();
@@ -123,19 +129,16 @@ export class CadastraVagaComponent implements OnInit {
           if (this.listaVagas.length > 0) {
             this.has_opportunity = true;
           }
-          console.log(this.listaVagas);
         },
         (erro: any) => console.error(erro)
       );
     } else {
-      console.log('verVagas', verVagas);
       this.serviceJobs.getVaga('pegarvagas').subscribe(
         (vagas: any[]) => {
           this.listaVagas = vagas;
           if (this.listaVagas.length > 0) {
             this.has_opportunity = true;
           }
-          console.log(this.listaVagas);
         },
         (erro: any) => console.error(erro)
       );
@@ -161,16 +164,36 @@ export class CadastraVagaComponent implements OnInit {
 
   abrirModalContato(vaga: any) {
     this.vagaSelecionada = vaga;
+    this.contato.vaga_id = vaga.id;
+    this.contato.nomeVaga = vaga.nome_vaga; // Pegando o nome da vaga
+    this.contato.mail_company = vaga.ass_vagas_parceiro.email_parceiro; // Pegando o email da empresa
     const modalEl = document.getElementById('modalContato');
     this.modalContato = new bootstrap.Modal(modalEl);
     this.modalContato.show();
   }
 
   enviarContato() {
-    console.log('Contato enviado para:', this.vagaSelecionada.nome_vaga);
-    console.log('Dados do formulário:', this.contato);
-    this.toastr.success('Contato enviado com sucesso!');
-    this.contatoForm.resetForm();
-    this.modalContato.hide();
+    this.serviceJobs.interessevaga(this.contato).subscribe({
+      next: () => {
+        this.toastr.success('Contato enviado com sucesso!');
+        this.contatoForm.resetForm();
+        this.modalContato.hide();
+      },
+      error: (e) => this.toastr.error('Erro ao enviar contato: ' + e),
+    });
+  }
+
+  onHover(event: MouseEvent) {
+    const img = event.target as HTMLImageElement;
+    img.style.filter = 'brightness(1.05) saturate(1.1)';
+    img.style.transform = 'scale(1.05)';
+    img.style.boxShadow = '0 0 15px rgba(0,0,0,0.3)';
+  }
+
+  onLeave(event: MouseEvent) {
+    const img = event.target as HTMLImageElement;
+    img.style.filter = 'brightness(0.9) saturate(1)';
+    img.style.transform = 'scale(1)';
+    img.style.boxShadow = 'none';
   }
 }
