@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.belongsTo(models.Profile, { foreignKey: 'profile_id', as: 'ass_user_profile' })
+      User.hasMany(models.Emprego_Nomad, { foreignKey: 'nomad_id', as: 'ass_nomad_vagas'})
     }
   }
   User.init({

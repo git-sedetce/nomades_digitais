@@ -16,7 +16,7 @@ module.exports = {
       nomad_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'cadastra_nomads', key: 'id' }
+        references: { model: 'Users', key: 'id' }
       },      
       createdAt: {
         allowNull: false,
