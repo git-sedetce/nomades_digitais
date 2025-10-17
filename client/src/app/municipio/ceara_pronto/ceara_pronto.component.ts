@@ -35,7 +35,7 @@ export class Ceara_prontoComponent implements OnInit {
   if (id) {
     this.munInfo = this.lista_municipio.find((m) => String(m.id) === id);
     console.log('Municipio Info:', this.munInfo);
-    this.pegarCidade(this.munInfo.nome_municipio, this.munInfo.cod_ibge);
+    this.pegarCidade(this.munInfo.id, this.munInfo.cod_ibge);
   }
 }
 

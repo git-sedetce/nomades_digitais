@@ -20,6 +20,76 @@
   background-color: #ffffff;
 }
 
+.cariri {
+  fill: #becf5050;
+  cursor: pointer;
+}
+
+.centroSul {
+  fill: #ff73df50;
+  cursor: pointer;
+}
+
+.grandeFortaleza {
+  fill: #33a02c50;
+  cursor: pointer;
+}
+
+.litoralLeste {
+  fill: #e7beff50;
+  cursor: pointer;
+}
+
+.litoralNorte {
+  fill: #d3ffbe50;
+  cursor: pointer;
+}
+
+.valeCuru {
+  fill: #77695550;
+  cursor: pointer;
+}
+
+.baturite {
+  fill: #5d745150;
+  cursor: pointer;
+}
+
+.ibiapaba {
+  fill: #c43c3950;
+  cursor: pointer;
+}
+
+.sertaoCentral {
+  fill: #ffff0050;
+  cursor: pointer;
+}
+
+.sertaoCaninde {
+  fill: #7d8b8f50;
+  cursor: pointer;
+}
+
+.sertaoSobral {
+  fill: #8d5a9950;
+  cursor: pointer;
+}
+
+.sertaoCrateus {
+  fill: #72dfff50;
+  cursor: pointer;
+}
+
+.inhamus {
+  fill: #fcc4b350;
+  cursor: pointer;
+}
+
+.valeJaguaribe {
+  fill: #ffaa0050;
+  cursor: pointer;
+}
+
 .cariri:hover {
   fill: #becf50;
   cursor: pointer;
@@ -103,6 +173,8 @@
   cursor: pointer;
   transition: fill 0.3s;
 }
+
+
 
 .accordion-button {
   background-color: #f2f2f2;
