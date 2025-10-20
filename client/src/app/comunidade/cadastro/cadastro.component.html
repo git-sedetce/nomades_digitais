@@ -32,13 +32,22 @@
                 <legend class="text-uppercase">Perfil Comunidade</legend>
 
                 <div class="row">
-                  <div class="col-sm-12 col-12 mb-3">
+                  <div class="col-sm-6 col-12 mb-3">
                     <label for="name" class="form-label pergunta">Nome</label>
                     <input type="text" class="form-control" id="name" name="name"
                       placeholder="Digite o nome da comunidade" required [(ngModel)]="comunity.name" #name="ngModel"
                       aria-label="Nome da comunidade" />
                     <div *ngIf="name.invalid && name.touched" class="alert alert-danger mt-1">
                       Informe o nome da Comunidade
+                    </div>
+                  </div>
+
+                  <div class="form-group col-sm-6 col-12 mb-3">
+                    <label for="data_criacao" class="form-label pergunta">Data da Criação da Comunidade</label>
+                    <input type="date" class="form-control" id="data_criacao" name="data_criacao" required
+                      [(ngModel)]="comunity.data_criacao" #data_criacao="ngModel" />
+                    <div *ngIf="data_criacao.invalid && data_criacao.touched" class="alert alert-danger mt-1">
+                      Informe o Nível da Experiência
                     </div>
                   </div>
                 </div>
@@ -71,21 +80,24 @@
 
                 <!-- Nível + Idioma -->
                 <div class="row">
+
+
                   <div class="form-group col-sm-6 col-12 mb-3">
-                    <label for="data_criacao" class="form-label pergunta">Data da Criação da Comunidade</label>
-                    <input type="date" class="form-control" id="data_criacao" name="data_criacao" required
-                      [(ngModel)]="comunity.data_criacao" #data_criacao="ngModel" />
-                    <div *ngIf="data_criacao.invalid && data_criacao.touched" class="alert alert-danger mt-1">
+                    <label for="gestor_comunidade" class="form-label pergunta">Gestor da Comunidade</label>
+                    <input type="text" class="form-control" id="gestor_comunidade" name="gestor_comunidade"
+                      placeholder="Informe o Gestor da Comunidade" required [(ngModel)]="comunity.gestor_comunidade"
+                      #gestor_comunidade="ngModel" />
+                    <div *ngIf="gestor_comunidade.invalid && gestor_comunidade.touched" class="alert alert-danger mt-1">
                       Informe o Nível da Experiência
                     </div>
                   </div>
 
                   <div class="form-group col-sm-6 col-12 mb-3">
-                    <label for="gestor_comunidade" class="form-label pergunta">Gestor da Comunidade</label>
-                    <input type="text" class="form-control" id="gestor_comunidade" name="gestor_comunidade"
-                      placeholder="Informe o nível de experiência" required [(ngModel)]="comunity.gestor_comunidade"
-                      #gestor_comunidade="ngModel" />
-                    <div *ngIf="gestor_comunidade.invalid && gestor_comunidade.touched" class="alert alert-danger mt-1">
+                    <label for="email_gestor" class="form-label pergunta">Email do Gestor da Comunidade</label>
+                    <input type="email" class="form-control" id="email_gestor" name="email_gestor"
+                      placeholder="Informe o emal do gestor" required [(ngModel)]="comunity.email_gestor"
+                      #email_gestor="ngModel" />
+                    <div *ngIf="email_gestor.invalid && email_gestor.touched" class="alert alert-danger mt-1">
                       Informe o Nível da Experiência
                     </div>
                   </div>

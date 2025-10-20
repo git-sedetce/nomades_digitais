@@ -4,6 +4,7 @@ const path = require("path");
 const baseUrl = process.cwd(); //+ "/src"; __dirname + '.
 const fs = require("fs");
 const { Sequelize, Op, literal } = require("sequelize");
+const bcrypt = require("bcryptjs");
 
 class CadastroMunicipioController {
   static async cadastraMunicipioParceiro(req, res) {
@@ -13,6 +14,25 @@ class CadastroMunicipioController {
       const criarMunicipioParceiro = await database.cadastra_municipios.create(
         novoMunicipioParceiro
       );
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(
+        novoMunicipioParceiro.email_prefeitura,
+        salt
+      );
+      const pin = Math.floor(1000 + Math.random() * 9000);
+      const nome_usuario = novoMunicipioParceiro.email_prefeitura.split("@");
+
+      await database.User.create({
+        nome_completo: novoMunicipioParceiro.cidade,
+        user_name: nome_usuario[0],
+        user_email: novoMunicipioParceiro.email_prefeitura,
+        user_active: false,
+        user_password: hashedPassword,
+        user_pin: pin,
+        profile_id: 5,
+      });
+
       console.log(novoMunicipioParceiro);
       var transporter = nodemailer.createTransport({
         host: "172.26.2.26", //"relay.etice.ce.gov.br",
@@ -45,6 +65,28 @@ class CadastroMunicipioController {
           console.log("Email sent: " + info.response);
           emailRetorno = {
             messagem: "email enviado com sucesso!",
+            info: info.response,
+          };
+        }
+      });
+
+      var mailOptionsPin = {
+        from: "digital.nomads@sedet.ce.gov.br",
+        to: novoMunicipioParceiro.email_prefeitura,
+        subject: "Código PIN",
+        html: `<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>
+                  <p><a href="https://www.digitalnomads.ce.gov.br/admin/resetSenha">Clique aqui</a> para criar sua senha</p>`,
+        //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+      };
+
+      transporter.sendMail(mailOptionsPin, function (error, info) {
+        if (error) {
+          console.log(error);
+          emailRetorno = error;
+        } else {
+          // console.log("Email sent: " + info.response);
+          emailRetorno = {
+            messagem: "PIN enviado com sucesso!",
             info: info.response,
           };
         }
@@ -173,57 +215,53 @@ class CadastroMunicipioController {
     }
   }
 
+  static async pegarMunicipioByTurismo(req, res) {
+    const { turismo } = req.params;
+    const imagensData = [];
 
-static async pegarMunicipioByTurismo(req, res) {
-  const { turismo } = req.params;
-  const imagensData = [];
-
-  try {
-    // Buscar todos os municípios com o tipo de turismo desejado
-    const municipios = await database.cadastra_municipios.findAll({
-      where: {
-        tipo_turismo: {
-          [Op.iLike]: `%${turismo}%`,
-        },
-      },
-      attributes: ["id", "cidade", "regiao", "tipo_turismo"],
-    });
-
-    // Para cada município, buscar 1 anexo aleatório e montar o objeto com base64
-    for (const municipio of municipios) {
-      const anexo = await database.anexo_municipio.findOne({
+    try {
+      // Buscar todos os municípios com o tipo de turismo desejado
+      const municipios = await database.cadastra_municipios.findAll({
         where: {
-          municipio_id: municipio.id,
+          tipo_turismo: {
+            [Op.iLike]: `%${turismo}%`,
+          },
         },
-        order: [literal("RANDOM()")], // sorteia um
+        attributes: ["id", "cidade", "regiao", "tipo_turismo"],
       });
 
-      if (!anexo) continue; // ignora se não tiver imagem
+      // Para cada município, buscar 1 anexo aleatório e montar o objeto com base64
+      for (const municipio of municipios) {
+        const anexo = await database.anexo_municipio.findOne({
+          where: {
+            municipio_id: municipio.id,
+          },
+          order: [literal("RANDOM()")], // sorteia um
+        });
 
-      const caminhoImagem = path.join(baseUrl, anexo.path);
-      if (!fs.existsSync(caminhoImagem)) continue; // ignora se arquivo não existir
+        if (!anexo) continue; // ignora se não tiver imagem
 
-      const base64 = fs.readFileSync(caminhoImagem, "base64");
+        const caminhoImagem = path.join(baseUrl, anexo.path);
+        if (!fs.existsSync(caminhoImagem)) continue; // ignora se arquivo não existir
 
-      imagensData.push({
-        id: anexo.id,
-        municipio_id: anexo.municipio_id,
-        cidade: municipio.cidade,
-        regiao: municipio.regiao,
-        tipo_turismo: municipio.tipo_turismo,
-        mimetype: anexo.mimetype,
-        base64: base64,
-      });
+        const base64 = fs.readFileSync(caminhoImagem, "base64");
+
+        imagensData.push({
+          id: anexo.id,
+          municipio_id: anexo.municipio_id,
+          cidade: municipio.cidade,
+          regiao: municipio.regiao,
+          tipo_turismo: municipio.tipo_turismo,
+          mimetype: anexo.mimetype,
+          base64: base64,
+        });
+      }
+
+      return res.status(200).json(imagensData);
+    } catch (error) {
+      return res.status(500).json(error.message);
     }
-
-    return res.status(200).json(imagensData);
-  } catch (error) {
-    return res.status(500).json(error.message);
   }
-}
-
-
-
 }
 
 module.exports = CadastroMunicipioController;

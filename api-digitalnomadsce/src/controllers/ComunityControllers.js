@@ -1,20 +1,62 @@
 const database = require("../models");
 const { Op } = require("sequelize");
 const { Sequelize, QueryTypes, literal } = require("sequelize");
+const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
 
 class ComunityController {
   static async cadastraComunidade(req, res) {
-    const novaComunidade = req.body;
-    // console.log("novaComunidade", novaComunidade);
+  const novaComunidade = req.body;
 
-    try {
-      const criarComunidade = await database.Comunidade.create(novaComunidade);
+  try {
+    const criarComunidade = await database.Comunidade.create(novaComunidade);
 
-      return res.status(200).json(criarComunidade);
-    } catch (error) {
-      return res.status(500).json(error.message);
-    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(novaComunidade.email_gestor, salt);
+
+    const pin = Math.floor(1000 + Math.random() * 9000);
+    const nome_usuario = novaComunidade.email_gestor.split("@")[0];
+
+    await database.User.create({
+      nome_completo: novaComunidade.gestor_comunidade,
+      user_name: nome_usuario,
+      user_email: novaComunidade.email_gestor,
+      user_active: false,
+      user_password: hashedPassword,
+      user_pin: pin,
+      profile_id: 4,
+    });
+
+    const transporter = nodemailer.createTransport({
+      host: "172.26.2.26",
+      port: 25,
+      secure: false,
+      tls: { rejectUnauthorized: false },
+    });
+
+    await transporter.sendMail({
+      from: "digital.nomads@sedet.ce.gov.br",
+      to: novaComunidade.email_gestor,
+      subject: "Código PIN",
+      html: `
+        <h2>Código PIN</h2>
+        <p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p>
+        <br><p><strong>${pin}</strong></p>
+        <p><a href="https://www.digitalnomads.ce.gov.br/admin/resetSenha">Clique aqui</a> para criar sua senha</p>
+      `,
+    });
+
+    return res.status(200).json({
+      message: "Comunidade cadastrada e PIN enviado",
+      comunidade: criarComunidade,
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error.message);
   }
+}
+
 
   static async cadastraMidiaComunidade(req, res) {
     const midiaComunidade = req.body;
@@ -55,14 +97,10 @@ class ComunityController {
     }
   }
 
-
   static async pegaOnlyComunidade(req, res) {
     try {
       const comunidades = await database.Comunidade.findAll({
-        attributes: [
-          "id",
-          "name"
-        ],
+        attributes: ["id", "name"],
       });
       return res.status(200).json(comunidades);
     } catch (error) {
@@ -149,7 +187,7 @@ class ComunityController {
           "cidade",
           "estado",
           "plataforma",
-          "link"
+          "link",
         ],
         include: [
           {

@@ -7,6 +7,7 @@ export class Comunidade {
     public data_criacao?: Date,
     public regras_convivencia?: string,
     public gestor_comunidade?: string,
+    public email_gestor?: string,
     public idioma?: string,
   ){
   }

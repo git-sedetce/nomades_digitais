@@ -51,8 +51,11 @@ export class CadastroComponent implements OnInit {
       .join(',')
       .toString();
 
+      console.log('comunity', this.comunity);
+
     this.community.cadastrarComunidade(this.comunity).subscribe({
       next: (res: Comunidade) => {
+        console.log('res', res);
         this.toastr.success('Comunidade cadastrada com sucesso!');
         this.router.navigate(['comunidade/homecadastro']);
       },

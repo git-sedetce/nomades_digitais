@@ -29,6 +29,9 @@ module.exports = {
       gestor_comunidade: {
         type: Sequelize.STRING
       },
+      email_gestor: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

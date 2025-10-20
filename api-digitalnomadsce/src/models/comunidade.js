@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     data_criacao: DataTypes.DATE,
     idioma: DataTypes.STRING,
     regras_convivencia: DataTypes.STRING,
-    gestor_comunidade: DataTypes.STRING
+    gestor_comunidade: DataTypes.STRING,
+    email_gestor: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Comunidade',
