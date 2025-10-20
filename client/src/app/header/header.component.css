@@ -68,6 +68,67 @@
   z-index: 1000;
 }
 
+@media (max-width: 1400px) and (min-width: 992px) {
+  .menu ul li a {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
+  .brand_nomad {
+    max-width: 140px;
+  }
+}
+
+/* ========== Ajustes Mobile ========== */
+@media (max-width: 991px) {
+
+  /* remove margens que centralizam no desktop */
+  .menuOpcoes {
+    margin: 0 !important;
+    text-align: left !important;
+  }
+
+  /* os itens tomam toda largura e ficam em coluna */
+  .navbar-nav {
+    width: 100%;
+    align-items: flex-start;
+    padding-left: 0;
+  }
+
+  .nav-item,
+  .dropdown-menu li {
+    width: 100%;
+  }
+
+  .menu ul li a {
+    width: 100%;
+    display: block;
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 0.95rem; /* menor no mobile */
+  }
+
+  /* evita overflow lateral do dropdown */
+  .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  /* botões login/logout ocupam a largura */
+  .btn {
+    width: 100%;
+    margin: 4px 0 !important;
+  }
+
+  /* ocupa 100% e separa melhor os grupos */
+  .menu {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+
 /* Ajustes para telas pequenas */
 @media (max-width: 768px) {
   .menu ul li a {
