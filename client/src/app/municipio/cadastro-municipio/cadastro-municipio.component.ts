@@ -22,6 +22,8 @@ export class CadastroMunicipioComponent implements OnInit {
   id_regiao: any;
   lista_municipio!: any[];
   multipleImages = [];
+  municipio_id!: any;
+  regiao_id!: any;
   cadastro_cidade = {
     id: '',
     cidade: '',
@@ -92,8 +94,8 @@ export class CadastroMunicipioComponent implements OnInit {
     saveCity(): void{
       this.cadastro_cidade.tipo_turismo = this._tourismList.filter(x=>x.isselected==true).map(x=>x.nome).join(",").toString()
       const data = {
-        cidade: this.cadastro_cidade.cidade,
-        regiao: this.cadastro_cidade.regiao,
+        cidade: this.municipio_id,
+        regiao: this.regiao_id,
         cod_ibge: this.cadastro_cidade.cod_ibge,
         email_prefeitura: this.cadastro_cidade.email_prefeitura,
         contato_prefeitura: this.cadastro_cidade.contato_prefeitura,
@@ -121,8 +123,8 @@ export class CadastroMunicipioComponent implements OnInit {
       this.service.cadastrar_municipio(data)
       .subscribe({
           next: (res: any) => {
-            //console.log(res);
-            this.cadastro_cidade.id = res.id
+            console.log(res);
+            this.cadastro_cidade.id = res.municipio.id
             this.submitted = true;
           },
           error: (e: any) => console.error(e)
@@ -136,7 +138,9 @@ export class CadastroMunicipioComponent implements OnInit {
       this.services.pegar_municipio('municipio/', cidade)
       .subscribe((regiao: any) => {
         console.log('regiao', regiao)
-        this.cadastro_cidade.cod_ibge = regiao.cod_ibge
+        this.municipio_id = regiao.id;
+        this.regiao_id = regiao.regiao_id
+        this.cadastro_cidade.cod_ibge = regiao.cod_ibge;
         this.pegarnomeRegiao(regiao.regiao_id)
       }
       );

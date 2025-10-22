@@ -27,6 +27,14 @@ class ComunityController {
       profile_id: 4,
     });
 
+    // -------- responde logo ao cliente --------
+    res.status(200).json({
+      message: "Comunidade cadastrada. Email sendo enviado...",
+      comunidade: criarComunidade,
+    });
+
+    // -------- e dispara o email depois ----------
+
     const transporter = nodemailer.createTransport({
       host: "172.26.2.26",
       port: 25,
@@ -34,7 +42,7 @@ class ComunityController {
       tls: { rejectUnauthorized: false },
     });
 
-    await transporter.sendMail({
+    transporter.sendMail({
       from: "digital.nomads@sedet.ce.gov.br",
       to: novaComunidade.email_gestor,
       subject: "Código PIN",
@@ -44,15 +52,13 @@ class ComunityController {
         <br><p><strong>${pin}</strong></p>
         <p><a href="https://www.digitalnomads.ce.gov.br/admin/resetSenha">Clique aqui</a> para criar sua senha</p>
       `,
-    });
-
-    return res.status(200).json({
-      message: "Comunidade cadastrada e PIN enviado",
-      comunidade: criarComunidade,
+    }, (err, info) => {
+      if (err) console.error("Erro ao enviar email:", err);
+      else console.log("Email enviado:", info.response);
     });
 
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json(error.message);
   }
 }
