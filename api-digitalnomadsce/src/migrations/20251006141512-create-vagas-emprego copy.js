@@ -16,12 +16,15 @@ module.exports = {
       nome_vaga: {
         type: Sequelize.STRING
       },
+      email_vaga: {
+        type: Sequelize.STRING
+      },
       descricao: {
         type: Sequelize.STRING
       },
-      status: {
-        type: Sequelize.STRING
-      },
+      // status: {
+      //   type: Sequelize.STRING
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

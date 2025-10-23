@@ -11,13 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Vagas_Emprego.belongsTo(models.cadastra_parceiros, { foreignKey: 'parceiro_id', as: 'ass_vagas_parceiro'})
-      Vagas_Emprego.hasMany(models.Emprego_Nomad, { foreignKey: 'vaga_id', as: 'ass_vaga_emprego'})
+      // Vagas_Emprego.hasMany(models.Emprego_Nomad, { foreignKey: 'vaga_id', as: 'ass_vaga_emprego'})
     }
   }
   Vagas_Emprego.init({
     nome_vaga: DataTypes.STRING,
     descricao: DataTypes.STRING,
-    status: DataTypes.STRING
+    // status: DataTypes.STRING,
+    email_vaga: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Vagas_Emprego',

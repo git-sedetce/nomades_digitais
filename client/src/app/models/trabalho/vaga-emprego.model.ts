@@ -5,6 +5,7 @@ export class VagaEmprego {
     public nomad_id?: number,
     public nome_vaga?: string,
     public descricao?: string,
-    public status?: string,
+    // public status?: string,
+    public email_vaga?: string,
   ){}
 }

@@ -26,6 +26,13 @@
   background: #fbc02d;
 }
 
+.tempnomad-text span {
+  margin: 0.8rem 0 0 0;
+  font-size: 1.0rem;
+  font-weight: 600;
+  color: #009688;
+}
+
 .tempnomad-text h2 {
   margin: 1.3rem 0;
   font-size: 1.2rem;

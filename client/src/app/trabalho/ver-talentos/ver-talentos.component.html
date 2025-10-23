@@ -16,24 +16,16 @@
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
                   <th>Profissão</th>
-                  <th class="text-center">Ações</th>
+                  <th>Email</th>
+
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let nomad of lista_nomad">
                   <td>{{ nomad.name }} {{ nomad.lastName }}</td>
-                  <td>{{ nomad.nomad_email }}</td>
-                  <td>{{ nomad.contato_nomad }}</td>
                   <td>{{ nomad.profissao }}</td>
-                  <td class="text-center">
-                    <!-- Exemplo de botão -->
-                    <button class="btn btn-light" title="Ver mais">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </td>
+                  <td>{{ nomad.nomad_email }}</td>
                 </tr>
               </tbody>
             </table>
@@ -55,43 +47,3 @@
     </div>
   </div>
 </section>
-
-
-
-<!-- Modal Contato -->
-<!-- <div class="modal fade" id="modalContato" tabindex="-1" aria-labelledby="modalContatoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-success text-white">
-        <h5 class="modal-title" id="modalContatoLabel">Entrar em Contato</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form #contatoForm="ngForm" (ngSubmit)="enviarContato()">
-        <div class="modal-body">
-          <div class="mb-3">
-            <label for="mensagem" class="form-label">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" class="form-control" rows="3" required
-              [(ngModel)]="contato.mensagem"></textarea>
-          </div>
-
-          <div class="mb-3">
-            <label for="telefone" class="form-label">Telefone</label>
-            <input type="text" id="telefone" name="telefone" class="form-control" placeholder="(00) 00000-0000" required
-              [(ngModel)]="contato.telefone">
-          </div>
-
-          <div class="mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="exemplo@email.com" required
-              [(ngModel)]="contato.email">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-success">Enviar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->

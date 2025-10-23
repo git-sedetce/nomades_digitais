@@ -33,14 +33,12 @@ export class EditarNomadsComponent implements OnInit{
       nomad_email: [''],
       contato_nomad: [''],
       cidade: [''],
-      regiao: [''],
       country: [''],
       shared_info: [''],
       nomads_news: [''],
       suggestion: [''],
       first_time_ce: [''],
       data_nascimento: [''],
-      passaporte: [''],
       motivo_viagem: [''],
       know_how: this.formBuilder.array([]),
       profissao: [''],
@@ -105,14 +103,12 @@ export class EditarNomadsComponent implements OnInit{
     this.formEditNomad.controls['nomad_email'].setValue(nomad.nomad_email);
     this.formEditNomad.controls['contato_nomad'].setValue(nomad.contato_nomad);
     this.formEditNomad.controls['cidade'].setValue(nomad.cidade);
-    this.formEditNomad.controls['regiao'].setValue(nomad.regiao);
     this.formEditNomad.controls['country'].setValue(nomad.country);
     this.formEditNomad.controls['shared_info'].setValue(nomad.shared_info);
     this.formEditNomad.controls['nomads_news'].setValue(nomad.nomads_news);
     this.formEditNomad.controls['suggestion'].setValue(nomad.suggestion);
     this.formEditNomad.controls['first_time_ce'].setValue(nomad.first_time_ce);
     this.formEditNomad.controls['data_nascimento'].setValue(nomad.data_nascimento);
-    this.formEditNomad.controls['passaporte'].setValue(nomad.passaporte);
     this.formEditNomad.controls['motivo_viagem'].setValue(nomad.motivo_viagem);
     // this.formEditNomad.controls['know_how'].setValue(nomad.know_how);
     this.formEditNomad.controls['profissao'].setValue(nomad.profissao);
@@ -155,14 +151,12 @@ export class EditarNomadsComponent implements OnInit{
     this.nomadObj.nomad_email = this.formEditNomad.value.nomad_email;
     this.nomadObj.contato_nomad = this.formEditNomad.value.contato_nomad;
     this.nomadObj.cidade = this.formEditNomad.value.cidade;
-    this.nomadObj.regiao = this.formEditNomad.value.regiao;
     this.nomadObj.country = this.formEditNomad.value.country;
     this.nomadObj.shared_info = this.formEditNomad.value.shared_info;
     this.nomadObj.nomads_news = this.formEditNomad.value.nomads_news;
     this.nomadObj.suggestion = this.formEditNomad.value.suggestion;
     this.nomadObj.first_time_ce = this.formEditNomad.value.first_time_ce;
     this.nomadObj.data_nascimento = this.formEditNomad.value.data_nascimento;
-    this.nomadObj.passaporte = this.formEditNomad.value.passaporte;
     this.nomadObj.motivo_viagem = this.formEditNomad.value.motivo_viagem;
     this.nomadObj.profissao = this.formEditNomad.value.profissao;
     this.nomadObj.possui_empresa = this.formEditNomad.value.possui_empresa;

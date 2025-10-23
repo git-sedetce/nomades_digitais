@@ -168,9 +168,7 @@
                     role="alert">Se não houver favor escrever "Não ofertamos esse serviço".</div>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="service_seguranca" class="pergunta">Quais são as medidas de segurança pública do
-                    município? (vigilância,
-                    endereço de postos policiais, entre outros).</label>
+                  <label for="service_seguranca" class="pergunta">Quais são as medidas de segurança pública do município? (vigilância, endereço de postos policiais, entre outros).</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="service_seguranca" rows="3"
                     name="service_seguranca" ngModel required #service_seguranca="ngModel"
                     [(ngModel)]="cadastro_cidade.service_seguranca"></textarea>
@@ -184,9 +182,7 @@
               <fieldset>
                 <legend>Pontos Turísticos</legend>
                 <div class="form-group mb-3">
-                  <label for="pontos_turisticos" class="pergunta">Principais pontos turísticos da cidade (Cite e
-                    descreva os pontos
-                    turísticos).</label>
+                  <label for="pontos_turisticos" class="pergunta">Principais atrativos turísticos e eventos/festas tradicionais da cidade (Cite e descreva estes pontos).</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="pontos_turisticos" rows="5"
                     name="pontos_turisticos" ngModel required #pontos_turisticos="ngModel"
                     [(ngModel)]="cadastro_cidade.pontos_turisticos"></textarea>

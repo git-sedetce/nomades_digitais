@@ -15,17 +15,15 @@
             { label: 'Email', value: nomad.nomad_email },
             { label: 'Data de Nascimento', value: nomad.data_nascimento ? (nomad.data_nascimento | date:'dd/MM/yyyy') : 'Sem informações' },
             { label: 'Telefone', value: nomad.contato_nomad },
-            { label: 'Cidade', value: nomad.cidade },
-            { label: 'Região', value: nomad.regiao },
+            { label: 'Cidade de origem', value: nomad.cidade },
+            { label: 'País de origem', value: nomad.country },
             { label: 'Primeira vez no Ceará?', value: nomad.first_time_ce ? (nomad.first_time_ce === 'sim' ? 'Sim' : 'Não') : 'Sem informações' },
-            { label: 'País', value: nomad.country },
             { label: 'Profissão', value: nomad.profissao || 'Sem informações' },
             { label: 'Possui Empresa', value: nomad.possui_empresa === 'sim' ? 'Sim' : 'Não' },
             { label: 'Sugestão', value: nomad.suggestion || 'Sem informações' },
             { label: 'Motivo da Viagem', value: nomad.motivo_viagem || 'Sem informações' },
             { label: 'Deseja dividir informações?', value: nomad.shared_info || 'Sem informações' },
             { label: 'Deseja receber notícias?', value: nomad.nomads_news || 'Sem informações' },
-            { label: 'Passaporte', value: nomad.passaporte || 'Sem informações' }
           ]">
             <div class="info-item">
               <h5>{{ info.label }}:</h5>
@@ -151,26 +149,14 @@
 
               <!-- Cidade -->
               <div class="col-md-6">
-                <label for="cidade" class="form-label">Cidade</label>
+                <label for="cidade" class="form-label">Cidade de origem</label>
                 <input id="cidade" type="text" formControlName="cidade" class="form-control" />
-              </div>
-
-              <!-- Região -->
-              <div class="col-md-6">
-                <label for="regiao" class="form-label">Região ou Estado</label>
-                <input id="regiao" type="text" formControlName="regiao" class="form-control" />
               </div>
 
               <!-- País -->
               <div class="col-md-6">
-                <label for="country" class="form-label">País</label>
+                <label for="country" class="form-label">País de origem</label>
                 <input id="country" type="text" formControlName="country" class="form-control" />
-              </div>
-
-              <!-- Passaporte -->
-              <div class="col-md-6">
-                <label for="passaporte" class="form-label">Número do Passaporte</label>
-                <input id="passaporte" type="text" formControlName="passaporte" class="form-control" />
               </div>
 
               <!-- Primeira vez -->

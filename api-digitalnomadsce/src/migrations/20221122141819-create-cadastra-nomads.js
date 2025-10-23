@@ -23,14 +23,8 @@ module.exports = {
       cidade: {
         type: Sequelize.STRING
       },
-      regiao: {
-        type: Sequelize.STRING
-      },
       country: {
         type: Sequelize.STRING
-      },
-      departure_date: {
-        type: Sequelize.DATE
       },
       shared_info: {
         type: Sequelize.STRING
@@ -47,10 +41,6 @@ module.exports = {
       },
       data_nascimento: {
         type: Sequelize.DATE,
-        allowNull: true
-      },
-      passaporte: {
-        type: Sequelize.STRING(50),
         allowNull: true
       },
       motivo_viagem: {

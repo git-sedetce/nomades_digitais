@@ -67,17 +67,10 @@
                 </legend>
                 <div class="row">
                   <div class="col-sm-4 col-12 mb-3">
-                    <label for="cidade" class="form-label pergunta">Cidade / City</label>
+                    <label for="cidade" class="form-label pergunta">Cidade de Origem / City</label>
                     <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite sua cidade / Type your city" required #cidade="ngModel" [(ngModel)]="nomad.cidade">
                     <div *ngIf="!cidade.valid && cidade.touched" class="alert alert-danger" role="alert">
                       Informe a cidade de origem</div>
-                  </div>
-
-                  <div class="col-sm-4 col-12 mb-3">
-                    <label for="regiao" class="form-label pergunta">Região ou Estado / State or Region</label>
-                    <input type="text" class="form-control" id="regiao" name="regiao" placeholder="Digite seu Estado / Type your State or Region" required #regiao="ngModel" [(ngModel)]="nomad.regiao">
-                    <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">
-                      Informe a regiao de origem / Type your State or Region</div>
                   </div>
 
                   <div class="col-sm-4 col-12 mb-3">
@@ -85,17 +78,8 @@
                     <input type="text" class="form-control" id="country" name="country" placeholder="Digite seu País / Type your Country" required #country="ngModel" [(ngModel)]="nomad.country">
                     <div *ngIf="!country.valid && country.touched" class="alert alert-danger" role="alert">Digite seu País / Type your Country</div>
                   </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-sm-6 col-12 mb-3">
-                    <label for="passaporte" class="form-label pergunta">Número do Passaporte / Passport Number</label>
-                    <input type="text" class="form-control" id="passaporte" name="passaporte" placeholder="Digite o número do passaporte / Type your passport number" required #passaporte="ngModel" [(ngModel)]="nomad.passaporte">
-                    <div *ngIf="!passaporte.valid && passaporte.touched" class="alert alert-danger" role="alert">
-                      Informe o número do seu passaporte / Enter your passport number</div>
-                  </div>
-
-                  <div class="col-sm-6 col-12 mb-3">
+                  <div class="col-sm-4 col-12 mb-3">
                     <label class="pergunta mb-3" for="first_time_ce">Primeira vez no Ceará? / First time in Ceará?</label><br>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="radio" name="first_time_ce" id="news_sim" value="sim" ngModel required #first_time_ce="ngModel" [(ngModel)]="nomad.first_time_ce">
@@ -110,6 +94,11 @@
                       </label>
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
+
+
                   <!--<div class="col-sm-6 col-12 mb-3">
                     <label for="departure_date" class="form-label pergunta">Data de partida / Departure Date</label>
                     <input type="date" class="form-control" id="departure_date" name="departure_date" placeholder="Data" required #departure_date="ngModel" [(ngModel)]="nomad.departure_date">
@@ -291,10 +280,6 @@
                 <tr class="table-info">
                   <td>Cidade</td>
                   <td>{{ nomad.cidade }}</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Região</td>
-                  <td>{{ nomad.regiao }}</td>
                 </tr>
                 <tr class="table-info">
                   <td>País</td>

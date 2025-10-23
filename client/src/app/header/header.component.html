@@ -36,9 +36,6 @@
                 <a class="dropdown-item" routerLink="/ondeficar/ambiente">Ambientes de Trabalho
                 </a>
               </li>
-              <li *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">
-                <hr class="dropdown-divider">
-              </li>
 
             </ul>
           </li>
@@ -58,21 +55,14 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
+                <a class="dropdown-item" routerLink="/eventos/proxima_parada">Eventos
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
                 <a class="dropdown-item" routerLink="/eventos/gastronomia">Gastronomia
-                </a>
-              </li>
-              <li *ngIf="profile === 3">
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_eventos" *ngIf="profile === 3">Cadastrar Eventos
-                </a>
-              </li>
-              <li *ngIf="profile === 3">
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada" *ngIf="profile === 3">Cadastrar Temporada Nomads
                 </a>
               </li>
             </ul>
@@ -99,13 +89,6 @@
                 <a class="dropdown-item" routerLink="/municipio/tipo_turismo">Tipo de Turismo
                 </a>
               </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/eventos/proxima_parada">Eventos
-                </a>
-              </li>
             </ul>
           </li>
 
@@ -113,17 +96,17 @@
             <a class="nav-link active" aria-current="page" routerLink="/trabalho/home">Oportunidades de Trabalho</a>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="profile != 1">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Cadastro
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
+              <li *ngIf="profile === 3">
                 <a class="dropdown-item" routerLink="/comunidade/homecadastro">Cadastro Comunidades
                 </a>
               </li>
-              <li>
+              <li *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">
                 <hr class="dropdown-divider">
               </li>
               <li>
@@ -136,7 +119,7 @@
               <li>
                 <a class="dropdown-item" routerLink="/municipio/cadastro_municipio" *ngIf="profile === 3">Cadastro de Municípios</a>
               </li>
-              <li>
+              <li *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">
                 <hr class="dropdown-divider">
               </li>
               <li>
@@ -148,6 +131,20 @@
               </li>
               <li>
                 <a class="dropdown-item" routerLink="/admin/cadastro" *ngIf="profile === 3">Cadastro de Admin</a>
+              </li>
+              <li *ngIf="profile === 3">
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/cadastro_eventos" *ngIf="profile === 3">Cadastrar Eventos
+                </a>
+              </li>
+              <li *ngIf="profile === 3">
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada" *ngIf="profile === 3">Cadastrar Temporada Nomads
+                </a>
               </li>
             </ul>
           </li>

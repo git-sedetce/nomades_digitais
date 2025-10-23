@@ -64,7 +64,7 @@ export class CadastraVagaComponent implements OnInit {
   }
 
   cadastrarOuAtualizarVaga() {
-    if (!this.vaga.nome_vaga || !this.vaga.descricao || !this.vaga.status) {
+    if (!this.vaga.nome_vaga || !this.vaga.descricao || !this.vaga.email_vaga) {
       this.toastr.warning('Preencha todos os campos antes de cadastrar!');
       return;
     }
