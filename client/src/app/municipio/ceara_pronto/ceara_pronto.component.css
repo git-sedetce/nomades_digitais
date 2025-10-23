@@ -20,7 +20,40 @@
   background-color: #ffffff;
 }
 
-.cariri {
+.mar {
+  fill: #33a02c50;
+  cursor: pointer;
+}
+
+.sertao {
+  fill: #ffff0050;
+  cursor: pointer;
+}
+
+.serra {
+  fill: #72dfff50;
+  cursor: pointer;
+}
+
+.mar:hover {
+  fill: #33a02c;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.sertao:hover {
+  fill: #ffff00;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+.serra:hover {
+  fill: #72dfff;
+  cursor: pointer;
+  transition: fill 0.3s;
+}
+
+/* .cariri {
   fill: #becf5050;
   cursor: pointer;
 }
@@ -172,7 +205,7 @@
   fill: #ffaa00;
   cursor: pointer;
   transition: fill 0.3s;
-}
+} */
 
 
 
