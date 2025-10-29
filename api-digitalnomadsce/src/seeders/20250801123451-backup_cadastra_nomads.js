@@ -13,7 +13,6 @@ module.exports = {
           cidade: "Itapajé",
           regiao: "Ceará",
           country: "Brasil",
-          departure_date: "2023-01-03 00:00:00+00",
           shared_info: "sim",
           nomads_news: "sim",
           suggestion: "",

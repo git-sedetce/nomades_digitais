@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     nomad_email: DataTypes.STRING,
     contato_nomad: DataTypes.STRING,
     cidade: DataTypes.STRING,
+    regiao: DataTypes.STRING,
     country: DataTypes.STRING,
     shared_info: DataTypes.STRING,
     nomads_news: DataTypes.STRING,

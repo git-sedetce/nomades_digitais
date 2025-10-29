@@ -23,6 +23,9 @@ module.exports = {
       cidade: {
         type: Sequelize.STRING
       },
+      regiao: {
+        type: Sequelize.STRING
+      },
       country: {
         type: Sequelize.STRING
       },
@@ -33,7 +36,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       suggestion: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.STRING(500),
+        allowNull: true
       },
       first_time_ce: {
         type: Sequelize.STRING(15),
@@ -52,7 +56,7 @@ module.exports = {
         allowNull: true
       },
       profissao: {
-        type: Sequelize.STRING(15),
+        type: Sequelize,
         allowNull: true
       },
       possui_empresa: {

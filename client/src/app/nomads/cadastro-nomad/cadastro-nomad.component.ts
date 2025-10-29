@@ -93,7 +93,6 @@ buscarCNPJ(cnpj:any, form: any){
       cidade: this.nomad.cidade,
       regiao: this.nomad.regiao,
       country: this.nomad.country,
-      //departure_date: this.nomad.departure_date,
       shared_info: this.nomad.shared_info,
       nomads_news: this.nomad.nomads_news,
       suggestion: this.nomad.suggestion,
