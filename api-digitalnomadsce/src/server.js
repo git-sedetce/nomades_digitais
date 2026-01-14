@@ -10,7 +10,7 @@ const port = process.env.PORT
 //app.use(express.json());
 //app.use(express.urlencoded({ extended: true }));
 var corsOptions = {
-  origin: ['http://localhost:4290', 'https://localhost:4290', 'https://www.digitalnomads.ce.gov.br'],
+  origin: ['http://localhost:4290', 'https://localhost:4290', 'https://www.digitalnomads.ce.gov.br', 'https://digitalnomads.ce.gov.br'],
   optionsSuccessStatus:200,
   methods: "GET, PUT, POST, DELETE",
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Access-Control-Allow-Origin"],
