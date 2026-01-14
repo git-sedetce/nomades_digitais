@@ -113,6 +113,17 @@ module.exports = {
       createdAt: "2024-11-25 18:19:00.14419+00",
       updatedAt: "2024-11-25 18:19:00.14419+00"
     },  
+    {
+      nome_completo: "MARIA FERNANDA ZEPEDA MEJIA",
+      user_name: "mariaferzepeda7",
+      user_email: "mariaferzepeda7@gmail.com",
+      user_active: 'False',
+      user_password: "$2a$10$TZ3o1iz7Pu07UkhoTaCnEuJYjzJ1nVoQm6oBrbQ1T3bmCGe0QQiaS",
+      user_pin: "1073",
+      profile_id: 1,
+      createdAt: "2025-12-01 15:08:02.395+00",
+      updatedAt: "2026-01-02 14:43:46.921+00"
+    },  
     
   ], {});
   },

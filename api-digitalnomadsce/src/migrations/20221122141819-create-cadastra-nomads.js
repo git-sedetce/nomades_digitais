@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       suggestion: {
-        type: Sequelize.STRING.STRING(500),
+        type: Sequelize.STRING(500),
         allowNull: true
       },
       first_time_ce: {
@@ -44,7 +44,7 @@ module.exports = {
         allowNull: true
       },
       data_nascimento: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: true
       },
       motivo_viagem: {
@@ -56,7 +56,7 @@ module.exports = {
         allowNull: true
       },
       profissao: {
-        type: Sequelize,
+        type: Sequelize.STRING,
         allowNull: true
       },
       possui_empresa: {

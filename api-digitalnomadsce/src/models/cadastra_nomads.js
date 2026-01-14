@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     nomads_news: DataTypes.STRING,
     suggestion: DataTypes.STRING,
     first_time_ce: DataTypes.STRING,
-    data_nascimento: DataTypes.DATE,
+    data_nascimento: DataTypes.DATEONLY,
     motivo_viagem: DataTypes.STRING(500),
     know_how: DataTypes.STRING,
     profissao: DataTypes.STRING,
