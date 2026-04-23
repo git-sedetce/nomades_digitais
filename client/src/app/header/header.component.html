@@ -22,33 +22,11 @@
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              Onde ficar
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-              <li class="nav-item">
-                <a class="dropdown-item" routerLink="/ondeficar/home">Hospedagem</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="/ondeficar/ambiente">Ambientes de Trabalho
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
               O que fazer?
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
               <li>
-                <a class="dropdown-item" routerLink="/eventos/temporadaNomad">Temporada Nomads
+                <a class="dropdown-item" routerLink="#">Experiências
                 </a>
               </li>
               <li>
@@ -65,6 +43,19 @@
                 <a class="dropdown-item" routerLink="/eventos/gastronomia">Gastronomia
                 </a>
               </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="nav-item">
+                <a class="dropdown-item" routerLink="/ondeficar/home">Hospedagem</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/eventos/temporadaNomad">Temporada Nomads
+                </a>
+              </li>
             </ul>
           </li>
 
@@ -75,25 +66,37 @@
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              Próxima Parada
+              Networking
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
               <li class="nav-item">
-                <a class="dropdown-item" routerLink="/municipio/ceara_pronto">Melhor de cada cidade</a>
+                <a class="dropdown-item" routerLink="/ondeficar/ambiente">Ambiente de Trabalho</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/municipio/tipo_turismo">Tipo de Turismo
+                <a class="dropdown-item" routerLink="/trabalho/home">Oportunidades de Trabalho
                 </a>
               </li>
             </ul>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/trabalho/home">Oportunidades de Trabalho</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Serviços
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/cpf_estrangeiro">CPF para Estrangeiros</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" routerLink="/visto_nomade">Visto para Nômade Digital no Brasil
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item dropdown" *ngIf="profile != 1">
@@ -110,20 +113,23 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/ondeficar/cadastro_parceiro" *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">Cadastre sua empresa
+                <a class="dropdown-item" routerLink="/ondeficar/cadastro_parceiro"
+                  *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">Cadastre sua empresa
                 </a>
               </li>
               <li *ngIf="profile === 3">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio" *ngIf="profile === 3">Cadastro de Municípios</a>
+                <a class="dropdown-item" routerLink="/municipio/cadastro_municipio" *ngIf="profile === 3">Cadastro de
+                  Municípios</a>
               </li>
               <li *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/nomad/cadastro_nomad" *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">Cadastro de Nomads
+                <a class="dropdown-item" routerLink="/nomad/cadastro_nomad"
+                  *ngIf="profile != 1 && profile != 2 && profile != 4 && profile != 5">Cadastro de Nomads
                 </a>
               </li>
               <li>
@@ -143,22 +149,8 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada" *ngIf="profile === 3">Cadastrar Temporada Nomads
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown" *ngIf="profile === 3 || profile === 1">
-            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Dicas
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/cpf_estrangeiro">CPF para Estrangeiros</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" routerLink="/visto_nomade">Visto para Nômade Digital no Brasil
+                <a class="dropdown-item" routerLink="/eventos/cadastro_temporada" *ngIf="profile === 3">Cadastrar
+                  Temporada Nomads
                 </a>
               </li>
             </ul>
@@ -182,6 +174,12 @@
                 <a class="dropdown-item" routerLink="/ondeficar/editarparceria">Editar empresas cadastradas
                 </a>
               </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li *ngIf="profile === 3">
+                <a class="dropdown-item" routerLink="/admin/user">Usuários</a>
+              </li>
             </ul>
           </li>
           <li class="nav-item" *ngIf="profile === 2">
@@ -190,9 +188,7 @@
           <li class="nav-item" *ngIf="profile === 1"><!--*ngIf="profile === 1"-->
             <a class="nav-link active" routerLink="/nomad/editarNomad">Perfil Nomad</a>
           </li>
-          <li class="nav-item" *ngIf="profile === 3">
-            <a class="nav-link active" routerLink="/admin/user">Usuários</a>
-          </li>
+
 
           <li *ngIf="!authenticated">
             <button type="button" routerLink="/admin/login"

@@ -1,54 +1,67 @@
-body, html {
-      height: 100%;
-      margin: 0;
-    }
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
 
-    .bg-container {
-      background: url("../../../assets/midia/imgs/praia_paracuru.png") no-repeat center center;
-      background-size: cover;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start; /* força alinhamento à esquerda */
-      padding-left: 3%; /* margem suave da borda esquerda */
-    }
+.bg-container {
+  background: url("../../../assets/midia/imgs/praia_paracuru.png") no-repeat center center;
+  background-size: cover;
+  min-height: 80vh;
+  padding: clamp(20px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .card-link {
-      border-radius: 15px;
-      padding: 30px;
-      margin: 10px;
-      text-decoration: none;
-      color: #fff;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 120px;
-      transition: transform 0.2s ease-in-out;
-    }
+/* grid dos cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 320px));
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+}
 
-    .card-link:hover {
-      transform: scale(1.05);
-    }
-    .card-link img {
-      z-index: 0;
-    }
+/* estilo base */
+.card-link {
+  position: relative;
+  border-radius: 20px;
+  text-decoration: none;
+  padding: 25px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  font-family: "Aristotelica", "Poppins", "Montserrat";
+}
 
-    .card-info {
-      background-color: #dcdcdc; /* cinza */
-      color: #000;
-    }
+.card-link:hover {
+  transform: scale(1.03);
+}
 
-    .card-perfil {
-      background-color: #ff4500; /* laranja */
-    }
+.card-perfil {
+  background: #ff5a00;
+  color: #fff;
+}
 
-    .card-hub {
-      background-color: #e60050; /* rosa */
-    }
+.card-destino {
+  background: #f4cf00;
+  color: #000;
+}
 
-    .card-destino {
-      background-color: #dcdcdc; /* cinza claro */
-      color: #000;
-    }
+/* tablet */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+  }
+
+  .card-link {
+    min-height: 150px;
+  }
+}

@@ -7,6 +7,8 @@ import { PerfilEstadoComponent } from './perfil-estado/perfil-estado.component';
 import { HubInovacaoComponent } from './hub-inovacao/hub-inovacao.component';
 import { AeroportosComponent } from './aeroportos/aeroportos.component';
 import { HomeComponent } from './home/home.component';
+import { DestinoComponent } from './destino/destino.component';
+import { ConhecaCearaComponent } from './conheca-ceara/conheca-ceara.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { HomeComponent } from './home/home.component';
     PerfilEstadoComponent,
     HubInovacaoComponent,
     AeroportosComponent,
-    HomeComponent
+    HomeComponent,
+    DestinoComponent,
+    ConhecaCearaComponent
   ],
   imports: [
     CommonModule,

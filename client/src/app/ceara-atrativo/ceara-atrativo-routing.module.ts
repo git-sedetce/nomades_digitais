@@ -5,6 +5,8 @@ import { InformacoesGeraisComponent } from './informacoes-gerais/informacoes-ger
 import { PerfilEstadoComponent } from './perfil-estado/perfil-estado.component';
 import { HubInovacaoComponent } from './hub-inovacao/hub-inovacao.component';
 import { AeroportosComponent } from './aeroportos/aeroportos.component';
+import { DestinoComponent } from './destino/destino.component';
+import { ConhecaCearaComponent } from './conheca-ceara/conheca-ceara.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,14 @@ const routes: Routes = [
   {
     path: 'aeroportos',
     component: AeroportosComponent,
+  },
+  {
+    path: 'destino',
+    component: DestinoComponent,
+  },
+  {
+    path: 'knowce',
+    component: ConhecaCearaComponent,
   },
 ];
 

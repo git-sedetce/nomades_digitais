@@ -1,0 +1,132 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.bg-container {
+  background: url("../../../assets/midia/imgs/fortress-g0a2d0b9c7_1920.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 10rem;
+}
+
+.titulo {
+  font-size: clamp(2rem, 5vw, 4rem);
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: #000;
+  margin-bottom: 40px;
+  font-family: "AristotelicaDemiBold", "Poppins", "Montserrat";
+}
+
+/* grid principal */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 280px));
+  grid-template-rows: auto auto;
+  gap: 30px;
+  align-items: start;
+}
+
+/* card info ocupa área central */
+.card-info {
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+/* estilo base */
+.card-link {
+  position: relative;
+  border-radius: 20px;
+  text-decoration: none;
+  padding: 25px;
+  min-height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  font-weight: 500;
+  transition: transform 0.3s ease;
+  font-family: "Aristotelica", "Poppins", "Montserrat";
+}
+
+.card-link:hover {
+  transform: scale(1.03);
+}
+
+.card-info {
+  background: #e6e6e6;
+  color: #000;
+}
+
+.card-perfil {
+  background: #ff5a00;
+  color: #fff;
+}
+
+.card-destino {
+  background: #f4cf00;
+  color: #000;
+}
+
+/* ícone superior */
+.icon-circle {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #2d2d2d;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* botão + */
+.plus-circle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* tablet */
+@media (max-width: 992px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+  }
+}
+
+/* celular */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-info {
+    grid-row: auto;
+  }
+
+  .card-link {
+    min-height: 150px;
+  }
+
+  .titulo {
+    text-align: center;
+  }
+}
