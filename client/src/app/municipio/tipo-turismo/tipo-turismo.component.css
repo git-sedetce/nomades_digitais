@@ -78,11 +78,108 @@
   margin: 4rem auto;
 }
 
-.card-img-top {
+/* .card-img-top {
   width: 100%;
-  height: 200px; /* ajuste conforme desejado */
+  height: 200px;
   object-fit: cover;
   object-position: center;
   border-radius: 0.5rem 0.5rem 0 0;
+} */
+
+.city-card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
 }
 
+.city-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.no-image {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+  color: #888;
+  font-size: 14px;
+}
+
+.card-body {
+  padding: 1.2rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: #222;
+}
+
+.category {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #eef5ff;
+  color: #2c6bed;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.region {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.btn-saiba {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  background: #0d6efd;
+  color: white;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-saiba:hover {
+  background: #0b5ed7;
+}
+
+/* Ajustes mobile */
+@media (max-width: 576px) {
+  .image-wrapper,
+  .no-image {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .btn-saiba {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+}

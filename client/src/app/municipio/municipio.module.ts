@@ -10,13 +10,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxMaskModule } from 'ngx-mask';
 import { TipoTurismoComponent } from './tipo-turismo/tipo-turismo.component';
+import { DetalhesMunicipioComponent } from './detalhes-municipio/detalhes-municipio.component';
 
 
 @NgModule({
   declarations: [
     Ceara_prontoComponent,
     CadastroMunicipioComponent,
-    TipoTurismoComponent
+    TipoTurismoComponent,
+    DetalhesMunicipioComponent
   ],
   imports: [
     CommonModule,

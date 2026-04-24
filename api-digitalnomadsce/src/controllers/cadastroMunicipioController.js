@@ -113,6 +113,16 @@ class CadastroMunicipioController {
     try {
       const umMunicipioParceiro = await database.cadastra_municipios.findOne({
         where: { id: Number(id) },
+        include:[
+            {
+              association: "ass_cadastra_municipios_cidade",
+              attributes: ["nome_municipio"],
+            },
+            {
+              association: "ass_cadastra_municipios_regiao",
+              attributes: ["nome"],
+            }
+          ]
       });
       return res.status(200).json(umMunicipioParceiro);
     } catch (error) {
@@ -195,14 +205,24 @@ class CadastroMunicipioController {
         // Buscar dados da cidade (JOIN manual já que não usamos include)
         const municipio = await database.cadastra_municipios.findOne({
           where: { id: imagem.municipio_id },
-          attributes: ["cidade", "regiao", "tipo_turismo"],
+          attributes: ["tipo_turismo"],
+          include:[
+            {
+              association: "ass_cadastra_municipios_cidade",
+              attributes: ["id", "nome_municipio"],
+            },
+            {
+              association: "ass_cadastra_municipios_regiao",
+              attributes: ["id", "nome"],
+            }
+          ]
         });
 
         imagensData.push({
           id: imagem.id,
           municipio_id: imagem.municipio_id,
-          cidade: municipio?.cidade,
-          regiao: municipio?.regiao,
+          cidade: municipio?.ass_cadastra_municipios_cidade.nome_municipio,
+          regiao: municipio?.ass_cadastra_municipios_regiao.nome,
           tipo_turismo: municipio?.tipo_turismo,
           mimetype: imagem.mimetype,
           base64: data,
@@ -228,7 +248,17 @@ class CadastroMunicipioController {
             [Op.iLike]: `%${turismo}%`,
           },
         },
-        attributes: ["id", "cidade", "regiao", "tipo_turismo"],
+        attributes: ["id", "tipo_turismo"],
+        include:[
+            {
+              association: "ass_cadastra_municipios_cidade",
+              attributes: ["id", "nome_municipio"],
+            },
+            {
+              association: "ass_cadastra_municipios_regiao",
+              attributes: ["id", "nome"],
+            }
+          ]
       });
 
       // Para cada município, buscar 1 anexo aleatório e montar o objeto com base64
@@ -250,8 +280,8 @@ class CadastroMunicipioController {
         imagensData.push({
           id: anexo.id,
           municipio_id: anexo.municipio_id,
-          cidade: municipio.cidade,
-          regiao: municipio.regiao,
+          cidade: municipio.ass_cadastra_municipios_cidade.nome_municipio,
+          regiao: municipio.ass_cadastra_municipios_regiao.nome,
           tipo_turismo: municipio.tipo_turismo,
           mimetype: anexo.mimetype,
           base64: base64,
@@ -261,6 +291,57 @@ class CadastroMunicipioController {
       return res.status(200).json(imagensData);
     } catch (error) {
       return res.status(500).json(error.message);
+    }
+  }
+
+  static async pegarImagensMunicipioParceiro(req, res) {
+    const { id } = req.params;
+    try {
+      const results = await database.anexo_municipio.findAll({
+        where: { municipio_id: id },
+        order: [["filename", "ASC"]],
+        attributes: ["id", "mimetype", "path", "municipio_id"],
+      });
+
+      const imagensData = [];
+
+      for (const imagem of results) {
+        const acesso = path.join(baseUrl, imagem.path);
+        if (!fs.existsSync(acesso)) continue;
+
+        const data = fs.readFileSync(acesso, "base64");
+
+        // Buscar dados da cidade (JOIN manual já que não usamos include)
+        const municipio = await database.cadastra_municipios.findOne({
+          where: { id: imagem.municipio_id },
+          attributes: ["tipo_turismo"],
+          include:[
+            {
+              association: "ass_cadastra_municipios_cidade",
+              attributes: ["id", "nome_municipio"],
+            },
+            {
+              association: "ass_cadastra_municipios_regiao",
+              attributes: ["id", "nome"],
+            }
+          ]
+        });
+
+        imagensData.push({
+          id: imagem.id,
+          municipio_id: imagem.municipio_id,
+          cidade: municipio?.ass_cadastra_municipios_cidade.nome_municipio,
+          regiao: municipio?.ass_cadastra_municipios_regiao.nome,
+          tipo_turismo: municipio?.tipo_turismo,
+          mimetype: imagem.mimetype,
+          base64: data,
+        });
+      }
+
+      return res.status(200).json(imagensData);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Erro ao buscar as imagens" });
     }
   }
 }

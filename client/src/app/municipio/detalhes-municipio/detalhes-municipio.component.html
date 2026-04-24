@@ -1,0 +1,208 @@
+<div class="municipio-detalhe" *ngIf="municipio">
+
+  <!-- botão voltar -->
+  <div class="mb-4">
+    <button class="btn-voltar" (click)="voltar()">
+      <i class="bi bi-arrow-left"></i> Voltar
+    </button>
+  </div>
+
+  <!-- título -->
+  <div class="mb-4">
+    <h1 class="titulo-cidade">
+      O melhor de {{ municipio.ass_cadastra_municipios_cidade?.nome_municipio }}
+    </h1>
+    <p class="subtitulo-regiao">
+      {{ municipio.ass_cadastra_municipios_regiao?.nome }}
+    </p>
+  </div>
+
+  <!-- abas -->
+  <ul class="nav nav-pills custom-tabs mb-4 justify-content-center" id="tabsMunicipio" role="tablist">
+
+    <li class="nav-item">
+      <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#informacoes">
+        Informações da cidade
+      </button>
+    </li>
+
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#impressoes">
+        Impressões
+      </button>
+    </li>
+
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#servicos">
+        Serviços
+      </button>
+    </li>
+
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#turismo">
+        Pontos Turísticos
+      </button>
+    </li>
+
+  </ul>
+
+  <div class="tab-content">
+
+    <!-- INFORMAÇÕES -->
+    <div class="tab-pane fade show active" id="informacoes">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <h4>História da cidade</h4>
+          <p class="text-justify">{{ municipio.historia_cidade }}</p>
+
+          <p><strong>Email:</strong> {{ municipio.email_prefeitura }}</p>
+          <p><strong>Contato:</strong> {{ municipio.contato_prefeitura }}</p>
+
+          <p>
+            <strong>Website:</strong>
+            <a [href]="municipio.link_prefeitura" target="_blank">
+              {{ municipio.link_prefeitura }}
+            </a>
+          </p>
+
+          <p>
+            <strong>Tipo de Turismo:</strong>
+            {{ municipio.tipo_turismo }}
+          </p>
+
+          <p *ngIf="municipio.rota === 'sim'">
+            <strong>Rota turística:</strong>
+            {{ municipio.qual_rota }}
+          </p>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- mapa -->
+          <div class="mapa-box mb-4">
+            <div id="mapaMunicipio"></div>
+          </div>
+
+          <!-- espaços de lazer -->
+          <div class="box-info">
+            <h5>Espaços de lazer</h5>
+            <p>{{ municipio.espacos_lazer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPRESSÕES -->
+    <div class="tab-pane fade" id="impressoes">
+
+      <p class="swipe-hint d-md-none">
+        Deslize para ver mais fotos →
+      </p>
+
+      <!-- desktop / tablet -->
+      <div class="row g-3 d-none d-md-flex">
+        <div class="col-md-6 col-lg-4" *ngFor="let img of listaImagens; let i = index">
+          <div class="galeria-item" (click)="abrirImagem(i)">
+            <img [src]="img.imagem" class="img-fluid rounded" alt="Imagem da cidade">
+          </div>
+        </div>
+      </div>
+
+      <!-- mobile -->
+      <div class="mobile-gallery d-flex d-md-none">
+        <div class="mobile-gallery-item" *ngFor="let img of listaImagens; let i = index" (click)="abrirImagem(i)">
+          <img [src]="img.imagem" alt="Imagem da cidade">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" *ngIf="imagemSelecionada" (click)="fecharImagem()">
+
+      <button class="lightbox-close" (click)="fecharImagem(); $event.stopPropagation()">
+        ✕
+      </button>
+
+      <button class="lightbox-nav prev" (click)="imagemAnterior($event)">
+        ‹
+      </button>
+
+      <img [src]="imagemSelecionada" alt="Imagem ampliada" (touchstart)="touchStart($event)"
+        (touchend)="touchEnd($event)" (click)="$event.stopPropagation()">
+
+      <button class="lightbox-nav next" (click)="proximaImagem($event)">
+        ›
+      </button>
+
+    </div>
+
+    <!-- SERVIÇOS -->
+    <div class="tab-pane fade" id="servicos">
+      <div class="service-box">
+        <h5>Serviço de internet</h5>
+        <p>
+          Possui wifi gratuito:
+          <strong>{{ municipio.wifi_service }}</strong>
+        </p>
+
+        <p *ngIf="municipio.wifi_cidade">
+          {{ municipio.wifi_cidade }}
+        </p>
+
+        <hr>
+
+        <h5>Serviços ao turista</h5>
+        <p>{{ municipio.service_estrangeiro }}</p>
+
+        <h5>Serviços da cidade</h5>
+        <p>{{ municipio.service_cidade }}</p>
+
+        <h5>Serviços ao empresário</h5>
+        <p>{{ municipio.service_empresario }}</p>
+
+        <h5>Segurança</h5>
+        <p>{{ municipio.service_seguranca }}</p>
+      </div>
+    </div>
+
+    <!-- PONTOS TURÍSTICOS -->
+    <div class="tab-pane fade" id="turismo">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h5>Pontos turísticos</h5>
+          <p>{{ municipio.pontos_turisticos }}</p>
+        </div>
+
+        <div class="col-md-6">
+          <h5>Turismo {{ municipio.tipo_turismo }}</h5>
+
+          <p *ngIf="municipio.tourism_praiano">
+            {{ municipio.tourism_praiano }}
+          </p>
+
+          <p *ngIf="municipio.tourism_ecologico">
+            {{ municipio.tourism_ecologico }}
+          </p>
+
+          <p *ngIf="municipio.tourism_radical">
+            {{ municipio.tourism_radical }}
+          </p>
+
+          <p *ngIf="municipio.tourism_religioso">
+            {{ municipio.tourism_religioso }}
+          </p>
+
+          <p *ngIf="municipio.tourism_serrano">
+            {{ municipio.tourism_serrano }}
+          </p>
+
+          <p *ngIf="municipio.tourism_sertanejo">
+            {{ municipio.tourism_sertanejo }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

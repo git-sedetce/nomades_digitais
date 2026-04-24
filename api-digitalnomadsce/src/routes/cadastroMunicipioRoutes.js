@@ -20,6 +20,7 @@ router.get('/parceiroMunicipio/:id', CadastroMunicipioController.municipioParcei
 router.get('/cidadeDados/:cidade', CadastroMunicipioController.municipioParceiroByName)
 router.post('/parceiroMunicipio', CadastroMunicipioController.cadastraMunicipioParceiro)
 router.post('/anexosMunicipio/:id', upload.array('files'), CadastroMunicipioController.anexosMunicipioParceiro)
+router.get('/imagensMunicipio/:id', CadastroMunicipioController.pegarImagensMunicipioParceiro)
 
 router.get('/pegaImageCity6', CadastroMunicipioController.pegaImgCity06)
 router.get('/cidadeTur/:turismo', CadastroMunicipioController.pegarMunicipioByTurismo)

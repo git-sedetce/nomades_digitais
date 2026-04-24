@@ -37,6 +37,14 @@ export class ServiceService {
     return this.http.post<Nomad>(environment.url + 'nomads', id)
   }
 
+  municipioById(id: any): Observable<Nomad> {
+    return this.http.get<Nomad>(environment.url + 'parceiroMunicipio/' + id)
+  }
+
+  imagensMunicipioById(id: any): Observable<Nomad> {
+    return this.http.get<Nomad>(environment.url + 'imagensMunicipio/' + id)
+  }
+
   editar(nomad: Nomad):Observable<Nomad>{
     return this.http.put<Nomad>(environment.url + 'nomads', nomad.id)
   }

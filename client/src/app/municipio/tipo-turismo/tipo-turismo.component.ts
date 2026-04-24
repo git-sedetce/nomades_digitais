@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
 import { ServiceService } from 'src/app/services/service.service';
 
@@ -35,7 +36,8 @@ export class TipoTurismoComponent implements OnInit {
   constructor(
     private estadoService: ListaMinucipioService,
     private service: ServiceService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class TipoTurismoComponent implements OnInit {
     this.service.cidadeporTurismo(name).subscribe(
       (data: any) => {
         this.lista_cidades_cadastradas = data;
+        console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
 
       if (this.lista_cidades_cadastradas && this.lista_cidades_cadastradas.length > 0) {
         console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
@@ -124,7 +127,7 @@ export class TipoTurismoComponent implements OnInit {
     this.estadoService.listar_regiao('regiao').subscribe(
       (data: any) => {
         this.lista_regiao = data;
-        console.log('Regiões:', this.lista_regiao);
+        // console.log('Regiões:', this.lista_regiao);
       },
       (erro: any) => console.error(erro)
     );
@@ -134,7 +137,7 @@ export class TipoTurismoComponent implements OnInit {
     this.estadoService.listar_municipio('todos_municipio').subscribe(
       (data: any) => {
         this.lista_cidades = data;
-        console.log('Cidades:', this.lista_cidades);
+        // console.log('Cidades:', this.lista_cidades);
       },
       (erro: any) => console.error(erro)
     );
@@ -152,5 +155,6 @@ export class TipoTurismoComponent implements OnInit {
 
   saibaMais(id: any) {
     console.log('ID da cidade selecionada:', id);
+    this.router.navigate(['/municipio/tipo-turismo/detalhes', id]);
   }
 }

@@ -32,7 +32,6 @@ export class EmpresasParceirasComponent implements OnInit {
   getParceiros() {
       this.service.pegarHospedagem('coworking').subscribe(
         (partners: any[]) => {
-          console.log('Parceiros', partners);
 
           // 🔹 se tiver logo em base64, monta uma URL segura
           this.allPartners = partners.map((p) => {
@@ -48,7 +47,7 @@ export class EmpresasParceirasComponent implements OnInit {
 
           this.updateSlides();
         },
-        (erro: any) => console.log(erro)
+        (erro: any) => console.error(erro)
       );
     }
 

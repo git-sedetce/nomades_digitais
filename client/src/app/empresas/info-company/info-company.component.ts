@@ -15,6 +15,10 @@ import { ParceriaService } from 'src/app/services/parceria.service';
 })
 export class InfoCompanyComponent implements OnInit {
   lista_imagens: any[] = [];
+  imagemSelecionada: string | null = null;
+  indiceImagemAtual = 0;
+  touchInicioX = 0;
+  touchFimX = 0;
   noInfo!: boolean;
   showInfo: boolean = false;
   showImg: boolean = false;
@@ -34,7 +38,7 @@ export class InfoCompanyComponent implements OnInit {
     private service: ParceriaService,
     private sanitizer: DomSanitizer,
     private geocoder: MapGeocoder,
-    private route: ActivatedRoute // ⬅️ adicionado
+    private route: ActivatedRoute, // ⬅️ adicionado
   ) {}
 
   ngOnInit(): void {
@@ -49,64 +53,111 @@ export class InfoCompanyComponent implements OnInit {
     this.service.parceirosById(id).subscribe(
       (partnerId: any) => {
         this.parceiro = partnerId;
-        console.log('Parceiro', this.parceiro);
         this.company_name = this.parceiro.nome_fantasia;
         this.type_establishment = this.parceiro.tipo_estabelecimento;
-        if(this.parceiro.tipo_service === 'hospedagem'){
+        if (this.parceiro.tipo_service === 'hospedagem') {
           this.returnHosp = true;
-        } else if(this.parceiro.tipo_estabelecimento === 'coworking'){
+        } else if (this.parceiro.tipo_estabelecimento === 'coworking') {
           this.returnCoworking = true;
-        } else if(this.parceiro.tipo_service === 'alimentacao'){
+        } else if (this.parceiro.tipo_service === 'alimentacao') {
           this.returnFood = true;
         }
       },
-      (erro: any) => console.error(erro)
+      (erro: any) => console.error(erro),
     );
   }
 
   getImagens(id: any) {
-  this.loadingImagens = true;
-  this.mensagemImagens = null;
-  this.lista_imagens = [];
+    this.loadingImagens = true;
+    this.mensagemImagens = null;
+    this.lista_imagens = [];
 
-  this.service.imagensById(id).subscribe(
-    (imagensData: any[]) => {
-      this.loadingImagens = false;
+    this.service.imagensById(id).subscribe(
+      (imagensData: any[]) => {
+        this.loadingImagens = false;
 
-      if (imagensData && imagensData.length > 0) {
-        this.lista_imagens = imagensData.map((imagem) => {
-          const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
-          const safeImageUrl: SafeUrl =
-            this.sanitizer.bypassSecurityTrustUrl(decodedImage);
-          return {
-            id: imagem.id,
-            tipo_anexo: imagem.tipo_anexo,
-            imagem: safeImageUrl,
-          };
-        });
+        if (imagensData && imagensData.length > 0) {
+          this.lista_imagens = imagensData.map((imagem) => {
+            const decodedImage = 'data:image/jpeg;base64,' + imagem.base64;
+            const safeImageUrl: SafeUrl =
+              this.sanitizer.bypassSecurityTrustUrl(decodedImage);
+            return {
+              id: imagem.id,
+              tipo_anexo: imagem.tipo_anexo,
+              imagem: safeImageUrl,
+            };
+          });
 
-        this.noInfo = false;
-        this.showImg = true;   // 👈 já abre galeria por padrão
-        this.showInfo = false;
-        this.showMap = false;
-
-      } else {
+          this.noInfo = false;
+          this.showImg = true; // 👈 já abre galeria por padrão
+          this.showInfo = false;
+          this.showMap = false;
+        } else {
+          this.noInfo = true;
+          this.showImg = true; // 👈 força abrir a seção galeria, mas mostra card vazio
+          this.showInfo = false;
+          this.showMap = false;
+        }
+      },
+      (erro: any) => {
+        this.loadingImagens = false;
         this.noInfo = true;
-        this.showImg = true;   // 👈 força abrir a seção galeria, mas mostra card vazio
+        this.showImg = true; // 👈 mesmo em erro, mostra card vazio
         this.showInfo = false;
         this.showMap = false;
-      }
-    },
-    (erro: any) => {
-      this.loadingImagens = false;
-      this.noInfo = true;
-      this.showImg = true;     // 👈 mesmo em erro, mostra card vazio
-      this.showInfo = false;
-      this.showMap = false;
-      console.error('Erro ao buscar imagens:', erro);
+        console.error('Erro ao buscar imagens:', erro);
+      },
+    );
+  }
+
+  abrirImagem(index: number) {
+    this.indiceImagemAtual = index;
+    this.imagemSelecionada = this.lista_imagens[index].imagem;
+  }
+
+  fecharImagem() {
+    this.imagemSelecionada = null;
+  }
+
+  proximaImagem(event?: Event) {
+    if (event) event.stopPropagation();
+
+    this.indiceImagemAtual =
+      (this.indiceImagemAtual + 1) % this.lista_imagens.length;
+
+    this.imagemSelecionada = this.lista_imagens[this.indiceImagemAtual].imagem;
+  }
+
+  imagemAnterior(event?: Event) {
+    if (event) event.stopPropagation();
+
+    this.indiceImagemAtual =
+      (this.indiceImagemAtual - 1 + this.lista_imagens.length) %
+      this.lista_imagens.length;
+
+    this.imagemSelecionada = this.lista_imagens[this.indiceImagemAtual].imagem;
+  }
+
+  touchStart(event: TouchEvent) {
+    this.touchInicioX = event.changedTouches[0].screenX;
+  }
+
+  touchEnd(event: TouchEvent) {
+    this.touchFimX = event.changedTouches[0].screenX;
+    this.verificarSwipe();
+  }
+
+  verificarSwipe() {
+    const distancia = this.touchInicioX - this.touchFimX;
+
+    if (Math.abs(distancia) < 50) return;
+
+    if (distancia > 0) {
+      this.proximaImagem();
+    } else {
+      this.imagemAnterior();
     }
-  );
-}
+  }
 
   currentIndex = 0;
   showModal = false;
@@ -171,7 +222,7 @@ export class InfoCompanyComponent implements OnInit {
     if (this.parceiro) {
       const endereco = `${this.parceiro.logradouro} ${this.parceiro.numero}, ${this.parceiro.bairro}, ${this.parceiro.cidade} - ${this.parceiro.estado}`;
       const url = `https://www.google.com/maps?q=${encodeURIComponent(
-        endereco
+        endereco,
       )}&output=embed`;
       this.mapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }

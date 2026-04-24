@@ -35,17 +35,17 @@
       <div class="row justify-content-center">
 
         <!-- Card Descrição -->
-          <div class="col-12 col-md-6 col-lg-6">
-            <div class="card info-card">
-              <div class="card-header">Descrição</div>
-              <div class="card-body">
-                <p>{{ parceiro.espacos_culturais }}</p>
-                <p><span class="info-label">Trabalha com outro idioma:</span> {{ parceiro.idioma }}</p>
-                <p><span class="info-label" *ngIf="parceiro.idioma =='sim'">Idiomas:</span> {{ parceiro.qual_idioma }}
-                </p>
-              </div>
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="card info-card">
+            <div class="card-header">Descrição</div>
+            <div class="card-body">
+              <p>{{ parceiro.espacos_culturais }}</p>
+              <p><span class="info-label">Trabalha com outro idioma:</span> {{ parceiro.idioma }}</p>
+              <p><span class="info-label" *ngIf="parceiro.idioma =='sim'">Idiomas:</span> {{ parceiro.qual_idioma }}
+              </p>
             </div>
           </div>
+        </div>
 
         <!-- Card Contato -->
         <div class="col-12 col-md-6 col-lg-4">
@@ -80,45 +80,64 @@
     <div class="container py-5" *ngIf="!noInfo && showImg" (window:keydown)="handleKey($event)">
 
       <!-- Estado vazio -->
-  <div class="container empty-state text-center" *ngIf="noInfo">
-    <div class="empty-card">
-      <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
-      <h3>Não há imagens deste estabelecimento</h3>
-      <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
-    </div>
-  </div>
-
-      <!-- Lista de imagens (só aparece quando terminar o loading) -->
-      <div class="row g-4" *ngIf="!noInfo && !loadingImagens">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let img of lista_imagens; let i = index">
-          <img [src]="img.imagem" [alt]="img.alt" class="gallery-img" (click)="openModal(i)">
+      <div class="container empty-state text-center" *ngIf="noInfo">
+        <div class="empty-card">
+          <img src="../../../assets/midia/icons/box_empty.png" alt="Sem dados" class="empty-icon">
+          <h3>Não há imagens deste estabelecimento</h3>
+          <p>Atualmente não há registros nesta categoria. Volte mais tarde ou explore outras opções.</p>
         </div>
       </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade show d-block" *ngIf="showModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-transparent border-0">
-          <div class="modal-body text-center position-relative">
-            <button class="close-btn" (click)="closeModal()">&times;</button>
-            <button class="nav-btn prev-btn" (click)="prevImage()">&#10094;</button>
-            <img [src]="lista_imagens[currentIndex].imagem" [alt]="lista_imagens[currentIndex].alt" class="modal-img">
-            <button class="nav-btn next-btn" (click)="nextImage()">&#10095;</button>
+      <!-- desktop / tablet -->
+      <div class="row g-3 d-none d-md-flex">
+        <div class="col-md-6 col-lg-4" *ngFor="let img of lista_imagens; let i = index">
+          <div class="galeria-item" (click)="abrirImagem(i)">
+            <img [src]="img.imagem" class="img-fluid rounded" alt="Imagem da cidade">
           </div>
         </div>
       </div>
+
+      <!-- mobile -->
+      <div class="mobile-gallery d-flex d-md-none">
+        <div class="mobile-gallery-item" *ngFor="let img of lista_imagens; let i = index" (click)="abrirImagem(i)">
+          <img [src]="img.imagem" alt="Imagem da cidade">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" *ngIf="imagemSelecionada" (click)="fecharImagem()">
+
+      <button class="lightbox-close" (click)="fecharImagem(); $event.stopPropagation()">
+        ✕
+      </button>
+
+      <button class="lightbox-nav prev" (click)="imagemAnterior($event)">
+        ‹
+      </button>
+
+      <img [src]="imagemSelecionada" alt="Imagem ampliada" (touchstart)="touchStart($event)"
+        (touchend)="touchEnd($event)" (click)="$event.stopPropagation()">
+
+      <button class="lightbox-nav next" (click)="proximaImagem($event)">
+        ›
+      </button>
+
     </div>
 
     <!-- Botão de retorno -->
     <div class="info-icon-return text-start pt-4">
-      <a *ngIf="returnHosp" [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
+      <a *ngIf="returnHosp" [routerLink]="['/ondeficar/hospedagem']" [queryParams]="{ tipo: type_establishment }"
+        class="ondeFicar-btn">
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
       </a>
-      <a *ngIf="returnCoworking" [routerLink]="['/ondeficar/parceria']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
+      <a *ngIf="returnCoworking" [routerLink]="['/ondeficar/parceria']" [queryParams]="{ tipo: type_establishment }"
+        class="ondeFicar-btn">
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
       </a>
-      <a *ngIf="returnFood" [routerLink]="['/eventos/gastronomia']" [queryParams]="{ tipo: type_establishment }" class="ondeFicar-btn">
+      <a *ngIf="returnFood" [routerLink]="['/eventos/gastronomia']" [queryParams]="{ tipo: type_establishment }"
+        class="ondeFicar-btn">
         <img src="../../../assets/midia/icons/volte.png" alt="Retorno">
       </a>
     </div>
