@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.belongsTo(models.Profile, { foreignKey: 'profile_id', as: 'ass_user_profile' })
-      // User.hasMany(models.Emprego_Nomad, { foreignKey: 'nomad_id', as: 'ass_nomad_vagas'})
+      User.hasMany(models.Experience, { foreignKey: 'user_id', as: 'ass_users_experiences' });
+      User.hasMany(models.FeedBack_Experience, { foreignKey: 'user_id', as: 'ass_users_feedback_experiences' });
+      // User.hasMany(models.audit, { foreignKey: 'user_id', as: 'ass_users_audit' });
     }
   }
   User.init({

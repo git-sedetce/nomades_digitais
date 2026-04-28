@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Cidades.hasMany(models.TemporadaNomad, { foreignKey: 'cidade_id', as: 'ass_municipio_temporada' })
       Cidades.hasMany(models.cadastra_municipios, { foreignKey: 'cidade', as: 'ass_cidades_cadastra_municipio' })
       Cidades.hasMany(models.anexo_municipio, { foreignKey: 'municipio_id', as: 'ass_cidades_anexo_municipio' })
+      Cidades.hasMany(models.Experience, { foreignKey: 'cidade_id', as: 'ass_cidades_experiences' })
     }
   }
   Cidades.init({
