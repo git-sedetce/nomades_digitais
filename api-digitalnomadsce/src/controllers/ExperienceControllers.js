@@ -8,15 +8,51 @@ const baseUrl = process.cwd(); //+ "/src"; __dirname + '.
 
 class ExperienceController {
   static async cadastraExperience(req, res) {
-    const novoExperience = req.body;
-    // console.log('novoNomads', novoNomads)
-
+    const t = await database.sequelize.transaction();
     try {
-      const criarExperience = await database.Experience.create(novoExperience);
+      if (!req.files?.image) {
+        return res.status(400).json({ error: "Nenhuma imagem foi enviada." });
+      }
+      const novoExperience = JSON.parse(req.body.dados);
+      // console.log('novoNomads', novoNomads)
 
-      return res.status(200).json(criarExperience);
+      const criarExperience = await database.Experience.create(dados, {
+        transaction: t,
+      });
+      const arquivos = [
+        {
+          file: req.files.image[0],
+        },
+      ];
+
+      const tiposPermitidos = ["image/jpeg", "image/png", "image/jpg"];
+
+      for (const item of arquivos) {
+        if (!tiposPermitidos.includes(item.file.mimetype)) {
+          throw new Error("Tipo de arquivo não permitido");
+        }
+
+        // const caminho = item.file.path.split(process.env.SPLIT)[1];
+        const caminho = file[img].path;
+
+        await database.anexo_experience.create(
+          {
+            mimetype: item.file.mimetype,
+            filename: item.file.filename,
+            experience_id: criarExperience.id,
+            path: caminho,
+          },
+          { transaction: t },
+        );
+      }
+
+      // ===== 5. COMMIT =====
+      await t.commit();
+
+      return res.status(200).json(novoExperience);
     } catch (error) {
-      return res.status(500).json(error.message);
+      await t.rollback();
+      return res.status(500).json({ message: error.message });
     }
   }
 

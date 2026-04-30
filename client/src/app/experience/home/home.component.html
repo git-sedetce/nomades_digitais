@@ -1,0 +1,40 @@
+<div class="page-wrapper">
+  <header class="topbar">
+    <div class="logo">Nomads Experience</div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Onde">
+      <input type="text" placeholder="Quando">
+      <input type="text" placeholder="Quem">
+      <button>Buscar</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section>
+      <div class="section-header">
+        <h2>Experiências em destaque</h2>
+        <a routerLink="/experience/create">
+          <button class="btn-create">Criar Experience</button>
+        </a>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card" *ngFor="let item of paginatedExperiences">
+          <img [src]="item.image" [alt]="item.title">
+          <div class="card-body">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.location }}</p>
+            <span>{{ item.price }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
+      </div>
+    </section>
+  </main>
+</div>

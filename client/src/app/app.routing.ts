@@ -39,6 +39,9 @@ const APP_ROUTES: Routes = [
   //Módulo comunidade
   { path: 'comunidade', loadChildren:() => import('./comunidade/comunidade.module').then(comt => comt.ComunidadeModule) },
 
+  //Módulo experience
+  { path: 'experience', loadChildren:() => import('./experience/experience.module').then(exp => exp.ExperienceModule) },
+
 ];
 
 @NgModule({

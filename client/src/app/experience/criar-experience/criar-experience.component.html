@@ -1,0 +1,196 @@
+<section class="experience-page">
+  <div class="experience-card">
+    <div class="experience-header">
+      <h2>Criar nova experiência</h2>
+      <p>Preencha os dados abaixo para cadastrar sua experiência.</p>
+    </div>
+
+    <form #formExperience="ngForm" (ngSubmit)="cadastrarExperience()" novalidate>
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="titulo">Título</label>
+          <input
+            id="titulo"
+            name="titulo"
+            type="text"
+            class="form-control"
+            placeholder="Título da experiência"
+            required
+            [(ngModel)]="experience.titulo"
+            #titulo="ngModel"
+          />
+          <div *ngIf="!titulo.valid && titulo.touched" class="field-error">
+            O título é obrigatório.
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="local">Local</label>
+          <input
+            id="local"
+            name="local"
+            type="text"
+            class="form-control"
+            placeholder="Local da experiência"
+            required
+            [(ngModel)]="experience.local"
+            #local="ngModel"
+          />
+          <div *ngIf="!local.valid && local.touched" class="field-error">
+            O local é obrigatório.
+          </div>
+        </div>
+
+        <div class="field-group full-width">
+          <label for="descricao">Descrição</label>
+          <textarea
+            id="descricao"
+            name="descricao"
+            rows="5"
+            class="form-control"
+            placeholder="Descreva a experiência"
+            required
+            [(ngModel)]="experience.descricao"
+            #descricao="ngModel"
+          ></textarea>
+          <div *ngIf="!descricao.valid && descricao.touched" class="field-error">
+            A descrição é obrigatória.
+          </div>
+        </div>
+
+        <div class="field-row-3">
+          <div class="field-group">
+            <label for="data_experience">Data da experiência</label>
+            <input
+              id="data_experience"
+              name="data_experience"
+              type="date"
+              class="form-control"
+              required
+              [(ngModel)]="experience.data_experience"
+              #data_experience="ngModel"
+            />
+            <div *ngIf="!data_experience.valid && data_experience.touched" class="field-error">
+              A data é obrigatória.
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="valor">Valor</label>
+            <input
+              id="valor"
+              name="valor"
+              type="number"
+              class="form-control"
+              placeholder="Valor em reais"
+              min="0"
+              step="0.01"
+              required
+              [(ngModel)]="experience.valor"
+              #valor="ngModel"
+            />
+            <div *ngIf="!valor.valid && valor.touched" class="field-error">
+              Informe um valor válido.
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="quantidade_vagas">Quantidade de vagas</label>
+            <input
+              id="quantidade_vagas"
+              name="quantidade_vagas"
+              type="number"
+              class="form-control"
+              placeholder="Número de vagas disponíveis"
+              min="1"
+              step="1"
+              required
+              [(ngModel)]="experience.qtde_vagas"
+              #quantidade_vagas="ngModel"
+            />
+            <div *ngIf="!quantidade_vagas.valid && quantidade_vagas.touched" class="field-error">
+              Informe uma quantidade válida de vagas.
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="cidade_id">Cidade</label>
+          <select
+            id="cidade_id"
+            name="cidade_id"
+            class="form-select"
+            required
+            [(ngModel)]="experience.cidade_id"
+            #cidade_id="ngModel"
+          >
+            <option value="" disabled selected>Selecione a cidade</option>
+            <option *ngFor="let city of lista_cidades" [ngValue]="city.id">
+              {{ city.nome_municipio || city.name || city.cidade }}
+            </option>
+          </select>
+          <div *ngIf="!cidade_id.valid && cidade_id.touched" class="field-error">
+            Escolha uma cidade.
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="experience_type_id">Tipo de experiência</label>
+          <select
+            id="experience_type_id"
+            name="experience_type_id"
+            class="form-select"
+            required
+            [(ngModel)]="experience.experience_type_id"
+            #experience_type_id="ngModel"
+          >
+            <option value="" disabled selected>Selecione um tipo</option>
+            <option *ngFor="let tipo of lista_tipo_experience" [ngValue]="tipo.id">
+              {{ tipo.tipo_experience || tipo.name || tipo.nome }}
+            </option>
+          </select>
+          <div *ngIf="!experience_type_id.valid && experience_type_id.touched" class="field-error">
+            Escolha um tipo de experiência.
+          </div>
+        </div>
+
+        <div class="field-group full-width">
+          <label for="anexoImagem">Foto da experiência</label>
+          <div class="file-input-wrapper">
+            <input
+              #anexoImagem
+              id="anexoImagem"
+              name="anexoImagem"
+              type="file"
+              class="file-input"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+            />
+            <label for="anexoImagem" class="file-input-label">
+              <svg class="file-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span class="file-text">Clique para selecionar ou arraste uma imagem</span>
+              <span class="file-hint">JPG, PNG ou WebP até 5MB</span>
+            </label>
+          </div>
+          <div *ngIf="arquivoImagemInvalido" class="field-error">
+            Por favor, selecione uma imagem para a experiência.
+          </div>
+          <div *ngIf="nomeArquivoSelecionado" class="file-selected">
+            ✓ {{ nomeArquivoSelecionado }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary btn-submit" [disabled]="formExperience.invalid">
+          Salvar experiência
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
