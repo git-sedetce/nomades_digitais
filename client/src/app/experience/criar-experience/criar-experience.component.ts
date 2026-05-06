@@ -46,10 +46,7 @@ export class CriarExperienceComponent implements OnInit {
     const payload = JSON.parse(atob(token!.split('.')[1]));
     this.profile_id = payload._profile_id;
     this.user_email = payload._user_email;
-    this.user_id = payload._user_id;
-    console.log('Profile ID:', this.profile_id);
-    console.log('Email:', this.user_email);
-    console.log('User ID:', this.user_id);
+    this.user_id = payload._id;
   }
 
   pegarCidade() {
@@ -81,8 +78,10 @@ export class CriarExperienceComponent implements OnInit {
   }
 
   cadastrarExperience() {
+    this.experience.user_id = this.user_id;
+    this.experience.status = false;
 
-    console.log('Experience a ser cadastrada:', this.experience);
+    // console.log('Experience a ser cadastrada:', this.experience);
     const imageFile = this.anexoImagem.nativeElement.files[0];
 
     if (!imageFile) {

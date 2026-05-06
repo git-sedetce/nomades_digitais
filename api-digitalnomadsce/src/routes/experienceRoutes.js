@@ -30,7 +30,7 @@ function verificarECriarPasta(pastaPath) {
 const upload = multer({ storage })
 
 const router = Router()
-router.post('/registerexperience', ExperienceController.cadastraExperience)
+router.post('/registerexperience', upload.single('image'),ExperienceController.cadastraExperience)
 router.post('/cadastrarexperience', ExperienceController.participacaoExperience)
 router.get('/experiences', ExperienceController.pegaExperiences)
 router.get('/participantes', ExperienceController.pegarParticipantes)

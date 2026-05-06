@@ -9,47 +9,43 @@ const baseUrl = process.cwd(); //+ "/src"; __dirname + '.
 class ExperienceController {
   static async cadastraExperience(req, res) {
     const t = await database.sequelize.transaction();
+
     try {
-      if (!req.files?.image) {
+      // 🔴 validação correta para single
+      if (!req.file) {
         return res.status(400).json({ error: "Nenhuma imagem foi enviada." });
       }
-      const novoExperience = JSON.parse(req.body.dados);
-      // console.log('novoNomads', novoNomads)
 
-      const criarExperience = await database.Experience.create(dados, {
+      const novoExperience = JSON.parse(req.body.dados);
+
+      const criarExperience = await database.Experience.create(novoExperience, {
         transaction: t,
       });
-      const arquivos = [
-        {
-          file: req.files.image[0],
-        },
-      ];
+
+      const file = req.file;
 
       const tiposPermitidos = ["image/jpeg", "image/png", "image/jpg"];
 
-      for (const item of arquivos) {
-        if (!tiposPermitidos.includes(item.file.mimetype)) {
-          throw new Error("Tipo de arquivo não permitido");
-        }
-
-        // const caminho = item.file.path.split(process.env.SPLIT)[1];
-        const caminho = file[img].path;
-
-        await database.anexo_experience.create(
-          {
-            mimetype: item.file.mimetype,
-            filename: item.file.filename,
-            experience_id: criarExperience.id,
-            path: caminho,
-          },
-          { transaction: t },
-        );
+      if (!tiposPermitidos.includes(file.mimetype)) {
+        throw new Error("Tipo de arquivo não permitido");
       }
 
-      // ===== 5. COMMIT =====
+      // const caminho = file.path;
+      const caminho = file.path.split("api-digitalnomadsce")[1];
+
+      await database.anexo_experience.create(
+        {
+          mimetype: file.mimetype,
+          filename: file.filename,
+          experience_id: criarExperience.id,
+          path: caminho,
+        },
+        { transaction: t },
+      );
+
       await t.commit();
 
-      return res.status(200).json(novoExperience);
+      return res.status(200).json(criarExperience);
     } catch (error) {
       await t.rollback();
       return res.status(500).json({ message: error.message });
@@ -58,7 +54,6 @@ class ExperienceController {
 
   static async participacaoExperience(req, res) {
     const novoExperience = req.body;
-    // console.log('novoNomads', novoNomads)
 
     try {
       const criarExperience =
@@ -71,29 +66,100 @@ class ExperienceController {
   }
 
   static async pegaExperiences(req, res) {
-    try {
-      const dataAtual = new Date(); // Obtém a data e hora atuais
-      const mostraExperiences = await database.Experience.findAll({
-        order: [["data_experience", "ASC"]],
-        attributes: ["id", "titulo", "descricao", "data_experience", "valor"],
-        include: [
+  try {
+    const hoje = new Date();
+    const dataHoje = hoje.toISOString().split("T")[0]; // YYYY-MM-DD
+    const horaAgora = hoje.toTimeString().split(" ")[0]; // HH:mm:ss
+
+    const mostraExperiences = await database.Experience.findAll({
+      where: {
+        status: false,
+        [Op.or]: [
           {
-            model: database.Experience,
-            as: "ass_experiences_user",
-            attributes: ["nome_completo"],
+            data_experience: {
+              [Op.gt]: dataHoje,
+            },
           },
           {
-            model: database.Tipo_Experience,
-            as: "ass_experience_type",
-            attributes: ["tipo_experience"],
+            data_experience: dataHoje,
+            horario_experience: {
+              [Op.gt]: horaAgora,
+            },
           },
         ],
-      });
-      return res.status(200).json(mostraExperiences);
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
+      },
+      order: [
+        ["data_experience", "ASC"],
+        ["horario_experience", "ASC"],
+      ],
+      attributes: [
+        "id",
+        "titulo",
+        "descricao",
+        "data_experience",
+        "horario_experience",
+        "valor",
+        "user_id",
+      ],
+      include: [
+        {
+          model: database.User,
+          as: "ass_experiences_user",
+          attributes: ["nome_completo"],
+        },
+        {
+          model: database.Tipo_Experience,
+          as: "ass_experience_type",
+          attributes: ["tipo_experience"],
+        },
+        {
+          model: database.Cidades,
+          as: "ass_experiences_cidade",
+          attributes: ["nome_municipio"],
+          include: [
+            {
+              model: database.Regiao,
+              as: "ass_municipio_regiao",
+              attributes: ["nome"],
+            },
+          ],
+        },
+        {
+          model: database.anexo_experience,
+          as: "ass_experience_anexos",
+          attributes: ["mimetype", "filename", "path"],
+        },
+      ],
+    });
+
+    const experiences = mostraExperiences.map((exp) => exp.toJSON());
+
+    for (const exp of experiences) {
+      if (exp.ass_experience_anexos?.length) {
+        for (const anexo of exp.ass_experience_anexos) {
+          try {
+            const caminho = path.join(baseUrl, anexo.path);
+
+            if (fs.existsSync(caminho)) {
+              const file = fs.readFileSync(caminho, "base64");
+              anexo.base64 = `data:${anexo.mimetype};base64,${file}`;
+            } else {
+              anexo.base64 = null;
+            }
+          } catch (err) {
+            console.error("Erro ao converter imagem:", err);
+            anexo.base64 = null;
+          }
+        }
+      }
     }
+
+    return res.status(200).json(experiences);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: error.message });
   }
+}
 
   static async pegarParticipantes(req, res) {
     try {
@@ -110,7 +176,7 @@ class ExperienceController {
           {
             model: database.Experience,
             as: "ass_cadastro_experience",
-            attributes: ["titulo", "descricao", "data_experience", "valor"],
+            attributes: ["id", "titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
           },
         ],
       });
@@ -125,10 +191,10 @@ class ExperienceController {
     try {
       const mostraExperiences = await database.Experience.findAll({
         where: { id: Number(id) },
-        attributes: ["titulo", "descricao", "data_experience", "valor"],
+        attributes: ["id", "titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
         include: [
           {
-            model: database.Experience,
+            model: database.User,
             as: "ass_experiences_user",
             attributes: ["nome_completo"],
           },
@@ -136,6 +202,23 @@ class ExperienceController {
             model: database.Tipo_Experience,
             as: "ass_experience_type",
             attributes: ["tipo_experience"],
+          },
+          {
+            model: database.Cidades,
+            as: "ass_experiences_cidade",
+            attributes: ["nome_municipio"],
+            include: [
+              {
+                model: database.Regiao,
+                as: "ass_municipio_regiao",
+                attributes: ["nome"],
+              },
+            ],
+          },
+          {
+            model: database.anexo_experience,
+            as: "ass_experience_anexos",
+            attributes: ["mimetype", "filename", "path"],
           },
         ],
       });
@@ -162,7 +245,7 @@ class ExperienceController {
           {
             model: database.Experience,
             as: "ass_cadastro_experience",
-            attributes: ["titulo", "descricao", "data_experience", "valor"],
+            attributes: ["titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
           },
         ],
       });
@@ -177,7 +260,7 @@ class ExperienceController {
     try {
       const dataAtual = new Date(); // Obtém a data e hora atuais
       const mostraExperiences = await database.Experience.findAll({
-        attributes: ["titulo", "descricao", "data_experience", "valor"],
+        attributes: ["id", "titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
         include: [
           {
             model: database.Experience,

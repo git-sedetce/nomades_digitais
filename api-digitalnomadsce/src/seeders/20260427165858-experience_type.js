@@ -13,16 +13,41 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
      },
-    //  {
-    //   perfil: 'Coordenador',
-    //   createdAt: new Date(),
-    //   updatedAt: new Date()
-    //  },
-    //  {
-    //   perfil: 'Colaborador',
-    //   createdAt: new Date(),
-    //   updatedAt: new Date()
-    //  }
+    {
+      tipo_experience: 'Apresentações',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      tipo_experience: 'Moda',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      tipo_experience: 'Esportes',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      tipo_experience: 'Paisagismo',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      tipo_experience: 'Turismo Ecológico',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      tipo_experience: 'Galerias',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      tipo_experience: 'Passeios de Barco',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
   ], {});
   },
 

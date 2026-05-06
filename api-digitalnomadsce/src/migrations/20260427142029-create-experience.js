@@ -11,14 +11,26 @@ module.exports = {
       titulo: {
         type: Sequelize.STRING
       },
+      local: {
+        type: Sequelize.STRING
+      },
       descricao: {
         type: Sequelize.STRING
       },
       data_experience: {
         type: Sequelize.DATEONLY
       },
+      horario_experience: {
+        type: Sequelize.TIME
+      },
       valor: {
         type: Sequelize.DOUBLE
+      },
+      qtde_vagas: {
+        type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.BOOLEAN
       },
       user_id: {
         allowNull: false,

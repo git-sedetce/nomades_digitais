@@ -19,9 +19,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Experience.init({
     titulo: DataTypes.STRING,
+    local: DataTypes.STRING,
     descricao: DataTypes.STRING,
     data_experience: DataTypes.DATEONLY,
-    valor: DataTypes.DOUBLE
+    horario_experience: DataTypes.TIME,
+    valor: DataTypes.DOUBLE,
+    qtde_vagas: DataTypes.INTEGER,
+    status: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Experience',
