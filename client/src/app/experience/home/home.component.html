@@ -1,103 +1,140 @@
 <div class="page-wrapper">
-  <header class="topbar">
-    <div class="logo">Nomads Experience</div>
 
-    <!-- 🔍 FILTROS -->
+  <!-- HEADER -->
+  <header class="topbar">
+
+    <div class="topbar-header">
+      <div class="logo">Nomads Experience</div>
+
+      <a routerLink="/experience/create">
+        <button class="btn btn-primary btn-create">
+          Criar Experience
+        </button>
+      </a>
+    </div>
+
+    <!-- FILTROS -->
     <div class="search-bar">
 
-      <!-- 🏙️ AUTOCOMPLETE CIDADE -->
-      <input type="text" placeholder="Cidade" [(ngModel)]="filtroCidade" (input)="filtrarCidades()"
-        (focus)="mostrarSugestoes = true">
+      <!-- CIDADE -->
+      <div class="filter-group city-group">
 
-      <ul class="autocomplete" *ngIf="mostrarSugestoes && cidadesFiltradas.length">
-        <li *ngFor="let cidade of cidadesFiltradas" (click)="selecionarCidade(cidade)">
-          {{ cidade }}
-        </li>
-      </ul>
+        <input type="text" placeholder="Cidade" [(ngModel)]="filtroCidade" (input)="filtrarCidades()"
+          (focus)="mostrarSugestoes = true" />
 
-      <!-- 🌎 REGIÃO -->
+        <ul class="autocomplete" *ngIf="mostrarSugestoes && cidadesFiltradas.length">
+          <li *ngFor="let cidade of cidadesFiltradas" (click)="selecionarCidade(cidade)">
+            {{ cidade }}
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- REGIÃO -->
       <select [(ngModel)]="filtroRegiao" (change)="aplicarFiltro()">
         <option value="">Todas Regiões</option>
+
         <option *ngFor="let reg of regioes" [value]="reg">
           {{ reg }}
         </option>
       </select>
 
-      <!-- 🎯 TIPO -->
+      <!-- TIPO -->
       <select [(ngModel)]="filtroTipo" (change)="aplicarFiltro()">
         <option value="">Todos Tipos</option>
+
         <option *ngFor="let tipo of tipos" [value]="tipo">
           {{ tipo }}
         </option>
       </select>
 
-      <!-- 📅 DATA -->
-      <input type="date" [(ngModel)]="filtroData" (change)="aplicarFiltro()">
+      <!-- DATA -->
+      <input type="date" [(ngModel)]="filtroData" (change)="aplicarFiltro()" />
 
-      <!-- 🔍 BOTÕES -->
-      <button (click)="aplicarFiltro()">Buscar</button>
+      <!-- BOTÕES -->
+      <button type="button" class="btn btn-primary" (click)="aplicarFiltro()">
+        Buscar
+      </button>
 
-      <button class="btn-clear" (click)="limparFiltros()">
+      <button type="button" class="btn btn-secondary" (click)="limparFiltros()">
         Limpar
       </button>
 
     </div>
+
   </header>
 
+  <!-- CONTEÚDO -->
   <main class="content">
-    <section>
-      <div class="section-header">
-        <h2>Experiências em destaque</h2>
 
-        <a routerLink="/experience/create">
-          <button class="btn-create">Criar Experience</button>
-        </a>
-      </div>
+    <div class="section-header">
+      <h2>Experiências em destaque</h2>
 
-      <!-- 🧩 CARDS -->
-      <div class="cards-grid">
-        <div class="card" *ngFor="let item of paginatedExperiences">
-          <img [src]="item.image" [alt]="item.title">
+      <span class="results-count">
+        {{ lista_experiences.length }} experiências
+      </span>
+    </div>
 
-          <div class="card-body">
-            <h3>{{ item.title }}</h3>
+    <!-- CARDS -->
+    <div class="cards-grid" *ngIf="paginatedExperiences.length > 0">
 
+      <div class="card" *ngFor="let item of paginatedExperiences">
+
+        <img [src]="item.image" [alt]="item.title">
+
+        <div class="card-body">
+
+          <h3>{{ item.title }}</h3>
+
+          <div class="card-info">
             <p><strong>Cidade:</strong> {{ item.cidade }}</p>
             <p><strong>Região:</strong> {{ item.regiao }}</p>
             <p><strong>Tipo:</strong> {{ item.tipo }}</p>
             <p><strong>Data:</strong> {{ item.data | date:'dd/MM/yyyy' }}</p>
-
-            <span class="price">{{ item.price }}</span>
-
-            <div class="card-actions">
-              <button class="btn-participar" (click)="participar(item)">
-                Participar
-              </button>
-
-              <button class="btn-inscritos" *ngIf="user_id == item.usuario_id" (click)="verInscritos(item)">
-                Ver Inscritos
-              </button>
-            </div>
           </div>
+
+          <span class="price">{{ item.price }}</span>
+
+          <div class="card-actions">
+
+            <button class="btn btn-participar" (click)="participar(item)">
+              Participar
+            </button>
+
+            <button class="btn btn-inscritos" *ngIf="user_id == item.usuario_id" (click)="verInscritos(item)">
+              Inscritos
+            </button>
+
+          </div>
+
         </div>
 
-        <div *ngIf="paginatedExperiences.length === 0">
-          <p>Nenhuma experience encontrada.</p>
-        </div>
       </div>
 
-      <!-- 📄 PAGINAÇÃO -->
-      <div class="pagination" *ngIf="totalPages > 1">
-        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
-          Anterior
-        </button>
+    </div>
 
-        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <!-- SEM RESULTADOS -->
+    <div class="empty-state" *ngIf="paginatedExperiences.length === 0">
+      <p>Nenhuma experience encontrada.</p>
+    </div>
 
-        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
-          Próxima
-        </button>
-      </div>
-    </section>
+    <!-- PAGINAÇÃO -->
+    <div class="pagination" *ngIf="totalPages > 1">
+
+      <button class="btn-page" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        Anterior
+      </button>
+
+      <span>
+        Página {{ currentPage }} de {{ totalPages }}
+      </span>
+
+      <button class="btn-page" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Próxima
+      </button>
+
+    </div>
+
   </main>
+
 </div>

@@ -9,7 +9,7 @@ import { ExperienceService } from 'src/app/services/experience.service';
 })
 export class HomeComponent implements OnInit {
   currentPage = 1;
-  itemsPerPage = 4;
+  itemsPerPage = 8;
 
   profile_id!: any;
   user_id!: any;
