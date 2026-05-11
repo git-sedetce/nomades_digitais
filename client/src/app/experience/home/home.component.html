@@ -97,9 +97,11 @@
 
           <div class="card-actions">
 
+            <a [routerLink]="['/experience/cadastro']" [queryParams]="{ id: item.id }">
             <button class="btn btn-participar" (click)="participar(item)">
               Participar
             </button>
+            </a>
 
             <button class="btn btn-inscritos" *ngIf="user_id == item.usuario_id" (click)="verInscritos(item)">
               Inscritos

@@ -1,1 +1,119 @@
-<p>cadastrar-experience works!</p>
+<div class="experience-page" *ngIf="experience">
+
+  <!-- HERO / IMAGEM -->
+  <div class="hero-image">
+    <img *ngIf="experience.ass_experience_anexos?.length" [src]="experience.ass_experience_anexos[0].base64"
+      [alt]="experience.titulo" />
+  </div>
+
+  <div class="top-actions">
+
+    <button class="btn-back" routerLink="/experience/home">
+      <i class="bi bi-arrow-left"></i>
+      Voltar
+    </button>
+
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="experience-container">
+
+    <!-- ESQUERDA -->
+    <div class="experience-content">
+
+      <span class="badge-category">
+        {{ experience.ass_experience_type?.tipo_experience }}
+      </span>
+
+      <h1 class="title">
+        {{ experience.titulo }}
+      </h1>
+
+      <div class="location">
+        <i class="bi bi-geo-alt-fill"></i>
+
+        {{ experience.ass_experiences_cidade?.nome_municipio }}
+        -
+        {{ experience.ass_experiences_cidade?.ass_municipio_regiao?.nome }}
+      </div>
+
+      <div class="creator">
+        <i class="bi bi-person-circle"></i>
+        Criado por:
+        <strong>
+          {{ experience.ass_experiences_user?.nome_completo }}
+        </strong>
+      </div>
+
+      <hr />
+
+      <div class="description">
+        <h3>Sobre a experiência</h3>
+
+        <p>
+          {{ experience.descricao }}
+        </p>
+      </div>
+
+    </div>
+
+    <!-- DIREITA -->
+    <div class="experience-sidebar">
+
+      <div class="booking-card">
+
+        <div class="price">
+          <span class="currency">R$</span>
+          {{ experience.valor }}
+        </div>
+
+        <div class="info-item">
+          <i class="bi bi-calendar-event"></i>
+
+          <div>
+            <strong>Data</strong>
+            <p>{{ experience.data_experience | date:'dd/MM/yyyy' }}</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <i class="bi bi-clock"></i>
+
+          <div>
+            <strong>Horário</strong>
+            <p>{{ experience.horario_experience }}</p>
+          </div>
+        </div>
+
+        <!-- USUÁRIO JÁ CADASTRADO -->
+        <button *ngIf="usuarioJaCadastrado" class="btn-book btn-success-custom" disabled>
+          <i class="bi bi-check-circle-fill"></i>
+          Você já está cadastrado
+        </button>
+
+        <!-- BOTÃO CADASTRAR -->
+        <button *ngIf="!usuarioJaCadastrado  && !admExperience" class="btn-book" (click)="cadastrarUsuario()"
+          [disabled]="loadingCadastro">
+
+          <span *ngIf="!loadingCadastro">
+            Participar da Experience
+          </span>
+
+          <span *ngIf="loadingCadastro">
+            Salvando...
+          </span>
+
+        </button>
+
+        <button *ngIf="admExperience" class="btn-participants" (click)="verParticipantes()">
+          <i class="bi bi-people-fill"></i>
+          Ver Participantes
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

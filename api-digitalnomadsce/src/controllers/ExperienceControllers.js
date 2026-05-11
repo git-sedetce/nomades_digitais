@@ -66,132 +66,41 @@ class ExperienceController {
   }
 
   static async pegaExperiences(req, res) {
-  try {
-    const hoje = new Date();
-    const dataHoje = hoje.toISOString().split("T")[0]; // YYYY-MM-DD
-    const horaAgora = hoje.toTimeString().split(" ")[0]; // HH:mm:ss
+    try {
+      const hoje = new Date();
+      const dataHoje = hoje.toISOString().split("T")[0]; // YYYY-MM-DD
+      const horaAgora = hoje.toTimeString().split(" ")[0]; // HH:mm:ss
 
-    const mostraExperiences = await database.Experience.findAll({
-      where: {
-        status: false,
-        [Op.or]: [
-          {
-            data_experience: {
-              [Op.gt]: dataHoje,
-            },
-          },
-          {
-            data_experience: dataHoje,
-            horario_experience: {
-              [Op.gt]: horaAgora,
-            },
-          },
-        ],
-      },
-      order: [
-        ["data_experience", "ASC"],
-        ["horario_experience", "ASC"],
-      ],
-      attributes: [
-        "id",
-        "titulo",
-        "descricao",
-        "data_experience",
-        "horario_experience",
-        "valor",
-        "user_id",
-      ],
-      include: [
-        {
-          model: database.User,
-          as: "ass_experiences_user",
-          attributes: ["nome_completo"],
-        },
-        {
-          model: database.Tipo_Experience,
-          as: "ass_experience_type",
-          attributes: ["tipo_experience"],
-        },
-        {
-          model: database.Cidades,
-          as: "ass_experiences_cidade",
-          attributes: ["nome_municipio"],
-          include: [
+      const mostraExperiences = await database.Experience.findAll({
+        where: {
+          status: false,
+          [Op.or]: [
             {
-              model: database.Regiao,
-              as: "ass_municipio_regiao",
-              attributes: ["nome"],
+              data_experience: {
+                [Op.gt]: dataHoje,
+              },
+            },
+            {
+              data_experience: dataHoje,
+              horario_experience: {
+                [Op.gt]: horaAgora,
+              },
             },
           ],
         },
-        {
-          model: database.anexo_experience,
-          as: "ass_experience_anexos",
-          attributes: ["mimetype", "filename", "path"],
-        },
-      ],
-    });
-
-    const experiences = mostraExperiences.map((exp) => exp.toJSON());
-
-    for (const exp of experiences) {
-      if (exp.ass_experience_anexos?.length) {
-        for (const anexo of exp.ass_experience_anexos) {
-          try {
-            const caminho = path.join(baseUrl, anexo.path);
-
-            if (fs.existsSync(caminho)) {
-              const file = fs.readFileSync(caminho, "base64");
-              anexo.base64 = `data:${anexo.mimetype};base64,${file}`;
-            } else {
-              anexo.base64 = null;
-            }
-          } catch (err) {
-            console.error("Erro ao converter imagem:", err);
-            anexo.base64 = null;
-          }
-        }
-      }
-    }
-
-    return res.status(200).json(experiences);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: error.message });
-  }
-}
-
-  static async pegarParticipantes(req, res) {
-    try {
-      const dataAtual = new Date(); // Obtém a data e hora atuais
-      const mostraParticipantes = await database.cadastro_experience.findAll({
-        order: [["user_id", "ASC"]],
-        attributes: ["id", "confirmacao_presenca", "ciente_pagamento"],
-        include: [
-          {
-            model: database.User,
-            as: "ass_cadastro_user",
-            attributes: ["nome_completo"],
-          },
-          {
-            model: database.Experience,
-            as: "ass_cadastro_experience",
-            attributes: ["id", "titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
-          },
+        order: [
+          ["data_experience", "ASC"],
+          ["horario_experience", "ASC"],
         ],
-      });
-      return res.status(200).json(mostraParticipantes);
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
-    }
-  }
-
-  static async pegaExperiencesById(req, res) {
-    const { id } = req.params;
-    try {
-      const mostraExperiences = await database.Experience.findAll({
-        where: { id: Number(id) },
-        attributes: ["id", "titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
+        attributes: [
+          "id",
+          "titulo",
+          "descricao",
+          "data_experience",
+          "horario_experience",
+          "valor",
+          "user_id",
+        ],
         include: [
           {
             model: database.User,
@@ -222,7 +131,136 @@ class ExperienceController {
           },
         ],
       });
-      return res.status(200).json(mostraExperiences);
+
+      const experiences = mostraExperiences.map((exp) => exp.toJSON());
+
+      for (const exp of experiences) {
+        if (exp.ass_experience_anexos?.length) {
+          for (const anexo of exp.ass_experience_anexos) {
+            try {
+              const caminho = path.join(baseUrl, anexo.path);
+
+              if (fs.existsSync(caminho)) {
+                const file = fs.readFileSync(caminho, "base64");
+                anexo.base64 = `data:${anexo.mimetype};base64,${file}`;
+              } else {
+                anexo.base64 = null;
+              }
+            } catch (err) {
+              console.error("Erro ao converter imagem:", err);
+              anexo.base64 = null;
+            }
+          }
+        }
+      }
+
+      return res.status(200).json(experiences);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async pegarParticipantes(req, res) {
+    try {
+      const dataAtual = new Date(); // Obtém a data e hora atuais
+      const mostraParticipantes = await database.cadastro_experience.findAll({
+        order: [["user_id", "ASC"]],
+        attributes: ["id", "confirmacao_presenca", "ciente_pagamento"],
+        include: [
+          {
+            model: database.User,
+            as: "ass_cadastro_user",
+            attributes: ["nome_completo"],
+          },
+          {
+            model: database.Experience,
+            as: "ass_cadastro_experience",
+            attributes: [
+              "id",
+              "titulo",
+              "descricao",
+              "data_experience",
+              "horario_experience",
+              "valor",
+              "user_id",
+            ],
+          },
+        ],
+      });
+      return res.status(200).json(mostraParticipantes);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async pegaExperiencesById(req, res) {
+    const { id } = req.params;
+    try {
+      const mostraExperience = await database.Experience.findAll({
+        where: { id: Number(id) },
+        attributes: [
+          "id",
+          "titulo",
+          "descricao",
+          "data_experience",
+          "horario_experience",
+          "valor",
+          "user_id",
+        ],
+        include: [
+          {
+            model: database.User,
+            as: "ass_experiences_user",
+            attributes: ["nome_completo"],
+          },
+          {
+            model: database.Tipo_Experience,
+            as: "ass_experience_type",
+            attributes: ["tipo_experience"],
+          },
+          {
+            model: database.Cidades,
+            as: "ass_experiences_cidade",
+            attributes: ["nome_municipio"],
+            include: [
+              {
+                model: database.Regiao,
+                as: "ass_municipio_regiao",
+                attributes: ["nome"],
+              },
+            ],
+          },
+          {
+            model: database.anexo_experience,
+            as: "ass_experience_anexos",
+            attributes: ["mimetype", "filename", "path"],
+          },
+        ],
+      });
+
+      const experience = mostraExperience.map((exp) => exp.toJSON());
+
+      for (const exp of experience) {
+        if (exp.ass_experience_anexos?.length) {
+          for (const anexo of exp.ass_experience_anexos) {
+            try {
+              const caminho = path.join(baseUrl, anexo.path);
+
+              if (fs.existsSync(caminho)) {
+                const file = fs.readFileSync(caminho, "base64");
+                anexo.base64 = `data:${anexo.mimetype};base64,${file}`;
+              } else {
+                anexo.base64 = null;
+              }
+            } catch (err) {
+              console.error("Erro ao converter imagem:", err);
+              anexo.base64 = null;
+            }
+          }
+        }
+      }
+      return res.status(200).json(experience);
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -245,7 +283,14 @@ class ExperienceController {
           {
             model: database.Experience,
             as: "ass_cadastro_experience",
-            attributes: ["titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
+            attributes: [
+              "titulo",
+              "descricao",
+              "data_experience",
+              "horario_experience",
+              "valor",
+              "user_id",
+            ],
           },
         ],
       });
@@ -260,7 +305,15 @@ class ExperienceController {
     try {
       const dataAtual = new Date(); // Obtém a data e hora atuais
       const mostraExperiences = await database.Experience.findAll({
-        attributes: ["id", "titulo", "descricao", "data_experience", "horario_experience", "valor", "user_id"],
+        attributes: [
+          "id",
+          "titulo",
+          "descricao",
+          "data_experience",
+          "horario_experience",
+          "valor",
+          "user_id",
+        ],
         include: [
           {
             model: database.Experience,

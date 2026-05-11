@@ -10,12 +10,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { CriarExperienceComponent } from './criar-experience/criar-experience.component';
 import { CadastrarExperienceComponent } from './cadastrar-experience/cadastrar-experience.component';
+import { VerParticipantesComponent } from './ver-participantes/ver-participantes.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CriarExperienceComponent,
-    CadastrarExperienceComponent
+    CadastrarExperienceComponent,
+    VerParticipantesComponent
   ],
   imports: [
     CommonModule,

@@ -24,4 +24,8 @@ export class ExperienceService {
   listar_tipo_experiences(metodo: string): Observable<any> {
     return this.http.get(environment.url + metodo);
   }
+
+  getExperienceById(id: any): Observable<any> {
+    return this.http.get(environment.url + 'experience/' +id);
+  }
 }
