@@ -1,1 +1,274 @@
-<p>ver-participantes works!</p>
+<div class="participantes-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h2>Participantes da Experience</h2>
+      <p>
+        Gerencie confirmações de presença e pagamentos dos participantes.
+      </p>
+    </div>
+
+    <div class="badge-total">
+      {{ participantes.length }} participante(s)
+    </div>
+  </div>
+
+  <!-- LISTA -->
+  <div *ngIf="participantes.length > 0; else noParticipantes">
+
+    <!-- DESKTOP / TABLET -->
+    <div class="table-wrapper">
+      <table class="participantes-table">
+        <thead>
+          <tr>
+            <th class="text-center">Participante</th>
+            <th class="text-center">Experience</th>
+            <th class="text-center">Data</th>
+            <th class="text-center">Horário</th>
+            <th class="text-center">Valor</th>
+            <th class="text-center">Presença</th>
+            <th class="text-center">Pagamento</th>
+            <th class="text-center">Ação</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let participante of participantes">
+
+            <td>
+              <div class="user-info">
+                <div class="avatar">
+                  {{
+                  participante.ass_cadastro_user?.nome_completo
+                  ?.charAt(0) || '?'
+                  }}
+                </div>
+
+                <div>
+                  <strong>
+                    {{
+                    participante.ass_cadastro_user?.nome_completo || '-'
+                    }}
+                  </strong>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div class="experience-info">
+                <strong>
+                  {{
+                  participante.ass_cadastro_experience?.titulo || '-'
+                  }}
+                </strong>
+
+                <span>
+                  {{
+                  participante.ass_cadastro_experience?.descricao || '-'
+                  }}
+                </span>
+              </div>
+            </td>
+
+            <td>
+              {{
+              participante.ass_cadastro_experience?.data_experience
+              | date:'dd/MM/yyyy'
+              }}
+            </td>
+
+            <td>
+              {{
+              participante.ass_cadastro_experience?.horario_experience || '-'
+              }}
+            </td>
+
+            <td class="valor">
+              {{
+              participante.ass_cadastro_experience?.valor
+              | currency:'BRL':'symbol':'1.2-2'
+              }}
+            </td>
+
+            <td>
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="participante.confirmacao_presenca"
+                  name="confirmacao_presenca_{{ participante.id }}" />
+                <span class="slider"></span>
+              </label>
+            </td>
+
+            <td>
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="participante.ciente_pagamento"
+                  name="ciente_pagamento_{{ participante.id }}" />
+                <span class="slider"></span>
+              </label>
+            </td>
+
+            <td>
+              <div class="actions">
+
+                <button type="button" class="btn-save" [disabled]="atualizandoId === participante.id"
+                  (click)="atualizarParticipante(participante)">
+                  <span *ngIf="atualizandoId !== participante.id">
+                    Salvar
+                  </span>
+
+                  <span *ngIf="atualizandoId === participante.id">
+                    Salvando...
+                  </span>
+                </button>
+
+                <button type="button" class="btn-remove" (click)="removerParticipante(participante)">
+                  Remover
+                </button>
+
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MOBILE -->
+    <div class="mobile-cards">
+
+      <div class="participante-card" *ngFor="let participante of participantes">
+
+        <div class="card-top">
+          <div class="avatar">
+            {{
+            participante.ass_cadastro_user?.nome_completo?.charAt(0) || '?'
+            }}
+          </div>
+
+          <div class="card-user-info">
+            <h3>
+              {{
+              participante.ass_cadastro_user?.nome_completo || '-'
+              }}
+            </h3>
+
+            <p>
+              {{
+              participante.ass_cadastro_experience?.titulo || '-'
+              }}
+            </p>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="info-item">
+            <span>Descrição</span>
+            <strong>
+              {{
+              participante.ass_cadastro_experience?.descricao || '-'
+              }}
+            </strong>
+          </div>
+
+          <div class="info-grid">
+
+            <div class="info-item">
+              <span>Data</span>
+              <strong>
+                {{
+                participante.ass_cadastro_experience?.data_experience
+                | date:'dd/MM/yyyy'
+                }}
+              </strong>
+            </div>
+
+            <div class="info-item">
+              <span>Horário</span>
+              <strong>
+                {{
+                participante.ass_cadastro_experience?.horario_experience || '-'
+                }}
+              </strong>
+            </div>
+
+          </div>
+
+          <div class="info-item">
+            <span>Valor</span>
+
+            <strong class="valor">
+              {{
+              participante.ass_cadastro_experience?.valor
+              | currency:'BRL':'symbol':'1.2-2'
+              }}
+            </strong>
+          </div>
+
+          <div class="switch-group">
+
+            <div class="switch-item">
+              <span>Confirmou presença</span>
+
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="participante.confirmacao_presenca"
+                  name="mobile_confirmacao_presenca_{{ participante.id }}" />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="switch-item">
+              <span>Ciente do pagamento</span>
+
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="participante.ciente_pagamento"
+                  name="mobile_ciente_pagamento_{{ participante.id }}" />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="mobile-actions">
+
+            <button type="button" class="btn-save full" [disabled]="atualizandoId === participante.id"
+              (click)="atualizarParticipante(participante)">
+              <span *ngIf="atualizandoId !== participante.id">
+                Salvar alterações
+              </span>
+
+              <span *ngIf="atualizandoId === participante.id">
+                Salvando...
+              </span>
+            </button>
+
+            <button type="button" class="btn-remove full" (click)="removerParticipante(participante)">
+              Remover participante
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- EMPTY -->
+  <ng-template #noParticipantes>
+    <div class="empty-state">
+      <div class="empty-icon">
+        👥
+      </div>
+
+      <h3>Nenhum participante encontrado</h3>
+
+      <p>
+        Ainda não existem participantes cadastrados nesta experience.
+      </p>
+    </div>
+  </ng-template>
+
+</div>

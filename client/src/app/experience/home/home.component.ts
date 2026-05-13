@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
           ...new Set(this.lista_experiences.map((e) => e.cidade)),
         ];
 
-        console.log('Experiences:', this.lista_experiences);
+        // console.log('Experiences:', this.lista_experiences);
       },
       (erro: any) => console.error(erro),
     );
@@ -161,19 +161,5 @@ export class HomeComponent implements OnInit {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
     }
-  }
-
-  participar(item: any) {
-    console.log('Participar da experience:', item);
-
-    // exemplo:
-    // this.experienceService.participar(item.id).subscribe(...)
-  }
-
-  verInscritos(item: any) {
-    console.log('Ver inscritos da experience:', item);
-
-    // exemplo:
-    // this.router.navigate(['/experience', item.id, 'inscritos']);
   }
 }

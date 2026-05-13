@@ -278,7 +278,7 @@ class ExperienceController {
           {
             model: database.User,
             as: "ass_cadastro_user",
-            attributes: ["nome_completo"],
+            attributes: ["id","nome_completo"],
           },
           {
             model: database.Experience,
@@ -295,6 +295,46 @@ class ExperienceController {
         ],
       });
       return res.status(200).json(mostraParticipantes);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async verificaParticipantes(req, res) {
+    const { id } = req.params;
+    try {
+      const dataAtual = new Date(); // Obtém a data e hora atuais
+      const mostraParticipantes = await database.cadastro_experience.findAll({
+        where: { experience_id: Number(id) },
+        order: [["user_id", "ASC"]],
+        attributes: ["user_id", "experience_id"],
+        
+      });
+      return res.status(200).json(mostraParticipantes);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async atualizaParticipante(req, res) {
+    const { id } = req.params;
+    const { confirmacao_presenca, ciente_pagamento } = req.body;
+
+    try {
+      const participante = await database.cadastro_experience.findOne({
+        where: { id: Number(id) },
+      });
+
+      if (!participante) {
+        return res.status(404).json({ error: 'Participante não encontrado.' });
+      }
+
+      await participante.update({
+        confirmacao_presenca: confirmacao_presenca ?? participante.confirmacao_presenca,
+        ciente_pagamento: ciente_pagamento ?? participante.ciente_pagamento,
+      });
+
+      return res.status(200).json(participante);
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -415,6 +455,18 @@ class ExperienceController {
       return res.status(500).json({ error: error.message });
     }
   }
+
+  static async deletaParticipanteExperience(req, res) {
+      const { id } = req.params;
+      try {
+        await database.cadastro_experience.destroy({ where: { id: Number(id) } });
+        return res
+          .status(200)
+          .json({ message: `O Participante de id ${id} foi deletado com sucesso` });
+      } catch (error) {
+        return res.status(500).json(error.message);
+      }
+    }
 }
 
 module.exports = ExperienceController;

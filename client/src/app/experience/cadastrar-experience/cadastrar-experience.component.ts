@@ -16,6 +16,7 @@ export class CadastrarExperienceComponent implements OnInit {
   loadingCadastro = false;
 
   usuarioJaCadastrado = false;
+  participantes: any[] = [];
   admExperience = false;
 
   constructor(
@@ -55,11 +56,12 @@ export class CadastrarExperienceComponent implements OnInit {
       (data: any) => {
         this.experience = Array.isArray(data) ? data[0] : data;
 
-        console.log('Experience:', this.experience);
+        // console.log('Experience:', this.experience);
 
-        // verifica se usuário já está cadastrado
-        this.verificarCadastro();
         this.verificaAdm();
+
+        // verifica participantes
+        this.verificarInscitos(id);
       },
       (erro: any) => {
         console.error(erro);
@@ -67,8 +69,34 @@ export class CadastrarExperienceComponent implements OnInit {
     );
   }
 
-  verificaAdm(){
-    if(this.experience.user_id === this.user_id){
+  verificarInscitos(id: any) {
+    this.experienceService.verificaParticipantes(id).subscribe(
+      (data: any) => {
+        this.participantes = Array.isArray(data) ? data : [data];
+
+        this.participantes = this.participantes.map((p: any) => ({
+          ...p,
+          confirmacao_presenca: p.confirmacao_presenca ?? false,
+          ciente_pagamento: p.ciente_pagamento ?? false,
+        }));
+
+        // console.log('Participantes:', this.participantes);
+
+        // VERIFICA SE O USUÁRIO LOGADO ESTÁ INSCRITO
+        this.usuarioJaCadastrado = this.participantes.some(
+          (participante: any) => participante.user_id === this.user_id,
+        );
+
+        // console.log('Usuário já inscrito:', this.usuarioJaCadastrado);
+      },
+      (erro: any) => {
+        console.error(erro);
+      },
+    );
+  }
+
+  verificaAdm() {
+    if (this.experience.user_id === this.user_id) {
       this.admExperience = true;
     } else {
       this.admExperience = false;
@@ -99,11 +127,11 @@ export class CadastrarExperienceComponent implements OnInit {
       experience_id: this.experience.id,
     };
 
-    console.log('Dados enviados:', data);
+    // console.log('Dados enviados:', data);
 
     this.experienceService.cadastrarExperience(data).subscribe(
       (response: any) => {
-        console.log('Cadastro realizado:', response);
+        // console.log('Cadastro realizado:', response);
 
         this.usuarioJaCadastrado = true;
 

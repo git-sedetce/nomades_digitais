@@ -7,8 +7,8 @@ require ('dotenv').config()
 
 const port = process.env.PORT
 
-//app.use(express.json());
-//app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 var corsOptions = {
   origin: ['http://localhost:4290', 'https://localhost:4290', 'https://www.digitalnomads.ce.gov.br', 'https://digitalnomads.ce.gov.br'],
   optionsSuccessStatus:200,

@@ -105,10 +105,12 @@
 
         </button>
 
-        <button *ngIf="admExperience" class="btn-participants" (click)="verParticipantes()">
-          <i class="bi bi-people-fill"></i>
-          Ver Participantes
-        </button>
+        <a [routerLink]="['/experience/paritipantes']" [queryParams]="{ id: experience.id }">
+          <button *ngIf="admExperience" class="btn-participants" (click)="verParticipantes()">
+            <i class="bi bi-people-fill"></i>
+            Ver Participantes
+          </button>
+        </a>
 
       </div>
 

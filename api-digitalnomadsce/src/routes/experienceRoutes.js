@@ -36,11 +36,15 @@ router.get('/experiences', ExperienceController.pegaExperiences)
 router.get('/participantes', ExperienceController.pegarParticipantes)
 router.get('/experience/:id', ExperienceController.pegaExperiencesById)
 router.get('/participantes/:id', ExperienceController.pegarParticipantesById)
+router.get('/verificaparticipantes/:id', ExperienceController.verificaParticipantes)
+router.put('/participantes/:id', ExperienceController.atualizaParticipante)
 router.get('/imageexperience/:id', ExperienceController.pegaImagensExperiencesById)
 router.get('/experiencecity/:id', ExperienceController.pegaExperiencesByCity)
 // router.get('/experienceregion/:id', ExperienceController.pegaExperiencesByRegion)
 router.post('/attachexperience/:id', upload.single('file'), ExperienceController.anexoExperience)
 router.get('/tipoexperiences', ExperienceController.pegaTypeExperiences)
+
+router.delete('/participante-experience/:id', ExperienceController.deletaParticipanteExperience)
 
 
 
