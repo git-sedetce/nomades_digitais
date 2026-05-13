@@ -85,6 +85,50 @@
           </div>
         </div>
 
+        <!-- ESTATÍSTICAS -->
+        <div class="experience-stats">
+
+          <div class="stat-box">
+            <i class="bi bi-people-fill"></i>
+
+            <div>
+              <strong>{{ participantes?.length || 0 }}</strong>
+              <span>Inscritos</span>
+            </div>
+          </div>
+
+          <div class="stat-box">
+            <i class="bi bi-ticket-perforated-fill"></i>
+
+            <div>
+              <strong>{{ experience.qtde_vagas }}</strong>
+              <span>Vagas</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- VAGAS RESTANTES -->
+        <div class="remaining-spots">
+
+          <span [ngClass]="{
+      'spots-success': vagasRestantes > 5,
+      'spots-warning': vagasRestantes <= 5 && vagasRestantes > 0,
+      'spots-danger': vagasRestantes <= 0
+    }">
+
+            <i class="bi bi-info-circle-fill"></i>
+
+            {{
+            vagasRestantes > 0
+            ? vagasRestantes + ' vagas restantes'
+            : 'Lotado'
+            }}
+
+          </span>
+
+        </div>
+
         <!-- USUÁRIO JÁ CADASTRADO -->
         <button *ngIf="usuarioJaCadastrado" class="btn-book btn-success-custom" disabled>
           <i class="bi bi-check-circle-fill"></i>

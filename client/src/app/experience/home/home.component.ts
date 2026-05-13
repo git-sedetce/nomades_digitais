@@ -63,6 +63,7 @@ export class HomeComponent implements OnInit {
           location: exp.ass_experience_type?.local || 'Não informado',
           data: exp.data_experience,
           price: `R$ ${exp.valor}`,
+          qtde_vagas: exp.qtde_vagas || 'Não informado',
 
           status: exp.ass_experience_type?.status || 'Não informado',
           usuario_id: exp.user_id,
@@ -91,7 +92,7 @@ export class HomeComponent implements OnInit {
           ...new Set(this.lista_experiences.map((e) => e.cidade)),
         ];
 
-        // console.log('Experiences:', this.lista_experiences);
+        console.log('Experiences:', this.lista_experiences);
       },
       (erro: any) => console.error(erro),
     );

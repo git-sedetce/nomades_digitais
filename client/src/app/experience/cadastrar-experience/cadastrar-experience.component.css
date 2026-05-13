@@ -228,6 +228,74 @@
   font-size: 18px;
 }
 
+.experience-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: #f8f9fa;
+
+  border-radius: 14px;
+  padding: 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-box i {
+  font-size: 24px;
+  color: #0d6efd;
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 18px;
+  color: #222;
+}
+
+.stat-box span {
+  color: #666;
+  font-size: 14px;
+}
+
+.remaining-spots {
+  margin-bottom: 20px;
+}
+
+.remaining-spots span {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  font-weight: 600;
+}
+
+.spots-success {
+  background: #e8f7ee;
+  color: #198754;
+}
+
+.spots-warning {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.spots-danger {
+  background: #fdeaea;
+  color: #dc3545;
+}
+
 /* TABLET */
 
 @media (max-width: 992px) {
