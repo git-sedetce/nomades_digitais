@@ -26,7 +26,7 @@ export class ExperienceService {
   }
 
   getExperienceById(id: any): Observable<any> {
-    return this.http.get(environment.url + 'experience/' +id);
+    return this.http.get(environment.url + 'experience/' + id);
   }
 
   getParticipanteExperienceById(id: any): Observable<any> {
@@ -37,11 +37,15 @@ export class ExperienceService {
     return this.http.get(environment.url + 'verificaparticipantes/' + id);
   }
 
+  finalizarExperience(data: any) {
+    return this.http.put(environment.url + `finalizar-experience`, data);
+  }
+
   updateParticipanteExperience(id: any, data: any): Observable<any> {
     return this.http.put(environment.url + 'participantes/' + id, data);
   }
 
   deleteParticipanteExperience(id: number) {
     return this.http.delete(environment.url + 'participante-experience/' + id);
-  };
+  }
 }

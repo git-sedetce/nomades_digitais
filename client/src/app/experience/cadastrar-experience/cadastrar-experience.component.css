@@ -296,6 +296,43 @@
   color: #dc3545;
 }
 
+.btn-finish-experience {
+  width: 100%;
+
+  margin-top: 12px;
+
+  border: none;
+  background: #dc3545;
+  color: #fff;
+
+  padding: 16px;
+  border-radius: 12px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  transition: all 0.3s ease;
+}
+
+.btn-finish-experience:hover {
+  background: #bb2d3b;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(220, 53, 69, 0.25);
+}
+
+.btn-finish-experience i {
+  font-size: 18px;
+}
+
 /* TABLET */
 
 @media (max-width: 992px) {

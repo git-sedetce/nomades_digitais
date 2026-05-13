@@ -90,7 +90,8 @@ export class CadastrarExperienceComponent implements OnInit {
         );
 
         // CALCULA VAGAS RESTANTES
-        this.vagasRestantes = this.experience.qtde_vagas - this.participantes.length;
+        this.vagasRestantes =
+          this.experience.qtde_vagas - this.participantes.length;
 
         // console.log('Usuário já inscrito:', this.usuarioJaCadastrado);
       },
@@ -156,5 +157,33 @@ export class CadastrarExperienceComponent implements OnInit {
 
   verParticipantes() {
     this.router.navigate(['/experience/paritipantes']);
+  }
+
+  finalizarExperience() {
+    const confirmar = confirm('Deseja realmente finalizar esta experience?');
+
+    if (!confirmar) {
+      return;
+    }
+
+    const data = {
+      id: this.experience.id,
+      status: true,
+    };
+
+    this.experienceService.finalizarExperience(data).subscribe(
+      (response: any) => {
+        console.log('Experience finalizada:', response);
+
+        alert('Experience finalizada com sucesso!');
+
+        this.router.navigate(['/experience/home']);
+      },
+      (erro: any) => {
+        console.error(erro);
+
+        alert('Erro ao finalizar experience.');
+      },
+    );
   }
 }
