@@ -58,7 +58,7 @@ export class VerParticipantesComponent implements OnInit {
           ciente_pagamento: p.ciente_pagamento ?? false,
         }));
 
-        console.log('Participantes:', this.participantes);
+        // console.log('Participantes:', this.participantes);
       },
       (erro: any) => {
         console.error(erro);
@@ -82,7 +82,7 @@ export class VerParticipantesComponent implements OnInit {
       .subscribe(
         (updated: any) => {
           this.atualizandoId = null;
-          console.log('Participante atualizado:', updated);
+          // console.log('Participante atualizado:', updated);
         },
         (erro: any) => {
           this.atualizandoId = null;
@@ -114,7 +114,7 @@ export class VerParticipantesComponent implements OnInit {
             (p) => p.id !== participante.id,
           );
 
-          console.log('Participante removido com sucesso');
+          // console.log('Participante removido com sucesso');
         },
         (erro: any) => {
           console.error('Erro ao remover participante:', erro);

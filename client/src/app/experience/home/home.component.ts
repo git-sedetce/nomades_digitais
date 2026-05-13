@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
           ...new Set(this.lista_experiences.map((e) => e.cidade)),
         ];
 
-        console.log('Experiences:', this.lista_experiences);
+        // console.log('Experiences:', this.lista_experiences);
       },
       (erro: any) => console.error(erro),
     );

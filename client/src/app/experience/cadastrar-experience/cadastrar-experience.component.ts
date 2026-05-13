@@ -58,7 +58,7 @@ export class CadastrarExperienceComponent implements OnInit {
       (data: any) => {
         this.experience = Array.isArray(data) ? data[0] : data;
 
-        console.log('Experience:', this.experience);
+        // console.log('Experience:', this.experience);
 
         this.verificaAdm();
 
@@ -82,7 +82,7 @@ export class CadastrarExperienceComponent implements OnInit {
           ciente_pagamento: p.ciente_pagamento ?? false,
         }));
 
-        console.log('Participantes:', this.participantes);
+        // console.log('Participantes:', this.participantes);
 
         // VERIFICA SE O USUÁRIO LOGADO ESTÁ INSCRITO
         this.usuarioJaCadastrado = this.participantes.some(
@@ -173,7 +173,7 @@ export class CadastrarExperienceComponent implements OnInit {
 
     this.experienceService.finalizarExperience(data).subscribe(
       (response: any) => {
-        console.log('Experience finalizada:', response);
+        // console.log('Experience finalizada:', response);
 
         alert('Experience finalizada com sucesso!');
 
