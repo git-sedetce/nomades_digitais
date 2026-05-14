@@ -385,7 +385,6 @@ class ParceiroController {
 
     try {
       const dados = JSON.parse(req.body.dados);
-      console.log('dados', dados)
 
       const comprovante = req.files?.comprovante?.[0];
 

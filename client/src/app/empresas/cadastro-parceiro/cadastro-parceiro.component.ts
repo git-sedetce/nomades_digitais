@@ -85,6 +85,31 @@ export class CadastroParceiroComponent implements OnInit {
     this.getLanguage();
   }
 
+  formatarCnpj(event: any): void {
+    let valor = event.target.value;
+
+    // Remove tudo que não for letra ou número
+    valor = valor.replace(/[^a-zA-Z0-9]/g, '');
+
+    // Converte para maiúsculo
+    valor = valor.toUpperCase();
+
+    // Limita em 14 caracteres
+    valor = valor.substring(0, 14);
+
+    // Aplica máscara
+    valor = valor.replace(
+      /^([A-Z0-9]{2})([A-Z0-9]{3})([A-Z0-9]{3})([A-Z0-9]{4})([A-Z0-9]{2}).*/,
+      '$1.$2.$3/$4-$5',
+    );
+
+    // Atualiza input
+    event.target.value = valor;
+
+    // Atualiza model
+    this.empresa.cnpj = valor;
+  }
+
   //preencher o endereço usando o cep
 
   consultaCEP(cep: any, form: any) {

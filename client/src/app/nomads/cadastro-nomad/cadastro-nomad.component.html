@@ -171,7 +171,7 @@
                       <div class="row mt-2">
                         <div class="col-sm-6 mb-3 mt-3">
                           <label for="registro" class="form-label pergunta">Registro da empresa (CNPJ) / Company registration</label>
-                        <input type="text" class="form-control" id="registro" name="registro" placeholder="Registro da empresa (CNPJ) / Company registration" required #registro="ngModel" [(ngModel)]="nomad.registro" mask="00.000.000/0000-00" (blur)="(buscarCNPJ(registro.value, formNomad))">
+                        <input type="text" class="form-control" id="registro" name="registro" placeholder="Registro da empresa (CNPJ) / Company registration" required #registro="ngModel" [(ngModel)]="nomad.registro" (input)="formatarCnpj($event)" (blur)="(buscarCNPJ(registro.value, formNomad))">
                         </div>
 
                         <div class="col-sm-6 mb-3 mt-3">

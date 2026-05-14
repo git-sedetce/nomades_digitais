@@ -28,13 +28,12 @@
                 <div class="row">
                   <div class="form-group col-sm-6 col-12 mb-3">
                     <label for="cnpj" class="form-label pergunta">CNPJ</label>
-                    <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" ngModel
-                      required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" mask="00.000.000/0000-00" (blur)="(buscarCNPJ(cnpj.value, parceiro))">
-                    <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe apenas os números.</div>
+                    <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" required #cnpj="ngModel" [(ngModel)]="empresa.cnpj" (input)="formatarCnpj($event)" (blur)="(buscarCNPJ(cnpj.value, parceiro))" maxlength="18">
+                    <div id="cnpjHelp" *ngIf="cnpj.untouched" class="form-text">Informe letras enúmeros.</div>
                     <div *ngIf="!cnpj.valid && cnpj.touched" class="alert alert-danger" role="alert">CNPJ é obrigatório
                     </div>
-
                   </div>
+
                   <div class="form-group col-sm-6 col-12 mb-3">
                     <label for="nome_fantasia" class="form-label pergunta">Nome Fantasia</label>
                     <input type="text" class="form-control" id="nome_fantasia" placeholder="Digite o nome fantasia"
