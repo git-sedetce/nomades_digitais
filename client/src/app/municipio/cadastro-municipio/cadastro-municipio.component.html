@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="card card_form mb-5">
-          <div *ngIf="!submitted">
+          <div>
             <div class="bg-primary titulo">
               <h3 class="pb-3 pt-3 text-center text-white">Cadastro do Municípios</h3>
             </div>
@@ -43,7 +43,8 @@
                   </div>
                   <div class="col-sm-6 col-12 mb-3">
                     <label for="regiao" class="form-label pergunta">Região de Planejamento</label>
-                    <input class="form-control" type="text" id="regiao" placeholder="Informe a sua região" name="regiao" ngModel required #regiao="ngModel" [(ngModel)]="cadastro_cidade.regiao" readonly>
+                    <input class="form-control" type="text" id="regiao" placeholder="Informe a sua região" name="regiao"
+                      ngModel required #regiao="ngModel" [(ngModel)]="cadastro_cidade.regiao" readonly>
                     <div *ngIf="!regiao.valid && regiao.touched" class="alert alert-danger" role="alert">Região é
                       obrigatório</div>
                   </div>
@@ -168,7 +169,8 @@
                     role="alert">Se não houver favor escrever "Não ofertamos esse serviço".</div>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="service_seguranca" class="pergunta">Quais são as medidas de segurança pública do município? (vigilância, endereço de postos policiais, entre outros).</label>
+                  <label for="service_seguranca" class="pergunta">Quais são as medidas de segurança pública do
+                    município? (vigilância, endereço de postos policiais, entre outros).</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="service_seguranca" rows="3"
                     name="service_seguranca" ngModel required #service_seguranca="ngModel"
                     [(ngModel)]="cadastro_cidade.service_seguranca"></textarea>
@@ -182,7 +184,8 @@
               <fieldset>
                 <legend>Pontos Turísticos</legend>
                 <div class="form-group mb-3">
-                  <label for="pontos_turisticos" class="pergunta">Principais atrativos turísticos e eventos/festas tradicionais da cidade (Cite e descreva estes pontos).</label>
+                  <label for="pontos_turisticos" class="pergunta">Principais atrativos turísticos e eventos/festas
+                    tradicionais da cidade (Cite e descreva estes pontos).</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="pontos_turisticos" rows="5"
                     name="pontos_turisticos" ngModel required #pontos_turisticos="ngModel"
                     [(ngModel)]="cadastro_cidade.pontos_turisticos"></textarea>
@@ -199,7 +202,8 @@
                 <div *ngIf="!espacos_culturais.valid && espacos_culturais.touched" class="alert alert-danger" role="alert">Se não houver favor escrever "Não possuimos espaço cultural".</div>
               </div>-->
                 <div class="form-group mb-3">
-                  <label for="espacos_lazer" class="pergunta">Espaços de lazer (praças públicas, parques de diversão, espaços para crianças, bibliotecas, entre outros).</label>
+                  <label for="espacos_lazer" class="pergunta">Espaços de lazer (praças públicas, parques de diversão,
+                    espaços para crianças, bibliotecas, entre outros).</label>
                   <textarea [maxlength]="maxChars" class="form-control" id="espacos_lazer" rows="5" name="espacos_lazer"
                     ngModel required #espacos_lazer="ngModel" [(ngModel)]="cadastro_cidade.espacos_lazer"></textarea>
                   <div class="limite_caractere alert alert-warning mt-1">Caracteres digitados: <strong>{{
@@ -328,166 +332,38 @@
                 </div>
 
               </fieldset>
+              <div class="row mt-4">
+
+                <div class="col-12">
+
+                  <fieldset>
+
+                    <legend>Anexos</legend>
+
+                    <div class="mb-3">
+
+                      <label class="form-label pergunta">
+                        Fotos dos pontos turísticos da cidade
+                      </label>
+
+                      <input class="form-control" type="file" multiple accept=".jpg,.jpeg,.png,.webp"
+                        (change)="selectMultipleImage($event)">
+
+                      <small class="text-muted">
+                        Resolução mínima recomendada: 1920x1080
+                      </small>
+
+                    </div>
+
+                  </fieldset>
+
+                </div>
+
+              </div>
               <button type="submit" class="btn btn-primary mb-3" [disabled]="!municipio.valid"
                 (click)="saveCity()">Cadastrar Município</button>
             </form>
           </div>
-        </div>
-      </div>
-        <div class="col-12" *ngIf="submitted">
-          <div class="card card_form mb-5">
-          <h3 class="pb-3 pt-3 bg-primary text-center text-white">O Munícipio foi cadastrado com sucesso!</h3>
-          <div class="container">
-            <!--<div class="row">
-              <div class="col-6 col-sm-4 mb-3">ID: </div>
-              <div class="col-6 col-sm-4 mb-3">{{ cadastro_cidade.id }}</div>
-            </div>-->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th class="table-primary" colspan="2">Dados Cadastrados</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <td class="table-primary" colspan="2">Um email de confimação foi enviado!</td>
-                </tr>
-              </tfoot>
-              <tbody>
-                <!--
-                  <tr class="table-info">
-                  <td>Id:</td>
-                  <td>{{ cadastro_cidade.id }}</td>
-                </tr>
-                -->
-                <tr class="table-info">
-                  <td>Cidade</td>
-                  <td>{{ cadastro_cidade.cidade }}</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Região de Planejamento</td>
-                  <td>{{ cadastro_cidade.regiao }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Email de contato</td>
-                  <td>{{ cadastro_cidade.email_prefeitura }}</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Telefone de Contato</td>
-                  <td>{{ cadastro_cidade.contato_prefeitura }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Site da prefeitura</td>
-                  <td>{{ cadastro_cidade.link_prefeitura }}</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Histórico da cidade</td>
-                  <td>{{ cadastro_cidade.historia_cidade }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Possui Wifi em pontos públicos?</td>
-                  <td>{{ cadastro_cidade.wifi_service }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.wifi_cidade !==''" class="table-light">
-                  <td>Quais locais?</td>
-                  <td>{{ cadastro_cidade.wifi_cidade }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Quais são os serviços ofertados para turistas e/ou estrangeiros?</td>
-                  <td>{{ cadastro_cidade.service_estrangeiro }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.service_cidade !==''" class="table-light">
-                  <td>Se houver serviços, onde são ofertados (endereços)?</td>
-                  <td>{{ cadastro_cidade.service_cidade }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Quais são os serviços oferecidos para empresários?</td>
-                  <td>{{ cadastro_cidade.service_empresario }}</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Quais são as medidas de segurança pública do município?</td>
-                  <td>{{ cadastro_cidade.service_seguranca }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Principais pontos turísticos da cidade</td>
-                  <td>{{ cadastro_cidade.pontos_turisticos }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.espacos_culturais !==''" class="table-light">
-                  <td>Espaços culturais</td>
-                  <td>{{ cadastro_cidade.espacos_culturais }}</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Espaços de Lazer</td>
-                  <td>{{ cadastro_cidade.espacos_lazer }}</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Tipo de turismo predominante</td>
-                  <td>{{ cadastro_cidade.tipo_turismo }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.tourism_ecologico !==''" class="table-info">
-                  <td>Turismo ecologico</td>
-                  <td>{{ cadastro_cidade.tourism_ecologico }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.tourism_praiano !==''" class="table-light">
-                  <td>Turismo praiano</td>
-                  <td>{{ cadastro_cidade.tourism_praiano }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.tourism_radical !==''" class="table-info">
-                  <td>Turismo radical</td>
-                  <td>{{ cadastro_cidade.tourism_radical }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.tourism_religioso !==''" class="table-light">
-                  <td>Turismo religioso</td>
-                  <td>{{ cadastro_cidade.tourism_religioso }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.tourism_serrano !==''" class="table-info">
-                  <td>Turismo serrano</td>
-                  <td>{{ cadastro_cidade.tourism_serrano }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.tourism_sertanejo !==''" class="table-light">
-                  <td>Turismo sertanejo</td>
-                  <td>{{ cadastro_cidade.tourism_sertanejo }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.rota !==''" class="table-info">
-                  <td>Faz parte de alguma rota turística?</td>
-                  <td>{{ cadastro_cidade.rota }}</td>
-                </tr>
-                <tr *ngIf="cadastro_cidade.qual_rota !==''" class="table-light">
-                  <td>Qual rota</td>
-                  <td>{{ cadastro_cidade.qual_rota }}</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <fieldset>
-              <legend>Anexos</legend>
-              <div class="row">
-                <div class="mb-3">
-                  <label for="formFileMultiple" class="form-label">Fotos dos pontos turísticos da cidade, dos centros
-                    culturais e espaços de lazer (Resolução mínima 1920x1080)</label>
-                  <input #filesInput class="form-control" type="file" id="formFileMultiple" multiple
-                    (change)="selectMultipleImage($event)">
-                  <button class="btn btn-primary mb-3" type="submit" [disabled]="habilita_anexo"
-                    (click)="onFilesUpload()">upLoad</button>
-                  <div *ngIf="habilita_anexo == true" class="alert alert-success" role="alert">
-                    Anexo enviado com Sucesso!
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-12 mb-3">
-                  <div class="alert alert-warning" role="alert">
-                    <h4 class="alert-heading">ATENÇÃO</h4>
-                    <p>Caso tenha dificuldades com o envio das fotos, as mesmas podem ser enviadas pelo e-mail <a
-                        href="mailto: admdigitalnomads@sedet.ce.gov.br">admdigitalnomads@sedet.ce.gov.br</a>. As fotos podem
-                      ser adicionadas em anexo ou compartilhadas por meio de armazenamento em nuvem. Ex.: Google Drive,
-                      Onedrive, etc.</p>
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-          <button type="submit" class="btn btn-success mb-3" [disabled]="finaliza == true" (click)="novoCadastro()">Novo Cadastro</button>
         </div>
       </div>
     </div>
