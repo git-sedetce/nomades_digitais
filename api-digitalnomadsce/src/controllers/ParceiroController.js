@@ -44,7 +44,7 @@ class ParceiroController {
           ) {
             const logoPath = path.join(
               baseUrl,
-              parceiro.ass_imgsParceiros[0].path
+              parceiro.ass_imgsParceiros[0].path,
             );
             try {
               const buffer = await fs.promises.readFile(logoPath);
@@ -58,7 +58,7 @@ class ParceiroController {
             ...parceiro.toJSON(),
             logo: logoBase64, // adiciona a logo convertida
           };
-        })
+        }),
       );
 
       return res.status(200).json(resultado);
@@ -95,7 +95,7 @@ class ParceiroController {
           ) {
             const logoPath = path.join(
               baseUrl,
-              parceiro.ass_imgsParceiros[0].path
+              parceiro.ass_imgsParceiros[0].path,
             );
             try {
               const buffer = await fs.promises.readFile(logoPath);
@@ -109,7 +109,7 @@ class ParceiroController {
             ...parceiro.toJSON(),
             logo: logoBase64, // adiciona a logo convertida
           };
-        })
+        }),
       );
 
       return res.status(200).json(resultado);
@@ -145,7 +145,7 @@ class ParceiroController {
           ) {
             const logoPath = path.join(
               baseUrl,
-              parceiro.ass_imgsParceiros[0].path
+              parceiro.ass_imgsParceiros[0].path,
             );
             try {
               const buffer = await fs.promises.readFile(logoPath);
@@ -159,7 +159,7 @@ class ParceiroController {
             ...parceiro.toJSON(),
             logo: logoBase64, // adiciona a logo convertida
           };
-        })
+        }),
       );
 
       return res.status(200).json(resultado);
@@ -196,7 +196,7 @@ class ParceiroController {
           ) {
             const logoPath = path.join(
               baseUrl,
-              parceiro.ass_imgsParceiros[0].path
+              parceiro.ass_imgsParceiros[0].path,
             );
             try {
               const buffer = await fs.promises.readFile(logoPath);
@@ -210,7 +210,7 @@ class ParceiroController {
             ...parceiro.toJSON(),
             logo: logoBase64, // adiciona a logo convertida
           };
-        })
+        }),
       );
 
       return res.status(200).json(resultado);
@@ -228,7 +228,8 @@ class ParceiroController {
         include: [
           {
             association: "ass_imgsParceiros",
-            where: (database.cadastra_parceiros.id = database.anexos.parceiro_id),
+            where: (database.cadastra_parceiros.id =
+              database.anexos.parceiro_id),
             attributes: ["mimetype", "path"],
           },
         ],
@@ -249,7 +250,8 @@ class ParceiroController {
         include: [
           {
             association: "ass_imgsParceiros",
-            where: (database.cadastra_parceiros.id = database.anexos.parceiro_id),
+            where: (database.cadastra_parceiros.id =
+              database.anexos.parceiro_id),
             attributes: ["mimetype", "path"],
           },
         ],
@@ -379,243 +381,165 @@ class ParceiroController {
   }
 
   static async cadastraParceiro(req, res) {
-    var email_grupo = "admdigitalnomads@sedet.ce.gov.br";
-    const novoParceiro = req.body;
-    // console.log('novoParceiro', novoParceiro)
+    const transaction = await database.sequelize.transaction();
+
     try {
-      const criarParceiro = await database.cadastra_parceiros.create(
-        novoParceiro
-      );
+      const dados = JSON.parse(req.body.dados);
+      console.log('dados', dados)
 
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(
-        novoParceiro.email_parceiro,
-        salt
-      );
-      const pin = Math.floor(1000 + Math.random() * 9000);
-      const nome_usuario = novoParceiro.email_parceiro.split("@");
+      const comprovante = req.files?.comprovante?.[0];
 
-      await database.User.create({
-        nome_completo: novoParceiro.nome_fantasia,
-        user_name: nome_usuario[0],
-        user_email: novoParceiro.email_parceiro,
-        user_active: false,
-        user_password: hashedPassword,
-        user_pin: pin,
-        profile_id: 2,
+      const alvara = req.files?.alvara?.[0];
+
+      const logo = req.files?.logo?.[0];
+
+      const imagens = req.files?.imagens || [];
+
+      // =========================
+      // CRIA PARCEIRO
+      // =========================
+
+      const criarParceiro = await database.cadastra_parceiros.create(dados, {
+        transaction,
       });
 
-      var transporter = nodemailer.createTransport({
-        host: "172.26.2.26", //"relay.etice.ce.gov.br",
+      // =========================
+      // CRIA USUÁRIO
+      // =========================
+
+      const salt = await bcrypt.genSalt(10);
+
+      const hashedPassword = await bcrypt.hash(dados.email_parceiro, salt);
+
+      const pin = Math.floor(1000 + Math.random() * 9000);
+
+      const nome_usuario = dados.email_parceiro.split("@");
+
+      await database.User.create(
+        {
+          nome_completo: dados.nome_fantasia,
+
+          user_name: nome_usuario[0],
+
+          user_email: dados.email_parceiro,
+
+          user_active: false,
+
+          user_password: hashedPassword,
+
+          user_pin: pin,
+
+          profile_id: 2,
+        },
+        { transaction },
+      );
+
+      // =========================
+      // SALVAR ANEXOS
+      // =========================
+
+      async function salvarArquivo(arquivo, tipo) {
+        if (!arquivo) return;
+
+        const caminho = arquivo.path.split("api-digitalnomadsce")[1];
+
+        await database.anexos.create(
+          {
+            mimetype: arquivo.mimetype,
+
+            filename: arquivo.filename,
+
+            path: caminho,
+
+            parceiro_id: criarParceiro.id,
+
+            tipo_anexo: tipo,
+          },
+          { transaction },
+        );
+      }
+
+      // comprovante
+      await salvarArquivo(comprovante, "comprovante");
+
+      // alvará
+      await salvarArquivo(alvara, "alvara");
+
+      // logo
+      await salvarArquivo(logo, "logo");
+
+      // imagens
+      for (const imagem of imagens) {
+        await salvarArquivo(imagem, "image");
+      }
+
+      // =========================
+      // EMAILS
+      // =========================
+
+      const email_grupo = "admdigitalnomads@sedet.ce.gov.br";
+
+      const transporter = nodemailer.createTransport({
+        host: "172.26.2.26",
+
         port: 25,
+
         secure: false,
-        /*auth: {
-            user: "digital.nomads@sedet.ce.gov.br",
-            pass: "@Sedet2022",
-          },*/
+
         tls: {
           rejectUnauthorized: false,
         },
       });
-      var email = novoParceiro.email_parceiro;
-      var enviarEmail = [email, email_grupo];
-      var mailOptions = {
+
+      const enviarEmail = [dados.email_parceiro, email_grupo];
+
+      const mailOptions = {
         from: "digital.nomads@sedet.ce.gov.br",
+
         to: enviarEmail,
+
         subject: "Cadastro Parceiro",
-        html: `<h2>Parabéns!</h2><p>Parabéns! O cadastro da sua empresa foi realizado com sucesso. Os dados enviados pela sua empresa serão analisados e em breve você receberá o retorno da sua inscrição e poderá fazer parte do Projeto Digital Nomads CE, atraindo um novo público para o seu estabelecimento.</p><p>Abaixo você pode ver os dados informados durante o cadastro:</p><ul><li>CNPJ: ${novoParceiro.cnpj}</li><li>Nome fantasia: ${novoParceiro.nome_fantasia}</li><li>Razão Social: ${novoParceiro.razao_social}</li><li>Contato: ${novoParceiro.telefone}</li><li>CEP: ${novoParceiro.cep}</li><li>Logradouro: ${novoParceiro.logradouro}</li><li>Número: ${novoParceiro.numero}</li><li>Complemento: ${novoParceiro.complemento}</li><li>Bairro: ${novoParceiro.bairro}</li><li>Cidade: ${novoParceiro.cidade}</li><li>Estado: ${novoParceiro.estado}</li><li>Email: ${novoParceiro.email_parceiro}</li><li>Mídia Social: ${novoParceiro.midia_social}</li><li>Tipo de Serviço: ${novoParceiro.tipo_service}</li><li>Serviços essenciais: ${novoParceiro.essential_service}</li><li>Serviço de internet: ${novoParceiro.internet_service}</li><li>Outro serviço: ${novoParceiro.outro_servico}</li><li>Reuniões: ${novoParceiro.trabalho_reunioes}</li><li>Orientação: ${novoParceiro.orienta_equipe}</li><li>Localização: ${novoParceiro.localizacao}</li><li>Ramo: ${novoParceiro.ramo}</li><li>Benefícios: ${novoParceiro.beneficios}</li><li>Espaços Culturais: ${novoParceiro.espacos_culturais}</li><li>Idioma: ${novoParceiro.idioma}</li><li>Qual Idioma: ${novoParceiro.qual_idioma}</li></ul><p>Caso a sua inscrição seja deferida, os dados acima informados poderão ser conferidos no site do projeto, na aba <strong>Escolha sua nova parada</strong> ou <strong>Parceiros</strong>.</p><p>Agradecemos a participação da sua empresa nesse mais novo projeto e contamos com a sua colaboração para tornar o Ceará um polo para os Nômades Digitais.</p><p>Para maiores duvidas ou esclarecimentos entre em contato conosco pelo e-mail: <a>admdigitalnomads@sedet.ce.gov.br</a> ou pelo telefone (85) 3108.1039.</p><p>Atenciosamente,</p><p>Equipe Digital Nomads CE.</p>`,
-        //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
+
+        html: `<h2>Parabéns!</h2><p>Parabéns! O cadastro da sua empresa foi realizado com sucesso. Os dados enviados pela sua empresa serão analisados e em breve você receberá o retorno da sua inscrição e poderá fazer parte do Projeto Digital Nomads CE, atraindo um novo público para o seu estabelecimento.</p><p>Abaixo você pode ver os dados informados durante o cadastro:</p><ul><li>CNPJ: ${dados.cnpj}</li><li>Nome fantasia: ${dados.nome_fantasia}</li><li>Razão Social: ${dados.razao_social}</li><li>Contato: ${dados.telefone}</li><li>CEP: ${dados.cep}</li><li>Logradouro: ${dados.logradouro}</li><li>Número: ${dados.numero}</li><li>Complemento: ${dados.complemento}</li><li>Bairro: ${dados.bairro}</li><li>Cidade: ${dados.cidade}</li><li>Estado: ${dados.estado}</li><li>Email: ${dados.email_parceiro}</li><li>Mídia Social: ${dados.midia_social}</li><li>Tipo de Serviço: ${dados.tipo_service}</li><li>Serviços essenciais: ${dados.essential_service}</li><li>Serviço de internet: ${dados.internet_service}</li><li>Outro serviço: ${dados.outro_servico}</li><li>Reuniões: ${dados.trabalho_reunioes}</li><li>Orientação: ${dados.orienta_equipe}</li><li>Localização: ${dados.localizacao}</li><li>Ramo: ${dados.ramo}</li><li>Benefícios: ${dados.beneficios}</li><li>Espaços Culturais: ${dados.espacos_culturais}</li><li>Idioma: ${dados.idioma}</li><li>Qual Idioma: ${dados.qual_idioma}</li></ul><p>Caso a sua inscrição seja deferida, os dados acima informados poderão ser conferidos no site do projeto, na aba <strong>Escolha sua nova parada</strong> ou <strong>Parceiros</strong>.</p><p>Agradecemos a participação da sua empresa nesse mais novo projeto e contamos com a sua colaboração para tornar o Ceará um polo para os Nômades Digitais.</p><p>Para maiores duvidas ou esclarecimentos entre em contato conosco pelo e-mail: <a>admdigitalnomads@sedet.ce.gov.br</a> ou pelo telefone (85) 3108.1039.</p><p>Atenciosamente,</p><p>Equipe Digital Nomads CE.</p>`,
       };
 
-      var mailOptionsPin = {
+      const mailOptionsPin = {
         from: "digital.nomads@sedet.ce.gov.br",
-        to: novoParceiro.email_parceiro,
+
+        to: dados.email_parceiro,
+
         subject: "Código PIN",
+
         html: `<h2>Código PIN</h2><p>Segue o código PIN para o acesso da plataforma Digital Nomads CE.</p><br><p><strong>${pin}</strong></p>
             <p><a href="https://www.digitalnomads.ce.gov.br/resetSenha">Clique aqui</a> para criar sua senha</p>`,
-        //text: `Prezado(a) seu cadastro foi realizado com sucesso!!!`,
       };
 
-      // console.log("mailOptions", mailOptions);
-      var emailRetorno = null;
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          emailRetorno = error;
-        } else {
-          // console.log("Email sent: " + info.response);
-          emailRetorno = {
-            messagem: "Email enviado com sucesso!",
-            info: info.response,
-          };
-        }
-      });
+      transporter.sendMail(mailOptions);
 
-      transporter.sendMail(mailOptionsPin, function (error, info) {
-        if (error) {
-          console.log(error);
-          emailRetorno = error;
-        } else {
-          // console.log("Email sent: " + info.response);
-          emailRetorno = {
-            messagem: "PIN enviado com sucesso!",
-            info: info.response,
-          };
-        }
-      });
+      transporter.sendMail(mailOptionsPin);
 
-      return res.status(200).json(criarParceiro);
+      // =========================
+      // COMMIT
+      // =========================
+
+      await transaction.commit();
+
+      return res.status(201).json({
+        message: "Parceiro cadastrado com sucesso!",
+
+        parceiro_id: criarParceiro.id,
+      });
     } catch (error) {
-      return res.status(500).json(error.message);
-    }
-  }
+      await transaction.rollback();
 
-  /*static async anexoParceiro(req, res) {
-    const file = req.file
-    console.log(file)
-    if(file){
-      res.json(file)
-    }else{
-      throw new Error("File upload unseccessful")
-    }
-      //res.send("Arquivo recebido!")
-  }*/
+      console.log(error);
 
-  static async anexoParceiro(req, res) {
-    const file = req.file;
-    const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1];
-    const nome_arquivo = file.filename;
-    const type = file.mimetype;
-    // console.log(file);
-    // console.log(id);
-    if (type == "application/pdf") {
-      try {
-        const anexarParceiro = await database.anexos.create({
-          mimetype: type,
-          filename: nome_arquivo,
-          path: caminho,
-          parceiro_id: id,
-          tipo_anexo: "comprovante",
-          raw: true,
-        });
-        // console.log('anexarParceiro', anexarParceiro)
-        return res
-          .status(200)
-          .json({ message: "Comprovante anexado com sucesso!" });
-      } catch (error) {
-        return res.status(500).json(error.message);
-      }
-    } else {
       return res.status(500).json({
-        message: "Somente arquivo .pdf",
+        message: "Erro ao cadastrar parceiro",
+
+        error: error.message,
       });
     }
-    //res.send("Arquivo recebido!")
-  }
-
-  static async alvaraParceiro(req, res) {
-    const file = req.file;
-    const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1];
-    const nome_arquivo = file.filename;
-    const type = file.mimetype;
-    // console.log(file);
-    // console.log(id);
-    if (type == "application/pdf") {
-      try {
-        const anexarParceiro = await database.anexos.create({
-          mimetype: type,
-          filename: nome_arquivo,
-          path: caminho,
-          parceiro_id: id,
-          tipo_anexo: "alvara",
-          raw: true,
-        });
-        // console.log('anexarParceiro', anexarParceiro)
-        return res.status(200).json({ message: "Alvará anexado com Sucesso!" });
-      } catch (error) {
-        return res.status(500).json(error.message);
-      }
-    } else {
-      return res.status(500).json({
-        message: "Somente arquivo .pdf",
-      });
-    }
-    //res.send("Arquivo recebido!")
-  }
-
-  static async logoParceiro(req, res) {
-    const file = req.file;
-    const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1];
-    const nome_arquivo = file.filename;
-    const type = file.mimetype;
-    // console.log(file);
-    // console.log(id);
-    if (type == "image/jpeg" || type == "image/png" || type == "image/jpg") {
-      try {
-        const anexarParceiro = await database.anexos.create({
-          mimetype: type,
-          filename: nome_arquivo,
-          path: caminho,
-          parceiro_id: id,
-          tipo_anexo: "logo",
-        });
-        // console.log('anexarParceiro', anexarParceiro)
-        return res.status(200).json({ message: "Logo enviado com Sucesso!" });
-      } catch (error) {
-        return res.status(500).json(error.message);
-      }
-    } else {
-      return res.status(500).json({
-        message: "Somente arquivo .jpeg",
-      });
-    }
-    //res.send("Arquivo recebido!")
-  }
-
-  static async imgsParceiro(req, res) {
-    var name_arquivo = [];
-    const file = req.files;
-    const { id } = req.params;
-    // console.log('file', file)
-    if (file.length > 0) {
-      for (let img = 0; img < file.length; img++) {
-        const caminho = file[img].path.split("api-digitalnomadsce")[1];
-        const nome_arquivo = file[img].filename;
-        const type = file[img].mimetype;
-        name_arquivo.push(nome_arquivo);
-        // console.log('name', file[img].originalname)
-        const anexarParceiro = await database.anexos.create({
-          mimetype: type,
-          filename: nome_arquivo,
-          path: caminho,
-          parceiro_id: id,
-          tipo_anexo: "image",
-        });
-
-        // console.log(res.status(200).json(anexarParceiro));
-        // console.log('imagens', anexarParceiro)
-      }
-      return res.status(200).json({ message: "Imagens enviadas com Sucesso!" });
-      //console.log('name_arquivo', name_arquivo)
-      return res.status(200).json({ message: "Imagens enviadas com Sucesso!" });
-    } else {
-      return res.status(500).json(error.message);
-    }
-
-    //res.send("Arquivo recebido!")
-  }
-
-  static async anexosParceiro(req, res) {
-    const file = req.files;
-    if (file) {
-      res.json(file);
-    } else {
-      throw new Error("File upload unseccessful");
-    }
-    //res.send("Arquivo recebido!")
   }
 
   static async pegaLogoByID(req, res) {
@@ -684,7 +608,7 @@ class ParceiroController {
     const { id } = req.params;
     try {
       const imagens = await database.anexos.findAll({
-        where: { parceiro_id: Number(id), tipo_anexo: 'image' }, //, tipo_anexo: 'image'
+        where: { parceiro_id: Number(id), tipo_anexo: "image" }, //, tipo_anexo: 'image'
         attributes: ["id", "tipo_anexo", "path"],
       });
       if (!imagens || imagens.length === 0) {
@@ -790,11 +714,11 @@ class ParceiroController {
           fs.unlink(imagemPath, (err) => {
             if (err) {
               console.error(
-                `Erro ao deletar o arquivo ${imagem.filename}: ${err}`
+                `Erro ao deletar o arquivo ${imagem.filename}: ${err}`,
               );
             } else {
               console.log(
-                `O arquivo ${imagem.filename} foi deletado com sucesso.`
+                `O arquivo ${imagem.filename} foi deletado com sucesso.`,
               );
             }
           });
@@ -832,11 +756,11 @@ class ParceiroController {
           fs.unlink(logoPath, (err) => {
             if (err) {
               console.error(
-                `Erro ao deletar o arquivo ${logo.filename}: ${err}`
+                `Erro ao deletar o arquivo ${logo.filename}: ${err}`,
               );
             } else {
               console.log(
-                `O arquivo ${logo.filename} foi deletado com sucesso.`
+                `O arquivo ${logo.filename} foi deletado com sucesso.`,
               );
             }
           });

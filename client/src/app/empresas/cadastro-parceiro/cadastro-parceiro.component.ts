@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -12,27 +12,23 @@ import { ServiceService } from 'src/app/services/service.service';
   styleUrls: ['./cadastro-parceiro.component.css'],
 })
 export class CadastroParceiroComponent implements OnInit {
-  @ViewChild('fileInput') fileInput!: ElementRef;
-  @ViewChild('alvaraInput') alvaraInput!: ElementRef;
-  @ViewChild('logoInput') logoInput!: ElementRef;
-
   radio_service: any;
   speed_quality: any;
   have_internet: any;
   have_idioma: any;
   tipo_estabelecimento_outros: any;
-  resposta_anexo: any;
-  habilita_anexo!: boolean;
-  alvara_anexo: any;
-  habilita_anexo_alvara!: boolean;
-  logo_anexo: any;
-  imgs_anexo: any;
-  habilita_anexo_logo!: boolean;
-  habilita_anexo_imgs!: boolean;
-  multipleFiles!: any[];
+  maxChars = 500;
+  qtdeChars = 255;
+  maxChars_link = 150;
+
+  loading = false;
+
+  comprovanteFile!: File;
+  alvaraFile!: File;
+  logoFile!: File;
+  imagensFiles: File[] = [];
 
   empresa = {
-    id: '',
     cnpj: '',
     nome_fantasia: '',
     razao_social: '',
@@ -69,15 +65,6 @@ export class CadastroParceiroComponent implements OnInit {
     user_id: '',
     caminho: '',
   };
-  submitted = false;
-  maxChars = 500;
-  qtdeChars = 255;
-  maxChars_link = 150;
-  finaliza = 0;
-  alvaraSelected: boolean = false;
-  comprovanteSelected: boolean = false;
-  imageSelected: boolean = false;
-  logoSelected: boolean = false;
 
   submitParceiro(parceiro: any) {
     console.log(parceiro);
@@ -89,7 +76,7 @@ export class CadastroParceiroComponent implements OnInit {
     public service: ServiceService,
     private http: HttpClient,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -142,278 +129,91 @@ export class CadastroParceiroComponent implements OnInit {
   //salvar parceiro
 
   savePartner(): void {
+    this.loading = true;
+
     this.empresa.essential_service = this._serviceList
-      .filter((x) => x.isselected == true)
+      .filter((x) => x.isselected)
       .map((x) => x.nome)
-      .join(',')
-      .toString();
+      .join(',');
+
     this.empresa.trabalho_reunioes = this._meetList
-      .filter((x) => x.isselected == true)
+      .filter((x) => x.isselected)
       .map((x) => x.nome)
-      .join(',')
-      .toString();
+      .join(',');
+
     this.empresa.qual_idioma = this._languageList
-      .filter((x) => x.isselected == true)
+      .filter((x) => x.isselected)
       .map((x) => x.nome)
-      .join(',')
-      .toString();
-    const data = {
-      cnpj: this.empresa.cnpj,
-      nome_fantasia: this.empresa.nome_fantasia,
-      razao_social: this.empresa.razao_social,
-      telefone: this.empresa.telefone,
-      cep: this.empresa.cep,
-      logradouro: this.empresa.logradouro,
-      numero: this.empresa.numero,
-      complemento: this.empresa.complemento,
-      bairro: this.empresa.bairro,
-      cidade: this.empresa.cidade,
-      estado: this.empresa.estado,
-      email_parceiro: this.empresa.email_parceiro,
-      midia_social: this.empresa.midia_social,
-      instagram_parceiro: this.empresa.instagram_parceiro,
-      tipo_service: this.empresa.tipo_service,
-      tipo_estabelecimento: this.empresa.tipo_estabelecimento,
-      tipo_estabelecimento_outros: this.empresa.tipo_estabelecimento_outros,
-      essential_service: this.empresa.essential_service,
-      internet_speed: this.empresa.internet_speed,
-      internet_service: this.empresa.internet_service,
-      outro_servico: this.empresa.outro_servico,
-      trabalho_reunioes: this.empresa.trabalho_reunioes,
-      tarifa_especial: this.empresa.tarifa_especial,
-      internet_service_alimentacao: this.empresa.internet_service_alimentacao,
-      orienta_equipe: this.empresa.orienta_equipe,
-      localizacao: this.empresa.localizacao,
-      ramo: this.empresa.ramo,
-      beneficios: this.empresa.beneficios,
-      espacos_culturais: this.empresa.espacos_culturais,
-      idioma: this.empresa.idioma,
-      qual_idioma: this.empresa.qual_idioma,
-    };
-    //console.log('dados enviados', data)
-    this.service.cadastrar_parceiro(data).subscribe({
+      .join(',');
+
+    const formData = new FormData();
+
+    // dados do formulário
+    formData.append('dados', JSON.stringify(this.empresa));
+
+    // comprovante
+    if (this.comprovanteFile) {
+      formData.append('comprovante', this.comprovanteFile);
+    }
+
+    // alvará
+    if (this.alvaraFile) {
+      formData.append('alvara', this.alvaraFile);
+    }
+
+    // logo
+    if (this.logoFile) {
+      formData.append('logo', this.logoFile);
+    }
+
+    // imagens
+    if (this.imagensFiles.length > 0) {
+      for (let file of this.imagensFiles) {
+        const ext = file.name.split('.').pop()?.toLowerCase();
+
+        if (ext !== 'jpg' && ext !== 'jpeg' && ext !== 'png') {
+          this.toastr.error('Somente imagens JPG/JPEG/PNG');
+
+          this.loading = false;
+          return;
+        }
+
+        formData.append('imagens', file);
+      }
+    }
+
+    this.service.cadastrar_parceiro(formData).subscribe({
       next: (res: any) => {
-        //console.log(res);
-        this.empresa.id = res.id;
-        //console.log("Id", this.empresa.id)
-        this.submitted = true;
+        this.toastr.success('Cadastro realizado com sucesso!');
+
+        this.loading = false;
+
+        this.router.navigate(['/home']);
       },
-      error: (e) => console.error(e),
+
+      error: (err) => {
+        this.loading = false;
+
+        this.toastr.error(err?.error?.message || 'Erro ao cadastrar parceiro');
+      },
     });
-  }
-
-  finalizaCadastro() {
-    this.router.navigate(['home']);
-    //window.location.reload();
-  }
-
-  onAlvaraSelected(event: any): void {
-    this.alvaraSelected = event.target.files.length > 0;
-    // console.log('alvaraSelected', this.alvaraSelected);
-  }
-
-  onImageSelected(event: any): void {
-    this.imageSelected = event.target.files.length > 0;
-    // console.log('imageSelected', this.imageSelected);
   }
 
   onComprovanteSelected(event: any): void {
-    this.comprovanteSelected = event.target.files.length > 0;
-    // console.log('comprovanteSelected', this.comprovanteSelected);
+    this.comprovanteFile = event.target.files[0];
+  }
+
+  onAlvaraSelected(event: any): void {
+    this.alvaraFile = event.target.files[0];
   }
 
   onLogoSelected(event: any): void {
-    this.logoSelected = event.target.files.length > 0;
-    // console.log('logoSelected', this.logoSelected);
-  }
-  /*
-    novoCadastroParceiro(): void {
-      this.submitted = false;
-      this.getService();
-      this.getMeet();
-      this.empresa = {
-        id: '',
-        cnpj: '',
-        nome_fantasia: '',
-        razao_social: '',
-        telefone: '',
-        cep: '',
-        logradouro: '',
-        numero: '',
-        complemento: '',
-        bairro: '',
-        cidade: '',
-        estado: '',
-        email_parceiro: '',
-        midia_social: '',
-        instagram_parceiro: '',
-        tipo_service: '',
-        essential_service: '',
-        internet_speed: '',
-        internet_service: '',
-        outro_servico: '',
-        trabalho_reunioes: '',
-        tarifa_especial: '',
-        internet_service_alimentacao: '',
-        orienta_equipe: '',
-        localizacao: '',
-        ramo: '',
-        beneficios: '',
-        espacos_culturais: '',
-        idioma: '',
-        qual_idioma: '',
-      }
-    }*/
-
-  //anexar arquivos
-  onFileUpload() {
-    const imageBlob = this.fileInput.nativeElement.files[0];
-    const file = new FormData();
-    const user_id = this.empresa.id;
-    file.append('file', imageBlob);
-    file.append('id', user_id);
-    //console.log('formData', file)
-    //console.log('id', user_id)
-
-    this.http.post(environment.url + 'anexo' + '/' + user_id, file).subscribe({
-      next: (response: any) => {
-        // console.log(response);
-
-        this.habilita_anexo = true;
-        this.resposta_anexo = response.message;
-        this.finaliza = this.finaliza + 1;
-        // console.log('resposta_anexo', this.resposta_anexo);
-      },
-      error: (e) => {
-        this.habilita_anexo = false;
-        this.resposta_anexo = e.error.message;
-        // console.log('resposta_anexo', this.resposta_anexo);
-      },
-    });
+    this.logoFile = event.target.files[0];
   }
 
-  alvaraUpload() {
-    const imageAlvara = this.alvaraInput.nativeElement.files[0];
-    const alvara = new FormData();
-    const user_id = this.empresa.id;
-    alvara.append('file', imageAlvara);
-    alvara.append('id', user_id);
-    //console.log('formData', alvara)
-    //console.log('id', user_id)
-
-    this.http
-      .post(environment.url + 'anexo_alvara' + '/' + user_id, alvara).subscribe({
-        next: (response: any) => {
-          // console.log(response);
-
-          this.habilita_anexo_alvara = true;
-          this.alvara_anexo = response.message;
-          this.finaliza = this.finaliza + 1;
-          // console.log('alvara_anexo', this.alvara_anexo);
-        },
-        error: (e) => {
-          this.habilita_anexo_alvara = false;
-          this.alvara_anexo = e.error.message;
-          // console.log('alvara_anexo', this.alvara_anexo);
-        },
-      });
-    }
-  //     .subscribe((response: any) => {
-  //       console.log(response);
-  //       this.alvara_anexo = response;
-  //       console.log('alvara_anexo', this.alvara_anexo);
-
-  //       if (response == 'Alvará anexado com Sucesso!') {
-  //         this.habilita_anexo_alvara = false;
-  //       } else {
-  //         this.habilita_anexo_alvara = true;
-  //       }
-  //     });
-  // }
-
-  logoUpload() {
-    const imageLogo = this.logoInput.nativeElement.files[0];
-    const logo = new FormData();
-    const user_id = this.empresa.id;
-    logo.append('file', imageLogo);
-    logo.append('id', user_id);
-    //console.log('formData', logo)
-    //console.log('id', user_id)
-
-    this.http
-      .post(environment.url + 'anexo_logo' + '/' + user_id, logo).subscribe({
-        next: (response: any) => {
-          // console.log(response);
-
-          this.habilita_anexo_logo = true;
-          this.logo_anexo = response.message;
-          this.finaliza = this.finaliza + 1;
-          // console.log('logo_anexo', this.logo_anexo);
-        },
-        error: (e) => {
-          this.habilita_anexo_logo = false;
-          this.logo_anexo = e.error.message;
-          // console.log('logo_anexo', this.logo_anexo);
-        },
-      });
-    }
-  //     .subscribe((response: any) => {
-  //       console.log(response);
-  //       this.logo_anexo = response;
-  //       console.log('logo_anexo', this.logo_anexo);
-
-  //       if (response == 'Logo enviado com Sucesso!') {
-  //         this.habilita_anexo_logo = false;
-  //       } else {
-  //         this.habilita_anexo_logo = true;
-  //       }
-  //     });
-  // }
-
-  selectMultipleFiles(event: any) {
-    if (event.target.files.length > 0) {
-      this.multipleFiles = event.target.files;
-    }
+  onImagesSelected(event: any): void {
+    this.imagensFiles = Array.from(event.target.files);
   }
-
-  imgsUpload() {
-    const files = new FormData();
-    const user_id = this.empresa.id;
-    let allFilesAreJPEG = true;
-
-    for (let file of this.multipleFiles) {
-      const fileExtension = file.name.split('.').pop().toLowerCase();
-    if (fileExtension !== 'jpeg' && fileExtension !== 'jpg' && fileExtension !== 'png') {
-      allFilesAreJPEG = false;
-      break;
-    }
-      files.append('files', file);
-    }
-
-    if (!allFilesAreJPEG) {
-      this.toastr.error('Somente arquivo .jpeg, .jpg ou .png');
-      this.imgs_anexo = 'Somente arquivo .jpeg, .jpg ou .png';
-      // Aqui você pode adicionar um aviso para o usuário, se desejar
-      return;
-    }
-
-    this.http
-      .post(environment.url + 'anexo_imgs' + '/' + user_id, files).subscribe({
-        next: (response: any) => {
-          // console.log(response);
-
-          this.habilita_anexo_imgs = true;
-          this.imgs_anexo = response.message;
-          this.finaliza = this.finaliza + 1;
-          // console.log('imgs_anexo', this.imgs_anexo);
-        },
-        error: (e) => {
-          this.habilita_anexo_imgs = false;
-          this.imgs_anexo = e.error.message;
-          // console.log('imgs_anexo', this.imgs_anexo);
-        },
-      });
-    }
 
   _serviceList!: typeService[];
   _meetList!: typeMeet[];
@@ -463,11 +263,11 @@ class typeService {
   nome: string | undefined;
   isselected: boolean | undefined;
 }
-class typeMeet{
+class typeMeet {
   nome: string | undefined;
   isselected: boolean | undefined;
 }
-class typeLanguage{
+class typeLanguage {
   nome: string | undefined;
   isselected: boolean | undefined;
 }
