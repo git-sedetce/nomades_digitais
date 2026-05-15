@@ -161,8 +161,12 @@ class CadastroMunicipioController {
 
       const imagensData = [];
 
+      // console.log("Resultados da consulta:", results);
+
       for (const imagem of results) {
         const acesso = path.join(baseUrl, imagem.path);
+        console.log("Caminho:", acesso);
+        console.log("Existe?", fs.existsSync(acesso));
         if (!fs.existsSync(acesso)) continue;
 
         const data = fs.readFileSync(acesso, "base64");
@@ -193,6 +197,8 @@ class CadastroMunicipioController {
           base64: data,
         });
       }
+
+      // console.log("Dados das imagens:", imagensData);
 
       return res.status(200).json(imagensData);
     } catch (error) {

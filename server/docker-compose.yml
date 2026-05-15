@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  api-digitalnomadsce:
+    build:
+      context: .
+      dockerfile: config/dockerfile
+    image: nodejs/api-digitalnomadsce:v1
+    container_name: api-digitalnomadsce
+    restart: always
+    tty: true
+    working_dir: /app
+    environment:
+      - TZ=America/Fortaleza
+    volumes:
+      - "./web/uploads:/app/uploads"
+    ports:
+      - "8085:2225"
+    deploy:
+        resources:
+          limits:
+            cpus: '1'
+            memory: 1024M
+

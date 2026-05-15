@@ -1,0 +1,27 @@
+# Set master image
+FROM rockylinux:8
+
+# Set working directory
+WORKDIR /app
+
+RUN dnf update -y && dnf install -y \
+    epel-release 
+
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
+
+# Install Additional dependencies
+RUN dnf module enable nodejs:14 -y
+RUN dnf install -y vim curl \
+    nodejs yarn \    
+    wget unzip \
+    procps iproute
+
+RUN dnf clean all
+
+COPY ./web/. .
+
+ENV NODE_OPTIONS="--max-old-space-size=1024"
+RUN npm install pm2 -g
+
+ENTRYPOINT [ "pm2-runtime","start","/app/src/server.js" ]

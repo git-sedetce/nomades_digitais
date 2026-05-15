@@ -1,7 +1,8 @@
 client/src/assets/imgs/icons/*
-api-digitalnomadsce/node_modules/*
-api-digitalnomadsce/uploads/*
+server/web/node_modules/*
+server/web/src/uploads/*
 client/node_modules/*
-api-digitalnomadsce/.env
+server/web/.env
 git-history.md
 git-history_digital_nomads.md
+server/web/uploads/*
