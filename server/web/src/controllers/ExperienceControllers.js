@@ -31,7 +31,7 @@ class ExperienceController {
       }
 
       // const caminho = file.path;
-      const caminho = file.path.split("api-digitalnomadsce")[1];
+      const caminho = file.path.split(process.env.SPLIT)[1];
 
       await database.anexo_experience.create(
         {
@@ -406,7 +406,7 @@ class ExperienceController {
   static async anexoExperience(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1];
+    const caminho = file.path.split(process.env.SPLIT)[1];
     const nome_arquivo = file.filename;
     const type = file.mimetype;
     // console.log(file);

@@ -16,6 +16,7 @@ class CadastroMunicipioController {
         const dados = JSON.parse(req.body.dados);
 
         const arquivos = req.files || [];
+        console.log('arquivos', arquivos)        
 
         const criarMunicipioParceiro =
             await database.cadastra_municipios.create(
@@ -27,6 +28,11 @@ class CadastroMunicipioController {
         if (arquivos.length > 0) {
 
             for (const file of arquivos) {
+              console.log('file', file)
+              console.log('file.path', file.path);
+              console.log('file.filename', file.filename);
+              console.log('process.env.SPLIT', process.env.SPLIT);
+              console.log('split result', file.path.split(process.env.SPLIT));
 
                 await database.anexo_municipio.create({
 
@@ -34,7 +40,8 @@ class CadastroMunicipioController {
 
                     filename: file.filename,
 
-                    path: file.path,
+                    path: file.path.split(process.env.SPLIT)[1],
+                    // path: `/uploads/municipios/${file.filename}`,
 
                     municipio_id: criarMunicipioParceiro.id
 
@@ -154,7 +161,6 @@ class CadastroMunicipioController {
         FROM anexo_municipios
         GROUP BY municipio_id
         ORDER BY RANDOM()
-        LIMIT 6
         ) m ON a.municipio_id = m.municipio_id
         ORDER BY a.municipio_id, RANDOM();
     `);
@@ -165,8 +171,8 @@ class CadastroMunicipioController {
 
       for (const imagem of results) {
         const acesso = path.join(baseUrl, imagem.path);
-        console.log("Caminho:", acesso);
-        console.log("Existe?", fs.existsSync(acesso));
+        // console.log("Caminho:", acesso);
+        // console.log("Existe?", fs.existsSync(acesso));
         if (!fs.existsSync(acesso)) continue;
 
         const data = fs.readFileSync(acesso, "base64");
@@ -194,7 +200,7 @@ class CadastroMunicipioController {
           regiao: municipio?.ass_cadastra_municipios_regiao.nome,
           tipo_turismo: municipio?.tipo_turismo,
           mimetype: imagem.mimetype,
-          base64: data,
+          // base64: data,
         });
       }
 

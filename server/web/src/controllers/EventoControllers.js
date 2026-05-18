@@ -178,7 +178,7 @@ class EventoController {
   static async anexoEvento(req, res) {
     const file = req.file;
     const { id } = req.params;
-    const caminho = file.path.split("api-digitalnomadsce")[1];
+    const caminho = file.path.split(process.env.SPLIT)[1];
     const nome_arquivo = file.filename;
     const type = file.mimetype;
     // console.log(file);

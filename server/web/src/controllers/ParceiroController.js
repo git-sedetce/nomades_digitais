@@ -440,7 +440,7 @@ class ParceiroController {
       async function salvarArquivo(arquivo, tipo) {
         if (!arquivo) return;
 
-        const caminho = arquivo.path.split("api-digitalnomadsce")[1];
+        const caminho = arquivo.path.split(process.env.SPLIT)[1];
 
         await database.anexos.create(
           {
@@ -656,7 +656,7 @@ class ParceiroController {
     const updateImage = req.body;
     // console.log('updateImage', updateImage)
     const file = req.file;
-    updateImage.path = file.path.split("api-digitalnomadsce")[1]; //file.path
+    updateImage.path = file.path.split(process.env.SPLIT)[1]; //file.path
     // console.log('path', updateImage.path)
     try {
       await database.anexos.update(updateImage, {
@@ -676,7 +676,7 @@ class ParceiroController {
     const updateImage = req.body;
     // console.log('updateImage', updateImage)
     const file = req.file;
-    updateImage.path = file.path.split("api-digitalnomadsce")[1]; //file.path
+    updateImage.path = file.path.split(process.env.SPLIT)[1]; //file.path
     // console.log('path', updateImage.path)
     try {
       await database.anexos.update(updateImage, {
