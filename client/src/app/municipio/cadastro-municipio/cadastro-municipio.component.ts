@@ -162,7 +162,7 @@ export class CadastroMunicipioComponent implements OnInit {
         this.cadastro_cidade.id = res.municipio.id;
 
         this.toastr.success('Cadastro realizado com sucesso!');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/municipio/tipo_turismo']);
       },
 
       error: (e: any) => {

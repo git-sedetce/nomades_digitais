@@ -1,108 +1,75 @@
-.tipoTurismo{
-  margin-top: 8rem !important;
-}
-.sidebar {
-  background-color: #f8f9fa;
-  border-right: 1px solid #ccc;
+.tipoTurismo {
+  background: #f5f7fb;
   min-height: 100vh;
 }
 
-.sidebar h5 {
-  background-color: #f7a93b;
-  color: #fff;
-  padding: 15px;
-  font-weight: bold;
+/* SIDEBAR */
+
+.sidebar {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  position: sticky;
+  top: 90px;
 }
-.sidebar a {
+
+.sidebar h5 {
+  background: #f7a93b;
+  color: #fff;
+  padding: 18px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.sidebar-links a {
   display: block;
-  padding: 10px 20px;
-  color: #000;
+  padding: 14px 18px;
   border-bottom: 1px solid #eee;
   text-decoration: none;
+  color: #333;
+  transition: 0.3s ease;
   cursor: pointer;
 }
-.sidebar a:hover {
-  background-color: #e0ffe0;
-  color: #2d572c;
+
+.sidebar-links a:hover {
+  background: #ecfff2;
+  color: #008c73;
 }
-.event-box {
+
+/* FILTRO */
+
+.filter-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.selected-filter {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  padding: 15px 0;
-}
-.event-date {
-  background-color: #008c73;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  margin-right: 15px;
-}
-.event-date .day {
-  font-size: 18px;
-  font-weight: bold;
-}
-.event-date .month {
-  font-size: 14px;
-}
-.event-info .category {
-  font-size: 12px;
-  color: #4caf50;
-  text-transform: uppercase;
+  gap: 8px;
+  height: 100%;
 }
 
-.saiba_mais {
-  font-size: 10px;
-  color: #4caf50;
-  text-transform: uppercase;
-  cursor: pointer
-}
-
-.saiba_mais:hover {
-  text-decoration: underline;
-  color: #2d572c;
-}
-
-.event-info .title {
-  font-weight: bold;
-}
-.filter-bar {
-  background-color: #008c73;
-  padding: 20px;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.imagemEvento img{
-  width: 100%;
-  margin: 4rem auto;
-}
-
-/* .card-img-top {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 0.5rem 0.5rem 0 0;
-} */
+/* CARD */
 
 .city-card {
   border: none;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background: #fff;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
 .city-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
 }
 
 .image-wrapper {
-  width: 100%;
-  height: 220px;
+  height: 230px;
   overflow: hidden;
 }
 
@@ -110,17 +77,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
 }
 
 .no-image {
-  height: 220px;
+  height: 230px;
+  background: #efefef;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f2f2f2;
-  color: #888;
-  font-size: 14px;
+  color: #777;
 }
 
 .card-body {
@@ -130,48 +95,77 @@
 .card-title {
   font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 0.7rem;
-  color: #222;
+  margin-bottom: 10px;
 }
 
 .category {
   display: inline-block;
-  padding: 6px 12px;
+  background: #eaf2ff;
+  color: #0d6efd;
+  padding: 6px 14px;
   border-radius: 20px;
-  background: #eef5ff;
-  color: #2c6bed;
   font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 0.8rem;
+  margin-bottom: 10px;
 }
 
 .region {
-  font-size: 0.95rem;
   color: #666;
-  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
 .btn-saiba {
-  width: 100%;
   border: none;
-  border-radius: 10px;
+  width: 100%;
   padding: 12px;
-  background: #0d6efd;
-  color: white;
+  border-radius: 12px;
+  background: #008c73;
+  color: #fff;
   font-weight: 600;
-  transition: background 0.3s ease;
-  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .btn-saiba:hover {
-  background: #0b5ed7;
+  background: #006d5a;
 }
 
-/* Ajustes mobile */
-@media (max-width: 576px) {
+/* PAGINAÇÃO */
+
+.pagination-wrapper {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* RESPONSIVIDADE */
+
+/* TABLET */
+@media (max-width: 991px) {
+
   .image-wrapper,
   .no-image {
-    height: 180px;
+    height: 210px;
+  }
+
+  .filter-container {
+    padding: 16px;
+  }
+
+}
+
+/* MOBILE */
+@media (max-width: 576px) {
+
+  .tipoTurismo {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .image-wrapper,
+  .no-image {
+    height: 190px;
   }
 
   .card-title {
@@ -182,4 +176,15 @@
     padding: 10px;
     font-size: 0.95rem;
   }
+
+  .pagination-wrapper {
+    gap: 6px;
+  }
+
+  .pagination-wrapper .btn {
+    min-width: 42px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
 }

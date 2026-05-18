@@ -1,88 +1,38 @@
-.imagem-carousel_teste{
-    object-fit: cover;
-    object-position: 0 80%;
-    height: 500px;
+/* altura padrão do header */
+:host {
+  --header-height: 80px;
 }
 
-.fonte-titulo{
-    font-weight: bold !important;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-  .texto-section-grande{
-    font-size:150px;
-    font-weight:bolder;
-    color: white;
-    margin: 0;
-    padding: 30px 0 0 0;
-    line-height: 150px;
-  }
+app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  .hubs{
-    position: absolute;
-    background-color: #f8f9faa8;
-    color:rgb(22, 19, 19);
-    font-weight: bold;
-    text-align: justify;
-    font-size: 1.8rem;
-    width: 285px;
-    line-height: 40px;
-    height: 360px;
-    padding: 12px 12px 50px 12px;
-    margin: 50px 12px;
-    right: 20px;
-  }
+/* HEADER FIXO */
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 1000;
+}
 
-  .data{
-    background-color: #f8f9faa8;
-    color:rgb(22, 19, 19);
-    font-weight: bold  !important;
-    font-size: 1.8rem;
-    line-height: 40px;
-    padding: 12px 12px 12px 12px;
-    margin-top: 20%;
-  }
+/* CONTEÚDO */
+.conteudo {
+  margin-top: var(--header-height);
+  flex: 1;
+}
 
-  .fibras{
-    position: absolute;
-    background-color: #f8f9faa8;
-    color:rgb(22, 19, 19);
-    font-weight: bold;
-    text-align: justify;
-    font-size: 1.8rem;
-    width: 285px;
-    line-height: 40px;
-    height: 560px;
-    padding: 12px 12px 50px 12px;
-    margin: 50px 12px;
-    left: 20px;
-  }
-
-  .fibers_02{
-    position: absolute;
-    background-color: #f8f9faa8;
-    color:rgb(22, 19, 19);
-    font-weight: bold  !important;
-    font-size: 2rem;
-    line-height: 40px;
-    height: 300px;
-    padding: 12px 12px 12px 12px;
-    vertical-align: middle;
-    margin-top: 10%;
-  }
-
-  .safe{
-    color:rgb(22, 19, 19);
-    font-weight: bold;
-    font-size: 2.8rem;
-    padding: 35px 12px 12px 12px;
-  }
-
-  .selo img{
-    width: 50%;
-    margin: 20px;
-  }
-
-  .conteudo{
-    min-height: auto;
-    /*margin-top: 1em;*/
-  }
+/* FOOTER */
+app-footer {
+  margin-top: auto;
+}

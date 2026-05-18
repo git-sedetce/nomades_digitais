@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+  SafeUrl,
+} from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ListaMinucipioService } from 'src/app/service/listarmunicipio/lista-minucipio.service';
 import { ServiceService } from 'src/app/services/service.service';
@@ -17,11 +21,17 @@ export class TipoTurismoComponent implements OnInit {
   cidadesFiltradas: any[] = [];
   tipo_turismo!: any;
   has_city: boolean = false; // Verifica se há cidades
-  page: number = 1; // Página atual
-  itemsPerPage: number = 10; // Itens por página
+  itemsPerPage: number = 6; // Itens por página
   isLoading = false;
   turismo_selected: boolean = false;
   imgUrl: SafeResourceUrl | null = null;
+
+  searchTerm: string = '';
+  currentPage: number = 1;
+  filteredCities: any[] = [];
+  paginatedCities: any[] = [];
+  totalPages: number = 0;
+  pages: number[] = [];
 
   // Lista de estilos de turismo
   lista_estilo_turismo = [
@@ -37,7 +47,7 @@ export class TipoTurismoComponent implements OnInit {
     private estadoService: ListaMinucipioService,
     private service: ServiceService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -46,82 +56,144 @@ export class TipoTurismoComponent implements OnInit {
     this.pegarCidade();
   }
 
+  //processar as imagens para exibição
+  processarImagens(lista: any[]) {
+    for (let image of lista) {
+      if (image.base64) {
+        const binaryString = window.atob(image.base64);
+
+        const binaryLen = binaryString.length;
+
+        const bytes = new Uint8Array(binaryLen);
+
+        for (let i = 0; i < binaryLen; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        const blob = new Blob([bytes], { type: 'image/jpeg' });
+
+        const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(
+          URL.createObjectURL(blob),
+        );
+
+        image.imagem = imageUrl;
+      } else {
+        image.imagem = null;
+      }
+    }
+  }
+
   // Método para obter o nome do estilo de turismo (já estava bom, apenas mantido)
+
+  apresentar06Cidades() {
+    this.service.cidades12('pegaImageCity6').subscribe(
+      (data: any) => {
+        this.lista_cidades_cadastradas = data;
+
+        this.filteredCities = [...data];
+
+        this.processarImagens(this.filteredCities);
+
+        this.has_city = this.filteredCities.length > 0;
+
+        this.setupPagination();
+      },
+
+      (erro: any) => console.error(erro),
+    );
+  }
+
   pegarTipoTurismo(name: any) {
+    this.tipo_turismo = name;
+
+    this.turismo_selected = true;
+
     this.service.cidadeporTurismo(name).subscribe(
       (data: any) => {
         this.lista_cidades_cadastradas = data;
-        console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
 
-      if (this.lista_cidades_cadastradas && this.lista_cidades_cadastradas.length > 0) {
-        console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
-        this.has_city = true;
+        this.filteredCities = [...data];
 
-        for (let image of this.lista_cidades_cadastradas) {
-          if (image.base64) {
-            const binaryString = window.atob(image.base64);
-            const binaryLen = binaryString.length;
-            const bytes = new Uint8Array(binaryLen);
+        this.processarImagens(this.filteredCities);
 
-            for (let i = 0; i < binaryLen; i++) {
-              bytes[i] = binaryString.charCodeAt(i);
-            }
+        this.has_city = this.filteredCities.length > 0;
 
-            const blob = new Blob([bytes], { type: 'image/jpeg' });
-            const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
-            image.imagem = imageUrl; // define imagem no objeto
-          } else {
-            image.imagem = null;
-          }
-        }
+        this.currentPage = 1;
 
-      } else {
-        this.has_city = false;
-      }
-    },
-    (erro: any) => console.error(erro)
-  );
-      }
+        this.setupPagination();
+      },
 
-      limparFiltro() {
-        this.apresentar06Cidades();
-      }
+      (erro: any) => console.error(erro),
+    );
+  }
 
+  filtrarCards() {
+    const termo = this.searchTerm.toLowerCase();
 
-  apresentar06Cidades() {
-  this.service.cidades12('pegaImageCity6').subscribe(
-    (data: any) => {
-      this.lista_cidades_cadastradas = data;
+    this.filteredCities = this.lista_cidades_cadastradas.filter(
+      (cidade: any) => {
+        return (
+          cidade.cidade.toLowerCase().includes(termo) ||
+          cidade.tipo_turismo.toLowerCase().includes(termo) ||
+          cidade.regiao.toLowerCase().includes(termo)
+        );
+      },
+    );
 
-      if (this.lista_cidades_cadastradas && this.lista_cidades_cadastradas.length > 0) {
-        console.log('Cidades cadastradas:', this.lista_cidades_cadastradas);
-        this.has_city = true;
+    this.currentPage = 1;
 
-        for (let image of this.lista_cidades_cadastradas) {
-          if (image.base64) {
-            const binaryString = window.atob(image.base64);
-            const binaryLen = binaryString.length;
-            const bytes = new Uint8Array(binaryLen);
+    this.setupPagination();
+  }
 
-            for (let i = 0; i < binaryLen; i++) {
-              bytes[i] = binaryString.charCodeAt(i);
-            }
+  setupPagination() {
+    this.totalPages = Math.ceil(this.filteredCities.length / this.itemsPerPage);
 
-            const blob = new Blob([bytes], { type: 'image/jpeg' });
-            const imageUrl: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
-            image.imagem = imageUrl; // define imagem no objeto
-          } else {
-            image.imagem = null;
-          }
-        }
+    this.pages = Array(this.totalPages)
+      .fill(0)
+      .map((x, i) => i + 1);
 
-      } else {
-        this.has_city = false;
-      }
-    },
-    (erro: any) => console.error(erro)
-  );
-}
+    this.updatePaginatedCities();
+  }
+
+  updatePaginatedCities() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+
+    const end = start + this.itemsPerPage;
+
+    this.paginatedCities = this.filteredCities.slice(start, end);
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
+
+    this.updatePaginatedCities();
+  }
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+
+      this.updatePaginatedCities();
+    }
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+
+      this.updatePaginatedCities();
+    }
+  }
+
+  limparFiltro() {
+    this.searchTerm = '';
+
+    this.turismo_selected = false;
+
+    this.currentPage = 1;
+
+    this.apresentar06Cidades();
+  }
 
   pegarRegiao() {
     this.estadoService.listar_regiao('regiao').subscribe(
@@ -129,7 +201,7 @@ export class TipoTurismoComponent implements OnInit {
         this.lista_regiao = data;
         // console.log('Regiões:', this.lista_regiao);
       },
-      (erro: any) => console.error(erro)
+      (erro: any) => console.error(erro),
     );
   }
 
@@ -139,7 +211,7 @@ export class TipoTurismoComponent implements OnInit {
         this.lista_cidades = data;
         // console.log('Cidades:', this.lista_cidades);
       },
-      (erro: any) => console.error(erro)
+      (erro: any) => console.error(erro),
     );
   }
 

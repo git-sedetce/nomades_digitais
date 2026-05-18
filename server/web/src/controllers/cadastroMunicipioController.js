@@ -200,7 +200,7 @@ class CadastroMunicipioController {
           regiao: municipio?.ass_cadastra_municipios_regiao.nome,
           tipo_turismo: municipio?.tipo_turismo,
           mimetype: imagem.mimetype,
-          // base64: data,
+          base64: data,
         });
       }
 

@@ -1,162 +1,219 @@
-<div class="container-fluid tipoTurismo">
+<div class="container-fluid tipoTurismo py-4">
+
   <div class="row">
 
-    <!-- Menu lateral (visível apenas em md para cima) -->
-    <div class="col-12 col-md-3 sidebar mb-4 mb-md-0 d-none d-md-block">
-      <h5>Turismo no Ceará</h5>
-      <div *ngFor="let tipo_turismo of lista_estilo_turismo">
-        <a (click)="pegarTipoTurismo(tipo_turismo.nome)">{{ tipo_turismo.nome }}</a>
-      </div>
-    </div>
+    <!-- Sidebar Desktop -->
+    <aside class="col-lg-2 col-md-3 d-none d-md-block">
+      <div class="sidebar shadow-sm">
 
-    <!-- Select visível apenas em telas pequenas (mobile) -->
-    <div class="col-12 mb-3 d-block d-md-none">
-      <label for="tipo_turismo" class="form-label">Turismo no Ceará</label>
-      <select class="form-select mb-3" id="tipo_turismo" #tipo_turismo (change)="pegarTipoTurismo(tipo_turismo.value)">
-        <option disabled selected>Selecione uma região</option>
-        <option *ngFor="let tipo_turismo of lista_estilo_turismo" [value]="tipo_turismo.nome">
-          {{ tipo_turismo.nome }}
-        </option>
-      </select>
-    </div>
+        <h5>Turismo no Ceará</h5>
 
-    <!-- Conteúdo principal -->
-    <div class="col-12 col-md-9 ps-md-4 pe-md-4 mt-3">
-
-      <!-- Filtro -->
-      <div class="filter-bar row g-3 align-items-center">
-
-        <div class="col-12 col-sm-auto">
-          <label class="form-label mb-0 me-sm-2">Tipo de Turismo<span *ngIf="turismo_selected">: {{ tipo_turismo
-              }}</span></label>
-        </div>
-
-        <div class="col-12 col-sm-auto">
-          <select class="form-select" id="city" #city (change)="(filtrarMunicipio(city.value))">
-            <option selected disabled>Selecione o Município</option>
-            <option *ngFor="let city of lista_cidades" [value]="city.nome_municipio">
-              {{ city.nome_municipio }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-12 col-sm-auto">
-          <button class="btn btn-warning text-white fw-bold w-100" (click)="limparFiltro()">Limpar Filtro</button>
+        <div class="sidebar-links">
+          <a
+            *ngFor="let tipo of lista_estilo_turismo"
+            (click)="pegarTipoTurismo(tipo.nome)">
+            {{ tipo.nome }}
+          </a>
         </div>
 
       </div>
+    </aside>
 
-      <!-- Lista de Eventos -->
-      <div *ngIf="!has_city" class="alert alert-info mt-3">
-        <strong>Informação:</strong> Não há eventos cadastrados para a cidade selecionada.
+    <!-- Conteúdo -->
+    <section class="col-12 col-md-9 col-lg-10">
+
+      <!-- Header/Filtro -->
+      <div class="filter-container shadow-sm">
+
+        <div class="row g-3 align-items-center">
+
+          <!-- Select Mobile -->
+          <div class="col-12 d-block d-md-none">
+            <select
+              class="form-select"
+              #tipo_turismo_mobile
+              (change)="pegarTipoTurismo(tipo_turismo_mobile.value)">
+
+              <option disabled selected>
+                Tipo de Turismo
+              </option>
+
+              <option
+                *ngFor="let tipo of lista_estilo_turismo"
+                [value]="tipo.nome">
+
+                {{ tipo.nome }}
+
+              </option>
+
+            </select>
+          </div>
+
+          <!-- Pesquisa -->
+          <div class="col-12 col-lg-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Pesquisar cidade..."
+              [(ngModel)]="searchTerm"
+              (input)="filtrarCards()">
+          </div>
+
+          <!-- Município -->
+          <div class="col-12 col-md-6 col-lg-3">
+            <select
+              class="form-select"
+              #city
+              (change)="filtrarMunicipio(city.value)">
+
+              <option selected disabled>
+                Selecione o Município
+              </option>
+
+              <option
+                *ngFor="let city of lista_cidades"
+                [value]="city.nome_municipio">
+
+                {{ city.nome_municipio }}
+
+              </option>
+
+            </select>
+          </div>
+
+          <!-- Tipo selecionado -->
+          <div class="col-12 col-lg-3">
+            <div class="selected-filter">
+
+              <span class="fw-bold">Tipo:</span>
+
+              <span *ngIf="turismo_selected">
+                {{ tipo_turismo }}
+              </span>
+
+              <span *ngIf="!turismo_selected">
+                Todos
+              </span>
+
+            </div>
+          </div>
+
+          <!-- Botão -->
+          <div class="col-12 col-md-6 col-lg-2">
+            <button
+              class="btn btn-warning w-100 fw-semibold"
+              (click)="limparFiltro()">
+
+              Limpar
+
+            </button>
+          </div>
+
+        </div>
+
       </div>
 
+      <!-- Sem registros -->
+      <div *ngIf="!has_city" class="alert alert-info mt-4">
+        Não há cidades cadastradas.
+      </div>
+
+      <!-- Cards -->
       <div *ngIf="has_city">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
-          <div *ngFor="let cidades of lista_cidades_cadastradas" class="col">
+
+        <div class="row g-4 mt-1">
+
+          <div
+            class="col-12 col-sm-6 col-lg-4"
+            *ngFor="let cidades of paginatedCities">
+
             <div class="card city-card h-100">
 
               <div class="image-wrapper">
-                <img *ngIf="cidades.imagem; else noImage" [src]="cidades.imagem" class="card-img-top"
-                  alt="{{ cidades.cidade }}" />
+
+                <img
+                  *ngIf="cidades.imagem; else noImage"
+                  [src]="cidades.imagem"
+                  class="card-img-top"
+                  alt="{{ cidades.cidade }}">
 
                 <ng-template #noImage>
                   <div class="no-image">
                     Imagem não disponível
                   </div>
                 </ng-template>
+
               </div>
 
               <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ cidades.cidade }}</h5>
 
-                <span class="category">{{ cidades.tipo_turismo }}</span>
-                <p class="region">{{ cidades.regiao }}</p>
+                <h5 class="card-title">
+                  {{ cidades.cidade }}
+                </h5>
 
-                <button class="btn-saiba mt-auto" (click)="saibaMais(cidades.municipio_id)">
+                <span class="category">
+                  {{ cidades.tipo_turismo }}
+                </span>
+
+                <p class="region">
+                  {{ cidades.regiao }}
+                </p>
+
+                <button
+                  class="btn-saiba mt-auto"
+                  (click)="saibaMais(cidades.municipio_id)">
+
                   Saiba Mais
+
                 </button>
+
               </div>
 
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
+          </div>
 
-    <!-- Modal Saiba Mais -->
-    <!-- <div class="modal fade" id="modalSaibaMais" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="modalSaibaMaisLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white text-center">
-        <h1 class="modal-title fs-5" id="modalSaibaMaisLabel">{{ evento.evento_name }}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div *ngIf="!isLoading" class="d-flex justify-content-center">
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
         </div>
-        <div *ngIf="isLoading">
-          <div class="row">
-            <div class="col-sm-4 col-12 imagemEvento text-center">
-              <ng-container *ngIf="has_image; else noImage">
-                <img class="mx-auto d-block align-middle" [src]="imgUrl" alt="Evento sem imagem">
-              </ng-container>
-              <ng-template #noImage>
-                <p class="text-muted">Imagem não disponível para este evento.</p>
-              </ng-template>
-            </div>
-            <div class="col-sm-8 col-12">
-              <table class="table table-hover align-middle">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Descrição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">Nome do Evento</th>
-                    <td>{{ evento[0].evento_name }}</td>
-                  </tr>
-                  <tr class="table-success">
-                    <th scope="row">Tipo de Evento</th>
-                    <td colspan="2">{{ evento[0].tipo_evento }}</td>
-                  </tr>
-                  <tr class="table-warning">
-                    <th scope="row">Descrição:</th>
-                    <td colspan="2">{{ evento[0].descricao }}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Data de Inicio</th>
-                    <td colspan="2">{{ evento[0].data_inicio_evento | date:'dd/MM/yyyy' }}</td>
-                  </tr>
-                  <tr class="table-success">
-                    <th scope="row">Encerramento</th>
-                    <td colspan="2">{{ evento[0].data_final_evento | date:'dd/MM/yyyy' }}</td>
-                  </tr>
-                  <tr class="table-warning">
-                    <th scope="row">Cidade</th>
-                    <td colspan="2">{{ evento[0]['ass_evento_municipio'].nome_municipio }}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Região:</th>
-                    <td colspan="2">{{ evento[0]['ass_evento_regiao'].nome }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+
+        <!-- Paginação -->
+        <div
+          class="pagination-wrapper"
+          *ngIf="totalPages > 1">
+
+          <button
+            class="btn btn-outline-primary"
+            [disabled]="currentPage === 1"
+            (click)="previousPage()">
+
+            Anterior
+
+          </button>
+
+          <button
+            *ngFor="let page of pages"
+            class="btn"
+            [ngClass]="page === currentPage ? 'btn-primary' : 'btn-outline-primary'"
+            (click)="goToPage(page)">
+
+            {{ page }}
+
+          </button>
+
+          <button
+            class="btn btn-outline-primary"
+            [disabled]="currentPage === totalPages"
+            (click)="nextPage()">
+
+            Próxima
+
+          </button>
+
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
       </div>
-    </div>
+
+    </section>
+
   </div>
-</div> -->
+
+</div>

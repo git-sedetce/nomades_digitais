@@ -2,7 +2,7 @@
    NAVBAR BASE
 ========================= */
 .navBar {
-  background: rgba(0, 0, 0, 0.55);
+  background-color: #008c72c0;
   backdrop-filter: blur(8px);
   padding: 0.4rem 1rem;
   transition: all 0.3s ease;
