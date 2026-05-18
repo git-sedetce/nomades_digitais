@@ -13,7 +13,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse justify-content-between menu" id="navbarSupportedContent">
         <ul class="menuOpcoes navbar-nav me-auto ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/atrativo/home">Ceará Atrativos</a>
@@ -190,7 +190,7 @@
           </li>
 
 
-          <li *ngIf="!authenticated">
+          <li *ngIf="!authenticated" class="d-flex align-items-center">
             <button type="button" routerLink="/admin/login"
               class="btn btn-success text-dark fw-bold text-white ms-2 me-3">Login</button>
           </li>
@@ -198,7 +198,7 @@
             <button type="button" routerLink="/nomad/cadastro_nomad"
               class="btn btn-primary text-dark fw-bold text-white">Cadastre-se</button>
           </li> -->
-          <li *ngIf="authenticated" class=" pt-2">
+          <li *ngIf="authenticated" class="d-flex align-items-center">
             <button type="button" routerLink="/login" class="btn btn-danger text-dark fw-bold text-white ms-3 me-2"
               (click)="logout()">Logout</button>
           </li>
